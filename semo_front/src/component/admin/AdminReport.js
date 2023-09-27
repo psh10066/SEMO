@@ -4,7 +4,7 @@ const AdminReport = (props) => {
   const reportList = props.reportList;
   return (
     <div className="my-content-wrap">
-      <div className="my-content-title">신고 내역</div>
+      <div className="my-content-title">모임 신고 내역</div>
       <div className="admin-report-board">
         <table>
           <thead>

@@ -14,7 +14,7 @@ const AdminMain = () => {
       memberName: "방수현",
       memberEmail: "bangsh@naver.com",
       memberPhone: "010-1111-1111",
-      memberType: 2,
+      memberType: 1,
     },
     {
       memberNo: 2,
