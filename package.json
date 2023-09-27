@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "date-fns": "^2.30.0",
+    "react-datepicker": "^4.18.0",
+    "react-modal": "^3.16.1",
+    "three-orbitcontrols": "^2.110.3"
+  },
+  "devDependencies": {
+    "@types/react-datepicker": "^4.15.1"
+  }
+}
