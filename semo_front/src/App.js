@@ -9,9 +9,9 @@ import AdminMain from "./component/admin/AdminMain";
 
 function App() {
   return (
-    <div>
+    <div className="wrap">
       <Header />
-      <div>
+      <div className="content">
         <Routes>
           <Route path="/admin/*" element={<AdminMain />} />
         </Routes>
