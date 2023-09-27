@@ -8,3 +8,4 @@ npm install swiper@6.8.4
 npm i three
 npm install three @react-three/fiber
 npm install @react-three/drei
+npm i react-modal
