@@ -1,7 +1,12 @@
+import Header from "./component/common/Header";
+import "./component/common/default.css";
+
 function App() {
   return (
     <div className="wrap">
-      <div className="content">메인페이지</div>
+      <div className="content">
+        <Header />
+      </div>
     </div>
   );
 }
