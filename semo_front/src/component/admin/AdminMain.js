@@ -74,8 +74,8 @@ const AdminMain = () => {
       <div>여기는 AdminMain입니다.</div>
       <hr></hr>
       <div className="links">
-        <Link to="/admin/list">회원 목록 조회</Link>
-        <Link to="/admin/report">신고 내역 조회</Link>
+        <Link to="list">회원 목록 조회</Link>
+        <Link to="report">신고 내역 조회</Link>
       </div>
       <hr></hr>
       <Routes>
