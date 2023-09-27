@@ -24,6 +24,7 @@
     "sweetalert2": "^11.7.29",
     "swiper": "^6.8.4",
     "three": "^0.156.1",
+    "three-orbitcontrols": "^2.110.3",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

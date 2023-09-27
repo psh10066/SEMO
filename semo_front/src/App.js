@@ -4,13 +4,17 @@ import Header from "./component/common/Header";
 import "./component/common/default.css";
 import { Button1 } from "./component/util/Buttons";
 import MyModal from "./component/util/MyModal";
+import { Route, Routes } from "react-router";
+import AdminMain from "./component/admin/AdminMain";
 
 function App() {
   return (
-    <div className="wrap">
+    <div>
       <Header />
-      <div className="content">
-        <></>
+      <div>
+        <Routes>
+          <Route path="/admin/*" element={<AdminMain />} />
+        </Routes>
       </div>
       <Footer />
     </div>
