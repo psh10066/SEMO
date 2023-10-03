@@ -6,6 +6,7 @@ import { Button1 } from "./component/util/Buttons";
 import MyModal from "./component/util/MyModal";
 import { Route, Routes } from "react-router";
 import AdminMain from "./component/admin/AdminMain";
+import GrBoardMain from "./component/board/GrBoardMain";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <div>
         <Routes>
           <Route path="/admin/*" element={<AdminMain />} />
+          <Route path="/board/*" element={<GrBoardMain />} />
         </Routes>
       </div>
       <Footer />
