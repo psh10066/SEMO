@@ -8,6 +8,11 @@ const Header = () => {
           <Link to="/">SEMOMO</Link>
         </div>
         <Navi />
+        <div className="login-button">
+          <button>
+            <Link to="/login">LogIn</Link>
+          </button>
+        </div>
       </div>
     </header>
   );
@@ -21,9 +26,6 @@ const Navi = () => {
         </li>
         <li>
           <Link to="#">라운지</Link>
-        </li>
-        <li>
-          <Link to="/login">로그인</Link> {/* 버튼으로 구현예정 */}
         </li>
       </ul>
     </div>
