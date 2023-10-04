@@ -5,7 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@mui/material": "^5.14.10",
+    "@mui/material": "^5.14.11",
     "@react-three/drei": "^9.85.0",
     "@react-three/fiber": "^8.14.3",
     "@testing-library/jest-dom": "^5.17.0",
@@ -24,6 +24,7 @@
     "sweetalert2": "^11.7.29",
     "swiper": "^6.8.4",
     "three": "^0.156.1",
+    "three-orbitcontrols": "^2.110.3",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -38,6 +39,7 @@
       "react-app/jest"
     ]
   },
+  "proxy": "http://localhost:9999",
   "browserslist": {
     "production": [
       ">0.2%",
@@ -51,6 +53,6 @@
     ]
   },
   "devDependencies": {
-    "@types/react-datepicker": "^4.15.0"
+    "@types/react-datepicker": "^4.15.1"
   }
 }

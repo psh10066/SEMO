@@ -1,0 +1,43 @@
+.login-wrap {
+  width: 500px;
+  margin: 0 auto;
+}
+
+.login-title {
+  text-align: center;
+  color: #220895;
+  font-size: 24px;
+  padding: 50px;
+}
+
+.login-input-wrap {
+  margin: 20px 0px;
+}
+.find-box {
+  display: flex;
+  align-items: center;
+  margin: 10px 0px;
+  justify-content: center;
+}
+.find-box > span {
+  font-size: 22px;
+  transform: rotate(90deg);
+}
+.find-box > a {
+  font-size: 0.9em;
+  height: 20px;
+  line-height: 20px;
+}
+.find-box > a:hover {
+  text-decoration: underline;
+}
+
+.login-btn-box {
+  text-align: center;
+}
+.login-btn-box > button {
+  width: 100%;
+}
+.login-btn-box > button:hover {
+  background-color: #8bb4ff;
+}
