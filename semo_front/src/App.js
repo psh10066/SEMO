@@ -11,6 +11,10 @@ import Login from "./component/member/Login";
 
 import GrBoardMain from "./component/board/GrBoardMain";
 
+import { Experience } from "./component/mainpage/Experience";
+import "./circle.css";
+import { Canvas } from "@react-three/fiber";
+
 function App() {
   const [isLogin, setIsLogin] = useState(true);
   useEffect(() => {
@@ -25,12 +29,20 @@ function App() {
     <div className="wrap">
       <Header />
       <div className="content">
+        <div className="circle">
+          <Canvas shadows camera={{ position: [0, 16, 42], fov: 30 }}>
+            <Experience />
+          </Canvas>
+        </div>
+
+
         <Routes>
           <Route path="/admin/*" element={<AdminMain />} />
           <Route path="/login/*" element={<Login />} />
           <Route path="/join" element={<Join />} />
           <Route path="/board/*" element={<GrBoardMain />} />
         </Routes>
+
       </div>
       <Footer />
     </div>
