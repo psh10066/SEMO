@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="kr.or.semo.report.model.dao.ReportDao">
+
+  	<select id="reportTotalCount" resultType="int">
+		select count(*) from gr_report
+	</select>
+	
+	<select id="reportList" resultType="report">
+		SELECT * FROM    
+	    (SELECT ROWNUM AS RNUM, B.* FROM
+	        (SELECT
+	            REPORT_NO,
+	            REPORT_DETAIL,
+	            TO_CHAR(REPORT_DATE,'YYYY-MM-DD') AS REPORT_DATE,
+	            GROUP_NAME,
+	            MEMBER_ID
+	        FROM GR_REPORT
+	        JOIN GROUP_TBL USING (GROUP_NO)
+	        JOIN MEMBER USING (MEMBER_NO)
+	        ORDER BY GROUP_NAME ASC, REPORT_NO ASC)B)
+	WHERE RNUM BETWEEN #{start} AND #{end}
+	</select>
+	
+</mapper>

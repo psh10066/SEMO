@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Pagination from "../common/Pagination";
 
 const AdminReport = (props) => {
-  const reportList2 = props.reportList;
+  //const reportList2 = props.reportList;
   const [reportList, setReportList] = useState([]);
   const [pageInfo, setPageInfo] = useState({});
   const [reqPage, setReqPage] = useState(1);
@@ -35,6 +35,7 @@ const AdminReport = (props) => {
             </tr>
           </thead>
           <tbody>
+            {/* 
             {reportList2.map((report, index) => {
               return (
                 <tr key={"r" + index}>
@@ -46,6 +47,7 @@ const AdminReport = (props) => {
                 </tr>
               );
             })}
+            */}
             {reportList.map((report, index) => {
               return <ReportItem key={"report" + index} report={report} />;
             })}
@@ -69,7 +71,7 @@ const ReportItem = (props) => {
       <td>{report.reportNo}</td>
       <td>{report.groupName}</td>
       <td>{report.memberId}</td>
-      <td>{report.reportContent}</td>
+      <td>{report.reportDetail}</td>
       <td>{report.reportDate}</td>
     </tr>
   );
