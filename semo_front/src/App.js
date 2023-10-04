@@ -6,6 +6,7 @@ import { Button1 } from "./component/util/Buttons";
 import MyModal from "./component/util/MyModal";
 import { Route, Routes } from "react-router";
 import AdminMain from "./component/admin/AdminMain";
+import MeetingCreate from "./component/meeting/MeetingCreate";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <div className="content">
         <Routes>
           <Route path="/admin/*" element={<AdminMain />} />
+          <Route path="/metting" element={<MeetingCreate />} />
         </Routes>
       </div>
       <Footer />
