@@ -38,7 +38,7 @@ function App() {
           <Route path="/group/*" element={<GroupMain />} />
           <Route path="/groupBoard/*" element={<GrBoardMain />} />
           <Route path="/notice/*" element={<NoticeMain />} />
-          <Route path="/metting" element={<MeetingCreate />} />
+          <Route path="/meeting" element={<MeetingCreate />} />
         </Routes>
       </div>
       <Footer />
