@@ -12,3 +12,5 @@ npm i react-modal
 npm install react-datepicker date-fns
 npm install --save-dev @types/react-datepicker
 npm install three-orbitcontrols
+npm i lamina
+npm install leva
