@@ -1,5 +1,7 @@
 import "./notice.css";
 
-const NoticeModify = () => {};
+const NoticeModify = () => {
+  return <div>NoticeModify</div>;
+};
 
 export default NoticeModify;
