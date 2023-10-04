@@ -1,6 +1,7 @@
 .login-wrap {
-  width: 500px;
+  width: 400px;
   margin: 0 auto;
+  padding: 80px;
 }
 
 .login-title {
@@ -19,7 +20,7 @@
   margin: 10px 0px;
   justify-content: center;
 }
-.login-icon-box > img {
+.login-icon-box > a > img {
   font-size: 22px;
   margin: 10px 20px;
   cursor: pointer;
@@ -44,6 +45,7 @@
 }
 
 .login-btn-box {
+  margin-top: 40px;
   text-align: center;
 }
 .login-btn-box > button {
