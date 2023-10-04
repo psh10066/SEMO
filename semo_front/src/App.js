@@ -11,10 +11,7 @@ import Login from "./component/member/Login";
 
 import GrBoardMain from "./component/board/GrBoardMain";
 import GroupMain from "./component/group/GroupMain";
-
-import { Experience } from "./component/mainpage/Experience";
-import "./circle.css";
-import { Canvas } from "@react-three/fiber";
+import Mainpage from "./component/mainpage/MainPage";
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
@@ -30,13 +27,8 @@ function App() {
     <div className="wrap">
       <Header />
       <div className="content">
-        <div className="circle">
-          <Canvas shadows camera={{ position: [0, 16, 42], fov: 30 }}>
-            <Experience />
-          </Canvas>
-        </div>
-
         <Routes>
+          <Route path="/" element={<Mainpage />} />
           <Route path="/admin/*" element={<AdminMain />} />
           <Route path="/login" element={<Login setIsLogin={setIsLogin} />} />
           <Route path="/join" element={<Join />} />
