@@ -23,7 +23,7 @@ const Navi = () => {
           <Link to="#">라운지</Link>
         </li>
         <li>
-          <Link to="#">로그인</Link> {/* 버튼으로 구현예정 */}
+          <Link to="/login">로그인</Link> {/* 버튼으로 구현예정 */}
         </li>
       </ul>
     </div>
