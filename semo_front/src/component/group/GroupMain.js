@@ -5,7 +5,9 @@ import GroupCreate from "./GroupCreate";
 const GroupMain = (props) => {
   return (
     <div className="group-all-wrap">
-      <GroupCreate />
+      <Routes>
+        <Route path="create" element={<GroupCreate />} />
+      </Routes>
     </div>
   );
 };

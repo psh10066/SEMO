@@ -1,6 +1,12 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Header = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const modalOpen = () => {
+    setIsModalOpen(true);
+  };
+
   return (
     <header>
       <div className="header">
@@ -8,6 +14,11 @@ const Header = () => {
           <Link to="/">SEMOMO</Link>
         </div>
         <Navi />
+        <div className="login-button">
+          <button>
+            <Link to="/login">LogIn</Link>
+          </button>
+        </div>
       </div>
     </header>
   );
@@ -21,9 +32,6 @@ const Navi = () => {
         </li>
         <li>
           <Link to="#">라운지</Link>
-        </li>
-        <li>
-          <Link to="/login">로그인</Link> {/* 버튼으로 구현예정 */}
         </li>
       </ul>
     </div>

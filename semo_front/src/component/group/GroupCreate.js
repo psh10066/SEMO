@@ -1,16 +1,44 @@
 import { useState } from "react";
 import GroupFrm from "./GroupFrm";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const GroupCreate = () => {
   const [groupName, setGroupName] = useState("");
   const [thumbnail, setThumbnail] = useState({});
-  const [groupImg, setGroupImg] = useState("");
+  const [groupImg, setGroupImg] = useState(null);
   const [groupMaxNUm, setGroupMaxNum] = useState(0);
   const [groupContent, setGroupContent] = useState("");
   const [groupCategory, setGroupCategory] = useState(0);
   const [groupLocal, setGroupLocal] = useState(0);
 
-  const create = () => {};
+  const create = () => {
+    if (
+      groupName !== "" &&
+      groupContent != "" &&
+      groupMaxNUm !== 0 &&
+      groupCategory !== 0 &&
+      groupLocal !== 0
+    ) {
+      const form = new FormData();
+      form.append("groupName", groupName);
+      form.append("thumbnail", thumbnail);
+      form.append("groupMaxNum", groupMaxNUm);
+      form.append("groupContent", groupContent);
+      form.append("groupCategory", groupCategory);
+      form.append("groupLocal", groupLocal);
+      axios
+        .post("/group/create", form)
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((res) => {
+          console.log(res.response.status);
+        });
+    } else {
+      Swal.fire("입력값을 확인하세요.");
+    }
+  };
 
   return (
     <div>

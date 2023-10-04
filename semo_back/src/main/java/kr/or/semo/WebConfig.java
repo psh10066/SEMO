@@ -1,6 +1,8 @@
 package kr.or.semo;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -15,6 +17,11 @@ public class WebConfig implements WebMvcConfigurer{
 		
 		registry.addResourceHandler("/groupBoard/editor/**")
 		.addResourceLocations("file:///C:/Temp/semo/groupBoard/editor/");
+	}
+	
+	@Bean
+	public BCryptPasswordEncoder bCryptPasswordEncoder() {
+		return new BCryptPasswordEncoder();
 	}
 
 }

@@ -12,10 +12,10 @@ const GrBoardList = (props) => {
   const [pageInfo, setPageInfo] = useState({});
   useEffect(() => {
     axios
-      .get("/board/list/" + reqPage)
+      .get("/groupBoard/list/" + reqPage)
       .then((res) => {
         console.log(res.data);
-        setGrBoardList(res.data.boardList);
+        setGrBoardList(res.data.groupBoardList);
         setPageInfo(res.data.pi);
       })
       .catch((res) => {
@@ -33,10 +33,9 @@ const GrBoardList = (props) => {
       <div className="board-write-btn">
         <Button1 text="글쓰기" clickEvent={write} />
       </div>
-
       <div className="board-list-wrap">
-        {GrboardList.map((board, index) => {
-          return <BoardItem key={"board" + index} board={board} />;
+        {GrboardList.map((grBoard, index) => {
+          return <BoardItem key={"grBoard" + index} GrBoard={grBoard} />;
         })}
       </div>
       {/* 페이징 */}
@@ -51,26 +50,20 @@ const GrBoardList = (props) => {
   );
 };
 const BoardItem = (props) => {
-  const board = props.board;
+  const grBoard = props.grBoard;
   const navigate = useNavigate();
   const boardView = () => {
-    navigate("/board/view", { state: { boardNo: board.boardNo } });
+    navigate("/groupBoard/view", {
+      state: { grBoardNo: grBoard.grBoardNo },
+    });
   };
   return (
     <div className="board-item" onClick={boardView}>
-      {/* 이미지없으므로 삭제 예정 */}
-      <div className="board-item-img">
-        {board.boardImg === null ? (
-          <img src="/img/default.png" />
-        ) : (
-          <img src={"/board/" + board.boardImg} />
-        )}
-      </div>
       {/* 게시글정보 */}
       <div className="board-item-info">
-        <div className="board-item-title">{board.boardTitle}</div>
-        <div className="board-item-writer">{board.memberId}</div>
-        <div className="board-item-date">{board.boardDate}</div>
+        <div className="board-item-title">{grBoard.grBoardTitle}</div>
+        <div className="board-item-writer">{grBoard.memberId}</div>
+        <div className="board-item-date">{grBoard.grBoardDate}</div>
       </div>
     </div>
   );

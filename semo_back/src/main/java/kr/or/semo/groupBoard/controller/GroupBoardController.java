@@ -34,9 +34,9 @@ public class GroupBoardController {
 		return map;
 	}
 	@PostMapping(value="/insert")
-//	public int insertBoard(@ModelAttribute GroupBoard gb, @RequestAttribute String memberId) {
+//	public int insertGroupBoard(@ModelAttribute GroupBoard gb, @RequestAttribute String memberId) {
 //		gb.setMemberId(memberId);
-	public int insertBoard(@ModelAttribute GroupBoard gb) {
+	public int insertGroupBoard(@ModelAttribute GroupBoard gb) {
 		gb.setMemberId("1"); // 임시
 		gb.setGroupNo(1); // 임시
 		int result = groupBoardService.insertGroupBoard(gb);
@@ -53,5 +53,10 @@ public class GroupBoardController {
 		String filename = image.getOriginalFilename();
 		String filepath = fileUtil.getfilepath(savepath, filename, image);
 		return "/groupBoard/editor/"+filepath;
+	}
+	//수정
+	@PostMapping(value="/modify")
+	public int modify(@ModelAttribute GroupBoard gb) {
+		return groupBoardService.updateGroupBoard(gb);
 	}
 }
