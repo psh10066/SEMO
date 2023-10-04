@@ -41,6 +41,7 @@ const AdminMain = () => {
       memberType: 2,
     },
   ]);
+  /*
   const [reportList, setReportList] = useState([
     {
       reportNo: 1,
@@ -70,7 +71,7 @@ const AdminMain = () => {
       reportContent: "설날연휴 아니에요?",
       reportDate: "2023-09-27",
     },
-  ]);
+  ]);*/
   return (
     <div className="wrap">
       <h1>SEMOMO 관리자 마이페이지</h1>
@@ -87,10 +88,7 @@ const AdminMain = () => {
           path="/list"
           element={<AdminMember adminMember={adminMember} />}
         />
-        <Route
-          path="/report"
-          element={<AdminReport reportList={reportList} />}
-        />
+        <Route path="/report" element={<AdminReport />} />
       </Routes>
     </div>
   );

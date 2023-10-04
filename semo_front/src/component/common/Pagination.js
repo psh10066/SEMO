@@ -19,7 +19,7 @@ const Pagination = (props) => {
       key="first-page"
       className="material-icons page-item"
     >
-      first_page
+      keyboard_double_arrow_left
     </span>
   );
   //이전 페이지
@@ -88,7 +88,7 @@ const Pagination = (props) => {
       key="last-page"
       className="material-icons page-item"
     >
-      last_page
+      keyboard_double_arrow_right
     </span>
   );
   return <div className="paging-wrap">{arr}</div>;
