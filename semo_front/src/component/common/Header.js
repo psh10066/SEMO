@@ -1,6 +1,12 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Header = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const modalOpen = () => {
+    setIsModalOpen(true);
+  };
+
   return (
     <header>
       <div className="header">

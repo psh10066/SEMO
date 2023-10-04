@@ -27,7 +27,7 @@ function App() {
       <div className="content">
         <Routes>
           <Route path="/admin/*" element={<AdminMain />} />
-          <Route path="/login/*" element={<Login />} />
+          <Route path="/login" element={<Login setIsLogin={setIsLogin} />} />
           <Route path="/join" element={<Join />} />
           <Route path="/board/*" element={<GrBoardMain />} />
         </Routes>

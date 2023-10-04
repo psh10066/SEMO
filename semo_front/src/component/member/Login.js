@@ -5,6 +5,7 @@ import { Button1, Button2 } from "../util/Buttons";
 import "./member.css";
 import Swal from "sweetalert2";
 import axios from "axios";
+import ReactModal from "react-modal";
 
 const Login = (props) => {
   const setIsLogin = props.setIsLogin;
@@ -16,16 +17,21 @@ const Login = (props) => {
   };
   const login = () => {
     const member = { memberId, memberPw };
-    axios.post("/member/login", member).then((res) => {
-      if (res.data === "실패") {
-        console.log(res.data);
-        Swal.fire("아이디 또는 비밀번호를 확인하세요");
-      } else {
-        window.localStorage.setItem("token", res.data);
-        setIsLogin(true);
-        navigate("/");
-      }
-    });
+    axios
+      .post("/member/login", member)
+      .then((res) => {
+        if (res.data === "실패") {
+          console.log(res);
+          Swal.fire("아이디 또는 비밀번호를 확인하세요");
+        } else {
+          window.localStorage.setItem("token", res.data);
+          setIsLogin(true);
+          navigate("/");
+        }
+      })
+      .catch((res) => {
+        console.log(res);
+      });
   };
   return (
     <div className="login-wrap">
