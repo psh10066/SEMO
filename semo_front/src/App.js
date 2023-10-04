@@ -15,7 +15,7 @@ function App() {
       <div className="content">
         <Routes>
           <Route path="/admin/*" element={<AdminMain />} />
-          <Route path="/board/*" element={<GrBoardMain />} />
+          <Route path="/groupBoard/*" element={<GrBoardMain />} />
         </Routes>
       </div>
       <Footer />
