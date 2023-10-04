@@ -1,0 +1,56 @@
+.login-wrap {
+  width: 500px;
+  margin: 0 auto;
+}
+
+.login-title {
+  text-align: center;
+  color: #220895;
+  font-size: 24px;
+  padding: 50px;
+}
+
+.login-input-wrap {
+  margin: 20px 0px;
+}
+.login-icon-box {
+  display: flex;
+  align-items: center;
+  margin: 10px 0px;
+  justify-content: center;
+}
+.login-icon-box > img {
+  font-size: 22px;
+  margin: 10px 20px;
+  cursor: pointer;
+}
+.find-box {
+  display: flex;
+  align-items: center;
+  margin: 10px 0px;
+  justify-content: center;
+}
+.find-box > span {
+  font-size: 22px;
+  transform: rotate(90deg);
+}
+.find-box > a {
+  font-size: 0.9em;
+  height: 20px;
+  line-height: 20px;
+}
+.find-box > a:hover {
+  text-decoration: underline;
+}
+
+.login-btn-box {
+  text-align: center;
+}
+.login-btn-box > button {
+  width: 100%;
+  border: none;
+}
+.login-btn-box > button:hover {
+  background-color: #5457e9;
+  border: none;
+}
