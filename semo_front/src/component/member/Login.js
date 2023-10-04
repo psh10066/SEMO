@@ -35,6 +35,11 @@ const Login = (props) => {
           placeholder="비밀번호"
         />
       </div>
+      <div className="login-icon-box">
+        <img src="/image/ico-kakao.png" />
+
+        <img src="/image/ico-naver.png" />
+      </div>
       <div className="find-box">
         <Link to="#">아이디 찾기</Link>
         <span className="material-icons">horizontal_rule</span>
