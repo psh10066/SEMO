@@ -1,0 +1,31 @@
+/* 
+  사이트 사용 색상 
+  balck : #252A34
+  darkgray : #393E46
+  lightgray : #EEEEEE
+  white : #fff
+  
+  메인색상 (찐한순)
+  #220895 rgba(34,8,149)
+  #5457E9 rgba(84,87,233)
+  #8BB4FF rgba(139,180,255)
+    */
+
+.paging-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.paging-wrap > .page-item {
+  min-width: 20px;
+  text-align: center;
+  height: 20px;
+  line-height: 20px;
+  padding: 5px;
+  cursor: pointer;
+}
+.page-item.active-page {
+  background-color: #053b50;
+  color: #fff;
+}

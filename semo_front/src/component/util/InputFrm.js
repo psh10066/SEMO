@@ -1,4 +1,3 @@
-
 const Input = (props) => {
   const data = props.data;
   const setData = props.setData;
@@ -19,7 +18,6 @@ const Input = (props) => {
         onChange={changeValue}
         onBlur={blurEvent}
       ></input>
-      
     </>
   );
 };
