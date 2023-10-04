@@ -1,5 +1,3 @@
-
-
 const Button1 = (props) => {
   const clickEvent = props.clickEvent;
   const text = props.text;

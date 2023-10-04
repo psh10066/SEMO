@@ -1,0 +1,39 @@
+.group-all-wrap {
+  width: 900px;
+  margin: 0 auto;
+}
+.group-frm-title {
+  font-size: 24px;
+  color: #220895;
+  padding: 50px;
+  text-align: center;
+}
+.group-frm-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+.group-thumbnail {
+  width: 300px;
+  height: 300px;
+  box-sizing: border-box;
+  padding: 10px;
+  margin-top: 30px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+}
+.group-thumbnail > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.group-info-tbl {
+  border-spacing: 0;
+}
+.group-info-tbl tr > td:first-child {
+  width: 80px;
+  padding: 10px;
+}
+.group-info-tbl tr > td:last-child {
+  padding: 10px 20px;
+}
