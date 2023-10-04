@@ -49,6 +49,10 @@ public class GroupBoardService {
 		GroupBoard gb = groupBoardDao.selectOneGroupBoard(grBoardNo);
 		return gb;
 	}
+	public int updateGroupBoard(GroupBoard gb) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 }
 

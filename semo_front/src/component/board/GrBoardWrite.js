@@ -31,14 +31,14 @@ const GrBoardWrite = () => {
         .then((res) => {
           console.log(res.data);
           if (res.data > 0) {
-            navigate("/board");
+            navigate("/groupBoard");
           }
         })
         .catch((res) => {
           console.log(res.response.status);
         });
     } else {
-      Swal.fire("입력값을 확인하세요.");
+      Swal.fire("내용을 입력하세요.");
     }
   };
   return (

@@ -35,14 +35,13 @@ function App() {
           </Canvas>
         </div>
 
-
         <Routes>
           <Route path="/admin/*" element={<AdminMain />} />
           <Route path="/login/*" element={<Login />} />
           <Route path="/join" element={<Join />} />
           <Route path="/board/*" element={<GrBoardMain />} />
+          <Route path="/groupBoard/*" element={<GrBoardMain />} />
         </Routes>
-
       </div>
       <Footer />
     </div>
