@@ -9,6 +9,8 @@ import AdminMain from "./component/admin/AdminMain";
 import Join from "./component/member/Join";
 import Login from "./component/member/Login";
 
+import GrBoardMain from "./component/board/GrBoardMain";
+
 function App() {
   const [isLogin, setIsLogin] = useState(true);
   useEffect(() => {
@@ -27,6 +29,7 @@ function App() {
           <Route path="/admin/*" element={<AdminMain />} />
           <Route path="/login/*" element={<Login />} />
           <Route path="/join" element={<Join />} />
+          <Route path="/board/*" element={<GrBoardMain />} />
         </Routes>
       </div>
       <Footer />
