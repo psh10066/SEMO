@@ -7,7 +7,7 @@ const GroupCreate = () => {
   const [groupName, setGroupName] = useState("");
   const [thumbnail, setThumbnail] = useState({});
   const [groupImg, setGroupImg] = useState(null);
-  const [groupMaxNUm, setGroupMaxNum] = useState(0);
+  const [groupMaxnum, setGroupMaxnum] = useState(0);
   const [groupContent, setGroupContent] = useState("");
   const [groupCategory, setGroupCategory] = useState(0);
   const [groupLocal, setGroupLocal] = useState(0);
@@ -16,14 +16,14 @@ const GroupCreate = () => {
     if (
       groupName !== "" &&
       groupContent != "" &&
-      groupMaxNUm !== 0 &&
+      groupMaxnum !== 0 &&
       groupCategory !== 0 &&
       groupLocal !== 0
     ) {
       const form = new FormData();
       form.append("groupName", groupName);
       form.append("thumbnail", thumbnail);
-      form.append("groupMaxNum", groupMaxNUm);
+      form.append("groupMaxnum", groupMaxnum);
       form.append("groupContent", groupContent);
       form.append("groupCategory", groupCategory);
       form.append("groupLocal", groupLocal);
@@ -50,8 +50,8 @@ const GroupCreate = () => {
         setThumbnail={setThumbnail}
         groupImg={groupImg}
         setGroupImg={setGroupImg}
-        groupMaxNum={groupMaxNUm}
-        setGroupMaxNum={setGroupMaxNum}
+        groupMaxnum={groupMaxnum}
+        setGroupMaxnum={setGroupMaxnum}
         groupContent={groupContent}
         setGroupContent={setGroupContent}
         groupCategory={groupCategory}
