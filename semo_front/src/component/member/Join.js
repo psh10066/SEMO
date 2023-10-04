@@ -16,9 +16,9 @@ const Join = () => {
   const [checkPwMsg, setCheckPwMsg] = useState("");
   const navigate = useNavigate();
   return (
-    <>
+    <div className="join-wrap">
       <div>회원가입</div>
-    </>
+    </div>
   );
 };
 export default Join;

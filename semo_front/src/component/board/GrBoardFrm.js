@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Button1 } from "../util/Buttons";
 import Input from "../util/InputFrm";
 import TextEditor from "../util/TextEditor";
-import GrBoardWrite from "./GrBoardWrite";
 
 const GrBoardFrm = (props) => {
   const GrBoardTitle = props.GrBoardTitle;
@@ -48,9 +47,9 @@ const GrBoardFrm = (props) => {
       </div>
       <div className="board-btn-box">
         {type === "modify" ? (
-          <Button1 text="수정하기" clickEvent={buttonEvent} />
+          <Button1 text="수정" clickEvent={buttonEvent} />
         ) : (
-          <Button1 text="작성하기" clickEvent={buttonEvent} />
+          <Button1 text="등록" clickEvent={buttonEvent} />
         )}
       </div>
     </div>

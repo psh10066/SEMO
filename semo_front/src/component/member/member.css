@@ -1,6 +1,7 @@
 .login-wrap {
-  width: 500px;
+  width: 400px;
   margin: 0 auto;
+  padding: 80px;
 }
 
 .login-title {
@@ -12,6 +13,17 @@
 
 .login-input-wrap {
   margin: 20px 0px;
+}
+.login-icon-box {
+  display: flex;
+  align-items: center;
+  margin: 10px 0px;
+  justify-content: center;
+}
+.login-icon-box > a > img {
+  font-size: 22px;
+  margin: 10px 20px;
+  cursor: pointer;
 }
 .find-box {
   display: flex;
@@ -33,11 +45,14 @@
 }
 
 .login-btn-box {
+  margin-top: 40px;
   text-align: center;
 }
 .login-btn-box > button {
   width: 100%;
+  border: none;
 }
 .login-btn-box > button:hover {
-  background-color: #8bb4ff;
+  background-color: #5457e9;
+  border: none;
 }
