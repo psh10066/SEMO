@@ -41,37 +41,6 @@ const AdminMain = () => {
       memberType: 2,
     },
   ]);
-  /*
-  const [reportList, setReportList] = useState([
-    {
-      reportNo: 1,
-      groupName: "집에가고싶다",
-      memberId: "user01",
-      reportContent: "집에 안 보내줘요.",
-      reportDate: "2023-09-27",
-    },
-    {
-      reportNo: 2,
-      groupName: "개발자는개발개발",
-      memberId: "user02",
-      reportContent: "개애애애바아아아알",
-      reportDate: "2023-09-27",
-    },
-    {
-      reportNo: 3,
-      groupName: "초밥좋아해요",
-      memberId: "user03",
-      reportContent: "초밥을 안 팔아요",
-      reportDate: "2023-09-27",
-    },
-    {
-      reportNo: 4,
-      groupName: "추석연휴",
-      memberId: "user04",
-      reportContent: "설날연휴 아니에요?",
-      reportDate: "2023-09-27",
-    },
-  ]);*/
   return (
     <div className="wrap">
       <h1>SEMOMO 관리자 마이페이지</h1>

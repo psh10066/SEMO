@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Pagination from "../common/Pagination";
 
-const AdminReport = (props) => {
+const AdminReport = () => {
   //const reportList2 = props.reportList;
   const [reportList, setReportList] = useState([]);
   const [pageInfo, setPageInfo] = useState({});
@@ -28,26 +28,13 @@ const AdminReport = (props) => {
           <thead>
             <tr>
               <td width={"10%"}>신고번호</td>
-              <td width={"20%"}>모임명</td>
-              <td width={"20%"}>신고회원아이디</td>
-              <td width={"40%"}>신고사유</td>
+              <td width={"15%"}>모임명</td>
+              <td width={"15%"}>신고회원아이디</td>
+              <td width={"50%"}>신고사유</td>
               <td width={"10%"}>신고일자</td>
             </tr>
           </thead>
           <tbody>
-            {/* 
-            {reportList2.map((report, index) => {
-              return (
-                <tr key={"r" + index}>
-                  <td>{report.reportNo}</td>
-                  <td>{report.groupName}</td>
-                  <td>{report.memberId}</td>
-                  <td>{report.reportContent}</td>
-                  <td>{report.reportDate}</td>
-                </tr>
-              );
-            })}
-            */}
             {reportList.map((report, index) => {
               return <ReportItem key={"report" + index} report={report} />;
             })}
