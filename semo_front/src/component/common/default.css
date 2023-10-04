@@ -78,13 +78,13 @@ header {
   padding: 5px 0px;
 }
 .nav > ul > li > a {
-  color: #27005d;
+  color: #fff;
   font-family: ns-eb;
 }
 .main-logo > a {
   font-size: 32px;
   font-family: ns-black;
-  color: #27005d;
+  color: #fff;
 }
 .header-link {
   display: flex;
@@ -96,7 +96,7 @@ header {
 }
 .header-link > a > span {
   font-size: 30px;
-  color: #27005d;
+  color: #fff;
 }
 .footer {
   padding: 50px;

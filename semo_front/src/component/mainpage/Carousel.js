@@ -50,7 +50,7 @@ export const Carousel = (props) => {
 
   return (
     <>
-      <group scale={[0.9,0.9,0.9]} rotation-y={-Math.PI / 4} position-y={-0.01}>
+      <group scale={[0.85,0.85,0.85]} rotation-y={-Math.PI / 4} position-y={-0.01}>
         <animated.group rotation-y={carouselRotation}>
           <CarouselLights currentStepSpring={currentStep} />
           <mesh position={[0, -2, 0]} >

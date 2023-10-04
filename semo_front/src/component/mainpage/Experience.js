@@ -50,13 +50,13 @@ export const Experience = () => {
       <ambientLight intensity={1} />
       <directionalLight
         position={[4, 5, 6]}
-        intensity={3}
+        intensity={1}
         color={"#000000"}
       />
 
       <directionalLight
         position={[-4, 5, 6]}
-        intensity={2}
+        intensity={1.5}
         color={"#ffffff"}
       />
     
