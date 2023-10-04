@@ -10,6 +10,7 @@ import Join from "./component/member/Join";
 import Login from "./component/member/Login";
 
 import GrBoardMain from "./component/board/GrBoardMain";
+import GroupMain from "./component/group/GroupMain";
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
@@ -30,6 +31,7 @@ function App() {
           <Route path="/login/*" element={<Login />} />
           <Route path="/join" element={<Join />} />
           <Route path="/board/*" element={<GrBoardMain />} />
+          <Route path="/group/*" element={<GroupMain />} />
         </Routes>
       </div>
       <Footer />

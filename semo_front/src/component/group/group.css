@@ -37,3 +37,23 @@
 .group-info-tbl tr > td:last-child {
   padding: 10px 20px;
 }
+.group-content-box .ql-container {
+  height: 400px;
+}
+.group-btn-box {
+  text-align: center;
+}
+.group-btn-box > button {
+  width: 300px;
+  border: none;
+  margin: 90px;
+}
+.group-btn-box > button:hover {
+  background-color: #5457e9;
+  border: none;
+}
+#thumbnail {
+  height: 50px;
+  line-height: 50px;
+  font-size: 16px;
+}

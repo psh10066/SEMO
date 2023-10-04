@@ -3,6 +3,7 @@ import { useState } from "react";
 import Input from "../util/InputFrm";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import TextEditor from "../util/TextEditor";
+import { Button1 } from "../util/Buttons";
 
 const GroupFrm = (props) => {
   const groupName = props.groupName;
@@ -72,7 +73,7 @@ const GroupFrm = (props) => {
                     type="file"
                     id="thumbnail"
                     accept="image/*"
-                    onChange={{ thumbnailChange }}
+                    onChange={thumbnailChange}
                   />
                 </td>
               </tr>
@@ -83,10 +84,10 @@ const GroupFrm = (props) => {
                 <td>
                   <FormControl sx={{ m: 0.5, width: 400 }}>
                     <Select value={groupMaxNum} onChange={handleChange1}>
-                      <MenuItem value={1}>10</MenuItem>
-                      <MenuItem value={2}>20</MenuItem>
-                      <MenuItem value={3}>30</MenuItem>
-                      <MenuItem value={4}>40</MenuItem>
+                      <MenuItem value={10}>10</MenuItem>
+                      <MenuItem value={20}>20</MenuItem>
+                      <MenuItem value={30}>30</MenuItem>
+                      <MenuItem value={40}>40</MenuItem>
                     </Select>
                   </FormControl>
                 </td>
@@ -136,6 +137,13 @@ const GroupFrm = (props) => {
           setData={setGroupContent}
           url="/group/contentImg"
         />
+      </div>
+      <div className="group-btn-box">
+        {type === "modify" ? (
+          <Button1 text="수정하기" clickEvent={buttonEvent} />
+        ) : (
+          <Button1 text="작성하기" clickEvent={buttonEvent} />
+        )}
       </div>
     </div>
   );
