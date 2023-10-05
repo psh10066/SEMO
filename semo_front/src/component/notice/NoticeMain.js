@@ -9,8 +9,10 @@ const NoticeMain = (props) => {
   const isLogin = props.isLogin;
   const setIsLogin = props.setIsLogin;
   return (
-    <div>
-      <div>NOTICE 메인</div>
+    <div className="notice-wrap">
+      <div>NOTICE</div>
+      <hr></hr>
+      <div>여기는 NoticeMain입니다.</div>
       <Routes>
         <Route path="view" element={<NoticeView isLogin={isLogin} />} />
         <Route path="write" element={<NoticeWrite />} />

@@ -39,7 +39,10 @@ function App() {
             element={<GroupMain isLogin={isLogin} setIsLogin={setIsLogin} />}
           />
           <Route path="/groupBoard/*" element={<GrBoardMain />} />
-          <Route path="/notice/*" element={<NoticeMain />} />
+          <Route
+            path="/notice/*"
+            element={<NoticeMain isLogin={isLogin} setIsLogin={setIsLogin} />}
+          />
           <Route path="/meeting" element={<MeetingCreate />} />
           <Route path="/feed/*" element={<FeedMain />} />
         </Routes>

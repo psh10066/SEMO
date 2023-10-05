@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./notice.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Button1 } from "../util/Buttons";
+import { Button1, Button2, Button3 } from "../util/Buttons";
 import Pagination from "../common/Pagination";
 
 const NoticeList = (props) => {
@@ -28,15 +28,16 @@ const NoticeList = (props) => {
   };
   return (
     <div className="my-content-wrap">
-      <div>
+      <div className="notice-write-wrap">
         {isLogin ? (
           <div className="notice-write-btn">
-            <Button1 text="글쓰기" clickEvent={write} />
+            <Button2 text="글쓰기" clickEvent={write} />
           </div>
         ) : (
           ""
         )}
       </div>
+
       <div className="my-content-title">공지사항</div>
       <div className="notice-list-wrap">
         <table>
