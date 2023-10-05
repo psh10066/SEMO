@@ -14,4 +14,6 @@ public interface GroupDao {
 
 	int selectGroupNo();
 
+	Group selectOneGroup(int groupNo);
+
 }
