@@ -86,13 +86,14 @@ header {
   color: #fff;
   font-size: 17px;
 }
+
 .login-button {
   flex-grow: 1;
   display: flex;
   justify-content: end;
   align-items: center;
 }
-.login-button > button {
+.login-button button {
   float: right;
   width: 20%;
   height: 80%;
@@ -101,7 +102,7 @@ header {
   border-radius: 10px;
   background-color: #f9d8ff;
 }
-.login-button > button > a {
+.login-button button a {
   color: #5457e9;
   font-family: ns-black;
   font-size: 14px;
