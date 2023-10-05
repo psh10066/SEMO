@@ -9,4 +9,8 @@
   <insert id="insertMember">
   	insert into member values(member_seq.nextval,#{memberId},#{memberPw},#{memberPhone},#{memberName},#{memberMail},1,#{memberContent},#{memberCategory1},#{memberCategory2},#{memberLocal},#{memberImg})
   </insert>
+  
+  <select id="selectMember" resultType="member">
+  	select * from member where member_no = #{memberNo}
+  </select>
 </mapper>

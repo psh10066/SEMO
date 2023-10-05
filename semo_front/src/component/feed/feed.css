@@ -1,6 +1,6 @@
 .feed-all-wrap {
   width: 900px;
-  margin: 70px auto;
+  margin: 120px auto;
 }
 .feed-profile-wrap {
   margin: 20px;
@@ -32,19 +32,28 @@
   margin: 20px 0;
 }
 .feed-memberContent {
-  min-height: 70px;
-  height: 70px;
+  min-height: 75px;
+  height: 75px;
   overflow: hidden;
 }
 .feed-memberContent > div {
   width: 500px;
   font-size: 17px;
+  text-overflow: ellipsis;
+  white-space: pre-line;
+  overflow-wrap: break-word;
+  overflow: hidden;
+  height: 100%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 .profile-bottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 10px 0;
+  margin-top: 15px;
+  margin-bottom: 50px;
 }
 
 .profile-button > button {
@@ -61,8 +70,8 @@
 .profile-category > a {
   display: inline-block;
   color: #220895;
-  width: 100px;
   font-size: 17px;
+  margin-right: 20px;
 }
 .profile-category > a:hover {
   font-family: ns-b;
@@ -78,15 +87,18 @@
 .profile-menu > ul > li {
   float: left;
   width: 50%;
-  height: 50px;
-  line-height: 50px;
+  height: 60px;
+  line-height: 60px;
   font-size: 19px;
   text-align: center;
 }
 .profile-menu > ul > li > a {
   width: 100%;
   height: 100%;
+  display: inline-block;
+  border-top: 1px solid #ccc;
 }
-.profile-menu > ul > li > a .active-profile-menu {
-  border-top: 2px solid #111;
+.profile-menu > ul > li > a.active-profile-menu {
+  border-top: 5px solid #5457e9;
+  font-family: ns-b;
 }

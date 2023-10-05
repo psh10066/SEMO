@@ -12,10 +12,10 @@ const GrBoardMain = (props) => {
     <div className="board-all-wrap">
       <div className="board-title">나의 모임 게시판</div>
       <Routes>
-        <Route path="view" element={<GrBoardView />} />
+        <Route path="view" element={<GrBoardView isLogin={isLogin} />} />
         <Route path="write" element={<GrBoardWrite />} />
         <Route path="modify" element={<GrBoardModify />} />
-        <Route path="*" element={<GrBoardList />}></Route>
+        <Route path="*" element={<GrBoardList isLogin={isLogin} />}></Route>
       </Routes>
     </div>
   );

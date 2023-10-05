@@ -41,6 +41,12 @@ const Header = (props) => {
   if (location.pathname.includes("/feed")) {
     headerStyle = { color: "#220895" };
   }
+  if (location.pathname.includes("/page")) {
+    headerStyle = { color: "#220895" };
+  }
+  if (location.pathname.includes("/mypage")) {
+    headerStyle = { color: "#220895" };
+  }
 
   return (
     <header>
@@ -50,7 +56,7 @@ const Header = (props) => {
             SEMOMO
           </Link>
         </div>
-        <Navi />
+        <Navi isLogin={isLogin} />
         <div className="login-button">
           <MainSearch />
           <button>
@@ -61,8 +67,10 @@ const Header = (props) => {
     </header>
   );
 };
-const Navi = () => {
+
+const Navi = (props) => {
   const location = useLocation();
+  const isLogin = props.isLogin;
 
   let naviStyle = {};
 
@@ -93,6 +101,12 @@ const Navi = () => {
   if (location.pathname.includes("/feed")) {
     naviStyle = { color: "#220895" };
   }
+  if (location.pathname.includes("/page")) {
+    naviStyle = { color: "#220895" };
+  }
+  if (location.pathname.includes("/mypage")) {
+    naviStyle = { color: "#220895" };
+  }
 
   return (
     <div className="nav">
@@ -106,6 +120,13 @@ const Navi = () => {
           <Link to="#" style={naviStyle}>
             라운지
           </Link>
+        </li>
+        <li>
+          {isLogin ? (
+            <Link to="/mypage" title="마이페이지" style={naviStyle}>
+              마이페이지
+            </Link>
+          ) : null}
         </li>
       </ul>
     </div>

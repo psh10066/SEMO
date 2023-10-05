@@ -30,9 +30,13 @@ const GrBoardList = (props) => {
   };
   return (
     <div>
-      <div className="board-write-btn">
-        <Button1 text="글쓰기" clickEvent={write} />
-      </div>
+      {isLogin ? (
+        <div className="board-write-btn">
+          <Button1 text="글쓰기" clickEvent={write} />
+        </div>
+      ) : (
+        ""
+      )}
       <div className="board-list-wrap">
         {GrboardList.map((grBoard, index) => {
           return <BoardItem key={"grBoard" + index} GrBoard={grBoard} />;
@@ -53,9 +57,9 @@ const BoardItem = (props) => {
   const grBoard = props.grBoard;
   const navigate = useNavigate();
   const boardView = () => {
-    navigate("/groupBoard/view", {
-      state: { grBoardNo: grBoard.grBoardNo },
-    });
+    // navigate("/groupBoard/view", {
+    //   state: { grBoardNo: grBoard.grBoardNo },
+    // });
   };
   return (
     <div className="board-item" onClick={boardView}>

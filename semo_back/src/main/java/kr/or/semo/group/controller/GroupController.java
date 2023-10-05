@@ -2,7 +2,9 @@ package kr.or.semo.group.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,5 +45,11 @@ public class GroupController {
 		String filename = image.getOriginalFilename();
 		String filepath = fileUtil.getfilepath(savepath, filename, image);
 		return "/group/editor/"+filepath;
+	}
+	
+	//상세보기 조회
+	@GetMapping(value="/view/{groupNo}")
+	public Group View(@PathVariable int groupNo) {
+		return groupService.selectOneGroup(groupNo);
 	}
 }

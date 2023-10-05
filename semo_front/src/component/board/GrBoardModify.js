@@ -32,7 +32,7 @@ const GrBoardModify = () => {
     form.append("delFileNo", delFileNo.join("/"));
     const token = window.localStorage.getItem("token");
     axios
-      .post("/board/modify", form, {
+      .post("/groupBoard/modify", form, {
         headers: {
           contentType: "muitlpart/form-data",
           processDate: false,

@@ -6,7 +6,7 @@ const FeedMain = (props) => {
   return (
     <div className="feed-all-wrap">
       <Routes>
-        <Route path="profile" element={<FeedProfile />} />
+        <Route path="profile/*" element={<FeedProfile />} />
       </Routes>
     </div>
   );
