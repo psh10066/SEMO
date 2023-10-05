@@ -33,4 +33,14 @@ public class MemberService {
 			return "실패";
 		}
 	}
+
+	public Member selectOneMember(String memberId) {
+		// TODO Auto-generated method stub
+		return memberDao.selectOneMember(memberId);
+	}
+
+	public int insertMember(Member member) {
+		// TODO Auto-generated method stub
+		return memberDao.insertMember(member);
+	}
 }
