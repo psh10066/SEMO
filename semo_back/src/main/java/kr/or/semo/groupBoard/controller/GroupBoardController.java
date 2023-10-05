@@ -39,6 +39,8 @@ public class GroupBoardController {
 //	public int insertGroupBoard(@ModelAttribute GroupBoard gb) {
 //		gb.setMemberId("1"); // 임시
 //		gb.setGroupNo(1); // 임시
+		System.out.println(memberId);
+		System.out.println(gb.getGroupNo());
 		int result = groupBoardService.insertGroupBoard(gb);
 		return result;
 	}
