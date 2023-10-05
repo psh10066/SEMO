@@ -1,13 +1,17 @@
 package kr.or.semo.member.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.semo.FileUtil;
 import kr.or.semo.member.model.service.MemberService;
 import kr.or.semo.member.model.vo.Member;
 
@@ -16,6 +20,10 @@ import kr.or.semo.member.model.vo.Member;
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private FileUtil fileUtil;
+	@Value("${file.root}")
+	private String root;
 	
 	//로그인
 	@PostMapping(value="/login")
@@ -34,8 +42,16 @@ public class MemberController {
 			return 1;
 		}
 	}
+	
+	//회원가입
 	@PostMapping(value="/join")
-	public int join(@RequestBody Member member) {
+	public int join(@ModelAttribute Member member, @ModelAttribute MultipartFile memberThumbnail) {
+		String savepath = root + "member/";
+		if(memberThumbnail != null) {
+			String filename = memberThumbnail.getOriginalFilename();
+			String filepath = fileUtil.getfilepath(savepath, filename, memberThumbnail);
+			member.setMemberImg(filepath);
+		}
 		int result = memberService.insertMember(member);
 		return result;
 	}

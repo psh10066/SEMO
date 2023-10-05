@@ -19,7 +19,22 @@ const GroupView = (props) => {
       .catch((res) => {
         console.log(res.response.state);
       });
-  });
+    if (isLogin) {
+      const token = window.localStorage.getItem("token");
+      axios
+        .post("/member/getMember", null, {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then((res) => {
+          setMember(res.data);
+        })
+        .catch((res) => {
+          console.log(res.response.status);
+        });
+    }
+  }, []);
   const groupJoin = () => {};
   return (
     <div>
@@ -30,6 +45,17 @@ const GroupView = (props) => {
       ) : (
         " "
       )}
+      <div className="group-view-wrap">
+        <div className="group-name">{group.name}</div>
+        <div className="group-thumbnail">
+          {group.groupImg ? (
+            <img src={"/group/" + group.group.Img} />
+          ) : (
+            <img src="/image/default.png" />
+          )}
+        </div>
+        <div className="group-content">{group.content}</div>
+      </div>
     </div>
   );
 };

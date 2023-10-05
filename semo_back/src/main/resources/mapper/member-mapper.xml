@@ -7,6 +7,6 @@
   </select>
   
   <insert id="insertMember">
-  	insert into member values(member_seq.nextval,#{memberId},#{memberPw},#{memberPhone},#{memberName},#{memberMail},1,#{memberContent},#{memberCategory1},#{memberCategory2},#{memberLocal})
+  	insert into member values(member_seq.nextval,#{memberId},#{memberPw},#{memberPhone},#{memberName},#{memberMail},1,#{memberContent},#{memberCategory1},#{memberCategory2},#{memberLocal},#{memberImg})
   </insert>
 </mapper>
