@@ -17,24 +17,26 @@ function MeetingCreate() {
   const [meetingMaxnum, setMeetingMaxnum] = useState("");
   const navigate = useNavigate();
 
-  const meeting = {
-    meetingName,
-    meetingDate,
-    meetingLocation,
-    meetingPrice,
-    meetingMaxnum,
+  const createMeeting = () => {
+    const meeting = {
+      meetingName,
+      meetingDate,
+      meetingLocation,
+      meetingPrice,
+      meetingMaxnum,
+    };
+    axios
+      .post("meeting/create", meeting)
+      .then((res) => {
+        if (res.data === 1) {
+          navigate("/login");
+        } else {
+        }
+      })
+      .catch((res) => {
+        console.log(res.data);
+      });
   };
-  axios
-    .post("meeting/create", meeting)
-    .then((res) => {
-      if (res.data === 1) {
-        navigate("/login");
-      } else {
-      }
-    })
-    .catch((res) => {
-      console.log(res.data);
-    });
 
   //날짜
   let handleColor = (time) => {
@@ -92,7 +94,7 @@ function MeetingCreate() {
           label="회비"
         />
       </div>
-      <Button2 text="모임 생성"></Button2>
+      <Button2 text="모임 생성" clickEvent={createMeeting}></Button2>
     </div>
   );
 }
