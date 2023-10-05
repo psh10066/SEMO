@@ -188,7 +188,7 @@ const Join = () => {
         content="memberPhone"
         placeholder="010-1234-1234"
       />
-      <div ref={inputRef}>
+      <div ref={inputRef} className="join-mail-wrap">
         <input
           type="text"
           placeholder="이메일 입력"
@@ -200,6 +200,7 @@ const Join = () => {
           }}
           onKeyUp={handleKeyUp}
         />
+
         {isDrobBox && (
           <div>
             {emailList.map((item, idx) => (
@@ -216,30 +217,35 @@ const Join = () => {
           </div>
         )}
       </div>
-      <JoinInputWrap
-        data={memberContent}
-        setData={setMemberConTent}
-        type="text"
-        content="memberContent"
-        placeholder="피드소개"
+
+      <textarea
+        value={memberContent}
+        id={memberContent}
+        placeholder="피드 소개글"
+        onChange={(e) => {
+          setMemberConTent(e.target.value);
+        }}
       />
-      <div>
-        <FormControl sx={{ m: 0.5, width: 400 }}>
-          <Select value={memberCategory1} onChange={handleChange2}>
-            <MenuItem value={1}>문화·예술</MenuItem>
-            <MenuItem value={2}>운동·액티비티</MenuItem>
-            <MenuItem value={3}>푸드·드링크</MenuItem>
-          </Select>
-        </FormControl>
-      </div>
-      <div>
-        <FormControl sx={{ m: 0.5, width: 400 }}>
-          <Select value={memberCategory2} onChange={handleChange3}>
-            <MenuItem value={1}>문화·예술</MenuItem>
-            <MenuItem value={2}>운동·액티비티</MenuItem>
-            <MenuItem value={3}>푸드·드링크</MenuItem>
-          </Select>
-        </FormControl>
+      <div className="join-category">
+        <div className="join-category-title">관심 카테고리</div>
+        <div>
+          <FormControl sx={{ m: 0.5, width: 400 }}>
+            <Select value={memberCategory1} onChange={handleChange2}>
+              <MenuItem value={1}>문화·예술</MenuItem>
+              <MenuItem value={2}>운동·액티비티</MenuItem>
+              <MenuItem value={3}>푸드·드링크</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
+        <div>
+          <FormControl sx={{ m: 0.5, width: 400 }}>
+            <Select value={memberCategory2} onChange={handleChange3}>
+              <MenuItem value={1}>문화·예술</MenuItem>
+              <MenuItem value={2}>운동·액티비티</MenuItem>
+              <MenuItem value={3}>푸드·드링크</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
       </div>
       <div>
         <FormControl sx={{ m: 0.5, width: 400 }}>
