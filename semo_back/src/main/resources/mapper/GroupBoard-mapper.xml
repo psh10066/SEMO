@@ -15,17 +15,14 @@
 			    MEMBER_ID,
 			    TO_CHAR(GR_BOARD_DATE, 'YYYY-MM-DD') AS GR_BOARD_DATE
 			FROM GR_BOARD
-			JOIN MEMBER_TBL ON (GR_BOARD_WRITER = MEMBER_NO)
+			JOIN MEMBER ON (GR_BOARD_WRITER = MEMBER_NO)
 			WHERE GR_BOARD_STATE = 1
 			ORDER BY 1 DESC) B)
 		WHERE RNUM BETWEEN #{start} AND #{end}
 			
 	</select>
 	<insert id="insertGroupBoard">
-		<!-- 
-		insert into board values(board_seq.nextval, #{boardTitle}, #{boardImg}, #{boardDetail}, (select member_no from member_tbl where member_id = #{memberId}),1,sysdate)
-		-->
-		insert into gr_board values(gr_board_seq.nextval, #{grBoardTitle}, #{grBoardContent}, sysdate, #{grBoardWriter}, #{groupNo}, 1)
+		insert into gr_board values(gr_board_seq.nextval, #{grBoardTitle}, #{grBoardContent}, sysdate, #{grBoardWriter}, 13, 1)
 		<selectKey resultType="int" keyProperty="grBoardNo" order="AFTER">
 			select max(gr_board_no) from gr_board
 		</selectKey>
@@ -37,4 +34,5 @@
 		join member on(gr_board_writer = member_no) 
 		where gr_board_no = #{grBoardNo}
 	</select>
+	
 </mapper>

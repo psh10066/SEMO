@@ -14,3 +14,5 @@ npm install --save-dev @types/react-datepicker
 npm install three-orbitcontrols
 npm i lamina
 npm install leva
+
+npm install react-daum-postcode
