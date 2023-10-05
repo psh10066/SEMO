@@ -5,16 +5,13 @@ import { Button1, Button2 } from "../util/Buttons";
 import "./member.css";
 import Swal from "sweetalert2";
 import axios from "axios";
-import ReactModal from "react-modal";
 
 const Login = (props) => {
   const setIsLogin = props.setIsLogin;
   const [memberId, setMemberId] = useState("");
   const [memberPw, setMemberPw] = useState("");
   const navigate = useNavigate();
-  const join = () => {
-    navigate("/join");
-  };
+
   const login = () => {
     const member = { memberId, memberPw };
     axios
@@ -22,7 +19,11 @@ const Login = (props) => {
       .then((res) => {
         if (res.data === "실패") {
           console.log(res);
-          Swal.fire("아이디 또는 비밀번호를 확인하세요");
+          Swal.fire({
+            text: "아이디 비밀번호를 확인하세요",
+            icon: "warning",
+            confirmButtonColor: "#220895", // confrim 버튼 색깔 지정
+          });
         } else {
           window.localStorage.setItem("token", res.data);
           setIsLogin(true);

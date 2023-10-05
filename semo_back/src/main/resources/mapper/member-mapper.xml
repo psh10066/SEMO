@@ -5,4 +5,8 @@
   <select id="selectOneMember" resultType="member">
   	select * from member where  member_id =#{memberId}
   </select>
+  
+  <insert id="insertMember">
+  	insert into member values(member_seq.nextval,#{memberId},#{memberPw},#{memberPhone},#{memberName},#{memberMail},1,#{memberContent},#{memberCategory1},#{memberCategory2},#{memberLocal})
+  </insert>
 </mapper>
