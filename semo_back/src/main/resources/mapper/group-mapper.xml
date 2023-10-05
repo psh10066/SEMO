@@ -12,6 +12,6 @@
 	</select>
 	
 	<select id="selectOneGroup" resultType="Group">
-		select * from group_tbl
+		select * from group_tbl where group_no=#{groupNo}
 	</select>
 </mapper>

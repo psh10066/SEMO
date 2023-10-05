@@ -6,18 +6,19 @@ import axios from "axios";
 const GroupView = (props) => {
   const isLogin = props.isLogin;
   const location = useLocation();
-  //const groupNo = location.state.groupNo;
+  const groupNo = location.state.groupNo;
   const [group, setGroup] = useState({});
   const [member, setMember] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .get("/group/view/" /*+groupNo*/)
+      .get("/group/view/" + groupNo)
       .then((res) => {
         setGroup(res.data);
+        console.log(res.data);
       })
       .catch((res) => {
-        console.log(res.response.state);
+        console.log(res.response.status);
       });
     if (isLogin) {
       const token = window.localStorage.getItem("token");
@@ -46,15 +47,18 @@ const GroupView = (props) => {
         " "
       )}
       <div className="group-view-wrap">
-        <div className="group-name">{group.name}</div>
+        <div className="group-name">{group.groupName}</div>
         <div className="group-thumbnail">
           {group.groupImg ? (
-            <img src={"/group/" + group.group.Img} />
+            <img src={"/group/" + group.groupImg} />
           ) : (
             <img src="/image/default.png" />
           )}
         </div>
-        <div className="group-content">{group.content}</div>
+        <div
+          className="group-content"
+          dangerouslySetInnerHTML={{ __html: group.groupContent }}
+        ></div>
       </div>
     </div>
   );

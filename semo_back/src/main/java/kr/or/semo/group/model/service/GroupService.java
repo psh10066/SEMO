@@ -36,6 +36,6 @@ public class GroupService {
 
 	public Group selectOneGroup(int groupNo) {
 		Group g = groupDao.selectOneGroup(groupNo);
-		return null;
+		return g;
 	}
 }
