@@ -1,27 +1,63 @@
-import ReactModal from "react-modal";
+import Modal from "react-modal";
 import "./mainSearch.css";
+import Input from "../../util/InputFrm";
+import { useState } from "react";
+import axios from "axios";
 
-const MainSearchModal = ({ isOpen }) => {
+Modal.setAppElement("#root");
+
+const MainSearchModal = (props) => {
+  const [searchContent, setSearchContent] = useState("");
+
+  const search = () => {
+    const searchContent = { searchContent };
+    axios
+      .post("#", searchContent)
+      .then((res) => {})
+      .catch((res) => {
+        console.log(res);
+      });
+  };
+
   return (
     <div className="mainSearchModal">
-      <ReactModal isOpen={isOpen}>
-        <div>검색어를 입력</div>
-      </ReactModal>
+      <Modal
+        isOpen={props.modalState}
+        onRequestClose={() => props.setModalState(false)} // 모달의 오버레이나 Esc 키를 클릭하면 이 함수가 호출됩니다.
+        shouldCloseOnOverlayClick={true}
+        style={{
+          content: {
+            width: "40vw",
+            height: "10vh",
+            margin: "32vh auto",
+            display: "grid",
+            alignItems: "center",
+            border: "1px solid #8bb4ff48",
+          },
+          overlay: {
+            zIndex: 1000,
+          },
+        }}
+      >
+        <div className="mainSearchModalIn">
+          <div className="search-box">
+            <Input
+              type="text"
+              data={searchContent}
+              setData={setSearchContent}
+              content="searchContent"
+              placeholder="관심사 , 지역명을 검색해보세요"
+            />
+            <div>
+              <span class="material-icons" clickEvent={search}>
+                search
+              </span>
+            </div>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };
-/*
-  const [isOpen, setIsOpen] = useState(false);
-  const handelClick = () => {
-    //모달오픈
-    setIsOpen(true);
-
-    위에 코드를 모달상단에 쓰면됨
-*/
-/*
-<button onClick={handelClick}>모달테스트</button>
-<MyModal isOpen={isOpen} />
-이런식으로 작성
-*/
 
 export default MainSearchModal;
