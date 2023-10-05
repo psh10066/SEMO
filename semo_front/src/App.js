@@ -15,6 +15,7 @@ import NoticeMain from "./component/notice/NoticeMain";
 import MeetingCreate from "./component/meeting/MeetingCreate";
 import FeedMain from "./component/feed/FeedMain";
 import PageMain from "./component/page/PageMain";
+import Mypage from "./component/mypage/Mypage";
 
 function App() {
   const [isLogin, setIsLogin] = useState();
@@ -54,6 +55,7 @@ function App() {
             isLogin={isLogin}
             setIsLogin={setIsLogin}
           />
+          <Route path="/mypage/*" element={<Mypage />} />
         </Routes>
       </div>
 
