@@ -104,7 +104,7 @@ textarea {
 .join-btn-box > .btn:hover {
   background-color: #5457e9;
 }
-.MuiInputBase-root {
+.join-category .MuiInputBase-root {
   padding: 0;
   width: 600px;
 }

@@ -90,7 +90,7 @@ const Join = () => {
   const handleChange3 = (event) => {
     setMemberCategory2(event.target.value);
   };
-  const FrequencyEmails = [
+  const Emails = [
     "@naver.com",
     "@gmail.com",
     "@daum.net",
@@ -101,7 +101,7 @@ const Join = () => {
     "@kakao.com",
   ];
   //이메일
-  const [emailList, setEmailList] = useState(FrequencyEmails);
+  const [emailList, setEmailList] = useState(Emails);
   const [selected, setSelected] = useState(-1);
   const [isDrobBox, setIsDropbox] = useState(false);
   const inputRef = useRef();
@@ -119,9 +119,7 @@ const Join = () => {
     if (e.target.value.includes("@")) {
       setIsDropbox(true);
       setEmailList(
-        FrequencyEmails.filter((el) =>
-          el.includes(e.target.value.split("@")[1])
-        )
+        Emails.filter((el) => el.includes(e.target.value.split("@")[1]))
       );
     } else {
       setIsDropbox(false);
@@ -246,15 +244,16 @@ const Join = () => {
             </Select>
           </FormControl>
         </div>
-      </div>
-      <div>
-        <FormControl sx={{ m: 0.5, width: 400 }}>
-          <Select value={memberLocal} onChange={handleChange1}>
-            <MenuItem value={1}>서울</MenuItem>
-            <MenuItem value={2}>경기</MenuItem>
-            <MenuItem value={3}>부산</MenuItem>
-          </Select>
-        </FormControl>
+
+        <div>
+          <FormControl sx={{ m: 0.5, width: 400 }}>
+            <Select value={memberLocal} onChange={handleChange1}>
+              <MenuItem value={1}>서울</MenuItem>
+              <MenuItem value={2}>경기</MenuItem>
+              <MenuItem value={3}>부산</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
       </div>
       <div className="join-btn-box">
         <Button1 text="회원가입" clickEvent={join} />
