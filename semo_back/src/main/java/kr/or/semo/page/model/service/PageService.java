@@ -1,4 +1,4 @@
-package kr.or.semo.notice.model.service;
+package kr.or.semo.page.model.service;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,30 +9,28 @@ import org.springframework.stereotype.Service;
 
 import kr.or.semo.PageInfo;
 import kr.or.semo.Pagination;
-import kr.or.semo.notice.model.dao.NoticeDao;
-import kr.or.semo.notice.model.vo.Notice;
+import kr.or.semo.page.model.dao.PageDao;
 
 @Service
-public class NoticeService {
+public class PageService {
 	@Autowired
-	private NoticeDao noticeDao;
+	private PageDao pageDao;
 	@Autowired
 	private Pagination pagination;
 	
-	public Map noticeList(int reqPage) {
-		int numPerPage = 10;
+	public Map pageList(int reqPage) {
+		int numPerPage = 12;
 		int pageNaviSize = 5;
-		int totalCount = noticeDao.totalCount();
+		int totalCount = pageDao.totalCount();
 		PageInfo pi = pagination.getPageInfo(reqPage, numPerPage, pageNaviSize, totalCount);
-		List noticeList = noticeDao.selectNoticeList(pi);
+		List pageList = pageDao.selectPageList(pi);
+		System.out.println(pageList);
+		
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("noticeList", noticeList);
+		map.put("pageList", pageList);
 		map.put("pi", pi);
 		return map;
 	}
+	
 
-	public Notice selectOneNotice(int noticeNo) {
-		Notice n = noticeDao.selectOneNotice(noticeNo);
-		return n;
-	}
 }

@@ -1,5 +1,7 @@
-.mainSearch {
-  width: 300px;
-  height: 300px;
-  background-color: #fff;
+.mainSearchBtn > span {
+  margin-top: 8px;
+  margin-right: 24px;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
 }

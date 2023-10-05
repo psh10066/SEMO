@@ -14,6 +14,7 @@ import Mainpage from "./component/mainpage/MainPage";
 import NoticeMain from "./component/notice/NoticeMain";
 import MeetingCreate from "./component/meeting/MeetingCreate";
 import FeedMain from "./component/feed/FeedMain";
+import PageMain from "./component/page/PageMain";
 
 function App() {
   const [isLogin, setIsLogin] = useState();
@@ -45,6 +46,12 @@ function App() {
           />
           <Route path="/meeting" element={<MeetingCreate />} />
           <Route path="/feed/*" element={<FeedMain />} />
+          <Route
+            path="/page/*"
+            element={<PageMain />}
+            isLogin={isLogin}
+            setIsLogin={setIsLogin}
+          />
         </Routes>
       </div>
 

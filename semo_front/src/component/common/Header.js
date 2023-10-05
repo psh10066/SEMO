@@ -17,7 +17,7 @@ const Header = (props) => {
   if (location.pathname.includes("/login")) {
     headerStyle = { color: "#220895" };
   }
-  if (location.pathname.includes("/admin/*")) {
+  if (location.pathname.includes("/admin")) {
     headerStyle = { color: "#220895" };
   }
   if (location.pathname.includes("/login")) {
@@ -26,10 +26,19 @@ const Header = (props) => {
   if (location.pathname.includes("/join")) {
     headerStyle = { color: "#220895" };
   }
-  if (location.pathname.includes("/group/*")) {
+  if (location.pathname.includes("/group")) {
     headerStyle = { color: "#220895" };
   }
-  if (location.pathname.includes("/groupBoard/*")) {
+  if (location.pathname.includes("/groupBoard")) {
+    headerStyle = { color: "#220895" };
+  }
+  if (location.pathname.includes("/notice")) {
+    headerStyle = { color: "#220895" };
+  }
+  if (location.pathname.includes("/meeting")) {
+    headerStyle = { color: "#220895" };
+  }
+  if (location.pathname.includes("/feed")) {
     headerStyle = { color: "#220895" };
   }
 
@@ -60,7 +69,7 @@ const Navi = () => {
   if (location.pathname.includes("/login")) {
     naviStyle = { color: "#220895" };
   }
-  if (location.pathname.includes("/admin/*")) {
+  if (location.pathname.includes("/admin")) {
     naviStyle = { color: "#220895" };
   }
   if (location.pathname.includes("/login")) {
@@ -69,10 +78,19 @@ const Navi = () => {
   if (location.pathname.includes("/join")) {
     naviStyle = { color: "#220895" };
   }
-  if (location.pathname.includes("/group/*")) {
+  if (location.pathname.includes("/group")) {
     naviStyle = { color: "#220895" };
   }
-  if (location.pathname.includes("/groupBoard/*")) {
+  if (location.pathname.includes("/groupBoard")) {
+    naviStyle = { color: "#220895" };
+  }
+  if (location.pathname.includes("/notice")) {
+    naviStyle = { color: "#220895" };
+  }
+  if (location.pathname.includes("/meeting")) {
+    naviStyle = { color: "#220895" };
+  }
+  if (location.pathname.includes("/feed")) {
     naviStyle = { color: "#220895" };
   }
 
@@ -80,7 +98,7 @@ const Navi = () => {
     <div className="nav">
       <ul>
         <li>
-          <Link to="#" style={naviStyle}>
+          <Link to="/page" title="소셜링" style={naviStyle}>
             소셜링
           </Link>
         </li>
