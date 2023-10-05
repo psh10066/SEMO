@@ -12,9 +12,7 @@ const GrBoardModify = () => {
   const [GrBoardContent, setGrBoardContent] = useState(grBoard.GrboardContent);
   const [boardFile, setBoardFile] = useState([]);
   //기존의 이미지,파일리스트 사용
-  const [boardImg, setBoardImg] = useState(grBoard.boardImg);
-  const [fileList, setFileList] = useState(grBoard.fileList);
-  const [delFileNo, setDelFileNo] = useState([]); //삭제파일용(추가)
+  const [boardImg, setBoardImg] = useState(grBoard.boardImg); //삭제파일용(추가)
   const navigate = useNavigate();
 
   //수정하기 클릭시 동작할 함수
@@ -25,11 +23,6 @@ const GrBoardModify = () => {
     form.append("grBoardTitle", GrBoardTitle);
     form.append("grBoardContent", GrBoardContent);
     form.append("grBoardImg", boardImg);
-    for (let i = 0; i < boardFile.length; i++) {
-      form.append("boardFile", boardFile[i]);
-    }
-    //join 문자열로 합치기
-    form.append("delFileNo", delFileNo.join("/"));
     const token = window.localStorage.getItem("token");
     axios
       .post("/groupBoard/modify", form, {
@@ -41,7 +34,7 @@ const GrBoardModify = () => {
       })
       .then((res) => {
         if (res.data === 1) {
-          navigate("/board");
+          navigate("/groupBoard");
         } else {
           Swal.fire(
             "수정 중 문제가 발생하였습니다. 잠시 후 다시 시도해주세요."
@@ -64,11 +57,7 @@ const GrBoardModify = () => {
         setBoardFile={setBoardFile}
         boardImg={boardImg}
         setBoardImg={setBoardImg}
-        fileList={fileList}
-        setFileList={setFileList}
         buttonEvent={modify}
-        delFileNo={delFileNo}
-        setDelFileNo={setDelFileNo}
         type="modify"
       />
     </div>

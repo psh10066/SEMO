@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Button1 } from "../util/Buttons";
 import Input from "../util/InputFrm";
 import TextEditor from "../util/TextEditor";
@@ -29,12 +28,6 @@ const GrBoardFrm = (props) => {
                   />
                 </td>
               </tr>
-              <tr>
-                <td>
-                  <label htmlFor="grBoardWrite">작성자</label>
-                </td>
-                <td>테스트</td>
-              </tr>
             </tbody>
           </table>
         </div>
@@ -47,15 +40,12 @@ const GrBoardFrm = (props) => {
         />
       </div>
       <div className="board-btn-box">
-        <Button1 text="등록" clickEvent={buttonEvent} />
-      </div>
-      {/* <div className="board-btn-box">
         {type === "modify" ? (
           <Button1 text="수정" clickEvent={buttonEvent} />
         ) : (
           <Button1 text="등록" clickEvent={buttonEvent} />
         )}
-      </div> */}
+      </div>
     </div>
   );
 };
