@@ -21,15 +21,16 @@ public class MemberService {
 	private String secretKey;
 	private long expiredMs;
 
+	public MemberService() {
+		super();
+		expiredMs = 1000 * 60 * 60l;
+	}
+
 	public String login(Member member) {
 		Member m = memberDao.selectOneMember(member.getMemberId());
-		System.out.println("서비스1");
 		if (m != null && bCryptPasswordEncoder.matches(member.getMemberPw(), m.getMemberPw())) {
-			System.out.println("서비스2");
 			return jwtUtil.createToken(member.getMemberId(), secretKey, expiredMs);
-			
 		} else {
-			System.out.println("서비스3");
 			return "실패";
 		}
 	}

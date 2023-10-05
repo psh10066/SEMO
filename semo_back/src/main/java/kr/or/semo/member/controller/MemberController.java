@@ -20,7 +20,6 @@ public class MemberController {
 	//로그인
 	@PostMapping(value="/login")
 	public String login(@RequestBody Member member) {
-		System.out.println("컨트롤러1");
 		String result = memberService.login(member);
 		return result;
 	}
@@ -37,8 +36,6 @@ public class MemberController {
 	}
 	@PostMapping(value="/join")
 	public int join(@RequestBody Member member) {
-		System.out.println(member.getMemberMail());
-		System.out.println(member.getMemberPhone());
 		int result = memberService.insertMember(member);
 		return result;
 	}
