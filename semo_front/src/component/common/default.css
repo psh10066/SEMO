@@ -86,8 +86,7 @@ header {
 }
 .nav > ul > li > a {
   color: #fff;
-  font-family: ns-eb;
-  font-size: 18px;
+  font-size: 17px;
 }
 .login-button {
   flex-grow: 1;

@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 const AdminMain = () => {
   return (
-    <div className="wrap">
+    <div>
       <h1>SEMOMO 관리자 마이페이지</h1>
       <hr></hr>
       <div>여기는 AdminMain입니다.</div>
