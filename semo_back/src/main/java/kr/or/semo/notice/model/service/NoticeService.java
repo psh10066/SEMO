@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import kr.or.semo.PageInfo;
 import kr.or.semo.Pagination;
 import kr.or.semo.notice.model.dao.NoticeDao;
+import kr.or.semo.notice.model.vo.Notice;
 
 @Service
 public class NoticeService {
@@ -28,5 +29,10 @@ public class NoticeService {
 		map.put("noticeList", noticeList);
 		map.put("pi", pi);
 		return map;
+	}
+
+	public Notice selectOneNotice(int noticeNo) {
+		Notice n = noticeDao.selectOneNotice(noticeNo);
+		return n;
 	}
 }
