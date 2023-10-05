@@ -28,9 +28,11 @@ function App() {
   return (
     <div className="wrap">
       <Header isLogin={isLogin} setIsLogin={setIsLogin} />
+      <Routes>
+        <Route path="/" element={<Mainpage />} />
+      </Routes>
       <div className="content">
         <Routes>
-          <Route path="/" element={<Mainpage />} />
           <Route path="/admin/*" element={<AdminMain />} />
           <Route path="/login" element={<Login setIsLogin={setIsLogin} />} />
           <Route path="/join" element={<Join />} />

@@ -5,3 +5,26 @@
   font-weight: 500;
   cursor: pointer;
 }
+.search-box {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+.search-box > Input {
+  width: 88%;
+  background-color: transparent;
+  border: 1px solid #8bb4ff48;
+  outline: none;
+  font-size: 16px;
+}
+.search-box > div {
+  flex: 1;
+  cursor: pointer;
+  text-align: center;
+  align-self: center;
+}
+
+.search-box > div > span {
+  font-size: 40px;
+  color: #8bb4ff;
+}

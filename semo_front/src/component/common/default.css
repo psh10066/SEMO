@@ -52,21 +52,19 @@ a {
 }
 .content {
   flex: 1;
+  z-index: 2;
 }
 
 /*헤더 푸터 */
 header {
   background-color: transparent;
-  position: relative;
   z-index: 1;
 }
 .header {
-  position: absolute;
+  position: inherit;
   width: 1200px;
   margin: 0 auto;
   display: flex;
-  left: 0;
-  right: 0;
   margin-left: auto;
   margin-right: auto;
 }
