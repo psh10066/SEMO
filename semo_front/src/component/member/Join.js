@@ -90,7 +90,7 @@ const Join = () => {
   const handleChange3 = (event) => {
     setMemberCategory2(event.target.value);
   };
-  const FrequencyEmails = [
+  const Emails = [
     "@naver.com",
     "@gmail.com",
     "@daum.net",
@@ -101,7 +101,7 @@ const Join = () => {
     "@kakao.com",
   ];
   //이메일
-  const [emailList, setEmailList] = useState(FrequencyEmails);
+  const [emailList, setEmailList] = useState(Emails);
   const [selected, setSelected] = useState(-1);
   const [isDrobBox, setIsDropbox] = useState(false);
   const inputRef = useRef();
@@ -119,9 +119,7 @@ const Join = () => {
     if (e.target.value.includes("@")) {
       setIsDropbox(true);
       setEmailList(
-        FrequencyEmails.filter((el) =>
-          el.includes(e.target.value.split("@")[1])
-        )
+        Emails.filter((el) => el.includes(e.target.value.split("@")[1]))
       );
     } else {
       setIsDropbox(false);
@@ -188,7 +186,7 @@ const Join = () => {
         content="memberPhone"
         placeholder="010-1234-1234"
       />
-      <div ref={inputRef}>
+      <div ref={inputRef} className="join-mail-wrap">
         <input
           type="text"
           placeholder="이메일 입력"
@@ -200,6 +198,7 @@ const Join = () => {
           }}
           onKeyUp={handleKeyUp}
         />
+
         {isDrobBox && (
           <div>
             {emailList.map((item, idx) => (
@@ -216,39 +215,45 @@ const Join = () => {
           </div>
         )}
       </div>
-      <JoinInputWrap
-        data={memberContent}
-        setData={setMemberConTent}
-        type="text"
-        content="memberContent"
-        placeholder="피드소개"
+
+      <textarea
+        value={memberContent}
+        id={memberContent}
+        placeholder="피드 소개글"
+        onChange={(e) => {
+          setMemberConTent(e.target.value);
+        }}
       />
-      <div>
-        <FormControl sx={{ m: 0.5, width: 400 }}>
-          <Select value={memberCategory1} onChange={handleChange2}>
-            <MenuItem value={1}>문화·예술</MenuItem>
-            <MenuItem value={2}>운동·액티비티</MenuItem>
-            <MenuItem value={3}>푸드·드링크</MenuItem>
-          </Select>
-        </FormControl>
-      </div>
-      <div>
-        <FormControl sx={{ m: 0.5, width: 400 }}>
-          <Select value={memberCategory2} onChange={handleChange3}>
-            <MenuItem value={1}>문화·예술</MenuItem>
-            <MenuItem value={2}>운동·액티비티</MenuItem>
-            <MenuItem value={3}>푸드·드링크</MenuItem>
-          </Select>
-        </FormControl>
-      </div>
-      <div>
-        <FormControl sx={{ m: 0.5, width: 400 }}>
-          <Select value={memberLocal} onChange={handleChange1}>
-            <MenuItem value={1}>서울</MenuItem>
-            <MenuItem value={2}>경기</MenuItem>
-            <MenuItem value={3}>부산</MenuItem>
-          </Select>
-        </FormControl>
+      <div className="join-category">
+        <div className="join-category-title">관심 카테고리</div>
+        <div>
+          <FormControl sx={{ m: 0.5, width: 400 }}>
+            <Select value={memberCategory1} onChange={handleChange2}>
+              <MenuItem value={1}>문화·예술</MenuItem>
+              <MenuItem value={2}>운동·액티비티</MenuItem>
+              <MenuItem value={3}>푸드·드링크</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
+        <div>
+          <FormControl sx={{ m: 0.5, width: 400 }}>
+            <Select value={memberCategory2} onChange={handleChange3}>
+              <MenuItem value={1}>문화·예술</MenuItem>
+              <MenuItem value={2}>운동·액티비티</MenuItem>
+              <MenuItem value={3}>푸드·드링크</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
+
+        <div>
+          <FormControl sx={{ m: 0.5, width: 400 }}>
+            <Select value={memberLocal} onChange={handleChange1}>
+              <MenuItem value={1}>서울</MenuItem>
+              <MenuItem value={2}>경기</MenuItem>
+              <MenuItem value={3}>부산</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
       </div>
       <div className="join-btn-box">
         <Button1 text="회원가입" clickEvent={join} />
