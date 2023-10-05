@@ -6,6 +6,9 @@ import Input from "../util/InputFrm";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import "./member.css";
 import { Button1 } from "../util/Buttons";
+import * as React from "react";
+import Avatar from "@mui/material/Avatar";
+import Stack from "@mui/material/Stack";
 
 const Join = () => {
   const [memberId, setMemberId] = useState("");
@@ -18,6 +21,8 @@ const Join = () => {
   const [memberCategory1, setMemberCategory1] = useState(0);
   const [memberCategory2, setMemberCategory2] = useState(0);
   const [memberLocal, setMemberLocal] = useState(0);
+  const [memberImg, setMemberImg] = useState("");
+  const [memberThumbnail, setMemberThumbnail] = useState("");
   const [checkIdMsg, setCheckIdMsg] = useState("");
   const [checkPwMsg, setCheckPwMsg] = useState("");
 
@@ -51,6 +56,7 @@ const Join = () => {
   };
   const join = () => {
     if (checkIdMsg === "" && checkPwMsg === "") {
+      /*
       const member = {
         memberId,
         memberPw,
@@ -61,9 +67,28 @@ const Join = () => {
         memberCategory1,
         memberCategory2,
         memberLocal,
+        memberImg,
+        memberThumbnail,
       };
+      */
+      const form = new FormData();
+      form.append("memberId", memberId);
+      form.append("memberPw", memberPw);
+      form.append("memberName", memberName);
+      form.append("memberPhone", memberPhone);
+      form.append("memberContent", memberContent);
+      form.append("memberMail", memberMail);
+      form.append("memberCategory1", memberCategory1);
+      form.append("memberCategory2", memberCategory2);
+      form.append("memberLocal", memberLocal);
+      form.append("memberThumbnail", memberThumbnail);
       axios
-        .post("/member/join", member)
+        .post("/member/join", form, {
+          headers: {
+            contentType: "multipart/form-data",
+            processData: false,
+          },
+        })
         .then((res) => {
           if (res.data === 1) {
             navigate("/login");
@@ -144,6 +169,21 @@ const Join = () => {
       }
     }
   };
+  const thumbnailChange = (e) => {
+    const files = e.currentTarget.files;
+    if (files.length !== 0 && files[0] != 0) {
+      setMemberThumbnail(files[0]); //썸네일 파일 전송을위한 state에 값 파일객체 저장
+      //화면에 썸네일 미리보기
+      const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+      reader.onloadend = () => {
+        setMemberImg(reader.result);
+      };
+    } else {
+      setMemberThumbnail({});
+      setMemberImg(null);
+    }
+  };
   return (
     <div className="join-wrap">
       <div className="join-title">회원가입</div>
@@ -198,7 +238,6 @@ const Join = () => {
           }}
           onKeyUp={handleKeyUp}
         />
-
         {isDrobBox && (
           <div>
             {emailList.map((item, idx) => (
@@ -215,15 +254,30 @@ const Join = () => {
           </div>
         )}
       </div>
-
-      <textarea
-        value={memberContent}
-        id={memberContent}
-        placeholder="피드 소개글"
-        onChange={(e) => {
-          setMemberConTent(e.target.value);
-        }}
-      />
+      <div className="join-category-title">피드 설정</div>
+      <div className="member-thumbnail">
+        <input
+          type="file"
+          id="memberThumbnail"
+          accept="image/*"
+          onChange={thumbnailChange}
+        />
+        <div>
+          {memberImg === null ? (
+            <Avatar src="/image/default.png" sx={{ width: 56, height: 56 }} />
+          ) : (
+            <Avatar src={memberImg} sx={{ width: 108, height: 108 }} />
+          )}
+          <textarea
+            value={memberContent}
+            id={memberContent}
+            placeholder="피드 소개글"
+            onChange={(e) => {
+              setMemberConTent(e.target.value);
+            }}
+          />
+        </div>
+      </div>
       <div className="join-category">
         <div className="join-category-title">관심 카테고리</div>
         <div>
@@ -287,4 +341,5 @@ const JoinInputWrap = (props) => {
     </div>
   );
 };
+
 export default Join;
