@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
+import MainSearch from "../mainpage/search/MainSearch";
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -40,6 +41,7 @@ const Header = () => {
         </div>
         <Navi />
         <div className="login-button">
+          <MainSearch />
           <button>
             <Link to="/login">LogIn</Link>
           </button>
