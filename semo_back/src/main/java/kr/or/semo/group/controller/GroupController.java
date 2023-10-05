@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,7 +25,7 @@ public class GroupController {
 	
 	//모임생성
 	@PostMapping(value="/create")
-	public int insertGroup(@ModelAttribute Group g, @ModelAttribute MultipartFile thumbnail, @ModelAttribute String memberId) {
+	public int insertGroup(@ModelAttribute Group g, @ModelAttribute MultipartFile thumbnail, @RequestAttribute String memberId) {
 		g.setMemberId(memberId);
 		String savepath = root+"group/";
 		if(thumbnail != null) {
@@ -38,7 +39,7 @@ public class GroupController {
 	//에디터 이미지 삽입
 	@PostMapping(value="/contentImg")
 	public String contentImg(@ModelAttribute MultipartFile image) {
-		String savepath = root+"groupBoard/editor/";
+		String savepath = root+"group/editor/";
 		String filename = image.getOriginalFilename();
 		String filepath = fileUtil.getfilepath(savepath, filename, image);
 		return "/group/editor/"+filepath;

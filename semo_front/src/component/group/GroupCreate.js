@@ -27,8 +27,15 @@ const GroupCreate = () => {
       form.append("groupContent", groupContent);
       form.append("groupCategory", groupCategory);
       form.append("groupLocal", groupLocal);
+      const token = window.localStorage.getItem("token");
       axios
-        .post("/group/create", form)
+        .post("/group/create", form, {
+          headers: {
+            contentType: "multipart/form-data",
+            processData: false,
+            Authorization: "Bearer " + token,
+          },
+        })
         .then((res) => {
           console.log(res.data);
         })

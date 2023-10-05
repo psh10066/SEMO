@@ -4,4 +4,10 @@
 	<insert id="insertGroup">
 		insert into group_tbl values (group_tbl_seq.nextval,#{groupName},#{groupImg},#{groupMaxnum},#{groupContent},#{groupCategory},#{groupLocal})
 	</insert>
+	<insert id="insertGroupJoin">
+		insert into gr_join values(gr_join_seq.nextval,#{groupNo},#{memberNo},1)
+	</insert>
+	<select id="selectGroupNo" resultType="int">
+		select max(group_no) from group_tbl
+	</select>
 </mapper>

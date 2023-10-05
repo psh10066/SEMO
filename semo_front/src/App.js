@@ -14,6 +14,7 @@ import GroupMain from "./component/group/GroupMain";
 import Mainpage from "./component/mainpage/MainPage";
 import NoticeMain from "./component/notice/NoticeMain";
 import MeetingCreate from "./component/meeting/MeetingCreate";
+import FeedMain from "./component/feed/FeedMain";
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
@@ -42,6 +43,7 @@ function App() {
             element={<NoticeMain isLogin={isLogin} setIsLogin={setIsLogin} />}
           />
           <Route path="/meeting" element={<MeetingCreate />} />
+          <Route path="/feed/*" element={<FeedMain />} />
         </Routes>
       </div>
       <Footer />
