@@ -1,4 +1,4 @@
-import "./circle.css";
+import "./mainpage.css";
 import { Experience } from "./Experience";
 import { Canvas } from "@react-three/fiber";
 import Black from "./black/Black";
