@@ -2,7 +2,9 @@ import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import MainSearch from "../mainpage/search/MainSearch";
 
-const Header = () => {
+const Header = (props) => {
+  const isLogin = props.isLogin;
+  const setIsLogin = props.setIsLogin;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const modalOpen = () => {
     setIsModalOpen(true);
@@ -52,7 +54,7 @@ const Header = () => {
         <div className="login-button">
           <MainSearch />
           <button>
-            <Link to="/login">LogIn</Link>
+            <HeaderLink isLogin={isLogin} setIsLogin={setIsLogin} />
           </button>
         </div>
       </div>
@@ -106,6 +108,31 @@ const Navi = () => {
           </Link>
         </li>
       </ul>
+    </div>
+  );
+};
+const HeaderLink = (props) => {
+  const isLogin = props.isLogin;
+  const setIsLogin = props.setIsLogin;
+  const logout = () => {
+    window.localStorage.removeItem("token");
+    setIsLogin(false);
+  };
+  return (
+    <div>
+      {isLogin ? (
+        <>
+          <Link to="/" title="로그아웃" onClick={logout}>
+            Logout
+          </Link>
+        </>
+      ) : (
+        <>
+          <Link to="/login" title="로그인">
+            Login
+          </Link>
+        </>
+      )}
     </div>
   );
 };

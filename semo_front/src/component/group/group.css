@@ -57,3 +57,13 @@
   line-height: 50px;
   font-size: 16px;
 }
+input[type="file"]::file-selector-button {
+  width: 100px;
+  height: 35px;
+  background: #5457e9;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  margin-right: 15px;
+}

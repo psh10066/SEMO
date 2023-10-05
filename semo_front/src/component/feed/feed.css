@@ -1,4 +1,92 @@
 .feed-all-wrap {
   width: 900px;
-  margin: 40px auto;
+  margin: 70px auto;
+}
+.feed-profile-wrap {
+  margin: 20px;
+}
+.profile-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+}
+.profile-image {
+  width: 100px;
+  height: 100px;
+}
+
+.feed-follow > table > tbody > tr > th {
+  width: 100px;
+  text-align: center;
+  font-size: 18px;
+}
+.feed-follow > table > tbody > tr > td {
+  width: 100px;
+  text-align: center;
+  font-size: 16px;
+}
+.feed-memberName {
+  font-size: 20px;
+  font-family: ns-b;
+  margin: 20px 0;
+}
+.feed-memberContent {
+  min-height: 70px;
+  height: 70px;
+  overflow: hidden;
+}
+.feed-memberContent > div {
+  width: 500px;
+  font-size: 17px;
+}
+.profile-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.profile-button > button {
+  border: none;
+  width: 120px;
+  height: 50px;
+  border-radius: 5px;
+  margin-right: 15px;
+}
+.profile-button > button:hover {
+  background-color: #5457e9;
+  border: none;
+}
+.profile-category > a {
+  display: inline-block;
+  color: #220895;
+  width: 100px;
+  font-size: 17px;
+}
+.profile-category > a:hover {
+  font-family: ns-b;
+}
+.profile-menu {
+  width: 100%;
+}
+.profile-menu > ul {
+  list-style-type: none;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.profile-menu > ul > li {
+  float: left;
+  width: 50%;
+  height: 50px;
+  line-height: 50px;
+  font-size: 19px;
+  text-align: center;
+}
+.profile-menu > ul > li > a {
+  width: 100%;
+  height: 100%;
+}
+.profile-menu > ul > li > a .active-profile-menu {
+  border-top: 2px solid #111;
 }
