@@ -41,6 +41,12 @@ const MainSearch = () => {
   if (location.pathname.includes("/feed")) {
     searchStyle = { color: "#220895" };
   }
+  if (location.pathname.includes("/page")) {
+    searchStyle = { color: "#220895" };
+  }
+  if (location.pathname.includes("/mypage")) {
+    searchStyle = { color: "#220895" };
+  }
 
   return (
     <div className="mainSearchBtn">
