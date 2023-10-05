@@ -41,7 +41,8 @@ const PageItem = (props) => {
   const page = props.page;
   const navigate = useNavigate();
   const groupView = () => {
-    navigate("/group/view", { state: { pageNo: page.pageNo } });
+    navigate("/group/view", { state: { pageNo: page.groupNo } });
+    //console.log(page.groupNo);
   };
   return (
     <div className="page-item" onClick={groupView}>
