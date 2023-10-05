@@ -3,7 +3,7 @@ import GroupFrm from "./GroupFrm";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const GroupCreate = () => {
+const GroupCreate = (props) => {
   const [groupName, setGroupName] = useState("");
   const [thumbnail, setThumbnail] = useState({});
   const [groupImg, setGroupImg] = useState(null);
