@@ -1,7 +1,7 @@
-import "./mainpage.css";
 import { Experience } from "./Experience";
 import { Canvas } from "@react-three/fiber";
 import Black from "./black/Black";
+import "./mainpage.css";
 
 const Mainpage = () => {
   return (
