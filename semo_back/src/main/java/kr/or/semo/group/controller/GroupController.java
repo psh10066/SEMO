@@ -35,4 +35,12 @@ public class GroupController {
 		int result = groupService.insertGroup(g);
 		return result;
 	}
+	//에디터 이미지 삽입
+	@PostMapping(value="/contentImg")
+	public String contentImg(@ModelAttribute MultipartFile image) {
+		String savepath = root+"groupBoard/editor/";
+		String filename = image.getOriginalFilename();
+		String filepath = fileUtil.getfilepath(savepath, filename, image);
+		return "/group/editor/"+filepath;
+	}
 }

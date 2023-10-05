@@ -14,7 +14,7 @@ public class Group {
 	private int groupNo;
 	private String groupName;
 	private String groupImg;
-	private int groupMaxNum;
+	private int groupMaxnum;
 	private String groupContent;
 	private int groupCategory;
 	private int groupLocal;

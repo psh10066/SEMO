@@ -12,8 +12,8 @@ const GroupFrm = (props) => {
   const setThumbnail = props.setThumbnail;
   const groupImg = props.groupImg;
   const setGroupImg = props.setGroupImg;
-  const groupMaxNum = props.groupMaxNum;
-  const setGroupMaxNum = props.setGroupMaxNum;
+  const groupMaxnum = props.groupMaxnum;
+  const setGroupMaxnum = props.setGroupMaxnum;
   const groupContent = props.groupContent;
   const setGroupContent = props.setGroupContent;
   const groupCategory = props.groupCategory;
@@ -37,7 +37,7 @@ const GroupFrm = (props) => {
     }
   };
   const handleChange1 = (event) => {
-    setGroupMaxNum(event.target.value);
+    setGroupMaxnum(event.target.value);
   };
   const handleChange2 = (event) => {
     setGroupCategory(event.target.value);
@@ -83,7 +83,7 @@ const GroupFrm = (props) => {
                 </td>
                 <td>
                   <FormControl sx={{ m: 0.5, width: 400 }}>
-                    <Select value={groupMaxNum} onChange={handleChange1}>
+                    <Select value={groupMaxnum} onChange={handleChange1}>
                       <MenuItem value={10}>10</MenuItem>
                       <MenuItem value={20}>20</MenuItem>
                       <MenuItem value={30}>30</MenuItem>

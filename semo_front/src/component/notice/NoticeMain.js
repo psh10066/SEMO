@@ -10,12 +10,12 @@ const NoticeMain = (props) => {
   const setIsLogin = props.setIsLogin;
   return (
     <div>
-      <div>NOTICE</div>
+      <div>NOTICE 메인</div>
       <Routes>
         <Route path="view" element={<NoticeView isLogin={isLogin} />} />
         <Route path="write" element={<NoticeWrite />} />
         <Route path="modify" element={<NoticeModify />} />
-        <Route path="*" element={<NoticeList />} />
+        <Route path="*" element={<NoticeList isLogin={isLogin} />} />
       </Routes>
     </div>
   );
