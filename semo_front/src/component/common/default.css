@@ -52,21 +52,19 @@ a {
 }
 .content {
   flex: 1;
+  z-index: 2;
 }
 
 /*헤더 푸터 */
 header {
   background-color: transparent;
-  position: relative;
   z-index: 1;
 }
 .header {
-  position: absolute;
+  position: inherit;
   width: 1200px;
   margin: 0 auto;
   display: flex;
-  left: 0;
-  right: 0;
   margin-left: auto;
   margin-right: auto;
 }
@@ -86,16 +84,16 @@ header {
 }
 .nav > ul > li > a {
   color: #fff;
-  font-family: ns-eb;
-  font-size: 18px;
+  font-size: 17px;
 }
+
 .login-button {
   flex-grow: 1;
   display: flex;
   justify-content: end;
   align-items: center;
 }
-.login-button > button {
+.login-button button {
   float: right;
   width: 20%;
   height: 80%;
@@ -104,7 +102,7 @@ header {
   border-radius: 10px;
   background-color: #f9d8ff;
 }
-.login-button > button > a {
+.login-button button a {
   color: #5457e9;
   font-family: ns-black;
   font-size: 14px;

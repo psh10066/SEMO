@@ -10,4 +10,8 @@
 	<select id="selectGroupNo" resultType="int">
 		select max(group_no) from group_tbl
 	</select>
+	
+	<select id="selectOneGroup" resultType="Group">
+		select * from group_tbl
+	</select>
 </mapper>

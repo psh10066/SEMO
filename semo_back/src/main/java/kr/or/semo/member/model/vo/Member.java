@@ -22,4 +22,5 @@ public class Member {
 	private int memberCategory1;
 	private int memberCategory2;
 	private int memberLocal;
+	private String memberImg;
 }

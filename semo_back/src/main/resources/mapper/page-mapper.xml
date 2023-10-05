@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="kr.or.semo.page.model.dao.PageDao">
+
+	<select id="totalCount" resultType="int">
+		select count(*) from group_tbl
+	</select>
+	
+	<select id="selectPageList" resultType="group">
+		SELECT * FROM    
+		    (SELECT ROWNUM AS RNUM, B.* FROM
+		        (SELECT
+		            GROUP_NO,
+		            GROUP_NAME,
+		            GROUP_IMG,
+	                GROUP_MAXNUM,
+		            GROUP_CATEGORY,
+		            GROUP_LOCAL
+		        FROM GROUP_TBL
+		        ORDER BY 1 DESC)B)
+		WHERE RNUM BETWEEN #{start} AND #{end}
+	</select>
+
+</mapper>

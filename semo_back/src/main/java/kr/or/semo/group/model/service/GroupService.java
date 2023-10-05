@@ -33,4 +33,9 @@ public class GroupService {
 		}
 		return 0;
 	}
+
+	public Group selectOneGroup(int groupNo) {
+		Group g = groupDao.selectOneGroup(groupNo);
+		return null;
+	}
 }

@@ -1,17 +1,17 @@
-import "./circle.css";
 import { Experience } from "./Experience";
 import { Canvas } from "@react-three/fiber";
-import MainSearch from "./search/MainSearch";
+import Black from "./black/Black";
+import "./mainpage.css";
 
 const Mainpage = () => {
   return (
-    <div>
+    <div className="mainpage">
       <div className="circle">
         <Canvas shadows camera={{ position: [0, 16, 42], fov: 30 }}>
           <Experience />
         </Canvas>
       </div>
-      <MainSearch />
+      <Black />
     </div>
   );
 };

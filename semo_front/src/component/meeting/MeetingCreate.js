@@ -5,97 +5,125 @@ import { ko } from "date-fns/esm/locale";
 import "./meeting.css";
 import axios from "axios";
 import { Button1, Button2, Button3 } from "../util/Buttons";
+import Input from "../util/InputFrm";
+import Postcode from "../util/PostCode";
+import { useNavigate } from "react-router-dom";
 
 function MeetingCreate() {
   const [meetingName, setMeetingName] = useState("");
   const [meetingDate, setMeetingDate] = useState(null);
-  const [meetingTime, setMeetingTime] = useState("");
   const [meetingLocation, setMeetingLocation] = useState("");
-  const [meetingFee, setMeetingFee] = useState("");
-  const [maxAttendees, setMaxAttendees] = useState("");
-  const [locations, setLocations] = useState([]);
+  const [meetingPrice, setMeetingPrice] = useState("");
+  const [meetingMaxnum, setMeetingMaxnum] = useState("");
+  const navigate = useNavigate();
 
-  // Open API에서 장소 정보를 가져오는 함수
-  useEffect(() => {
-    axios
-      .get("") // 실제 API 엔드포인트로 바꾸세요.
-      .then((response) => {
-        setLocations(response.data.locations);
-      })
-      .catch((error) => {
-        console.error("Error fetching locations:", error);
-      });
-  }, []);
-
-  // 모임 정보를 서버로 제출하는 함수
-  const handleSubmit = () => {
-    // 여기에서 서버로 데이터를 보내는 로직을 작성하세요.
-    // meetingName, meetingDate, meetingTime, meetingLocation, meetingFee, maxAttendees 변수를 사용하여 데이터를 생성하고 서버로 보냅니다.
+  const meeting = {
+    meetingName,
+    meetingDate,
+    meetingLocation,
+    meetingPrice,
+    meetingMaxnum,
   };
+  axios
+    .post("meeting/create", meeting)
+    .then((res) => {
+      if (res.data === 1) {
+        navigate("/login");
+      } else {
+      }
+    })
+    .catch((res) => {
+      console.log(res.data);
+    });
+
+  //날짜
   let handleColor = (time) => {
     return time.getHours() > 12 ? "text-success" : "text-error";
   };
 
   return (
     <div className="meeting-wrap">
-      <h2 className="meeting-title">모임 생성</h2>
-      <form onSubmit={handleSubmit} className="meeting-form">
-        <div className="meeting-name">
-          <label>모임 이름</label>
-          <input
-            type="text"
-            value={meetingName}
-            onChange={(e) => setMeetingName(e.target.value)}
-          />
-        </div>
-        <div className="meeting-date">
+      <h2 className="meeting-title">정모 생성</h2>
+
+      <div className="meeting-name">
+        <MeetingInputWrap
+          data={meetingName}
+          setData={setMeetingName}
+          type="type"
+          content="meetingName"
+          label="모임 이름"
+        />
+      </div>
+      <div className="meeting-date">
+        <div className="label">
           <label>모임 날짜</label>
-          <DatePicker
-            showTimeSelect
-            locale={ko}
-            dateFormat="yyyy년 MM월 dd일 aa hh:mm "
-            showPopperArrow={false} // 화살표 변경
-            selected={meetingDate}
-            minDate={new Date()}
-            placeholderText="날짜를 선택해주세요"
-            timeClassName={handleColor}
-            onChange={(date) => setMeetingDate(date)}
-          />
         </div>
-        <div>
-          <label>장소</label>
-          <select
-            value={meetingLocation}
-            onChange={(e) => setMeetingLocation(e.target.value)}
-          >
-            <option value="">장소를 선택하세요</option>
-            {locations.map((location) => (
-              <option key={location.id} value={location.name}>
-                {location.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label>회비</label>
-          <input
-            type="text"
-            value={meetingFee}
-            onChange={(e) => setMeetingFee(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>정원</label>
-          <input
-            type="number"
-            value={maxAttendees}
-            onChange={(e) => setMaxAttendees(e.target.value)}
-          />
-        </div>
-        <Button2 text="모임 생성"></Button2>
-      </form>
+        <DatePicker
+          showTimeSelect
+          locale={ko}
+          dateFormat="yyyy년 MM월 dd일 aa hh:mm "
+          showPopperArrow={false} // 화살표 변경
+          selected={meetingDate}
+          minDate={new Date()}
+          placeholderText="날짜를 선택해주세요"
+          timeClassName={handleColor}
+          onChange={(date) => setMeetingDate(date)}
+        />
+      </div>
+      <div>
+        <label>장소</label>
+        <Postcode />
+      </div>
+      <div>
+        <MeetingInputWrap
+          data={meetingPrice}
+          setData={setMeetingPrice}
+          type="type"
+          content="meetingName"
+          label="회비"
+        />
+      </div>
+      <div>
+        <MeetingInputWrap
+          data={meetingMaxnum}
+          setData={setMeetingMaxnum}
+          type="number"
+          content="meetingMaxnum"
+          label="회비"
+        />
+      </div>
+      <Button2 text="모임 생성"></Button2>
     </div>
   );
 }
+
+const MeetingInputWrap = (props) => {
+  const data = props.data;
+  const setData = props.setData;
+  const type = props.type;
+  const content = props.content;
+  const label = props.label;
+  const blurEvent = props.blurEvent;
+  const checkMsg = props.checkMsg;
+  return (
+    <div className="join-input-wrap">
+      <div>
+        <div className="label">
+          <label htmlFor={content}>{label}</label>
+        </div>
+        <div className="input">
+          <Input
+            type={type}
+            data={data}
+            setData={setData}
+            content={content}
+            blurEvent={blurEvent}
+          />
+        </div>
+      </div>
+      <div className="check-msg">{checkMsg}</div>
+    </div>
+  );
+};
 
 export default MeetingCreate;

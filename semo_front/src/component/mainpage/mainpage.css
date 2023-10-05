@@ -1,3 +1,7 @@
+.mainpage {
+  position: absolute;
+  top: 0;
+}
 .circle {
   width: 100vw;
   height: 100vh;

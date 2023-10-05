@@ -14,7 +14,7 @@
   color: #5457e9; /* 포인트 컬러 */
 }
 
-.meeting-form div {
+.meeting-title div {
   margin-bottom: 20px;
 }
 
@@ -27,7 +27,7 @@
   margin-bottom: 5px;
 }
 
-.meeting-form input,
+/* .meeting-form input,
 select {
   width: 100%;
   display: block;
@@ -36,13 +36,24 @@ select {
   outline: none;
   border: 1px solid #ccc;
   box-sizing: border-box;
-}
+} */
 
 .meeting-date label {
   display: block;
 }
 .meeting-date > .react-datepicker-wrapper {
   margin: 0 !important;
+}
+.meeting-date > .react-datepicker-wrapper input {
+  width: 100%;
+  display: block;
+  padding: 0.9rem;
+  background-color: #fff;
+  outline: none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
 }
 .meeting-date {
   margin: 0 !important;
