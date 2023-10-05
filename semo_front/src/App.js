@@ -37,7 +37,10 @@ function App() {
           <Route path="/join" element={<Join />} />
           <Route path="/group/*" element={<GroupMain />} />
           <Route path="/groupBoard/*" element={<GrBoardMain />} />
-          <Route path="/notice/*" element={<NoticeMain />} />
+          <Route
+            path="/notice/*"
+            element={<NoticeMain isLogin={isLogin} setIsLogin={setIsLogin} />}
+          />
           <Route path="/meeting" element={<MeetingCreate />} />
         </Routes>
       </div>
