@@ -96,7 +96,7 @@ const Navi = () => {
     <div className="nav">
       <ul>
         <li>
-          <Link to="#" style={naviStyle}>
+          <Link to="/page" title="소셜링" style={naviStyle}>
             소셜링
           </Link>
         </li>
