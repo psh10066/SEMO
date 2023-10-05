@@ -12,6 +12,9 @@ import Login from "./component/member/Login";
 import GrBoardMain from "./component/board/GrBoardMain";
 import GroupMain from "./component/group/GroupMain";
 import Mainpage from "./component/mainpage/MainPage";
+import NoticeMain from "./component/notice/NoticeMain";
+import MeetingCreate from "./component/meeting/MeetingCreate";
+import FeedMain from "./component/feed/FeedMain";
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
@@ -35,6 +38,9 @@ function App() {
           <Route path="/join" element={<Join />} />
           <Route path="/group/*" element={<GroupMain />} />
           <Route path="/groupBoard/*" element={<GrBoardMain />} />
+          <Route path="/notice/*" element={<NoticeMain />} />
+          <Route path="/meeting" element={<MeetingCreate />} />
+          <Route path="/feed/*" element={<FeedMain />} />
         </Routes>
       </div>
       <Footer />
