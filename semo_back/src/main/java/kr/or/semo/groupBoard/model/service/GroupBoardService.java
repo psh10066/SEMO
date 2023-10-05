@@ -12,14 +12,16 @@ import kr.or.semo.PageInfo;
 import kr.or.semo.Pagination;
 import kr.or.semo.groupBoard.model.dao.GroupBoardDao;
 import kr.or.semo.groupBoard.model.vo.GroupBoard;
+import kr.or.semo.member.model.dao.MemberDao;
+import kr.or.semo.member.model.vo.Member;
 @Service
 public class GroupBoardService {
 	@Autowired
 	private GroupBoardDao groupBoardDao;
 	@Autowired
 	private Pagination pagination;
-//	@Autowired
-//	private MemberDao memberDao;
+	@Autowired
+	private MemberDao memberDao;
 	
 	public Map groupBoardList(int reqPage) {
 
@@ -39,9 +41,9 @@ public class GroupBoardService {
 	public int insertGroupBoard(GroupBoard gb) {
 		//작성자 정보를 현재 아이디만 알고 있음 -> Board테이블에는 회원번호가 외래키로 설정되어있음
 		//아이디를 이용해서 번호를 구해옴(회원정보를 조회해서 회원정보 중 번호를  사용)
-//		Member member = memberDao.selectOneMember(gb.getMemberId());
-//		gb.setGrBoardWriter(member.getMemberNo());
-		gb.setGrBoardWriter(1); // 임시
+		Member member = memberDao.selectOneMember(gb.getMemberId());
+		gb.setGrBoardWriter(member.getMemberNo());
+		//gb.setGrBoardWriter(1); // 임시
 		int result = groupBoardDao.insertGroupBoard(gb);
 		return result;		
 	}
@@ -49,10 +51,10 @@ public class GroupBoardService {
 		GroupBoard gb = groupBoardDao.selectOneGroupBoard(grBoardNo);
 		return gb;
 	}
-	public int updateGroupBoard(GroupBoard gb) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
+//	public int updateGroupBoard(GroupBoard gb) {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
+//	
 }
 

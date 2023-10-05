@@ -34,11 +34,11 @@ public class GroupBoardController {
 		return map;
 	}
 	@PostMapping(value="/insert")
-//	public int insertGroupBoard(@ModelAttribute GroupBoard gb, @RequestAttribute String memberId) {
-//		gb.setMemberId(memberId);
-	public int insertGroupBoard(@ModelAttribute GroupBoard gb) {
-		gb.setMemberId("1"); // 임시
-		gb.setGroupNo(1); // 임시
+	public int insertGroupBoard(@ModelAttribute GroupBoard gb, @RequestAttribute String memberId) {
+		gb.setMemberId(memberId);
+//	public int insertGroupBoard(@ModelAttribute GroupBoard gb) {
+//		gb.setMemberId("1"); // 임시
+//		gb.setGroupNo(1); // 임시
 		int result = groupBoardService.insertGroupBoard(gb);
 		return result;
 	}
@@ -55,8 +55,8 @@ public class GroupBoardController {
 		return "/groupBoard/editor/"+filepath;
 	}
 	//수정
-	@PostMapping(value="/modify")
-	public int modify(@ModelAttribute GroupBoard gb) {
-		return groupBoardService.updateGroupBoard(gb);
-	}
+//	@PostMapping(value="/modify")
+//	public int modify(@ModelAttribute GroupBoard gb) {
+//		return groupBoardService.updateGroupBoard(gb);
+//	}
 }
