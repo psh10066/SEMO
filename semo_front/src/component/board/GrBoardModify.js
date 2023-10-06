@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 const GrBoardModify = () => {
   const location = useLocation();
   const grBoard = location.state.grBoard;
+  console.log(grBoard);
   //제목,내용 -> 전송용 데이터를 담을 state
   const [GrBoardTitle, setGrBoardTitle] = useState(grBoard.GrboardTitle);
   const [GrBoardContent, setGrBoardContent] = useState(grBoard.GrboardContent);
