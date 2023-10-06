@@ -46,4 +46,12 @@ public class MemberService {
 		// TODO Auto-generated method stub
 		return memberDao.insertMember(member);
 	}
+
+	public int selectOneMemberByPw(Member member) {
+		Member m = memberDao.selectOneMember(member.getMemberId());
+		if(m !=null && bCryptPasswordEncoder.matches(member.getMemberPw(),m.getMemberPw())) {
+			return 1;
+		}
+		return 0;
+	}
 }
