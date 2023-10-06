@@ -29,18 +29,32 @@ const GrBoardList = (props) => {
     navigate("write");
   };
   return (
-    <div>
-      {isLogin ? (
-        <div className="board-write-btn">
-          <Button1 text="글쓰기" clickEvent={write} />
-        </div>
-      ) : (
-        ""
-      )}
+    <div className="my-board-wrap">
+      <div className="board-write-wrap">
+        {isLogin ? (
+          <div className="board-write-btn">
+            <Button1 text="글쓰기" clickEvent={write} />
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
       <div className="board-list-wrap">
-        {GrboardList.map((grBoard, index) => {
-          return <BoardItem key={"grBoard" + index} GrBoard={grBoard} />;
-        })}
+        <table>
+          <thead>
+            <tr>
+              <td width={"30px"}>번호</td>
+              <td width={"400px"}>제목</td>
+              <td width={"50px"}>작성자</td>
+              <td width={"50px"}>작성일</td>
+            </tr>
+          </thead>
+          <tbody>
+            {GrboardList.map((grBoard, index) => {
+              return <BoardItem key={"grBoard" + index} grBoard={grBoard} />;
+            })}
+          </tbody>
+        </table>
       </div>
       {/* 페이징 */}
       <div className="board-page">
@@ -57,19 +71,17 @@ const BoardItem = (props) => {
   const grBoard = props.grBoard;
   const navigate = useNavigate();
   const boardView = () => {
-    // navigate("/groupBoard/view", {
-    //   state: { grBoardNo: grBoard.grBoardNo },
-    // });
+    navigate("/groupBoard/view", {
+      state: { grBoardNo: grBoard.grBoardNo },
+    });
   };
   return (
-    <div className="board-item" onClick={boardView}>
-      {/* 게시글정보 */}
-      <div className="board-item-info">
-        <div className="board-item-title">{grBoard.grBoardTitle}</div>
-        <div className="board-item-writer">{grBoard.memberId}</div>
-        <div className="board-item-date">{grBoard.grBoardDate}</div>
-      </div>
-    </div>
+    <tr className="board-item" onClick={boardView}>
+      <td>{grBoard.grBoardNo}</td>
+      <td>{grBoard.grBoardTitle}</td>
+      <td>{grBoard.memberId}</td>
+      <td>{grBoard.grBoardDate}</td>
+    </tr>
   );
 };
 export default GrBoardList;

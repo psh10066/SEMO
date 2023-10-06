@@ -27,9 +27,10 @@ const MainSearchModal = (props) => {
         shouldCloseOnOverlayClick={true}
         style={{
           content: {
+            position: "unset",
             width: "40vw",
             height: "10vh",
-            margin: "32vh auto",
+            margin: "44vh auto",
             display: "grid",
             alignItems: "center",
             border: "1px solid #8bb4ff48",
@@ -49,7 +50,7 @@ const MainSearchModal = (props) => {
               placeholder="관심사 , 지역명을 검색해보세요"
             />
             <div>
-              <span class="material-icons" clickEvent={search}>
+              <span className="material-icons" clickEvent={search}>
                 search
               </span>
             </div>

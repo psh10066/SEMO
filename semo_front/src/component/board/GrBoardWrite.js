@@ -5,10 +5,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const GrBoardWrite = () => {
-  //제목,썸네일,내용,첨부파일 -> 전송용 데이터를 담을 state
+  //전송용 데이터를 담을 state
   const [grBoardTitle, setGrBoardTitle] = useState("");
   const [grBoardContent, setGrBoardContent] = useState("");
-  const [boardFile, setBoardFile] = useState([]);
   const navigate = useNavigate();
 
   //글쓰기 버튼 클릭 시 동작할 함수(서버에 insert요청 함수)
@@ -43,7 +42,6 @@ const GrBoardWrite = () => {
   };
   return (
     <div>
-      <div className="board-frm-title">게시글</div>
       <GrBoardFrm
         grBoardTitle={grBoardTitle}
         setGrBoardTitle={setGrBoardTitle}
