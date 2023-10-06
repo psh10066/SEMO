@@ -139,7 +139,7 @@ const Navi = (props) => {
     <div className="nav">
       <ul>
         <li>
-          <Link to="/page" title="소셜링" style={naviStyle}>
+          <Link to="/page" style={naviStyle}>
             소셜링
           </Link>
         </li>
