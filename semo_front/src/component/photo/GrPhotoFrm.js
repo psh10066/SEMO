@@ -43,14 +43,14 @@ const GrPhotoFrm = (props) => {
   return (
     <div className="photo-frm-wrap">
       <div className="photo-frm-top">
-        <div className="board-thumbnail">
+        <div className="photo-thumbnail">
           {boardImg === null ? (
             <img src="/img/default.png" />
           ) : (
             <img src={boardImg} />
           )}
         </div>
-        <div className="board-info">
+        <div className="photo-info">
           <table className="photo-info-tbl">
             <tbody>
               <tr>
@@ -81,7 +81,7 @@ const GrPhotoFrm = (props) => {
               </tr>
               <tr>
                 <td>
-                  <label htmlFor="boardFile">첨부파일</label>
+                  <label htmlFor="photoFile">첨부파일</label>
                 </td>
                 <td>
                   <input type="file" onChange={changeFile} multiple />
