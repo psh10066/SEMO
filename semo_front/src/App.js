@@ -42,7 +42,10 @@ function App() {
             path="/group/*"
             element={<GroupMain isLogin={isLogin} setIsLogin={setIsLogin} />}
           />
-          <Route path="/groupBoard/*" element={<GrBoardMain />} />
+          <Route
+            path="/groupBoard/*"
+            element={<GrBoardMain isLogin={isLogin} setIsLogin={setIsLogin} />}
+          />
           <Route
             path="/notice/*"
             element={<NoticeMain isLogin={isLogin} setIsLogin={setIsLogin} />}
