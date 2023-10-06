@@ -31,9 +31,6 @@ function App() {
   return (
     <div className="wrap">
       <Header isLogin={isLogin} setIsLogin={setIsLogin} />
-      <Routes>
-        <Route path="/" element={<Mainpage />} />
-      </Routes>
       <div className="content">
         <Routes>
           <Route path="/admin/*" element={<AdminMain />} />
@@ -65,6 +62,7 @@ function App() {
             element={<Mypage isLogin={isLogin} setIsLogin={setIsLogin} />}
           />
           <Route path="/chat" element={<Chat />} />
+          <Route path="/" element={<Mainpage />} />
         </Routes>
       </div>
 
