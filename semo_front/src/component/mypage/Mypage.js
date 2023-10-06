@@ -17,7 +17,7 @@ const Mypage = (props) => {
   const [menus, setMenus] = useState([
     { url: "mygroup", text: "내가 참여하고 있는 모임", active: false },
     { url: "mylikegroup", text: "내가 찜한 모임", active: false },
-    { url: "modifymyinfo", text: "내 정보 변경", active: false },
+    { url: "modifymyinfo", text: "내 정보 수정", active: false },
   ]);
 
   useEffect(() => {
@@ -113,7 +113,7 @@ const Mypage = (props) => {
               }
             />
             <Route
-              path="modifymyinfo"
+              path="modifymyinfo/*"
               element={
                 <ModifyMyInfo
                   member={member}
