@@ -2,6 +2,7 @@ import { Avatar, Stack } from "@mui/material";
 import ReactModal from "react-modal";
 import "./modal.css";
 import { useState } from "react";
+import { Button1 } from "./Buttons";
 
 const FeedModal = ({ isOpen, onCancel, onSubmit, member }) => {
   const [thumbnail, setThumbnail] = useState({});
@@ -11,6 +12,45 @@ const FeedModal = ({ isOpen, onCancel, onSubmit, member }) => {
     "0" +
     (today.getMonth() + 1)
   ).slice(-2)}-${("0" + today.getDate()).slice(-2)}`;
+
+  return (
+    <ReactModal isOpen={isOpen}>
+      <div className="feed-write-cancel">
+        <span className="material-icons cancel-icon" onClick={onCancel}>
+          close
+        </span>
+      </div>
+      <div className="feed-write-all-wrap">
+        <div className="feed-write-wrap">
+          <div className="feed-write-top">
+            <div className="feed-writerImage">
+              <Stack direction="row" spacing={2}>
+                <Avatar
+                  alt="Remy Sharp"
+                  src={"/member/" + member.memberImg}
+                  sx={{ width: 65, height: 65 }}
+                />
+              </Stack>
+            </div>
+            <div className="feed-writerName">{member.memberName}</div>
+            <div className="feed-writeDate">{formattedDate}</div>
+          </div>
+          <FeedInsertImg
+            setThumbnail={setThumbnail}
+            setFeedImg={setFeedImg}
+            feedImg={feedImg}
+          />
+          <FeedInsertContent />
+        </div>
+      </div>
+    </ReactModal>
+  );
+};
+
+const FeedInsertImg = (props) => {
+  const setThumbnail = props.setThumbnail;
+  const setFeedImg = props.setFeedImg;
+  const feedImg = props.feedImg;
   const thumbnailChange = (e) => {
     const files = e.currentTarget.files;
     if (files.length !== 0 && files[0] != 0) {
@@ -30,69 +70,53 @@ const FeedModal = ({ isOpen, onCancel, onSubmit, member }) => {
       .pop(); // 파일 경로에서 파일 이름 추출
     document.querySelector(".upload-name").value = fileName; // 다른 요소에 파일 이름 설정
   };
-
+  const feedWriteNext = () => {};
   return (
-    <ReactModal isOpen={isOpen}>
-      <div className="feed-write-all-wrap">
-        <div className="feed-write-top">
-          <div className="feed-writerImage">
-            <Stack direction="row" spacing={2}>
-              <Avatar
-                alt="Remy Sharp"
-                src={"/member/" + member.memberImg}
-                sx={{ width: 65, height: 65 }}
-              />
-            </Stack>
-          </div>
-          <div className="feed-writerName">{member.memberName}</div>
-          <div className="feed-writeDate">{formattedDate}</div>
+    <div className="feed-write-image-wrap">
+      <div className="feed-write-content">
+        <div className="feed-write-content-top">
+          <input
+            className="upload-name"
+            defaultValue="피드 사진을 넣어주세요."
+            placeholder="피드 사진"
+            disabled
+          />
+          <label htmlFor="feedThumbnail">파일찾기</label>
+          <input
+            type="file"
+            id="feedThumbnail"
+            accept="image/*"
+            onChange={thumbnailChange}
+          />
         </div>
-        <div className="feed-write-content">
-          <div className="feed-write-content-top">
-            <input
-              className="upload-name"
-              defaultValue="피드 사진을 넣어주세요."
-              placeholder="피드 사진"
-              disabled
-            />
-            <label htmlFor="feedThumbnail">파일찾기</label>
-            <input
-              type="file"
-              id="feedThumbnail"
-              accept="image/*"
-              onChange={thumbnailChange}
-            />
+        <div className="feed-write-content-mid">
+          <div className="feed-thumbnail">
+            {feedImg === null ? (
+              <img src="/image/feedImg.png" className="feedDefaultImg" />
+            ) : (
+              <img src={feedImg} />
+            )}
           </div>
-          <div className="feed-write-content-mid">
-            <div className="feed-thumbnail">
-              {feedImg === null ? (
-                <img src="/image/feedImg.png" className="feedDefaultImg" />
-              ) : (
-                <img src={feedImg} />
-              )}
-            </div>
-          </div>
-        </div>
-        <div>
-          <button onClick={onSubmit}>확인</button>
-          <button onClick={onCancel}>취소</button>
         </div>
       </div>
-    </ReactModal>
+      <div className="feed-write-btn feed-write-nextBtn">
+        <Button1 text="다음" clickEvent={feedWriteNext} />
+      </div>
+    </div>
   );
 };
-/*
-  const [isOpen, setIsOpen] = useState(false);
-  const handelClick = () => {
-    //모달오픈
-    setIsOpen(true);
 
-    위에 코드를 모달상단에 쓰면됨
-*/
-/*
-<button onClick={handelClick}>모달테스트</button>
-<MyModal isOpen={isOpen} />
-이런식으로 작성
-*/
+const FeedInsertContent = () => {
+  return (
+    <div className="feed-write-letter-wrap">
+      <div className="feed-write-content">
+        <textarea></textarea>
+      </div>
+      <div className="feed-write-btn feed-write-submitBtn">
+        <Button1 text="작성" />
+      </div>
+    </div>
+  );
+};
 
 export default FeedModal;
