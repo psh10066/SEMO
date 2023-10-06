@@ -12,6 +12,8 @@
 	        (SELECT
 	            NOTICE_NO,
 	            NOTICE_TITLE,
+	            MEMBER_NAME,
+	            MEMBER_NO,
 	            MEMBER_ID,
 	            TO_CHAR(NOTICE_DATE,'YYYY-MM-DD') AS NOTICE_DATE
 	        FROM NOTICE
@@ -20,6 +22,18 @@
 	WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>
 	
-	
+	<select id="selectOneNotice" resultType="notice">
+		SELECT
+		    NOTICE_NO,
+		    NOTICE_TITLE,
+		    NOTICE_CONTENT,
+		    MEMBER_NO,
+		    MEMBER_ID,
+		    MEMBER_NAME,
+		    TO_CHAR(NOTICE_DATE, 'YYYY-MM-DD') AS NOTICE_DATE
+		FROM NOTICE
+		JOIN MEMBER USING (MEMBER_NO)
+		where notice_no = #{noticeNo}
+	</select>
 
 </mapper>

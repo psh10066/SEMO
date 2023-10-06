@@ -44,7 +44,7 @@ const NoticeList = (props) => {
     navigate("write");
   };
   return (
-    <div className="my-content-wrap">
+    <div className="notice-content-wrap">
       <div className="notice-write-wrap">
         {isLogin ? (
           member && member.memberType === 1 ? (
@@ -59,9 +59,9 @@ const NoticeList = (props) => {
         )}
       </div>
 
-      <div className="my-content-title">공지사항</div>
+      <div className="notice-content-title">공지사항</div>
       <div className="notice-list-wrap">
-        <table>
+        <table class="notice-tbl">
           <thead>
             <tr>
               <td width={"20%"}>번호</td>
