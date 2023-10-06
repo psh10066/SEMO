@@ -16,6 +16,7 @@ import MeetingCreate from "./component/meeting/MeetingCreate";
 import FeedMain from "./component/feed/FeedMain";
 import PageMain from "./component/page/PageMain";
 import Mypage from "./component/mypage/Mypage";
+import Chat from "./component/chat/Chat";
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
@@ -60,6 +61,7 @@ function App() {
             setIsLogin={setIsLogin}
           />
           <Route path="/mypage/*" element={<Mypage />} />
+          <Route path="/chat" element={<Chat />} />
         </Routes>
       </div>
 

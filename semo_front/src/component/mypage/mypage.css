@@ -1,0 +1,12 @@
+.mypage-all-wrap {
+  width: 1200px;
+  margin: 50px auto;
+}
+.mypage-title {
+  text-align: center;
+  font-size: 20px;
+  padding: 30px 0px;
+}
+.mypage-title > h2 {
+  color: #8bb4ff;
+}
