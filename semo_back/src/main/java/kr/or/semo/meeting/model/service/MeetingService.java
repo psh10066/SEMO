@@ -1,16 +1,22 @@
 package kr.or.semo.meeting.model.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.semo.meeting.model.dao.MeetingDao;
 import kr.or.semo.meeting.model.vo.Meeting;
 
 @Service
 public class MeetingService {
+	@Autowired
 	private MeetingDao meetingDao;
 
-	public int create(Meeting meeting) {
+	@Transactional
+	public int createMeeting(Meeting meeting) {
 		// TODO Auto-generated method stub
-		return meetingDao.create(meeting);
+		return meetingDao.createMeeting(meeting);
 	}
+	
+	
 }

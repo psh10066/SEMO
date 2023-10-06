@@ -1,12 +1,18 @@
-import React, { useState } from "react";
 import { useDaumPostcodePopup } from "react-daum-postcode";
 import { Button1 } from "./Buttons";
-import Input from "./InputFrm";
 
-const Postcode = () => {
+const Postcode = (props) => {
+  const data = props.data;
+  const setData = props.setData;
+  const type = props.type;
+  const content = props.content;
+  const label = props.label;
+  const changeValue = (e) => {
+    const inputValue = e.currentTarget.value;
+    setData(inputValue);
+  };
   const open = useDaumPostcodePopup();
-  const [meetingAddress, setMeetingAddress] = useState("");
-
+  // const [meetingAddress, setMeetingAddress] = useState("");
   const handleComplete = (data) => {
     let fullAddress = data.address;
     let extraAddress = "";
@@ -21,7 +27,8 @@ const Postcode = () => {
       }
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
-    setMeetingAddress(fullAddress);
+    setData(fullAddress);
+    console.log(fullAddress);
   };
 
   const handleClick = () => {
@@ -30,11 +37,22 @@ const Postcode = () => {
 
   return (
     <div>
-      <div>
-        <Button1 clickEvent={handleClick} text="클릭" />
+      <div className="label">
+        <label htmlFor={content}>{label}</label>
+      </div>
+      <div className="input meeting-input">
+        <input
+          className="input-form meeting-input"
+          id={content}
+          type={type}
+          value={data || ""}
+          onChange={changeValue}
+          data={data}
+          readOnly
+        />
       </div>
       <div>
-        <Input data={meetingAddress} />
+        <Button1 clickEvent={handleClick} text="주소검색" />
       </div>
     </div>
   );
