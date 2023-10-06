@@ -18,7 +18,7 @@ import PageMain from "./component/page/PageMain";
 import Mypage from "./component/mypage/Mypage";
 
 function App() {
-  const [isLogin, setIsLogin] = useState();
+  const [isLogin, setIsLogin] = useState(true);
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     if (token === null) {
@@ -49,7 +49,10 @@ function App() {
           />
 
           <Route path="/meeting" element={<MeetingCreate />} />
-          <Route path="/feed/*" element={<FeedMain />} />
+          <Route
+            path="/feed/*"
+            element={<FeedMain isLogin={isLogin} setIsLogin={setIsLogin} />}
+          />
           <Route
             path="/page/*"
             element={<PageMain />}

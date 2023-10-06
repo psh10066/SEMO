@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -54,5 +55,11 @@ public class MemberController {
 		}
 		int result = memberService.insertMember(member);
 		return result;
+	}
+	
+	//로그인된 회원 정보 가져오기
+	@PostMapping(value="/getMember")
+	public Member mypage(@RequestAttribute String memberId) {
+		return memberService.selectOneMember(memberId);
 	}
 }

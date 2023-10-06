@@ -10,7 +10,10 @@ import { useEffect } from "react";
 import axios from "axios";
 
 const FeedProfile = (props) => {
+  const isLogin = props.isLogin;
+  const setIsLogin = props.setIsLogin;
   const [member, setMember] = useState({});
+  const [loginMember, setLoginMember] = useState({});
   //   const memberNo = props.memberNo;
   const memberNo = 53;
   useEffect(() => {
@@ -22,7 +25,24 @@ const FeedProfile = (props) => {
       .catch((res) => {
         console.log(res.response.status);
       });
-  }, []);
+    if (isLogin) {
+      // console.log(isLogin);
+      const token = window.localStorage.getItem("token");
+      axios
+        .post("/member/getMember", null, {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then((res) => {
+          // console.log(res.data);
+          setLoginMember(res.data);
+        })
+        .catch((res) => {
+          console.log(res.response.status);
+        });
+    }
+  }, [isLogin]);
   const [menus, setMenus] = useState([
     { url: "feedList", text: "피드", active: true },
     { url: "groupList", text: "모임", active: false },
@@ -79,7 +99,15 @@ const FeedProfile = (props) => {
             </Link>
           </div>
           <div className="profile-button">
-            <Button1 text="팔로우" />
+            {isLogin ? (
+              loginMember && loginMember.memberNo === member.memberNo ? (
+                <Button1 text="피드 작성" />
+              ) : (
+                <Button1 text="팔로우" />
+              )
+            ) : (
+              <Button1 text="팔로우" />
+            )}
           </div>
         </div>
       </div>
