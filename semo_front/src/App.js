@@ -15,7 +15,8 @@ import NoticeMain from "./component/notice/NoticeMain";
 import MeetingCreate from "./component/meeting/MeetingCreate";
 import FeedMain from "./component/feed/FeedMain";
 import PageMain from "./component/page/PageMain";
-import Mypage from "./component/mypage/Mypage";
+import { Mypage } from "./component/mypage/Mypage";
+import Chat from "./component/chat/Chat";
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
@@ -30,9 +31,6 @@ function App() {
   return (
     <div className="wrap">
       <Header isLogin={isLogin} setIsLogin={setIsLogin} />
-      <Routes>
-        <Route path="/" element={<Mainpage />} />
-      </Routes>
       <div className="content">
         <Routes>
           <Route path="/admin/*" element={<AdminMain />} />
@@ -59,7 +57,12 @@ function App() {
             isLogin={isLogin}
             setIsLogin={setIsLogin}
           />
-          <Route path="/mypage/*" element={<Mypage />} />
+          <Route
+            path="/mypage/*"
+            element={<Mypage isLogin={isLogin} setIsLogin={setIsLogin} />}
+          />
+          <Route path="/chat" element={<Chat />} />
+          <Route path="/" element={<Mainpage />} />
         </Routes>
       </div>
 

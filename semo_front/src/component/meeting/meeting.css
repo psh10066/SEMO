@@ -54,7 +54,11 @@ select {
   border-radius: 5px;
   box-sizing: border-box;
   font-size: 16px;
+  cursor: pointer;
 }
 .meeting-date {
   margin: 0 !important;
+}
+.meeting-input {
+  margin-bottom: 5px;
 }

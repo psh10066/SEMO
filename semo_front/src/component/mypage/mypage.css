@@ -1,0 +1,82 @@
+.mypage-all-wrap {
+  width: 1200px;
+  margin: 50px auto;
+}
+.mypage-title {
+  text-align: center;
+  font-size: 20px;
+  padding: 30px 0px;
+}
+.mypage-title > h2 {
+  color: #8bb4ff;
+}
+
+.mypage-intro {
+  display: flex;
+  justify-content: space-evenly;
+  padding-bottom: 70px;
+}
+.mypage-intro > .mypage-name > .material-icons {
+  font-size: 80px;
+  margin-right: 10px;
+}
+.mypage-name {
+  display: flex;
+}
+.mypage-name > div {
+  line-height: 80px;
+}
+.mypage-name span {
+  font-family: ns-black;
+  font-size: 22px;
+}
+.mypage-myfeed {
+  cursor: pointer;
+  height: fit-content;
+  align-self: center;
+  background-color: #8bb4ff;
+  padding: 5px;
+  border-radius: 10px;
+}
+.mypage-myfeed > div {
+  align-self: center;
+  color: #fff;
+}
+.mypage-myfeed > .material-icons {
+  font-size: 30px;
+  text-align: center;
+  width: 100%;
+}
+.mypage-myfeed:last-child {
+  font-size: 15px;
+}
+
+/*사이드메뉴*/
+.mysidemenu {
+  width: 200px;
+}
+.mysidemenu > ul {
+  list-style-type: none;
+  margin: 0;
+}
+.mysidemenu > ul > li {
+  padding: 5px 0px;
+}
+.mysidemenu > ul > li > a {
+  display: block;
+  padding: 10px;
+  color: #5457e9;
+  font-family: ns-b;
+}
+.mysidemenu > ul > li > a.active-side {
+  background-color: #5457e9;
+  color: #fff;
+}
+.mysidemenu > ul > li > a.active-side > span {
+  color: #fff;
+}
+
+/*컨텐츠*/
+.mypage-content {
+  display: flex;
+}

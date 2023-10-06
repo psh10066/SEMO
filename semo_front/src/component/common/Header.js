@@ -47,6 +47,9 @@ const Header = (props) => {
   if (location.pathname.includes("/mypage")) {
     headerStyle = { color: "#220895" };
   }
+  if (location.pathname.includes("/chat")) {
+    headerStyle = { color: "#220895" };
+  }
 
   return (
     <header>
@@ -57,7 +60,28 @@ const Header = (props) => {
           </Link>
         </div>
         <Navi isLogin={isLogin} />
-        <div className="login-button">
+        <div className="header-leftside">
+          <div className="chatTotal">
+            <div className="chat">
+              {isLogin ? (
+                <Link to="/chat" title="채팅">
+                  <span className="material-icons" style={headerStyle}>
+                    chat_bubble
+                  </span>
+                </Link>
+              ) : null}
+            </div>
+            <div className="chatNew">
+              {isLogin ? (
+                <Link to="/chat" title="채팅">
+                  <span className="chatNew" style={headerStyle}>
+                    N
+                  </span>
+                  {/* 새로운 채팅 있을때, N 뜨게하기*/}
+                </Link>
+              ) : null}
+            </div>
+          </div>
           <MainSearch />
           <button>
             <HeaderLink isLogin={isLogin} setIsLogin={setIsLogin} />
@@ -107,12 +131,15 @@ const Navi = (props) => {
   if (location.pathname.includes("/mypage")) {
     naviStyle = { color: "#220895" };
   }
+  if (location.pathname.includes("/chat")) {
+    naviStyle = { color: "#220895" };
+  }
 
   return (
     <div className="nav">
       <ul>
         <li>
-          <Link to="/page" title="소셜링" style={naviStyle}>
+          <Link to="/page" style={naviStyle}>
             소셜링
           </Link>
         </li>
@@ -132,6 +159,7 @@ const Navi = (props) => {
     </div>
   );
 };
+
 const HeaderLink = (props) => {
   const isLogin = props.isLogin;
   const setIsLogin = props.setIsLogin;
