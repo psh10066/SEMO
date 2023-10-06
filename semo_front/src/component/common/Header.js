@@ -150,7 +150,7 @@ const Navi = (props) => {
         </li>
         <li>
           {isLogin ? (
-            <Link to="/mypage" title="마이페이지" style={naviStyle}>
+            <Link to="/mypage/mygroup" title="마이페이지" style={naviStyle}>
               마이페이지
             </Link>
           ) : null}

@@ -29,6 +29,7 @@ const Mypage = (props) => {
       })
       .then((res) => {
         setMember(res.data);
+        document.querySelectorAll(".mysidemenu a")[0].click(); // /mypage 열리면 제일 첫번쨰메뉴 클릭
 
         if (res.data && res.data.memberType === 1) {
           const adminMenu = {
@@ -36,9 +37,6 @@ const Mypage = (props) => {
             text: "관리자 페이지",
             active: false,
           };
-
-          document.querySelectorAll(".mysidemenu a")[0].click(); // /mypage 열리면 제일 첫번쨰메뉴 클릭
-
           setMenus([...menus, adminMenu]); //setMenus > menus참조값 복사
         }
       })
@@ -64,7 +62,9 @@ const Mypage = (props) => {
       navigate("/login");
     });
   }
-
+  const myfeed = () => {
+    navigate("/feed");
+  };
   return (
     <div className="mypage-all-wrap">
       <div className="mypage-title">
@@ -77,9 +77,15 @@ const Mypage = (props) => {
             <span>{member.memberName}</span>
           </div>
         </div>
-        <div className="mypage-myfeed">
-          <div className="material-icons">interests</div>
-          <div>내 피드</div>
+        <div className="mypage-buttons">
+          <div className="mypage-myfeed a" onClick={myfeed}>
+            <div className="material-icons">interests</div>
+            <div className="texta">내 피드</div>
+          </div>
+          <div className="mypage-myfeed b">
+            <div className="material-icons">chat_bubble</div>
+            <div className="textb">내 채팅</div>
+          </div>
         </div>
       </div>
       <div className="mypage-content">
