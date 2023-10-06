@@ -1,9 +1,13 @@
 import ReactModal from "react-modal";
 
-const MyModal = ({ isOpen }) => {
+const MyModal = ({ isOpen, onCancel, onSubmit }) => {
   return (
     <ReactModal isOpen={isOpen}>
       <div>모달입니다</div>
+      <div>
+        <button onClick={onSubmit}>확인</button>
+        <button onClick={onCancel}>취소</button>
+      </div>
     </ReactModal>
   );
 };

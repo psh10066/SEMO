@@ -23,6 +23,9 @@ public class WebConfig implements WebMvcConfigurer{
 		
 		registry.addResourceHandler("/group/editor/**")
 		.addResourceLocations("file:///C:/Temp/semo/group/editor/");
+		
+		registry.addResourceHandler("/member/**")
+		.addResourceLocations("file:///C:/Temp/semo/member/");
 	}
 	
 	@Bean
