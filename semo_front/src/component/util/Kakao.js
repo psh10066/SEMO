@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 
 /* global kakao */
-const Kakao = () => {
+const Kakao = (props) => {
+  const newAddress = props.data;
+  const setData = props.setData;
+  console.log(newAddress);
   useEffect(() => {
     var mapContainer = document.getElementById("map"), // 지도를 표시할 div
       mapOption = {
@@ -11,7 +14,8 @@ const Kakao = () => {
     //지도를 미리 생성
     var map = new kakao.maps.Map(mapContainer, mapOption);
     //주소-좌표 변환 객체를 생성
-
+    // newAddress = new kakao.maps.services.Geocoder();
+    // console.log(newAddress);
     //마커를 미리 생성
     var marker = new kakao.maps.Marker({
       position: new kakao.maps.LatLng(37.537187, 127.005476),
@@ -22,7 +26,8 @@ const Kakao = () => {
         oncomplete: function (data) {
           var addr = data.address; // 최종 주소 변수
           // 주소 정보를 해당 필드에 넣는다.
-          document.getElementById("sample5_address").value = addr;
+          newAddress = addr;
+          console.log(addr);
           /*
           // 주소로 상세 정보를 검색
           geocoder.addressSearch(data.address, function (results, status) {
