@@ -9,6 +9,7 @@ const GrBoardList = (props) => {
   const isLogin = props.isLogin;
   const [GrboardList, setGrBoardList] = useState([]);
   const [reqPage, setReqPage] = useState(1);
+  console.log(isLogin);
   const [pageInfo, setPageInfo] = useState({});
   useEffect(() => {
     axios

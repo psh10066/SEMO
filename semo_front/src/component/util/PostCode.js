@@ -1,5 +1,6 @@
 import { useDaumPostcodePopup } from "react-daum-postcode";
 import { Button1 } from "./Buttons";
+import Kakao from "./Kakao";
 
 const Postcode = (props) => {
   const data = props.data;
@@ -28,7 +29,6 @@ const Postcode = (props) => {
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
     setData(fullAddress);
-    console.log(fullAddress);
   };
 
   const handleClick = () => {
@@ -53,6 +53,7 @@ const Postcode = (props) => {
       </div>
       <div>
         <Button1 clickEvent={handleClick} text="주소검색" />
+        <Kakao data={data} setData={setData} type={type} />
       </div>
     </div>
   );

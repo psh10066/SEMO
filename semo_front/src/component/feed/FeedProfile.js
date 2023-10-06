@@ -8,12 +8,14 @@ import FeedList from "./FeedList";
 import GroupList from "./GroupList";
 import { useEffect } from "react";
 import axios from "axios";
+import FeedModal from "../util/FeedModal";
 
 const FeedProfile = (props) => {
   const isLogin = props.isLogin;
   const setIsLogin = props.setIsLogin;
   const [member, setMember] = useState({});
   const [loginMember, setLoginMember] = useState({});
+  const [isOpen, setIsOpen] = useState(false);
   //   const memberNo = props.memberNo;
   const memberNo = 53;
   useEffect(() => {
@@ -47,6 +49,18 @@ const FeedProfile = (props) => {
     { url: "feedList", text: "피드", active: true },
     { url: "groupList", text: "모임", active: false },
   ]);
+  const handelClick = () => {
+    //모달오픈
+    setIsOpen(true);
+  };
+  const onSubmit = () => {
+    // 특정 로직
+    setIsOpen(false);
+  };
+
+  const onCancel = () => {
+    setIsOpen(false);
+  };
   return (
     <div className="feed-profile-all-wrap">
       <div className="feed-profile-wrap">
@@ -99,9 +113,15 @@ const FeedProfile = (props) => {
             </Link>
           </div>
           <div className="profile-button">
+            <FeedModal
+              isOpen={isOpen}
+              onSubmit={onSubmit}
+              onCancel={onCancel}
+              member={member}
+            />
             {isLogin ? (
               loginMember && loginMember.memberNo === member.memberNo ? (
-                <Button1 text="피드 작성" />
+                <Button1 text="피드 작성" clickEvent={handelClick} />
               ) : (
                 <Button1 text="팔로우" />
               )
