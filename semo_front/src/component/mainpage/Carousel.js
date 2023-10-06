@@ -3,10 +3,8 @@ import { VolleyBall } from "../mainpage/items/VolleyBall";
 import { Book } from "../mainpage/items/Book";
 import BycircleMove from "../mainpage/items/BicycleMove";
 import { Tree } from "../mainpage/items/Tree";
-import { Chair } from "../mainpage/items/Chair"
+import { Chair } from "../mainpage/items/Chair";
 import { CarouselLights } from "./CarouselLight";
-
-
 
 export const STEP_DURATION = 1000;
 
@@ -47,14 +45,17 @@ export const Carousel = (props) => {
     immediate: true,
   });
 
-
   return (
     <>
-      <group scale={[0.85,0.85,0.85]} rotation-y={-Math.PI / 4} position-y={-0.01}>
+      <group
+        scale={[0.85, 0.85, 0.85]}
+        rotation-y={-Math.PI / 4}
+        position-y={-0.01}
+      >
         <animated.group rotation-y={carouselRotation}>
           <CarouselLights currentStepSpring={currentStep} />
-          <mesh position={[0, -2, 0]} >
-            <meshStandardMaterial color='#fdff6a' />
+          <mesh position={[0, -2, 0]}>
+            <meshStandardMaterial color="#fdff6a" />
             <cylinderGeometry args={[11, 11, 1.5, 64]} />
           </mesh>
           <mesh scale={[1, 6, 24]} position-y={3}></mesh>
@@ -68,27 +69,12 @@ export const Carousel = (props) => {
               scale={[4, 4.5, 4]}
               rotation-y={Math.PI}
             />
-            <Chair
-              position={[3, 0, -3.5]}
-              scale={[2, 2, 2]}
-              rotation-y={0}
-            />
-            <Book
-              position={[2, 7, -3]}
-              scale={[4, 4, 4]}
-              rotation-y={0}
-            />
-
-
-
+            <Chair position={[3, 0, -3.5]} scale={[2, 2, 2]} rotation-y={0} />
+            <Book position={[2, 7, -3]} scale={[4, 4, 4]} rotation-y={0} />
           </>
-
-
-
         </animated.group>
       </group>
     </>
-
   );
 };
 

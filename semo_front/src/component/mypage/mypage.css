@@ -30,6 +30,10 @@
   font-family: ns-black;
   font-size: 22px;
 }
+
+.mypage-buttons {
+  display: flex;
+}
 .mypage-myfeed {
   cursor: pointer;
   height: fit-content;
@@ -37,6 +41,18 @@
   background-color: #8bb4ff;
   padding: 5px;
   border-radius: 10px;
+  width: 3.5em;
+}
+.a {
+  margin-right: 5px;
+}
+.texta {
+  text-align: center;
+  font-size: 15px;
+}
+.textb {
+  text-align: center;
+  font-size: 15px;
 }
 .mypage-myfeed > div {
   align-self: center;
@@ -46,9 +62,6 @@
   font-size: 30px;
   text-align: center;
   width: 100%;
-}
-.mypage-myfeed:last-child {
-  font-size: 15px;
 }
 
 /*사이드메뉴*/
