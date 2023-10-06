@@ -20,11 +20,6 @@ const Mypage = (props) => {
     { url: "modifymyinfo", text: "내 정보 변경", active: false },
   ]);
 
-  const myfeed = () => {
-    //내 피드 연결
-    navigate("/feed");
-  };
-
   useEffect(() => {
     axios
       .post("/member/getMember", null, {
@@ -35,14 +30,14 @@ const Mypage = (props) => {
       .then((res) => {
         setMember(res.data);
 
-        document.querySelectorAll(".mysidemenu a")[0].click(); // /mypage 열리면 제일 첫번쨰메뉴 클릭
-
         if (res.data && res.data.memberType === 1) {
           const adminMenu = {
             url: "/admin",
             text: "관리자 페이지",
             active: false,
           };
+
+          document.querySelectorAll(".mysidemenu a")[0].click(); // /mypage 열리면 제일 첫번쨰메뉴 클릭
 
           setMenus([...menus, adminMenu]); //setMenus > menus참조값 복사
         }
@@ -82,7 +77,7 @@ const Mypage = (props) => {
             <span>{member.memberName}</span>
           </div>
         </div>
-        <div className="mypage-myfeed" onClick={myfeed}>
+        <div className="mypage-myfeed">
           <div className="material-icons">interests</div>
           <div>내 피드</div>
         </div>
@@ -130,6 +125,7 @@ const Mypage = (props) => {
 
 //사이드메뉴
 const MySideMenu = (props) => {
+  const navigate = useNavigate();
   const menus = props.menus;
   const setMenus = props.setMenus;
 
