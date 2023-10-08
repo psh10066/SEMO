@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import GrBoardFrm from "./GrBoardFrm";
 import Swal from "sweetalert2";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const GrBoardWrite = () => {
+  const location = useLocation();
+  const groupNo = location.state.groupNo;
   //전송용 데이터를 담을 state
   const [grBoardTitle, setGrBoardTitle] = useState("");
   const [grBoardContent, setGrBoardContent] = useState("");
@@ -18,6 +20,7 @@ const GrBoardWrite = () => {
       const form = new FormData();
       form.append("grBoardTitle", grBoardTitle);
       form.append("grBoardContent", grBoardContent);
+      form.append("groupNo", groupNo);
       const token = window.localStorage.getItem("token");
       axios
         .post("/groupBoard/insert", form, {
@@ -28,8 +31,8 @@ const GrBoardWrite = () => {
           },
         })
         .then((res) => {
-          console.log(res.data);
           if (res.data > 0) {
+            Swal.fire("등록이 완료되었습니다.");
             navigate("/groupBoard");
           }
         })

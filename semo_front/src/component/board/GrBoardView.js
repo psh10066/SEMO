@@ -48,9 +48,9 @@ const BoardView = (props) => {
   const deleteBoard = () => {
     Swal.fire({
       icon: "warning",
-      text: "게시글을 삭제하시겠습니까",
+      text: "게시글을 삭제하시겠습니까?",
       showCancelButton: true,
-      confirmButtonText: "삭제",
+      confirmButtonText: "확인",
       cancelButtonText: "취소",
     }).then((res) => {
       if (res.isConfirmed) {
@@ -59,6 +59,7 @@ const BoardView = (props) => {
           .then((res) => {
             console.log(res.data);
             if (res.data === 1) {
+              Swal.fire("삭제가 완료되었습니다.");
               navigate("/groupBoard");
             }
           })

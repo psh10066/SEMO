@@ -7,13 +7,9 @@ import Swal from "sweetalert2";
 const GrBoardModify = () => {
   const location = useLocation();
   const grBoard = location.state.grBoard;
-  console.log(grBoard);
   //제목,내용 -> 전송용 데이터를 담을 state
-  const [GrBoardTitle, setGrBoardTitle] = useState(grBoard.GrboardTitle);
-  const [GrBoardContent, setGrBoardContent] = useState(grBoard.GrboardContent);
-  const [boardFile, setBoardFile] = useState([]);
-  //기존의 이미지,파일리스트 사용
-  const [boardImg, setBoardImg] = useState(grBoard.boardImg); //삭제파일용(추가)
+  const [grBoardTitle, setGrBoardTitle] = useState(grBoard.grBoardTitle);
+  const [grBoardContent, setGrBoardContent] = useState(grBoard.grBoardContent);
   const navigate = useNavigate();
 
   //수정하기 클릭시 동작할 함수
@@ -21,9 +17,8 @@ const GrBoardModify = () => {
     const form = new FormData();
     //boardNo 필수
     form.append("grBoardNo", grBoard.grBoardNo);
-    form.append("grBoardTitle", GrBoardTitle);
-    form.append("grBoardContent", GrBoardContent);
-    form.append("grBoardImg", boardImg);
+    form.append("grBoardTitle", grBoardTitle);
+    form.append("grBoardContent", grBoardContent);
     const token = window.localStorage.getItem("token");
     axios
       .post("/groupBoard/modify", form, {
@@ -35,6 +30,7 @@ const GrBoardModify = () => {
       })
       .then((res) => {
         if (res.data === 1) {
+          Swal.fire("수정이 완료되었습니다.");
           navigate("/groupBoard");
         } else {
           Swal.fire(
@@ -48,16 +44,11 @@ const GrBoardModify = () => {
   };
   return (
     <div>
-      <div className="board-frm-title">게시물 수정</div>
       <BoardFrm
-        GrboardTitle={GrBoardTitle}
-        setBoardTitle={setGrBoardTitle}
-        GrboardContent={GrBoardContent}
-        setGrboardContent={setGrBoardContent}
-        boardFile={boardFile}
-        setBoardFile={setBoardFile}
-        boardImg={boardImg}
-        setBoardImg={setBoardImg}
+        grBoardTitle={grBoardTitle}
+        setGrBoardTitle={setGrBoardTitle}
+        grBoardContent={grBoardContent}
+        setGrBoardContent={setGrBoardContent}
         buttonEvent={modify}
         type="modify"
       />
