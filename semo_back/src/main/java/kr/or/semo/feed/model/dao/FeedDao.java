@@ -15,4 +15,8 @@ public interface FeedDao {
 
 	Feed selectOneFeed(int feedNo);
 
+	int updateFeed(Feed f);
+
+	int deleteFeed(int feedNo);
+
 }

@@ -24,4 +24,13 @@
   	join member on (feed_writer = member_no)
   	where feed_no = #{feedNo}
   </select>
+  <update id="updateFeed">
+  	update feed set
+  		feed_img = #{feedImg},
+  		feed_content = #{feedContent}
+  	where feed_no = #{feedNo}
+  </update>
+  <delete id="deleteFeed">
+  	delete from feed where feed_no = #{feedNo}
+  </delete>
 </mapper>

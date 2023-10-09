@@ -41,4 +41,19 @@ public class FeedService {
 		// TODO Auto-generated method stub
 		return feedDao.selectOneFeed(feedNo);
 	}
+	@Transactional
+	public int modifyFeed(Feed f) {
+		// TODO Auto-generated method stub
+		return feedDao.updateFeed(f);
+	}
+	@Transactional
+	public String delete(int feedNo) {
+		Feed f = feedDao.selectOneFeed(feedNo);
+		String feedImg = f.getFeedImg();
+		int result = feedDao.deleteFeed(feedNo);
+		if(result>0) {
+			return feedImg;
+		}
+		return null;
+	}
 }

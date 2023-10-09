@@ -58,7 +58,6 @@ const FeedProfile = (props) => {
     // 특정 로직
     setIsOpen(false);
   };
-
   const onCancel = () => {
     setIsOpen(false);
   };

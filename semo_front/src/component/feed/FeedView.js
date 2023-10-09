@@ -1,7 +1,10 @@
 import { Avatar, Stack } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Button1 } from "../util/Buttons";
+import Swal from "sweetalert2";
+import FeedModal from "../util/FeedModal";
 
 const FeedView = (props) => {
   const isLogin = props.isLogin;
@@ -9,6 +12,9 @@ const FeedView = (props) => {
   const feedNo = location.state.feedNo;
   const [feed, setFeed] = useState({});
   const [member, setMember] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  // console.log(member);
   useEffect(() => {
     axios
       .get("/feed/view/" + feedNo)
@@ -36,6 +42,40 @@ const FeedView = (props) => {
         });
     }
   }, []);
+  const handelClick = () => {
+    //모달오픈
+    setIsOpen(true);
+  };
+  const onSubmit = () => {
+    // 특정 로직
+    setIsOpen(false);
+  };
+  const onCancel = () => {
+    setIsOpen(false);
+  };
+  const deleteFeed = () => {
+    Swal.fire({
+      icon: "question",
+      text: "피드를 삭제하시겠습니까?",
+      showCancelButton: true,
+      confirmButtonText: "삭제",
+      cancelButtonText: "취소",
+    }).then((res) => {
+      if (res.isConfirmed) {
+        axios
+          .get("/feed/delete/" + feed.feedNo)
+          .then((res) => {
+            console.log(res.data);
+            if (res.data === 1) {
+              navigate("/");
+            }
+          })
+          .catch((res) => {
+            console.log(res.response.status);
+          });
+      }
+    });
+  };
   function formatTime(postTime) {
     const currentTime = new Date();
     const postDate = new Date(postTime);
@@ -69,20 +109,46 @@ const FeedView = (props) => {
   }
   return (
     <div className="feed-view-wrap">
+      {isLogin ? (
+        member && member.memberNo === feed.feedWriter ? (
+          <div className="feed-view-btn-zone">
+            <FeedModal
+              isOpen={isOpen}
+              onSubmit={onSubmit}
+              onCancel={onCancel}
+              member={member}
+              feed={feed}
+              type="modify"
+            />
+            <Button1 text="수정" clickEvent={handelClick} />
+            <Button1 text="삭제" clickEvent={deleteFeed} />
+          </div>
+        ) : (
+          ""
+        )
+      ) : (
+        ""
+      )}
       <div className="feed-view-top">
-        <div className="feed-writerImg">
+        <div className="feed-view-writerImg">
           <Stack direction="row" spacing={2}>
             <Avatar
               alt="Remy Sharp"
               src={"/member/" + feed.memberImg}
-              sx={{ width: 70, height: 70 }}
+              sx={{ width: 40, height: 40 }}
             />
           </Stack>
         </div>
-        <div className="feed-writerName">{feed.memberName}</div>
-        <div className="feed-write-date">
+        <div className="feed-view-writer">{feed.memberName}</div>
+        <div className="feed-view-date">
           {feed.feedDate ? formatTime(feed.feedDate) : ""}
         </div>
+      </div>
+      <div className="feed-view-mid">
+        <div className="feed-view-image">
+          <img src={"/feed/" + feed.feedImg} />
+        </div>
+        <div className="feed-view-content">{feed.feedContent}</div>
       </div>
     </div>
   );

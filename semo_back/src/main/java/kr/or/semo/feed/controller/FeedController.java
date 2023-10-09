@@ -1,5 +1,6 @@
 package kr.or.semo.feed.controller;
 
+import java.io.File;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,5 +61,36 @@ public class FeedController {
 	@GetMapping(value="/view/{feedNo}")
 	public Feed view(@PathVariable int feedNo) {
 		return feedService.selectOneFeed(feedNo);
+	}
+	
+	//피드 수정
+	@PostMapping(value="/modify")
+	public int modify(@ModelAttribute Feed f, @ModelAttribute MultipartFile thumbnail) {
+		if(f.getFeedImg().equals("null")) {
+			f.setFeedImg(null);
+		}
+		
+		String savepath = root+"feed/";
+		File delFile = new File(savepath+f.getFeedImg());
+		delFile.delete();
+		if(thumbnail != null) {
+			String filepath = fileUtil.getfilepath(savepath, thumbnail.getOriginalFilename(), thumbnail);
+			f.setFeedImg(filepath);
+		}
+		return feedService.modifyFeed(f);
+	}
+	
+	//피드 삭제
+	@GetMapping(value="/delete/{feedNo}")
+	public int deleteFeed(@PathVariable int feedNo) {
+		String feedImg = feedService.delete(feedNo);
+		if(feedImg != null) {
+			String savepath = root+"feed/";
+			File delFile = new File(savepath+feedImg);
+			delFile.delete();
+			return 1;
+		}else {
+			return 0;
+		}
 	}
 }

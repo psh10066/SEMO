@@ -1,15 +1,21 @@
 import { Avatar, Stack } from "@mui/material";
 import ReactModal from "react-modal";
 import "./modal.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button1 } from "./Buttons";
 import Swal from "sweetalert2";
 import axios from "axios";
 
-const FeedModal = ({ isOpen, onCancel, onSubmit, member, type }) => {
+const FeedModal = ({ isOpen, onCancel, onSubmit, member, feed, type }) => {
   const [thumbnail, setThumbnail] = useState({});
   const [feedImg, setFeedImg] = useState(null);
   const [feedContent, setFeedConTent] = useState("");
+  useEffect(() => {
+    if (type === "modify") {
+      setFeedImg(feed.feedImg);
+      setFeedConTent(feed.feedContent);
+    }
+  }, []);
   const today = new Date();
   const formattedDate = `${today.getFullYear()}-${(
     "0" +
@@ -23,11 +29,19 @@ const FeedModal = ({ isOpen, onCancel, onSubmit, member, type }) => {
       Swal.fire("피드 사진을 넣어주세요.");
     }
   };
-  const handleCancelClick = () => {
-    setShowInsertImg(true);
+  const handleCancelClick1 = () => {
     setFeedImg(null);
+    setFeedConTent("");
+    setShowInsertImg(true);
     onCancel();
   };
+  const handleCancelClick2 = () => {
+    setFeedImg(feed.feedImg);
+    setFeedConTent(feed.feedContent);
+    setShowInsertImg(true);
+    onCancel();
+  };
+  //피드 작성
   const write = () => {
     const form = new FormData();
     form.append("thumbnail", thumbnail);
@@ -52,16 +66,53 @@ const FeedModal = ({ isOpen, onCancel, onSubmit, member, type }) => {
         console.log(res.response.status);
       });
   };
+  //피드 수정
+  const modify = () => {
+    // console.log("수정하기 버튼 클릭 동작");
+    // console.log(feed.feedImg);
+    // console.log(thumbnail);
+    // console.log(feedContent);
+    // console.log(feed.feedNo);
+    const form = new FormData();
+    form.append("feedNo", feed.feedNo);
+    form.append("feedImg", feed.feedImg);
+    form.append("thumbnail", thumbnail);
+    form.append("feedContent", feedContent);
+    const token = window.localStorage.getItem("token");
+    axios
+      .post("/feed/modify", form, {
+        headers: {
+          contentType: "multipart/form-data",
+          processData: false,
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+  };
 
   return (
     <ReactModal isOpen={isOpen}>
       <div className="feed-write-cancel">
-        <span
-          className="material-icons cancel-icon"
-          onClick={handleCancelClick}
-        >
-          close
-        </span>
+        {type === "write" ? (
+          <span
+            className="material-icons cancel-icon"
+            onClick={handleCancelClick1}
+          >
+            close
+          </span>
+        ) : (
+          <span
+            className="material-icons cancel-icon"
+            onClick={handleCancelClick2}
+          >
+            close
+          </span>
+        )}
       </div>
       <div className="feed-write-all-wrap">
         <div className="feed-write-wrap">
@@ -99,7 +150,7 @@ const FeedModal = ({ isOpen, onCancel, onSubmit, member, type }) => {
                 {type === "write" ? (
                   <Button1 text="작성" clickEvent={write} />
                 ) : (
-                  <Button1 text="수정" />
+                  <Button1 text="수정" clickEvent={modify} />
                 )}
               </div>
             </div>
@@ -139,7 +190,7 @@ const FeedInsertImg = (props) => {
       <div className="feed-write-content-top">
         <input
           className="upload-name"
-          defaultValue="피드 사진을 넣어주세요."
+          defaultValue=""
           placeholder="피드 사진"
           disabled
         />
@@ -170,7 +221,7 @@ const FeedInsertContent = (props) => {
   return (
     <div className="feed-write-content">
       <textarea
-        value={feedContent}
+        defaultValue={feedContent}
         id={feedContent}
         placeholder="내용을 입력해 주세요."
         onChange={(e) => {
