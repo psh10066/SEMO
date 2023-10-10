@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import kr.or.semo.PageInfo;
 import kr.or.semo.Pagination;
 import kr.or.semo.groupPhoto.model.dao.GroupPhotoDao;
+import kr.or.semo.groupPhoto.model.vo.GroupPhoto;
 import kr.or.semo.member.model.dao.MemberDao;
 
 @Service
@@ -33,6 +34,16 @@ public class GroupPhotoService {
 		map.put("groupPhotoList", groupPhotoList);
 		map.put("pi", pi);
 		return map;
+	}
+
+	public GroupPhoto selectOneGroupPhoto(int grPhotoNo) {
+		GroupPhoto gp = groupPhotoDao.selectOneGroupPhoto(grPhotoNo);
+		return gp;
+	}
+
+	public int insertGroupPhoto(GroupPhoto gp) {
+		
+		return 0;
 	}
 
 }

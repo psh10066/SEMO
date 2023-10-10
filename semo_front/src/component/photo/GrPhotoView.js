@@ -59,6 +59,7 @@ const GrPhotoView = (props) => {
           .then((res) => {
             console.log(res.data);
             if (res.data === 1) {
+              Swal.fire("삭제가 완료되었습니다.");
               navigate("/groupPhoto");
             }
           })
@@ -77,9 +78,9 @@ const GrPhotoView = (props) => {
       </div>
       <div className="photo-view-thumbnail">
         {grPhoto.grPhotoImg ? (
-          <img src={"/photo/" + grPhoto.grPhotoImg} />
+          <img src={"/groupPhoto/" + grPhoto.grPhotoImg} />
         ) : (
-          <img src="/img/default.png" />
+          <img src="/image/default.png" />
         )}
       </div>
       <div
