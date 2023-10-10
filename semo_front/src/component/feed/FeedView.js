@@ -13,8 +13,12 @@ const FeedView = (props) => {
   const [feed, setFeed] = useState({});
   const [member, setMember] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [feedLikeCount, setFeedLikeCount] = useState(0);
+  const [isLike, setIsLike] = useState(0);
+  const [feedLikeList, setFeedLikeList] = useState([]);
   const navigate = useNavigate();
-  // console.log(member);
+  const token = window.localStorage.getItem("token");
+
   useEffect(() => {
     axios
       .get("/feed/view/" + feedNo)
@@ -23,7 +27,7 @@ const FeedView = (props) => {
         setFeed(res.data);
       })
       .catch((res) => {
-        console.log(res.response.state);
+        console.log(res.response.status);
       });
     if (isLogin) {
       const token = window.localStorage.getItem("token");
@@ -40,7 +44,33 @@ const FeedView = (props) => {
         .catch((res) => {
           console.log(res.response.status);
         });
+      axios
+        .post(
+          "/feed/isLike",
+          { feedNo },
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        )
+        .then((res) => {
+          // console.log(res.data);
+          setIsLike(res.data);
+        })
+        .catch((res) => {
+          console.log(res.response.status);
+        });
     }
+    axios
+      .get("/feed/getFeedLike/" + feedNo)
+      .then((res) => {
+        setFeedLikeCount(res.data.feedLikeCount);
+        setFeedLikeList(res.data.list);
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
   }, []);
   const handelClick = () => {
     //모달오픈
@@ -76,6 +106,51 @@ const FeedView = (props) => {
       }
     });
   };
+
+  const loginMsg = () => {
+    Swal.fire("로그인 후 이용해 주세요.");
+  };
+  const addLike = () => {
+    axios
+      .post(
+        "/feed/addLike",
+        { feedNo },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      )
+      .then((res) => {
+        // console.log(res.data);
+        setFeedLikeCount(res.data);
+        setIsLike(1);
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+  };
+  const removeLike = () => {
+    axios
+      .post(
+        "/feed/removeLike",
+        { feedNo },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      )
+      .then((res) => {
+        // console.log(res.data);
+        setFeedLikeCount(res.data);
+        setIsLike(0);
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+  };
+
   function formatTime(postTime) {
     const currentTime = new Date();
     const postDate = new Date(postTime);
@@ -149,6 +224,30 @@ const FeedView = (props) => {
           <img src={"/feed/" + feed.feedImg} />
         </div>
         <div className="feed-view-content">{feed.feedContent}</div>
+        <div className="feed-view-mid-icon">
+          <div className="feed-view-like">
+            {isLogin ? (
+              isLike === 0 ? (
+                <span className="material-icons" onClick={addLike}>
+                  favorite_border
+                </span>
+              ) : (
+                <span className="material-icons" onClick={removeLike}>
+                  favorite
+                </span>
+              )
+            ) : (
+              <span className="material-icons" onClick={loginMsg}>
+                favorite_border
+              </span>
+            )}
+            <span className="feed-count">{feedLikeCount}</span>
+          </div>
+          <div className="feed-view-commentCount">
+            <span className="material-icons">chat_bubble_outline</span>
+            <span className="feed-count">15</span>
+          </div>
+        </div>
       </div>
     </div>
   );

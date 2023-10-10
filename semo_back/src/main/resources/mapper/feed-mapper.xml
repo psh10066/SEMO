@@ -33,4 +33,20 @@
   <delete id="deleteFeed">
   	delete from feed where feed_no = #{feedNo}
   </delete>
+  <select id="getFeedLike" resultType="feedLike">
+  	select * from feed_like where feed_no = #{feedNo}
+  </select>
+  <select id="feedLikeCount" resultType="int">
+  	select count(*) as feed_like_count from feed_like where feed_no=#{feedNo}
+  </select>
+  <select id="getIsLike" resultType="int">
+  	select count(*) as is_like from feed_like where feed_no= #{feedNo} and member_no=#{memberNo}
+  </select>
+  <insert id="insertFeedLike">
+  	insert into feed_like values(#{feedNo},#{memberNo})
+  </insert>
+  <delete id="deleteFeedLike">
+  	delete from feed_like where feed_no = #{feedNo} and member_no=#{memberNo}
+  </delete>
+
 </mapper>

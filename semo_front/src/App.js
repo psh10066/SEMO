@@ -26,6 +26,7 @@ function App() {
     const token = window.localStorage.getItem("token");
     if (token === null) {
       setIsLogin(false);
+      console.log(1);
     } else {
       setIsLogin(true);
     }

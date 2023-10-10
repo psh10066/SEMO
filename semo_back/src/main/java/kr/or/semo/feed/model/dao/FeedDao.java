@@ -19,4 +19,16 @@ public interface FeedDao {
 
 	int deleteFeed(int feedNo);
 
+	List getFeedLike(int feedNo);
+
+	int feedLikeCount(int feedNo);
+
+	int getIsLike(int feedNo, int memberNo);
+
+	int insertFeedLike(int feedNo, int memberNo);
+
+	int deleteFeedLike(int feedNo, int memberNo);
+
+
+
 }
