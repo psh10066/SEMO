@@ -57,8 +57,6 @@ function App() {
             path="/notice/*"
             element={<NoticeMain isLogin={isLogin} setIsLogin={setIsLogin} />}
           />
-
-          <Route path="/meeting" element={<MeetingCreate />} />
           <Route path="/meeting/*" element={<MeetingMain />} />
           <Route
             path="/feed/*"

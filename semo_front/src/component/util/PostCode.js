@@ -1,6 +1,7 @@
 import { useDaumPostcodePopup } from "react-daum-postcode";
-import { Button1 } from "./Buttons";
+import { Button1, Button3 } from "./Buttons";
 import Kakao from "./Kakao";
+import React, { useEffect, useState } from "react";
 
 const Postcode = (props) => {
   const data = props.data;
@@ -8,6 +9,7 @@ const Postcode = (props) => {
   const type = props.type;
   const content = props.content;
   const label = props.label;
+  const [showMap, setShowMap] = useState(false); // Kakao Map 보이기/감추기 상태
   const changeValue = (e) => {
     const inputValue = e.currentTarget.value;
     setData(inputValue);
@@ -29,6 +31,9 @@ const Postcode = (props) => {
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
     setData(fullAddress);
+
+    // 주소 검색 완료 시 Kakao Map을 보이도록 설정
+    setShowMap(true);
   };
 
   const handleClick = () => {
@@ -37,7 +42,7 @@ const Postcode = (props) => {
 
   return (
     <div>
-      <div className="label">
+      <div className="meeting-label">
         <label htmlFor={content}>{label}</label>
       </div>
       <div className="input meeting-input">
@@ -51,9 +56,9 @@ const Postcode = (props) => {
           readOnly
         />
       </div>
-      <div>
-        <Button1 clickEvent={handleClick} text="주소검색" />
-        <Kakao data={data} setData={setData} type={type} />
+      <div id="address-btn">
+        <Button3 clickEvent={handleClick} text="주소검색" />
+        {showMap && <Kakao data={data} setData={setData} type={type} />}
       </div>
     </div>
   );

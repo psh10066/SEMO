@@ -4,8 +4,6 @@
 	<insert id="createMeeting">
 		insert into meeting values(
     		1,
-    		11,
-    		3,
     		25,
     		64,
     		#{meetingName},
@@ -15,6 +13,7 @@
     		#{meetingMaxnum})
 	</insert>
 	<select id="selectOneMeeting" resultType="Meeting">
-		select * from meeting where group_no = #{groupNo}
+		select m.*,(select count(meeting_no) from meeting where group_no=m.group_no) meeting_Member from meeting m where group_no = #{groupNo}
 	</select>
+	
 </mapper>

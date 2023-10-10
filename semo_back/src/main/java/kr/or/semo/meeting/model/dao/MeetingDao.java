@@ -11,4 +11,6 @@ public interface MeetingDao {
 
 	Meeting selectOneMeeting(int groupNo);
 
+	
+
 }

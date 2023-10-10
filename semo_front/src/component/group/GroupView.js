@@ -118,6 +118,9 @@ const GroupView = (props) => {
       active: false,
     },
     { url: "#", text: "성준님메뉴", active: false },
+    { url: "#", text: "아름님메뉴1", active: false },
+    { url: "#", text: "아름님메뉴2", active: false },
+    { url: "/meeting/create", text: "정모 만들기", active: false },
   ]);
   return (
     <div className="group-view-wrap">
