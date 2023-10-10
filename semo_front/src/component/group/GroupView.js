@@ -14,6 +14,8 @@ const GroupView = (props) => {
   const [isJoin, setIsJoin] = useState(false);
   const [group, setGroup] = useState({});
   const [member, setMember] = useState(null);
+  const [groupLevel, setGroupLevel] = useState(0);
+  const [changeLevel, setChangeLevel] = useState(true);
   const navigate = useNavigate();
   useEffect(() => {
     axios
@@ -46,20 +48,41 @@ const GroupView = (props) => {
                   setIsJoin(true);
                 }
               });
+            axios
+              .post("/group/groupLevelState", null, {
+                headers: {
+                  Authorization: "Bearer " + token,
+                },
+              })
+              .then((res) => {
+                setGroupLevel(res.data);
+              });
           }
         })
         .catch((res) => {
           console.log(res.response.status);
         });
     }
-  }, []);
-
-  const groupJoin = (props) => {
+  }, [changeLevel, isLogin]);
+  const groupExit = (props) => {
+    const token = window.localStorage.getItem("token");
+    axios
+      .post("/group/groupExit", null, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => {
+        Swal.fire({
+          icon: "error",
+          text: "탈퇴완료!",
+        });
+        setChangeLevel(!changeLevel);
+      });
+  };
+  const groupJoin = () => {
     const token = window.localStorage.getItem("token");
     const groupNo = group.groupNo;
-    const memberNo = member.memberNo;
-    console.log(memberNo);
-    console.log(groupNo);
     axios
       .post(
         "/group/groupJoin",
@@ -77,15 +100,24 @@ const GroupView = (props) => {
           icon: "success",
           text: "가입완료!",
         });
+        setChangeLevel(!changeLevel);
       })
       .catch((res) => {
         console.log(res);
       });
   };
   const [menus, setMenus] = useState([
-    { url: "#", text: "아름님메뉴1", active: false },
-    { url: "#", text: "아름님메뉴2", active: false },
-    { url: "#", text: "성준님메뉴", active: false },
+    {
+      url: "http://localhost:3000/groupBoard",
+      text: "아름님메뉴1",
+      active: false,
+    },
+    {
+      url: "http://localhost:3000/groupPhoto",
+      text: "아름님메뉴2",
+      active: false,
+    },
+    { url: "/meeting/create", text: "정모 만들기", active: false },
   ]);
   return (
     <div className="group-view-wrap">
@@ -131,9 +163,21 @@ const GroupView = (props) => {
             <div className="group-join-btn">
               <Button2 text="가입하기" clickEvent={groupJoin} />
             </div>
+          ) : groupLevel === 2 ? (
+            <div className="group-join-btn">
+              <Button2 text="탈퇴하기" clickEvent={groupExit} />
+            </div>
+          ) : groupLevel === 3 ? (
+            <div className="group-join-btn">
+              <Button2 text="가입대기" />
+            </div>
+          ) : groupLevel === 0 ? (
+            <div className="group-join-btn">
+              <Button2 text="가입하기" clickEvent={groupJoin} />
+            </div>
           ) : (
             <div className="group-join-btn">
-              <Button2 text="탈퇴하기" />
+              <Button2 text="모임해산" />
             </div>
           )
         ) : (

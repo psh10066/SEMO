@@ -22,5 +22,7 @@ public class MeetingService {
 		Meeting m = meetingDao.selectOneMeeting(groupNo);
 		return m;
 	}
+
+	
 	
 }

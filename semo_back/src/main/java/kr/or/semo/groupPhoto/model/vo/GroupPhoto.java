@@ -1,5 +1,7 @@
 package kr.or.semo.groupPhoto.model.vo;
 
+import java.util.List;
+
 import org.apache.ibatis.type.Alias;
 
 import lombok.AllArgsConstructor;
@@ -18,4 +20,5 @@ public class GroupPhoto {
 	private String memberId;//화면 처리를 위한 게시글 작성자
 	private int memberNo;
 	private int groupNo;//모임번호
+	private List fileList; 
 }

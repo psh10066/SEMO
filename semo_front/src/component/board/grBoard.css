@@ -129,8 +129,8 @@
 }
 .board-view-btn-zone {
   padding: 20px 0px;
+  text-align: center;
 }
 .board-view-btn-zone > button {
-  width: 60px;
   margin-right: 20px;
 }

@@ -26,6 +26,7 @@ function App() {
     const token = window.localStorage.getItem("token");
     if (token === null) {
       setIsLogin(false);
+      console.log(1);
     } else {
       setIsLogin(true);
     }
@@ -57,8 +58,6 @@ function App() {
             path="/notice/*"
             element={<NoticeMain isLogin={isLogin} setIsLogin={setIsLogin} />}
           />
-
-          <Route path="/meeting" element={<MeetingCreate />} />
           <Route path="/meeting/*" element={<MeetingMain />} />
           <Route
             path="/feed/*"

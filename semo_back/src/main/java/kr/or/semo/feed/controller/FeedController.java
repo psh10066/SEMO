@@ -2,6 +2,7 @@ package kr.or.semo.feed.controller;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.or.semo.FileUtil;
 import kr.or.semo.feed.model.service.FeedService;
 import kr.or.semo.feed.model.vo.Feed;
-import kr.or.semo.member.model.service.MemberService;
 import kr.or.semo.member.model.vo.Member;
 
 @RestController
@@ -93,4 +94,30 @@ public class FeedController {
 			return 0;
 		}
 	}
+	
+	//피드 좋아요 리스트 가져오기
+	@GetMapping(value="/getFeedLike/{feedNo}")
+	public Map feedLikeList(@PathVariable int feedNo) {
+		return feedService.getFeedLike(feedNo);
+	}
+	
+	//피드 좋아요 isLike 조회
+	@PostMapping(value="/isLike")
+	public int isLike(@RequestBody Feed f, @RequestAttribute String memberId) {
+		int feedNo = f.getFeedNo();
+		return feedService.getIsLike(feedNo, memberId);
+	}
+	//피드 좋아요 
+	@PostMapping(value="addLike")
+	public int addLike(@RequestBody Feed f, @RequestAttribute String memberId) {
+		int feedNo = f.getFeedNo();
+		return feedService.insertFeedLike(feedNo,memberId);
+	}
+	//피드 좋아요 삭제
+	@PostMapping(value="/removeLike")
+	public int removeLike(@RequestBody Feed f, @RequestAttribute String memberId) {
+		int feedNo = f.getFeedNo();
+		return feedService.deleteFeedLike(feedNo, memberId);
+	}
+
 }

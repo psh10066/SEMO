@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 const FeedList = (props) => {
   const feedList = props.feedList;
+  const setChangeFeed = props.setChangeFeed;
   const setFeedList = props.setFeedList;
 
   return (

@@ -16,9 +16,10 @@ const FeedProfile = (props) => {
   const [loginMember, setLoginMember] = useState({});
   const [isOpen, setIsOpen] = useState(false);
   const [feedList, setFeedList] = useState([]);
-  //   const memberNo = props.memberNo;
+  const [changeFeed, setChangeFeed] = useState(true);
   const memberNo = 53;
   const feedWriter = memberNo;
+
   useEffect(() => {
     axios
       .get("/feed/profile/" + memberNo)
@@ -29,7 +30,6 @@ const FeedProfile = (props) => {
         console.log(res.response.status);
       });
     if (isLogin) {
-      // console.log(isLogin);
       const token = window.localStorage.getItem("token");
       axios
         .post("/member/getMember", null, {
@@ -61,29 +61,44 @@ const FeedProfile = (props) => {
   const onCancel = () => {
     setIsOpen(false);
   };
+
   useEffect(() => {
     axios
       .get("/feed/list/" + feedWriter)
       .then((res) => {
+        console.log(res.data);
         setFeedList(res.data);
       })
       .catch((res) => {
         console.log(res.response.status);
       });
-  }, []);
+  }, [changeFeed]);
   return (
     <div className="feed-profile-all-wrap">
       <div className="feed-profile-wrap">
         <div className="profile-top">
-          <div className="profile-image">
-            <Stack direction="row" spacing={2}>
-              <Avatar
-                alt="Remy Sharp"
-                src={"/member/" + member.memberImg}
-                sx={{ width: 100, height: 100 }}
-              />
-            </Stack>
-          </div>
+          {member.memberImg === null ? (
+            <div className="profile-image">
+              <Stack direction="row" spacing={2}>
+                <Avatar
+                  alt="Remy Sharp"
+                  src="/image/person.png"
+                  sx={{ width: 100, height: 100 }}
+                />
+              </Stack>
+            </div>
+          ) : (
+            <div className="profile-image">
+              <Stack direction="row" spacing={2}>
+                <Avatar
+                  alt="Remy Sharp"
+                  src={"/member/" + member.memberImg}
+                  sx={{ width: 100, height: 100 }}
+                />
+              </Stack>
+            </div>
+          )}
+
           <div className="feed-follow">
             <table>
               <tbody>
@@ -128,6 +143,8 @@ const FeedProfile = (props) => {
               onSubmit={onSubmit}
               onCancel={onCancel}
               member={member}
+              changeFeed={changeFeed}
+              setChangeFeed={setChangeFeed}
               type="write"
             />
             {isLogin ? (
@@ -147,6 +164,7 @@ const FeedProfile = (props) => {
         <div className="feed-current-content">
           <Routes>
             <Route path="groupList" element={<GroupList />} />
+            <Route path="*" element={<FeedList feedList={feedList} />} />
             <Route
               path="*"
               element={

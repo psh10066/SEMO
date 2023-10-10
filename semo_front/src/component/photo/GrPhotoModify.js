@@ -42,7 +42,8 @@ const GrPhotoModify = () => {
       })
       .then((res) => {
         if (res.data === 1) {
-          navigate("/photo");
+          Swal.fire("수정이 완료되었습니다.");
+          navigate("/groupPhoto");
         } else {
           Swal.fire(
             "수정 중 문제가 발생하였습니다. 잠시 후 다시 시도해주세요."

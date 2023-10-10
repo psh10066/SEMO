@@ -54,4 +54,19 @@ public class GroupService {
 		}
 		return 0;
 	}
+
+	public int groupLevelState(String memberId) {
+		// TODO Auto-generated method stub
+		Integer result =groupDao.groupLevelState(memberId);
+		if(result == null) {
+			return 0;
+		}
+		return result;
+	}
+	
+	@Transactional
+	public int groupExit(String memberId) {
+		// TODO Auto-generated method stub
+		return groupDao.groupExit(memberId);
+	}
 }
