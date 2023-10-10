@@ -97,7 +97,9 @@ const FeedView = (props) => {
           .then((res) => {
             console.log(res.data);
             if (res.data === 1) {
-              navigate("/");
+              navigate("/feed/profile", {
+                state: { memberNo: member.memberNo },
+              });
             }
           })
           .catch((res) => {

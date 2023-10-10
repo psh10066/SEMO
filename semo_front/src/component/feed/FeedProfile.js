@@ -25,6 +25,7 @@ const FeedProfile = (props) => {
     axios
       .get("/feed/profile/" + memberNo)
       .then((res) => {
+        // console.log(res.data);
         setMember(res.data);
       })
       .catch((res) => {

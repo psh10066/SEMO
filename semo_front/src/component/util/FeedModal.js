@@ -6,7 +6,16 @@ import { Button1 } from "./Buttons";
 import Swal from "sweetalert2";
 import axios from "axios";
 
-const FeedModal = ({ isOpen, onCancel, onSubmit, member, feed, type }) => {
+const FeedModal = ({
+  isOpen,
+  onCancel,
+  onSubmit,
+  member,
+  feed,
+  type,
+  changeFeed,
+  setChangeFeed,
+}) => {
   const [thumbnail, setThumbnail] = useState({});
   const [feedImg, setFeedImg] = useState(null);
   const [feedContent, setFeedConTent] = useState("");
@@ -60,6 +69,7 @@ const FeedModal = ({ isOpen, onCancel, onSubmit, member, feed, type }) => {
         setShowInsertImg(true);
         setFeedImg(null);
         setFeedConTent("");
+        setChangeFeed(!changeFeed);
         onSubmit();
       })
       .catch((res) => {
