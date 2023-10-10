@@ -13,4 +13,25 @@
   <select id="selectMember" resultType="member">
   	select * from member where member_no = #{memberNo}
   </select>
+  
+  
+ 	 <update id="updateMemberName">
+ 			update MEMBER set
+			member_name = #{memberName}
+			where member_id=#{memberId}
+ 	</update>
+   	 <update id="updateMemberMail">
+ 			update MEMBER set
+			member_mail = #{memberMail}
+			where member_id=#{memberId}
+ 	</update>
+     	 <update id="updateMemberPhone">
+ 			update MEMBER set
+			member_phone = #{memberPhone}
+			where member_id=#{memberId}
+ 	</update>
+  
+  
+  
+  
 </mapper>

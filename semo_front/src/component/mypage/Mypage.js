@@ -10,6 +10,7 @@ import AdminMain from "../admin/AdminMain";
 import ModifyMyInfo from "./ModifyMyInfo";
 import ModifyMyFeed from "./ModifyMyFeed";
 import ModifyMyLike from "./ModifyMyLike";
+import ModifyMyPassword from "./ModifyMyPassword";
 
 const Mypage = (props) => {
   const navigate = useNavigate();
@@ -143,6 +144,16 @@ const Mypage = (props) => {
               path="modifyMyLike"
               element={
                 <ModifyMyLike
+                  member={member}
+                  setMember={setMember}
+                  setIsLogin={setIsLogin}
+                />
+              }
+            />
+            <Route
+              path="modifyMyPassword"
+              element={
+                <ModifyMyPassword
                   member={member}
                   setMember={setMember}
                   setIsLogin={setIsLogin}

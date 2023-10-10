@@ -19,17 +19,17 @@ const Myinfo = () => {
         <div className="mypage-buttons">
           <div className="mypage-myfeed edit">
             <div className="textb" onClick={modifyMyinfo}>
-              내 정보 수정{" "}
+              내 정보 수정
             </div>
           </div>
           <div className="mypage-myfeed edit">
             <div className="textb" onClick={modifyMyFeed}>
-              내 피드 수정{" "}
+              내 피드 수정
             </div>
           </div>
           <div className="mypage-myfeed edit">
             <div className="textb" onClick={modifyMyLike}>
-              내 관심사 수정{" "}
+              내 관심사 수정
             </div>
           </div>
         </div>
