@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.semo.feed.model.dao.FeedDao;
+import kr.or.semo.feed.model.vo.Feed;
 import kr.or.semo.member.model.dao.MemberDao;
 import kr.or.semo.member.model.vo.Member;
 

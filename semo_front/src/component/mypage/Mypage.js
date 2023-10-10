@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import MyGroup from "./MyGroup";
 import MyLikeGroup from "./MyLikeGroup";
 import ModifyMyInfo from "./ModifyMyInfo";
+import AdminMain from "../admin/AdminMain";
 
 const Mypage = (props) => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const Mypage = (props) => {
   const [menus, setMenus] = useState([
     { url: "mygroup", text: "내가 참여하고 있는 모임", active: false },
     { url: "mylikegroup", text: "내가 찜한 모임", active: false },
-    { url: "modifymyinfo", text: "내 정보 변경", active: false },
+    { url: "modifymyinfo", text: "내 정보 수정", active: false },
   ]);
 
   useEffect(() => {
@@ -33,7 +34,7 @@ const Mypage = (props) => {
 
         if (res.data && res.data.memberType === 1) {
           const adminMenu = {
-            url: "/admin",
+            url: "adminMain",
             text: "관리자 페이지",
             active: false,
           };
@@ -113,7 +114,7 @@ const Mypage = (props) => {
               }
             />
             <Route
-              path="modifymyinfo"
+              path="modifymyinfo/*"
               element={
                 <ModifyMyInfo
                   member={member}
@@ -121,6 +122,10 @@ const Mypage = (props) => {
                   setIsLogin={setIsLogin}
                 />
               }
+            />
+            <Route
+              path="adminMain/*"
+              element={<AdminMain isLogin={isLogin} setIsLogin={setIsLogin} />}
             />
           </Routes>
         </div>

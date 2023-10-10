@@ -4,9 +4,11 @@ const Pagination = (props) => {
   const pageInfo = props.pageInfo;
   const reqPage = props.reqPage;
   const setReqPage = props.setReqPage;
+  const setList = props.setList;
   const changePage = (e) => {
     const changePage = e.currentTarget.innerText;
     setReqPage(changePage);
+    setList([]); //memberType -> 배열을 비워야 함
   };
   //페이징 jsx가 저장될 배열
   const arr = new Array();

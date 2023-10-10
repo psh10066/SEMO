@@ -1,18 +1,19 @@
-import ".grPhoto.css";
+import "./grPhoto.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Pagination from "../common/Pagination";
 import { Button1 } from "../util/Buttons";
 import { useNavigate } from "react-router-dom";
+
 const GrPhotoList = (props) => {
   const isLogin = props.isLogin;
   const [grPhotoList, setGrPhotoList] = useState([]);
   const [reqPage, setReqPage] = useState(1);
-  console.log(isLogin);
   const [pageInfo, setPageInfo] = useState({});
+  const groupNo = 10;
   useEffect(() => {
     axios
-      .get("/groupPhoto/list/" + reqPage)
+      .get("/groupPhoto/list/" + groupNo + "/" + reqPage)
       .then((res) => {
         console.log(res.data);
         setGrPhotoList(res.data.groupPhotoList);
@@ -24,7 +25,7 @@ const GrPhotoList = (props) => {
   }, [reqPage]);
   const navigate = useNavigate();
   const write = () => {
-    navigate("write");
+    navigate("write", { state: { groupNo: groupNo } });
   };
   return (
     <div>
@@ -36,8 +37,8 @@ const GrPhotoList = (props) => {
         ""
       )}
       <div className="photo-list-wrap">
-        {grPhotoList.map((photo, index) => {
-          return <PhotoItem key={"photo" + index} photo={photo} />;
+        {grPhotoList.map((grPhoto, index) => {
+          return <PhotoItem key={"grPhoto" + index} grphoto={grPhoto} />;
         })}
       </div>
       {/* 게시물 페이징 */}
@@ -52,22 +53,24 @@ const GrPhotoList = (props) => {
   );
 };
 const PhotoItem = (props) => {
-  const photo = props.photo;
+  const grPhoto = props.grPhoto;
   const navigate = useNavigate();
   const photoView = () => {
-    navigate("/photo/view", { state: { photoNo: photo.photoNo } });
+    navigate("/groupPhoto/view", { state: { grPhotoNo: grPhoto.photoNo } });
   };
   return (
     <div className="photo-item" onClick={photoView}>
       <div className="photo-item-img">
-        {photo.photoImg === null ? (
-          <img src="/img/default.png" />
+        {grPhoto.grPhotoImg === null ? (
+          <img src="/image/default.png" />
         ) : (
-          <img src={"/photo/" + photo.photoImg} />
+          <img src={"/groupPhoto/" + grPhoto.photoImg} />
         )}
       </div>
       <div className="photo-item-info">
-        <div className="photo-item-title">{photo.photoTitle}</div>
+        <div className="photo-item-title">{grPhoto.grPhotoTitle}</div>
+        <div className="board-item-writer">{grPhoto.memberId}</div>
+        <div className="photo-item-date">{grPhoto.grphotoDate}</div>
       </div>
     </div>
   );

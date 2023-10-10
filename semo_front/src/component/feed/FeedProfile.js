@@ -12,16 +12,13 @@ import FeedModal from "../util/FeedModal";
 
 const FeedProfile = (props) => {
   const isLogin = props.isLogin;
-  const setIsLogin = props.setIsLogin;
   const [member, setMember] = useState({});
   const [loginMember, setLoginMember] = useState({});
   const [isOpen, setIsOpen] = useState(false);
   const [feedList, setFeedList] = useState([]);
   const [changeFeed, setChangeFeed] = useState(true);
-  //   const memberNo = props.memberNo;
   const memberNo = 53;
   const feedWriter = memberNo;
-  // console.log("profile " + isLogin);
 
   useEffect(() => {
     axios
@@ -61,7 +58,6 @@ const FeedProfile = (props) => {
     // 특정 로직
     setIsOpen(false);
   };
-
   const onCancel = () => {
     setIsOpen(false);
   };
@@ -77,7 +73,6 @@ const FeedProfile = (props) => {
         console.log(res.response.status);
       });
   }, [changeFeed]);
-
   return (
     <div className="feed-profile-all-wrap">
       <div className="feed-profile-wrap">
@@ -170,6 +165,12 @@ const FeedProfile = (props) => {
           <Routes>
             <Route path="groupList" element={<GroupList />} />
             <Route path="*" element={<FeedList feedList={feedList} />} />
+            <Route
+              path="*"
+              element={
+                <FeedList feedList={feedList} setFeedList={setFeedList} />
+              }
+            />
           </Routes>
         </div>
       </div>

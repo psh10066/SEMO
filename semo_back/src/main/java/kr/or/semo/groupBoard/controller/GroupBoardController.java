@@ -28,19 +28,14 @@ public class GroupBoardController {
 	@Value("${file.root}")
 	private String root;
 	
-	@GetMapping(value="/list/{reqPage}")
-	public Map list(@PathVariable int reqPage) {
-		Map map = groupBoardService.groupBoardList(reqPage);
+	@GetMapping(value="/list/{groupNo}/{reqPage}")
+	public Map list(@PathVariable int groupNo, @PathVariable int reqPage) {
+		Map map = groupBoardService.groupBoardList(groupNo,reqPage);
 		return map;
 	}
 	@PostMapping(value="/insert")
 	public int insertGroupBoard(@ModelAttribute GroupBoard gb, @RequestAttribute String memberId) {
 		gb.setMemberId(memberId);
-//	public int insertGroupBoard(@ModelAttribute GroupBoard gb) {
-//		gb.setMemberId("1"); // 임시
-//		gb.setGroupNo(1); // 임시
-		System.out.println(memberId);
-		System.out.println(gb.getGroupNo());
 		int result = groupBoardService.insertGroupBoard(gb);
 		return result;
 	}
@@ -57,8 +52,17 @@ public class GroupBoardController {
 		return "/groupBoard/editor/"+filepath;
 	}
 	//수정
-//	@PostMapping(value="/modify")
-//	public int modify(@ModelAttribute GroupBoard gb) {
-//		return groupBoardService.updateGroupBoard(gb);
-//	}
+	@PostMapping(value="/modify")
+	public int modify(@ModelAttribute GroupBoard gb, @RequestAttribute String memberId) {
+		gb.setMemberId(memberId);
+		int result = groupBoardService.updateGroupBoard(gb);
+		return result;
+	}//삭제
+	@GetMapping(value="/delete/{grBoardNo}")
+	public int deleteBoard(@PathVariable int grBoardNo) {
+		int result = groupBoardService.deleteGroupBoard(grBoardNo);
+		return result;
+	
+	}
+	
 }

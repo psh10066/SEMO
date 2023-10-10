@@ -7,13 +7,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.semo.FileUtil;
 import kr.or.semo.group.model.service.GroupService;
 import kr.or.semo.group.model.vo.Group;
+import kr.or.semo.member.model.vo.Member;
 
 @RestController
 @RequestMapping(value="/group")
@@ -51,5 +54,30 @@ public class GroupController {
 	@GetMapping(value="/view/{groupNo}")
 	public Group View(@PathVariable int groupNo) {
 		return groupService.selectOneGroup(groupNo);
+	}
+	
+	//그룹 가입
+	@PostMapping(value="/groupJoin")
+	public int groupJoin(@RequestBody Group g, @RequestAttribute String memberId) {
+		return groupService.groupJoin(memberId, g);
+	}
+	
+	//그룹가입여부 조회
+	@PostMapping(value="/joinState")
+	public int joinState(@RequestAttribute String memberId) {
+		int result = groupService.joinState(memberId);
+		return result;
+	}
+	
+	//그룹 등급 조회
+	@PostMapping(value="/groupLevelState")
+	public int groupLevelState(@RequestAttribute String memberId) {
+		return groupService.groupLevelState(memberId);
+	}
+	
+	//그룹 탈퇴
+	@PostMapping(value="/groupExit")
+	public int groupExit(@RequestAttribute String memberId) {
+		return groupService.groupExit(memberId);
 	}
 }

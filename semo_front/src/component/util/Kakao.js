@@ -1,55 +1,53 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 /* global kakao */
-const Kakao = () => {
+const Kakao = (props) => {
+  const data = props.data;
+
   useEffect(() => {
-    var mapContainer = document.getElementById("map"), // 지도를 표시할 div
-      mapOption = {
-        center: new kakao.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
-        level: 5, // 지도의 확대 레벨
-      };
-    //지도를 미리 생성
-    var map = new kakao.maps.Map(mapContainer, mapOption);
-    //주소-좌표 변환 객체를 생성
+    const mapContainer = document.getElementById("map"); // 지도를 표시할 div
+    const mapOption = {
+      center: new kakao.maps.LatLng(37.537187, 127.005476), // 기본 중심 좌표
+      level: 5, // 지도의 확대 레벨
+    };
 
-    //마커를 미리 생성
-    var marker = new kakao.maps.Marker({
-      position: new kakao.maps.LatLng(37.537187, 127.005476),
-      map: map,
+    // 지도를 미리 생성
+    const map = new kakao.maps.Map(mapContainer, mapOption);
+
+    // 주소-좌표 변환 객체를 생성
+    const geocoder = new kakao.maps.services.Geocoder();
+
+    // 주소로 좌표를 변환하여 지도에 표시
+    geocoder.addressSearch(data, function (results, status) {
+      if (status === kakao.maps.services.Status.OK) {
+        const coords = new kakao.maps.LatLng(results[0].y, results[0].x);
+
+        // 마커를 생성하고 지도에 표시
+        const marker = new kakao.maps.Marker({
+          position: coords,
+          map: map,
+        });
+
+        // 지도 중심을 변경
+        map.setCenter(coords);
+      } else {
+      }
     });
-    function kakaoPostcode() {
-      new kakao.Postcode({
-        oncomplete: function (data) {
-          var addr = data.address; // 최종 주소 변수
-          // 주소 정보를 해당 필드에 넣는다.
-          document.getElementById("sample5_address").value = addr;
-          /*
-          // 주소로 상세 정보를 검색
-          geocoder.addressSearch(data.address, function (results, status) {
-            // 정상적으로 검색이 완료됐으면
-            if (status === kakao.maps.services.Status.OK) {
-              var result = results[0]; //첫번째 결과의 값을 활용
-
-              // 해당 주소에 대한 좌표를 받아서
-              var coords = new kakao.maps.LatLng(result.y, result.x);
-              // 지도를 보여준다.
-              mapContainer.style.display = "block";
-              map.relayout();
-              // 지도 중심을 변경한다.
-              map.setCenter(coords);
-              // 마커를 결과값으로 받은 위치로 옮긴다.
-              marker.setPosition(coords);
-            }
-          });
-          */
-        },
-      }).open();
-    }
-  }, []);
+  }, [data]);
 
   return (
     <div>
-      <div id="map" style={{ width: "500px", height: "400px" }}></div>
+      <div
+        id="map"
+        style={{
+          width: "400px",
+          height: "250px",
+          zIndex: 0,
+          boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+          marginTop: "20px",
+          borderRadius: "10px",
+        }}
+      ></div>
     </div>
   );
 };

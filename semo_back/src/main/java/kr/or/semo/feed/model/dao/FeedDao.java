@@ -1,6 +1,10 @@
 package kr.or.semo.feed.model.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
+
+import kr.or.semo.feed.model.vo.Feed;
 
 @Mapper
 public interface FeedDao {
@@ -24,6 +28,7 @@ public interface FeedDao {
 	int insertFeedLike(int feedNo, int memberNo);
 
 	int deleteFeedLike(int feedNo, int memberNo);
+
 
 
 }

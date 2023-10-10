@@ -17,6 +17,8 @@ import FeedMain from "./component/feed/FeedMain";
 import PageMain from "./component/page/PageMain";
 import { Mypage } from "./component/mypage/Mypage";
 import Chat from "./component/chat/Chat";
+import GrPhotoMain from "./component/photo/GrPhotoMain";
+import MeetingMain from "./component/meeting/MeetingMain";
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
@@ -34,7 +36,10 @@ function App() {
       <Header isLogin={isLogin} setIsLogin={setIsLogin} />
       <div className="content">
         <Routes>
-          <Route path="/admin/*" element={<AdminMain />} />
+          <Route
+            path="/admin/*"
+            element={<AdminMain isLogin={isLogin} setIsLogin={setIsLogin} />}
+          />
           <Route path="/login" element={<Login setIsLogin={setIsLogin} />} />
           <Route path="/join" element={<Join />} />
           <Route
@@ -46,11 +51,14 @@ function App() {
             element={<GrBoardMain isLogin={isLogin} setIsLogin={setIsLogin} />}
           />
           <Route
+            path="/groupPhoto/*"
+            element={<GrPhotoMain isLogin={isLogin} setIsLogin={setIsLogin} />}
+          />
+          <Route
             path="/notice/*"
             element={<NoticeMain isLogin={isLogin} setIsLogin={setIsLogin} />}
           />
-
-          <Route path="/meeting" element={<MeetingCreate />} />
+          <Route path="/meeting/*" element={<MeetingMain />} />
           <Route
             path="/feed/*"
             element={<FeedMain isLogin={isLogin} setIsLogin={setIsLogin} />}

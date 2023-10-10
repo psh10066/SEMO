@@ -18,6 +18,7 @@ const FeedView = (props) => {
   const [feedLikeList, setFeedLikeList] = useState([]);
   const navigate = useNavigate();
   const token = window.localStorage.getItem("token");
+
   useEffect(() => {
     axios
       .get("/feed/view/" + feedNo)
@@ -29,6 +30,7 @@ const FeedView = (props) => {
         console.log(res.response.status);
       });
     if (isLogin) {
+      const token = window.localStorage.getItem("token");
       axios
         .post("/member/getMember", null, {
           headers: {
@@ -104,6 +106,7 @@ const FeedView = (props) => {
       }
     });
   };
+
   const loginMsg = () => {
     Swal.fire("로그인 후 이용해 주세요.");
   };
@@ -147,6 +150,7 @@ const FeedView = (props) => {
         console.log(res.response.status);
       });
   };
+
   function formatTime(postTime) {
     const currentTime = new Date();
     const postDate = new Date(postTime);

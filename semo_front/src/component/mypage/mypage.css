@@ -13,8 +13,10 @@
 
 .mypage-intro {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   padding-bottom: 70px;
+  width: 810px;
+  margin: 0 auto;
 }
 .mypage-intro > .mypage-name > .material-icons {
   font-size: 80px;
@@ -93,3 +95,47 @@
 .mypage-content {
   display: flex;
 }
+.current-content {
+  flex: 1;
+}
+/**************************************************/
+
+/*비밀번호 확인*/
+
+.pw-auth {
+  width: 810px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pw-currPw {
+  display: flex;
+  align-items: center;
+}
+.pw-currPw label {
+  font-size: 18px;
+  margin-right: 10px;
+}
+.pw-currPw Input {
+  height: 20px;
+}
+.pw-currPw button {
+  border: none;
+  padding: 0.2rem;
+  display: inline-block;
+  box-sizing: border-box;
+  transition-duration: 0.5s;
+  font-size: 16px;
+  font-family: ns-light;
+  background-color: #5457e9;
+  color: #252a34;
+  border: 2px solid #5457e9;
+  margin-left: 4px;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/*******************************************************/
+/*내 정보 수정*/

@@ -21,6 +21,7 @@
   padding: 30px 0px;
   border-bottom: 2px solid #220895;
   font-weight: bold;
+  text-align: center;
 }
 .board-list-wrap {
   overflow: hidden;
@@ -128,8 +129,8 @@
 }
 .board-view-btn-zone {
   padding: 20px 0px;
+  text-align: center;
 }
 .board-view-btn-zone > button {
-  width: 60px;
   margin-right: 20px;
 }

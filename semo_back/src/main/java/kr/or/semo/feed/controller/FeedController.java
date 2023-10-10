@@ -2,20 +2,22 @@ package kr.or.semo.feed.controller;
 
 import java.io.File;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.semo.FileUtil;
 import kr.or.semo.feed.model.service.FeedService;
+import kr.or.semo.feed.model.vo.Feed;
 import kr.or.semo.member.model.service.MemberService;
 import kr.or.semo.member.model.vo.Member;
 
@@ -26,7 +28,7 @@ public class FeedController {
 	private FeedService feedService;
 	@Autowired
 	private FileUtil fileUtil;
-	@Value("&{file.root}")
+	@Value("${file.root}")
 	private String root;
 	
 	//피드 프로필

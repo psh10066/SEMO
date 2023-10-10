@@ -3,6 +3,8 @@ package kr.or.semo.group.model.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestAttribute;
 
 import kr.or.semo.group.model.dao.GroupDao;
 import kr.or.semo.group.model.vo.Group;
@@ -36,6 +38,35 @@ public class GroupService {
 
 	public Group selectOneGroup(int groupNo) {
 		Group g = groupDao.selectOneGroup(groupNo);
-		return null;
+		return g;
+	}
+	
+	@Transactional
+	public int groupJoin(String memberId, Group group) {
+		int groupNo = group.getGroupNo();
+		return groupDao.groupJoin(memberId,groupNo);
+	}
+
+	public int joinState(String memberId) {
+		GroupJoin gj = groupDao.joinState(memberId);
+		if(gj != null) {
+			return 1;
+		}
+		return 0;
+	}
+
+	public int groupLevelState(String memberId) {
+		// TODO Auto-generated method stub
+		Integer result =groupDao.groupLevelState(memberId);
+		if(result == null) {
+			return 0;
+		}
+		return result;
+	}
+	
+	@Transactional
+	public int groupExit(String memberId) {
+		// TODO Auto-generated method stub
+		return groupDao.groupExit(memberId);
 	}
 }

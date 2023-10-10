@@ -48,5 +48,5 @@
   <delete id="deleteFeedLike">
   	delete from feed_like where feed_no = #{feedNo} and member_no=#{memberNo}
   </delete>
-  
+
 </mapper>

@@ -29,21 +29,22 @@ const AdminMember = () => {
 
   return (
     <div className="my-content-wrap">
-      <div className="my-content-title">전체 회원 조회</div>
+      {/*<div className="admin-content-title">전체 회원 조회</div>*/}
       <div className="admin-member-tbl-box">
         <table>
           <thead>
             <tr>
-              <td width={"10%"}>회원번호</td>
-              <td width={"15%"}>회원아이디</td>
-              <td width={"15%"}>회원이름</td>
-              <td width={"25%"}>이메일</td>
-              <td width={"20%"}>연락처</td>
-              <td width={"15%"}>회원등급</td>
+              <th width={"10%"}>회원번호</th>
+              <th width={"15%"}>회원아이디</th>
+              <th width={"15%"}>회원이름</th>
+              <th width={"25%"}>이메일</th>
+              <th width={"20%"}>연락처</th>
+              <th width={"15%"}>회원등급</th>
             </tr>
           </thead>
           <tbody>
             {memberList.map((member, index) => {
+              console.log(member);
               return <MemberItem key={"member" + index} member={member} />;
             })}
           </tbody>
@@ -54,6 +55,7 @@ const AdminMember = () => {
           reqPage={reqPage}
           setReqPage={setReqPage}
           pageInfo={pageInfo}
+          setList={setMemberList}
         />
       </div>
     </div>
@@ -61,8 +63,9 @@ const AdminMember = () => {
 };
 const MemberItem = (props) => {
   const member = props.member;
+  console.log(member);
   const [memberType, setMemberType] = useState(member.memberType);
-
+  console.log(member);
   const handleChange = (event) => {
     const obj = { memberNo: member.memberNo, memberType: event.target.value };
     const token = window.localStorage.getItem("token");
@@ -76,6 +79,7 @@ const MemberItem = (props) => {
         console.log(res.data);
         if (res.data === 1) {
           setMemberType(event.target.value);
+          Swal.fire("회원 등급 변경 완료!");
         } else {
           Swal.fire(
             "회원 등급 변경 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요."

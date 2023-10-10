@@ -11,9 +11,10 @@ const GrBoardList = (props) => {
   const [reqPage, setReqPage] = useState(1);
   console.log(isLogin);
   const [pageInfo, setPageInfo] = useState({});
+  const groupNo = 10; //임시
   useEffect(() => {
     axios
-      .get("/groupBoard/list/" + reqPage)
+      .get("/groupBoard/list/" + groupNo + "/" + reqPage)
       .then((res) => {
         console.log(res.data);
         setGrBoardList(res.data.groupBoardList);
@@ -27,7 +28,7 @@ const GrBoardList = (props) => {
   // 글쓰기 페이지 이동
   const navigate = useNavigate();
   const write = () => {
-    navigate("write");
+    navigate("write", { state: { groupNo: groupNo } });
   };
   return (
     <div className="my-board-wrap">

@@ -17,6 +17,12 @@ public class MeetingService {
 		// TODO Auto-generated method stub
 		return meetingDao.createMeeting(meeting);
 	}
+
+	public Meeting selectOneMeeting(int groupNo) {
+		Meeting m = meetingDao.selectOneMeeting(groupNo);
+		return m;
+	}
+
 	
 	
 }
