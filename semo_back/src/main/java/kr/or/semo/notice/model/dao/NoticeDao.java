@@ -16,4 +16,6 @@ public interface NoticeDao {
 
 	Notice selectOneNotice(int noticeNo);
 
+	int insertNotice(Notice n);
+
 }

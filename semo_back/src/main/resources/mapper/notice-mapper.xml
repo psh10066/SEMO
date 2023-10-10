@@ -35,5 +35,9 @@
 		JOIN MEMBER USING (MEMBER_NO)
 		where notice_no = #{noticeNo}
 	</select>
+	
+	<insert id="insertNotice">
+		insert into notice values(notice_seq.nextval,#{noticeTitle},#{noticeContent},#{memberNo},sysdate)
+	</insert>
 
 </mapper>
