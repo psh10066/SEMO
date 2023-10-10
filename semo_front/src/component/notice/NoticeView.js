@@ -74,9 +74,10 @@ const NoticeView = (props) => {
         </div>
         <div>{notice.noticeDate}</div>
       </div>
-      <div className="notice-view-content">
-        <div>내용 : {notice.noticeContent}</div>
-      </div>
+      <div
+        className="notice-view-content"
+        dangerouslySetInnerHTML={{ __html: notice.noticeContent }}
+      ></div>
       <div className="notice-view-btn-zone">
         {isLogin ? (
           member && member.memberNo === notice.memberNo ? (

@@ -8,7 +8,6 @@ const NoticeTextEditor = (props) => {
   const quillRef = useRef();
   const data = props.data;
   const setData = props.setData;
-  const url = props.url;
 
   //quill에디터 형식옵션을 담는 배열
   const formats = [
