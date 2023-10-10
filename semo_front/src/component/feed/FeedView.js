@@ -1,4 +1,4 @@
-import { Avatar, Stack } from "@mui/material";
+import { Avatar, AvatarGroup, Stack } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -223,7 +223,6 @@ const FeedView = (props) => {
         <div className="feed-view-image">
           <img src={"/feed/" + feed.feedImg} />
         </div>
-        <div className="feed-view-content">{feed.feedContent}</div>
         <div className="feed-view-mid-icon">
           <div className="feed-view-like">
             {isLogin ? (
@@ -232,7 +231,7 @@ const FeedView = (props) => {
                   favorite_border
                 </span>
               ) : (
-                <span className="material-icons" onClick={removeLike}>
+                <span className="material-icons likeicon" onClick={removeLike}>
                   favorite
                 </span>
               )
@@ -247,7 +246,31 @@ const FeedView = (props) => {
             <span className="material-icons">chat_bubble_outline</span>
             <span className="feed-count">15</span>
           </div>
+          {/* <div className="feed-like-person-wrap">
+            <AvatarGroup max={4} total={feedLikeCount}>
+              <Avatar
+                sx={{ width: 33, height: 33 }}
+                alt="Remy Sharp"
+                src="/static/images/avatar/1.jpg"
+              />
+              <Avatar
+                sx={{ width: 33, height: 33 }}
+                alt="Travis Howard"
+                src="/static/images/avatar/2.jpg"
+              />
+              <Avatar
+                sx={{ width: 33, height: 33 }}
+                alt="Agnes Walker"
+                src="/static/images/avatar/4.jpg"
+              />
+              <Avatar
+                alt="Trevor Henderson"
+                src="/static/images/avatar/5.jpg"
+              />
+            </AvatarGroup>
+          </div> */}
         </div>
+        <div className="feed-view-content">{feed.feedContent}</div>
       </div>
     </div>
   );
