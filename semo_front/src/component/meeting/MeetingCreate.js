@@ -16,7 +16,6 @@ function MeetingCreate() {
   const [meetingPrice, setMeetingPrice] = useState("");
   const [meetingMaxnum, setMeetingMaxnum] = useState("");
   const navigate = useNavigate();
-
   const createMeeting = () => {
     const meeting = {
       meetingName,
@@ -27,7 +26,7 @@ function MeetingCreate() {
     };
     const token = window.localStorage.getItem("token");
     axios
-      .post("meeting/create", meeting, {
+      .post("create", meeting, {
         headers: {
           Authorization: "Bearer " + token,
         },
@@ -65,7 +64,7 @@ function MeetingCreate() {
         />
       </div>
       <div className="meeting-date">
-        <div className="label">
+        <div className="meeting-label">
           <label>모임 날짜</label>
         </div>
         <DatePicker
@@ -107,7 +106,9 @@ function MeetingCreate() {
           label="정원"
         />
       </div>
-      <Button2 text="모임 생성" clickEvent={createMeeting}></Button2>
+      <div id="meeting-btn">
+        <Button1 text="모임 생성" clickEvent={createMeeting}></Button1>
+      </div>
     </div>
   );
 }
@@ -123,7 +124,7 @@ const MeetingInputWrap = (props) => {
   return (
     <div className="join-input-wrap">
       <div>
-        <div className="label">
+        <div className="meeting-label">
           <label htmlFor={content}>{label}</label>
         </div>
         <div className="input">

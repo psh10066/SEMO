@@ -22,8 +22,6 @@ public class MeetingController {
 	@PostMapping(value = "/create")
 	public int create(@RequestBody Meeting meeting) {
 		meeting.setMeetingNo(1);
-		meeting.setGroupNo(11);
-		meeting.setGrJoin(3);
 		meeting.setGroupNo(25);
 		meeting.setGrJoin(64);
 		int result = meetingService.createMeeting(meeting);
@@ -33,5 +31,6 @@ public class MeetingController {
 	public Meeting View(@PathVariable int groupNo) {
 		return meetingService.selectOneMeeting(groupNo);
 	}
+	
 
 }

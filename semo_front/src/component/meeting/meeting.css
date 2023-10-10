@@ -3,21 +3,23 @@
   max-width: 600px;
   margin: 0 auto;
   padding: 30px;
-  background-color: #f7f7f7;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .meeting-title {
   font-size: 28px;
-  margin-bottom: 20px;
-  color: #5457e9; /* 포인트 컬러 */
+  text-align: center;
+  padding: 40px;
+  color: #220895;
 }
 
 .meeting-title div {
   margin-bottom: 20px;
 }
 
+.meeting-wrap button {
+  border-radius: 5px;
+}
 .example-custom-input {
   background-color: #282c34;
   color: white;
@@ -49,7 +51,22 @@
   margin: 0 !important;
 }
 .meeting-input {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+}
+.meeting-label {
+  margin: 10px 0;
+}
+#meeting-btn {
+  text-align: center;
+  margin: 20px;
+}
+#meeting-btn > button {
+  width: 300px;
+  border: none;
+}
+#meeting-btn > button:hover {
+  background-color: #5457e9;
+  border: none;
 }
 
 /* MeetingView */
@@ -78,4 +95,14 @@
 }
 .meeting-content {
   font-weight: bold;
+}
+
+/* PostCode */
+#address-btn > button {
+  background-color: #8bb4ff;
+  color: #fff;
+  font-weight: 500;
+}
+#address-btn > button:hover {
+  background-color: #5457e9;
 }
