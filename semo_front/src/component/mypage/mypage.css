@@ -100,9 +100,9 @@
 }
 /**************************************************/
 
-/*비밀번호 확인*/
+/*관리*/
 
-.pw-auth {
+.mypage-form {
   width: 810px;
   height: 100%;
   display: flex;
@@ -136,6 +136,19 @@
   cursor: pointer;
   border-radius: 5px;
 }
+.edit {
+  width: 9em;
+  height: 4em;
+  line-height: 4em;
+  margin: 2px;
+}
+.textb {
+  color: #fff;
+}
 
 /*******************************************************/
 /*내 정보 수정*/
+.input-style {
+  color: #000000;
+  font-family: ns-b;
+}

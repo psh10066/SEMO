@@ -5,8 +5,11 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import MyGroup from "./MyGroup";
 import MyLikeGroup from "./MyLikeGroup";
-import ModifyMyInfo from "./ModifyMyInfo";
+import MyInfo from "./MyInfo";
 import AdminMain from "../admin/AdminMain";
+import ModifyMyInfo from "./ModifyMyInfo";
+import ModifyMyFeed from "./ModifyMyFeed";
+import ModifyMyLike from "./ModifyMyLike";
 
 const Mypage = (props) => {
   const navigate = useNavigate();
@@ -18,7 +21,7 @@ const Mypage = (props) => {
   const [menus, setMenus] = useState([
     { url: "mygroup", text: "내가 참여하고 있는 모임", active: false },
     { url: "mylikegroup", text: "내가 찜한 모임", active: false },
-    { url: "modifymyinfo", text: "내 정보 수정", active: false },
+    { url: "myInfo", text: "관리", active: false },
   ]);
 
   useEffect(() => {
@@ -30,6 +33,7 @@ const Mypage = (props) => {
       })
       .then((res) => {
         setMember(res.data);
+
         document.querySelectorAll(".mysidemenu a")[0].click(); // /mypage 열리면 제일 첫번쨰메뉴 클릭
 
         if (res.data && res.data.memberType === 1) {
@@ -64,8 +68,9 @@ const Mypage = (props) => {
     });
   }
   const myfeed = () => {
-    navigate("/feed");
+    navigate("/feed/profile", { state: { memberNo: member.memberNo } });
   };
+
   return (
     <div className="mypage-all-wrap">
       <div className="mypage-title">
@@ -113,8 +118,9 @@ const Mypage = (props) => {
                 />
               }
             />
+            <Route path="myInfo" element={<MyInfo />} />
             <Route
-              path="modifymyinfo/*"
+              path="modifyMyinfo"
               element={
                 <ModifyMyInfo
                   member={member}
@@ -123,6 +129,27 @@ const Mypage = (props) => {
                 />
               }
             />
+            <Route
+              path="modifyMyFeed"
+              element={
+                <ModifyMyFeed
+                  member={member}
+                  setMember={setMember}
+                  setIsLogin={setIsLogin}
+                />
+              }
+            />
+            <Route
+              path="modifyMyLike"
+              element={
+                <ModifyMyLike
+                  member={member}
+                  setMember={setMember}
+                  setIsLogin={setIsLogin}
+                />
+              }
+            />
+
             <Route
               path="adminMain/*"
               element={<AdminMain isLogin={isLogin} setIsLogin={setIsLogin} />}
@@ -136,7 +163,6 @@ const Mypage = (props) => {
 
 //사이드메뉴
 const MySideMenu = (props) => {
-  const navigate = useNavigate();
   const menus = props.menus;
   const setMenus = props.setMenus;
 
