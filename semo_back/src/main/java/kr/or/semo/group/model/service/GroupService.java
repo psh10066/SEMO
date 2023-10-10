@@ -55,9 +55,9 @@ public class GroupService {
 		return 0;
 	}
 
-	public int groupLevelState(String memberId) {
+	public int groupLevelState(int groupNo, String memberId) {
 		// TODO Auto-generated method stub
-		Integer result =groupDao.groupLevelState(memberId);
+		Integer result =groupDao.groupLevelState(groupNo, memberId);
 		if(result == null) {
 			return 0;
 		}

@@ -19,6 +19,9 @@ const Footer = () => {
           <li>
             <Link to="/notice">공지사항</Link>
           </li>
+          <li>
+            <Link to="#">회원탈퇴</Link>
+          </li>
         </ul>
       </div>
     </footer>

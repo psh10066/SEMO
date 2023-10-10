@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,9 +32,9 @@ public class NoticeController {
 	}
 	
 	@PostMapping(value="/insert")
-	public int insertNotice(@ModelAttribute Notice n, @ModelAttribute String memberId) {
-		System.out.println("n = "+n);
-		System.out.println("memberId = "+memberId);
+	public int insertNotice(@ModelAttribute Notice n, @RequestAttribute String memberId) {
+		System.out.println("n은 "+n);
+		System.out.println("memberId는 "+memberId);
 		n.setMemberId(memberId);
 		int result = noticeService.insertNotice(n);
 		return result;

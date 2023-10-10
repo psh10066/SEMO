@@ -133,28 +133,23 @@ input[type="file"]::file-selector-button {
   margin: 30px 0px;
 }
 .group-view-tap > div {
-  list-style-type: none;
-  box-sizing: border-box;
-  padding-top: 30px;
-  margin: 0;
-}
-.group-view-tap > div {
   display: flex;
-  justify-content: center;
 }
-.group-view-tap > div a {
+.group-view-tap > div > div {
+  width: calc(100% / 3);
+}
+.group-view-tap > div > div > a {
   display: block;
-  padding: 10px;
-  font-size: 18px;
-  color: #8bb4ff;
-  font-family: ns-b;
-  position: relative;
-  margin: 0px 20px;
+  width: 100%;
+  border-top: 1px solid #ccc;
+  text-align: center;
+  line-height: 60px;
+  height: 60px;
+  font-size: 19px;
 }
-
-.group-view-tap > div a.active-side {
-  background-color: rgb(255, 209, 209);
-  color: #fff;
+.group-view-tap > div > div > a.active-group-menu {
+  font-family: ns-b;
+  border-top: 5px solid #5457e9;
 }
 
 .group-view-meeting > p {
