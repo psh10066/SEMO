@@ -12,12 +12,13 @@ import FeedModal from "../util/FeedModal";
 
 const FeedProfile = (props) => {
   const isLogin = props.isLogin;
-  const setIsLogin = props.setIsLogin;
   const [member, setMember] = useState({});
   const [loginMember, setLoginMember] = useState({});
   const [isOpen, setIsOpen] = useState(false);
+  const [feedList, setFeedList] = useState([]);
   //   const memberNo = props.memberNo;
   const memberNo = 53;
+  const feedWriter = memberNo;
   useEffect(() => {
     axios
       .get("/feed/profile/" + memberNo)
@@ -57,10 +58,19 @@ const FeedProfile = (props) => {
     // 특정 로직
     setIsOpen(false);
   };
-
   const onCancel = () => {
     setIsOpen(false);
   };
+  useEffect(() => {
+    axios
+      .get("/feed/list/" + feedWriter)
+      .then((res) => {
+        setFeedList(res.data);
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+  }, []);
   return (
     <div className="feed-profile-all-wrap">
       <div className="feed-profile-wrap">
@@ -118,6 +128,7 @@ const FeedProfile = (props) => {
               onSubmit={onSubmit}
               onCancel={onCancel}
               member={member}
+              type="write"
             />
             {isLogin ? (
               loginMember && loginMember.memberNo === member.memberNo ? (
@@ -136,7 +147,12 @@ const FeedProfile = (props) => {
         <div className="feed-current-content">
           <Routes>
             <Route path="groupList" element={<GroupList />} />
-            <Route path="*" element={<FeedList />} />
+            <Route
+              path="*"
+              element={
+                <FeedList feedList={feedList} setFeedList={setFeedList} />
+              }
+            />
           </Routes>
         </div>
       </div>

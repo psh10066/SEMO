@@ -1,5 +1,7 @@
 package kr.or.semo.feed.model.vo;
 
+import java.util.Date;
+
 import org.apache.ibatis.type.Alias;
 
 import lombok.AllArgsConstructor;
@@ -15,4 +17,8 @@ public class Feed {
 	private String feedImg;
 	private String feedContent;
 	private int feedWriter;
+	private String memberId;
+	private String memberName;
+	private String memberImg;
+	private Date feedDate;
 }

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="kr.or.semo.feed.model.dao.FeedDao">
+  <insert id="insertFeed">
+  	insert into feed values(feed_seq.nextval, #{feedImg}, #{feedContent}, #{feedWriter}, sysdate)
+  </insert>
+  <select id="selectFeedList" resultType="feed">
+  	select * from feed where feed_writer = #{feedWriter} order by 1 desc
+  </select>
+  <select id="feedCount" resultType="int">
+  	select count(*) from feed where feed_writer = #{feedWriter}
+  </select>
+  <select id="selectOneFeed" resultType="feed">
+  	select
+  		feed_no,
+  		feed_img,
+  		feed_content,
+  		feed_writer,
+  		member_name,
+  		member_id,
+  		member_img,
+  		feed_date
+  	from feed
+  	join member on (feed_writer = member_no)
+  	where feed_no = #{feedNo}
+  </select>
+  <update id="updateFeed">
+  	update feed set
+  		feed_img = #{feedImg},
+  		feed_content = #{feedContent}
+  	where feed_no = #{feedNo}
+  </update>
+  <delete id="deleteFeed">
+  	delete from feed where feed_no = #{feedNo}
+  </delete>
+</mapper>
