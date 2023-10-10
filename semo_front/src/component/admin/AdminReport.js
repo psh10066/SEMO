@@ -22,16 +22,16 @@ const AdminReport = () => {
   }, [reqPage]);
   return (
     <div className="my-content-wrap">
-      <div className="my-content-title">모임 신고 내역</div>
+      {/*<div className="admin-content-title">모임 신고 내역</div>*/}
       <div className="admin-report-board">
         <table>
           <thead>
             <tr>
-              <td width={"10%"}>신고번호</td>
-              <td width={"15%"}>모임명</td>
-              <td width={"15%"}>신고회원아이디</td>
-              <td width={"50%"}>신고사유</td>
-              <td width={"10%"}>신고일자</td>
+              <th width={"10%"}>신고번호</th>
+              <th width={"10%"}>모임명</th>
+              <th width={"15%"}>신고회원아이디</th>
+              <th width={"55%"}>신고사유</th>
+              <th width={"10%"}>신고일자</th>
             </tr>
           </thead>
           <tbody>

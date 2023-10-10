@@ -29,17 +29,17 @@ const AdminMember = () => {
 
   return (
     <div className="my-content-wrap">
-      <div className="my-content-title">전체 회원 조회</div>
+      {/*<div className="admin-content-title">전체 회원 조회</div>*/}
       <div className="admin-member-tbl-box">
         <table>
           <thead>
             <tr>
-              <td width={"10%"}>회원번호</td>
-              <td width={"15%"}>회원아이디</td>
-              <td width={"15%"}>회원이름</td>
-              <td width={"25%"}>이메일</td>
-              <td width={"20%"}>연락처</td>
-              <td width={"15%"}>회원등급</td>
+              <th width={"10%"}>회원번호</th>
+              <th width={"15%"}>회원아이디</th>
+              <th width={"15%"}>회원이름</th>
+              <th width={"25%"}>이메일</th>
+              <th width={"20%"}>연락처</th>
+              <th width={"15%"}>회원등급</th>
             </tr>
           </thead>
           <tbody>

@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import MyGroup from "./MyGroup";
 import MyLikeGroup from "./MyLikeGroup";
 import ModifyMyInfo from "./ModifyMyInfo";
+import AdminMain from "../admin/AdminMain";
 
 const Mypage = (props) => {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ const Mypage = (props) => {
 
         if (res.data && res.data.memberType === 1) {
           const adminMenu = {
-            url: "/admin",
+            url: "adminMain",
             text: "관리자 페이지",
             active: false,
           };
@@ -121,6 +122,10 @@ const Mypage = (props) => {
                   setIsLogin={setIsLogin}
                 />
               }
+            />
+            <Route
+              path="adminMain/*"
+              element={<AdminMain isLogin={isLogin} setIsLogin={setIsLogin} />}
             />
           </Routes>
         </div>
