@@ -44,6 +44,7 @@ const AdminMember = () => {
           </thead>
           <tbody>
             {memberList.map((member, index) => {
+              console.log(member);
               return <MemberItem key={"member" + index} member={member} />;
             })}
           </tbody>
@@ -54,6 +55,7 @@ const AdminMember = () => {
           reqPage={reqPage}
           setReqPage={setReqPage}
           pageInfo={pageInfo}
+          setList={setMemberList}
         />
       </div>
     </div>
@@ -61,8 +63,9 @@ const AdminMember = () => {
 };
 const MemberItem = (props) => {
   const member = props.member;
+  console.log(member);
   const [memberType, setMemberType] = useState(member.memberType);
-
+  console.log(member);
   const handleChange = (event) => {
     const obj = { memberNo: member.memberNo, memberType: event.target.value };
     const token = window.localStorage.getItem("token");
@@ -76,6 +79,7 @@ const MemberItem = (props) => {
         console.log(res.data);
         if (res.data === 1) {
           setMemberType(event.target.value);
+          Swal.fire("회원 등급 변경 완료!");
         } else {
           Swal.fire(
             "회원 등급 변경 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요."
@@ -95,7 +99,7 @@ const MemberItem = (props) => {
       <td>{member.memberPhone}</td>
       <td>
         <FormControl sx={{ m: 1, minWidth: 100 }}>
-          <Select value={member.memberType} onChange={handleChange}>
+          <Select value={memberType} onChange={handleChange}>
             <MenuItem value={1}>관리자</MenuItem>
             <MenuItem value={2}>일반회원</MenuItem>
           </Select>

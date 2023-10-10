@@ -100,6 +100,7 @@ const AdminMain = (props) => {
           <Routes>
             <Route path="report" element={<AdminReport />} />
             <Route path="list" element={<AdminMember />} />
+            <Route path="*" element={<AdminMember />} />
           </Routes>
         </div>
       </div>
