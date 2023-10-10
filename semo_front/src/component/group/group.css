@@ -71,6 +71,7 @@ input[type="file"]::file-selector-button {
   width: 800px;
   margin: 0 auto;
 }
+
 .group-view-name {
   text-align: center;
   font-family: ns-b;
@@ -84,4 +85,67 @@ input[type="file"]::file-selector-button {
 }
 .group-view-content img {
   width: 100%;
+}
+.group-view-content {
+  text-align: center;
+  margin-top: 50px;
+}
+.group-view-div-content {
+  background-color: #f4f4f4;
+}
+
+.group-view-category a {
+  color: #5457e9;
+  margin: 0 20px;
+  font-size: 18px;
+}
+.group-view-category {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.group-view-meeting {
+  text-align: center;
+  margin: 20px 0px;
+}
+.group-join-btn {
+  text-align: center;
+  margin: 20px 0;
+}
+.group-join-btn button {
+  background-color: #5457e9;
+  border: none;
+}
+.group-view-tap {
+  width: 100%;
+  margin: 30px 0px;
+}
+.group-view-tap > div {
+  list-style-type: none;
+  box-sizing: border-box;
+  padding-top: 30px;
+  margin: 0;
+}
+.group-view-tap > div {
+  display: flex;
+  justify-content: center;
+}
+.group-view-tap > div a {
+  display: block;
+  padding: 10px;
+  font-size: 18px;
+  color: #8bb4ff;
+  font-family: ns-b;
+  position: relative;
+  margin: 0px 20px;
+}
+
+.group-view-tap > div a.active-side {
+  background-color: rgb(255, 209, 209);
+  color: #fff;
+}
+
+.group-view-meeting > p {
+  font-size: 50px;
+  background-color: #ccc;
 }

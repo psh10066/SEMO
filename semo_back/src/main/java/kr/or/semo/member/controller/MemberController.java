@@ -65,10 +65,7 @@ public class MemberController {
 		return result;
 	}
 	
-<<<<<<< Updated upstream
 	//로그인된 회원 정보 가져오기
-=======
->>>>>>> Stashed changes
 	@PostMapping(value="/getMember")
 	public Member mypage(@RequestAttribute String memberId) {
 		return memberService.selectOneMember(memberId);
