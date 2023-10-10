@@ -2,6 +2,7 @@ package kr.or.semo.feed.controller;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.or.semo.FileUtil;
 import kr.or.semo.feed.model.service.FeedService;
 import kr.or.semo.feed.model.vo.Feed;
-import kr.or.semo.member.model.service.MemberService;
 import kr.or.semo.member.model.vo.Member;
 
 @RestController

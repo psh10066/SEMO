@@ -20,7 +20,7 @@
 			order by 1 desc) b)
 		where rnum between #{pi.start} and #{pi.end}
 	</select>
-	<select id="selectOneGroupPhoto" resultMap="groupPhoto">
+	<select id="selectOneGroupPhoto" resultType="groupPhoto">
 		select 
 			gr_photo_no, gr_photo_title, gr_photo_content, gr_photo_img, member_id
 			from gr_photo
