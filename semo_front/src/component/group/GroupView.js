@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Button2 } from "../util/Buttons";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./group.css";
 
 const GroupView = (props) => {
   const isLogin = props.isLogin;
@@ -15,7 +16,6 @@ const GroupView = (props) => {
       .get("/group/view/" + groupNo)
       .then((res) => {
         setGroup(res.data);
-        console.log(res.data);
       })
       .catch((res) => {
         console.log(res.response.status);
@@ -29,6 +29,7 @@ const GroupView = (props) => {
           },
         })
         .then((res) => {
+          console.log(res.data);
           setMember(res.data);
         })
         .catch((res) => {
@@ -36,19 +37,23 @@ const GroupView = (props) => {
         });
     }
   }, []);
-  const groupJoin = () => {};
+  const groupJoin = (props) => {
+    const token = window.localStorage.getItem("token");
+    axios.post(
+      "/group/GroupJoin",
+      { member, group },
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+  };
   return (
-    <div>
-      {isLogin ? (
-        <div className="group-join-btn">
-          <Button2 text="가입하기" clickEvent={groupJoin} />
-        </div>
-      ) : (
-        " "
-      )}
-      <div className="group-view-wrap">
-        <div className="group-name">{group.groupName}</div>
-        <div className="group-thumbnail">
+    <div className="group-view-wrap">
+      <div>
+        <div className="group-view-name">{group.groupName}</div>
+        <div className="group-view-thumbnail">
           {group.groupImg ? (
             <img src={"/group/" + group.groupImg} />
           ) : (
@@ -56,10 +61,17 @@ const GroupView = (props) => {
           )}
         </div>
         <div
-          className="group-content"
+          className="group-view-content"
           dangerouslySetInnerHTML={{ __html: group.groupContent }}
         ></div>
       </div>
+      {isLogin ? (
+        <div className="group-join-btn">
+          <Button2 text="가입하기" clickEvent={groupJoin} />
+        </div>
+      ) : (
+        " "
+      )}
     </div>
   );
 };
