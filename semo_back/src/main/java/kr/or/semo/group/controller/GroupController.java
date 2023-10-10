@@ -59,8 +59,6 @@ public class GroupController {
 	//그룹 가입
 	@PostMapping(value="/groupJoin")
 	public int groupJoin(@RequestBody Group g, @RequestAttribute String memberId) {
-		System.out.println(g.getGroupNo());
-		System.out.println(memberId);
 		return groupService.groupJoin(memberId, g);
 	}
 	
@@ -69,5 +67,17 @@ public class GroupController {
 	public int joinState(@RequestAttribute String memberId) {
 		int result = groupService.joinState(memberId);
 		return result;
+	}
+	
+	//그룹 등급 조회
+	@PostMapping(value="/groupLevelState")
+	public int groupLevelState(@RequestAttribute String memberId) {
+		return groupService.groupLevelState(memberId);
+	}
+	
+	//그룹 탈퇴
+	@PostMapping(value="/groupExit")
+	public int groupExit(@RequestAttribute String memberId) {
+		return groupService.groupExit(memberId);
 	}
 }

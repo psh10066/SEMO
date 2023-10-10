@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="kr.or.semo.group.model.dao.GroupDao">
+	
+	<!-- 그룹 생성 -->
 	<insert id="insertGroup">
 		insert into group_tbl values (group_tbl_seq.nextval,#{groupName},#{groupImg},#{groupMaxnum},#{groupContent},#{groupCategory},#{groupLocal})
 	</insert>
+	
+	<!-- 모임장 그룹가입 => 1일때 모임장 -->
 	<insert id="insertGroupJoin">
 		insert into gr_join values(gr_join_seq.nextval,#{groupNo},#{memberNo},1)
 	</insert>
+	
+	
 	<select id="selectGroupNo" resultType="int">
 		select max(group_no) from group_tbl
 	</select>
@@ -15,14 +21,28 @@
 		select * from group_tbl where group_no=#{groupNo}
 	</select>
 	
+	<!-- 일반회원 그룹가입 =>3일때 회원가입대기 -->
 	<insert id="groupJoin">
 		insert into gr_join values(gr_join_seq.nextval,#{groupNo},
 		(select member_No from member where member_Id=#{memberId})
-		,2)
+		,3)
 	</insert>
 	
+	<!-- 그룹가입여부 조회 -->
 	<select id="joinState" resultType="GroupJoin">
 		select * from gr_join where member_no=
 		(select member_No from member where member_Id=#{memberId}) 
 	</select>
+	
+	<!-- 그룹 등급 조회 -->
+	<select id="groupLevelState" resultType="Integer">
+		select GR_JOIN_TYPE from gr_join where member_no=
+		(select member_No from member where member_Id=#{memberId})
+	</select>
+	
+	<!-- 그룹 탈퇴하기 -->
+	<delete id="groupExit">
+		delete from gr_join where member_no=
+		(select member_No from member where member_Id=#{memberId})
+	</delete>
 </mapper>
