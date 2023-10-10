@@ -48,12 +48,17 @@ const GroupView = (props) => {
                   setIsJoin(true);
                 }
               });
+            console.log(groupNo);
             axios
-              .post("/group/groupLevelState", null, {
-                headers: {
-                  Authorization: "Bearer " + token,
-                },
-              })
+              .post(
+                "/group/groupLevelState",
+                { groupNo },
+                {
+                  headers: {
+                    Authorization: "Bearer " + token,
+                  },
+                }
+              )
               .then((res) => {
                 setGroupLevel(res.data);
               });
@@ -121,9 +126,8 @@ const GroupView = (props) => {
   ]);
   return (
     <div className="group-view-wrap">
-      <div>
-        <MySideMenu menus={menus} setMenus={setMenus} />
-      </div>
+      <MySideMenu menus={menus} setMenus={setMenus} />
+
       <div className="group-view-div-content">
         <div>
           <div className="group-view-thumbnail">
@@ -206,7 +210,7 @@ const MySideMenu = (props) => {
               {menu.active ? (
                 <Link
                   to={menu.url}
-                  className="active-side"
+                  className="active-groupview-menu"
                   onClick={() => {
                     activeTab(index);
                   }}

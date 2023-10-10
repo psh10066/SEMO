@@ -36,13 +36,13 @@
 	
 	<!-- 그룹 등급 조회 -->
 	<select id="groupLevelState" resultType="Integer">
-		select GR_JOIN_TYPE from gr_join where member_no=
-		(select member_No from member where member_Id=#{memberId})
+		select GR_JOIN_TYPE from gr_join where group_no=#{groupNo} and
+		member_no=(select member_No from member where member_Id=#{memberId})
 	</select>
 	
 	<!-- 그룹 탈퇴하기 -->
 	<delete id="groupExit">
-		delete from gr_join where member_no=
+		delete from gr_join where group_no=
 		(select member_No from member where member_Id=#{memberId})
 	</delete>
 </mapper>

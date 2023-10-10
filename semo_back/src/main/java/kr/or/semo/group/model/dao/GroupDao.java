@@ -23,7 +23,7 @@ public interface GroupDao {
 
 	GroupJoin joinState(String memberId);
 
-	Integer groupLevelState(String memberId);
+	Integer groupLevelState(int groupNo, String memberId);
 
 	int groupExit(String memberId);
 
