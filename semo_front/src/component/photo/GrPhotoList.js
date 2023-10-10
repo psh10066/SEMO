@@ -62,9 +62,9 @@ const PhotoItem = (props) => {
     <div className="photo-item" onClick={photoView}>
       <div className="photo-item-img">
         {grPhoto.grPhotoImg === null ? (
-          <img src="/img/default.png" />
+          <img src="/image/default.png" />
         ) : (
-          <img src={"/photo/" + grPhoto.photoImg} />
+          <img src={"/groupPhoto/" + grPhoto.photoImg} />
         )}
       </div>
       <div className="photo-item-info">

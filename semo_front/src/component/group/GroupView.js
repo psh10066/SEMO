@@ -82,8 +82,16 @@ const GroupView = (props) => {
       });
   };
   const [menus, setMenus] = useState([
-    { url: "#", text: "아름님메뉴1", active: false },
-    { url: "#", text: "아름님메뉴2", active: false },
+    {
+      url: "http://localhost:3000/groupBoard",
+      text: "아름님메뉴1",
+      active: false,
+    },
+    {
+      url: "http://localhost:3000/groupPhoto",
+      text: "아름님메뉴2",
+      active: false,
+    },
     { url: "#", text: "성준님메뉴", active: false },
   ]);
   return (

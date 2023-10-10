@@ -14,10 +14,10 @@ const GrPhotoFrm = (props) => {
   const setGrPhotoFile = props.setGrPhotoFile;
   const grPhotoImg = props.grPhotoImg;
   const setGrPhotoImg = props.setGrPtohoImg;
+  const fileList = props.fileList;
+  const setFileList = props.setFileList;
   const buttonEvent = props.buttonEvent;
   const type = props.type;
-  const delFileNo = props.delFileNo;
-  const setDelFileNo = props.setDelFileNo;
   //새첨부파일 출력용 state
   const [newFileList, setNewFileList] = useState([]);
   const thumbnailChange = (e) => {
@@ -49,7 +49,7 @@ const GrPhotoFrm = (props) => {
       <div className="photo-frm-top">
         <div className="photo-thumbnail">
           {grPhotoImg === null ? (
-            <img src="/img/default.png" />
+            <img src="/image/default.png" />
           ) : (
             <img src={grPhotoImg} />
           )}
@@ -89,6 +89,17 @@ const GrPhotoFrm = (props) => {
                 </td>
                 <td>
                   <input type="file" onChange={changeFile} multiple />
+                </td>
+                <td>
+                  <label htmlFor="grPhotoContent">내용</label>
+                </td>
+                <td>
+                  <Input
+                    type="text"
+                    data={grPhotoContent}
+                    setData={setGrPhotoContent}
+                    content="grPhotoContent"
+                  />
                 </td>
               </tr>
             </tbody>
