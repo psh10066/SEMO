@@ -95,7 +95,7 @@ const MemberItem = (props) => {
       <td>{member.memberPhone}</td>
       <td>
         <FormControl sx={{ m: 1, minWidth: 100 }}>
-          <Select value={memberType} onChange={handleChange}>
+          <Select value={member.memberType} onChange={handleChange}>
             <MenuItem value={1}>관리자</MenuItem>
             <MenuItem value={2}>일반회원</MenuItem>
           </Select>
