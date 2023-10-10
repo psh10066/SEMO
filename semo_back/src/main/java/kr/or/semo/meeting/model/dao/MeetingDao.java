@@ -9,4 +9,6 @@ public interface MeetingDao {
 
 	int createMeeting(Meeting meeting);
 
+	Meeting selectOneMeeting(int groupNo);
+
 }
