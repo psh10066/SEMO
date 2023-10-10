@@ -6,10 +6,15 @@
     		1,
     		11,
     		3,
+    		25,
+    		64,
     		#{meetingName},
     		#{meetingDate},
     		#{meetingPlace},
     		#{meetingPrice},
     		#{meetingMaxnum})
 	</insert>
+	<select id="selectOneMeeting" resultType="Meeting">
+		select * from meeting where group_no = #{groupNo}
+	</select>
 </mapper>

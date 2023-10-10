@@ -5,6 +5,7 @@ import axios from "axios";
 import "./group.css";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import MeetingView from "../meeting/MeetingView";
 
 const GroupView = (props) => {
   const isLogin = props.isLogin;
@@ -130,7 +131,7 @@ const GroupView = (props) => {
             dangerouslySetInnerHTML={{ __html: group.groupContent }}
           ></div>
           <div className="group-view-meeting">
-            <p>성준님 미팅 만든거 넣어주시면 됩니다</p>
+            <MeetingView groupNo={groupNo} />
           </div>
           <div className="group-view-category">
             <Link to="#">
