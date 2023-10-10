@@ -168,3 +168,22 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
 }
+.feed-view-mid-icon {
+  display: flex;
+  align-items: center;
+  margin: 12px;
+}
+.feed-view-mid-icon > div {
+  display: flex;
+  align-items: center;
+}
+.feed-view-mid-icon > div > span:first-child {
+  padding-right: 6px;
+}
+.feed-view-like {
+  padding-right: 22px;
+  cursor: pointer;
+}
+.likeicon {
+  color: #f00;
+}

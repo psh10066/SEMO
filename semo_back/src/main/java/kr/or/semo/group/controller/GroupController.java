@@ -71,8 +71,10 @@ public class GroupController {
 	
 	//그룹 등급 조회
 	@PostMapping(value="/groupLevelState")
-	public int groupLevelState(@RequestAttribute String memberId) {
-		return groupService.groupLevelState(memberId);
+	public int groupLevelState(@RequestBody Group g, @RequestAttribute String memberId) {
+		int groupNo = g.getGroupNo();
+		return groupService.groupLevelState(groupNo, memberId);
+		//return groupService.groupLevelState();
 	}
 	
 	//그룹 탈퇴

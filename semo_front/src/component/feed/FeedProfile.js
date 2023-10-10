@@ -2,7 +2,7 @@ import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import { useState } from "react";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useLocation, useParams } from "react-router-dom";
 import { Button1 } from "../util/Buttons";
 import FeedList from "./FeedList";
 import GroupList from "./GroupList";
@@ -17,13 +17,15 @@ const FeedProfile = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [feedList, setFeedList] = useState([]);
   const [changeFeed, setChangeFeed] = useState(true);
-  const memberNo = 53;
+  const location = useLocation();
+  const memberNo = location.state.memberNo;
   const feedWriter = memberNo;
 
   useEffect(() => {
     axios
       .get("/feed/profile/" + memberNo)
       .then((res) => {
+        // console.log(res.data);
         setMember(res.data);
       })
       .catch((res) => {
