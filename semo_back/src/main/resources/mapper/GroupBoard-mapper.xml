@@ -6,23 +6,22 @@
 	</select>
 	
 	<select id="selectgroupBoardList" resultType="groupBoard">
-		SELECT * FROM
-			(SELECT ROWNUM AS RNUM, B.*FROM
-			(SELECT 
-			    GR_BOARD_NO,
-			    GR_BOARD_TITLE,
-			    GR_BOARD_WRITER,
-			    MEMBER_ID,
-			    TO_CHAR(GR_BOARD_DATE, 'YYYY-MM-DD') AS GR_BOARD_DATE
-			FROM GR_BOARD
-			JOIN MEMBER ON (GR_BOARD_WRITER = MEMBER_NO)
-			WHERE GR_BOARD_STATE = 1
-			ORDER BY 1 DESC) B)
-		WHERE RNUM BETWEEN #{start} AND #{end}
-			
+		select * from
+			(select rownum as rnum, b.* from
+			(select 
+			    gr_board_no,
+			    gr_board_title,
+			    gr_board_writer,
+			    member_id,
+			    to_char(gr_board_date, 'yyyy-mm-dd') as gr_board_date
+			from gr_board
+			join member on (gr_board_writer = member_no)
+			where gr_board_state = 1 and group_no = #{groupNo}
+			order by 1 desc) b)
+		where rnum between #{pi.start} and #{pi.end}
 	</select>
 	<insert id="insertGroupBoard">
-		insert into gr_board values(gr_board_seq.nextval, #{grBoardTitle}, #{grBoardContent}, sysdate, #{grBoardWriter}, 13, 1)
+		insert into gr_board values(gr_board_seq.nextval, #{grBoardTitle}, #{grBoardContent}, sysdate, #{grBoardWriter}, #{groupNo}, 1)
 		<selectKey resultType="int" keyProperty="grBoardNo" order="AFTER">
 			select max(gr_board_no) from gr_board
 		</selectKey>
@@ -31,8 +30,15 @@
 		select 
 			gr_board_no, gr_board_title, gr_board_content, to_char(gr_board_date,'yyyy-mm-dd') as gr_board_date, gr_board_writer, member_name, group_no, gr_board_state
 		from gr_board 
-		join member on(gr_board_writer = member_no) 
+		join member on(gr_board_writer = member_no)
 		where gr_board_no = #{grBoardNo}
 	</select>
-	
+	<update id="updateGroupBoard">
+		update gr_board set 
+			gr_board_title = #{grBoardTitle}, gr_board_content = #{grBoardContent}
+		where gr_board_no = #{grBoardNo}
+	</update>
+	<delete id="deleteGroupBoard">
+		delete from gr_board where gr_board_no = #{grBoardNo}
+	</delete>
 </mapper>

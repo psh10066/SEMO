@@ -4,36 +4,40 @@ import Input from "../util/InputFrm";
 import TextEditor from "../util/TextEditor";
 
 const GrPhotoFrm = (props) => {
-  const grPhotoTitle = props.GrPhotoTitle;
+  const grPhotoTitle = props.grPhotoTitle;
   const setGrPhotoTitle = props.setGrPhotoTitle;
   const grPhotoContent = props.grPhotoContent;
   const setGrPhotoContent = props.setGrPhotoContent;
   const grThumbnail = props.grThmbnail;
   const setGrThumbnail = props.setGrThmbnail;
+  const grPhotoFile = props.grPhotoFile;
+  const setGrPhotoFile = props.setGrPhotoFile;
   const grPhotoImg = props.grPhotoImg;
   const setGrPhotoImg = props.setGrPtohoImg;
   const buttonEvent = props.buttonEvent;
   const type = props.type;
   const delFileNo = props.delFileNo;
   const setDelFileNo = props.setDelFileNo;
+  //새첨부파일 출력용 state
   const [newFileList, setNewFileList] = useState([]);
   const thumbnailChange = (e) => {
     const files = e.currentTarget.files;
     if (files.length !== 0 && files[0] != 0) {
       setGrThumbnail(files[0]);
+      //화면에 썸네일 미리보기
       const reader = new FileReader();
       reader.readAsDataURL(files[0]);
       reader.onloadend = () => {
-        setBoardImg(reader.result);
+        setGrPhotoImg(reader.result);
       };
     } else {
       setGrThumbnail({});
-      setBoardImg(null);
+      setGrPhotoImg(null);
     }
   };
   const changeFile = (e) => {
     const files = e.currentTarget.files;
-    setBoardFile(files);
+    setGrPhotoFile(files);
     const arr = new Array();
     for (let i = 0; i < files.length; i++) {
       arr.push(files[i].name);
@@ -44,10 +48,10 @@ const GrPhotoFrm = (props) => {
     <div className="photo-frm-wrap">
       <div className="photo-frm-top">
         <div className="photo-thumbnail">
-          {boardImg === null ? (
+          {grPhotoImg === null ? (
             <img src="/img/default.png" />
           ) : (
-            <img src={boardImg} />
+            <img src={grPhotoImg} />
           )}
         </div>
         <div className="photo-info">
@@ -91,15 +95,12 @@ const GrPhotoFrm = (props) => {
           </table>
         </div>
       </div>
-      <div className="photo-content-box">
-        <TextEditor
-          data={grPhotoContent}
-          setData={setGrPhotoContent}
-          url="/groupPhoto/contentImg"
-        />
-      </div>
       <div className="photo-btn-box">
-        <Button1 text="등록" clickEvent={buttonEvent} />
+        {type === "modify" ? (
+          <Button1 text="수정" clickEvent={buttonEvent} />
+        ) : (
+          <Button1 text="등록" clickEvent={buttonEvent} />
+        )}
       </div>
     </div>
   );

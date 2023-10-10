@@ -17,6 +17,7 @@ import FeedMain from "./component/feed/FeedMain";
 import PageMain from "./component/page/PageMain";
 import { Mypage } from "./component/mypage/Mypage";
 import Chat from "./component/chat/Chat";
+import GrPhotoMain from "./component/photo/GrPhotoMain";
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
@@ -48,6 +49,10 @@ function App() {
           <Route
             path="/groupBoard/*"
             element={<GrBoardMain isLogin={isLogin} setIsLogin={setIsLogin} />}
+          />
+          <Route
+            path="/groupPhoto/*"
+            element={<GrPhotoMain isLogin={isLogin} setIsLogin={setIsLogin} />}
           />
           <Route
             path="/notice/*"
