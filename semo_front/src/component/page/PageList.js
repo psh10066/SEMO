@@ -45,7 +45,7 @@ const PageItem = (props) => {
     //console.log(page.groupNo);
   };
   return (
-    <div className="page-item" onClick={groupView}>
+    <div className="page-item-wrap" onClick={groupView}>
       <div className="page-item-img">
         {page.groupImg === null ? (
           <img src="/image/default.png" />
@@ -54,10 +54,26 @@ const PageItem = (props) => {
         )}
       </div>
       <div className="page-item-info">
-        <div>{page.groupName}</div>
-        <div>{page.groupMaxnum}</div>
-        <div>{page.groupCategory}</div>
-        <div>{page.groupLocal}</div>
+        <div className="page-infos">
+          <div>모임명 : {page.groupName}</div>
+          <div>최대 모임 인원 : {page.groupMaxnum}</div>
+          <div>
+            카테고리 :
+            {page.groupCategory === 1
+              ? "문화·예술"
+              : page.groupCategory === 2
+              ? "운동·액티비티"
+              : "푸드·드링크"}
+          </div>
+          <div>
+            지역 카테고리 :{" "}
+            {page.groupLocal === 1
+              ? "서울"
+              : page.groupLocal === 2
+              ? "경기"
+              : "부산"}
+          </div>
+        </div>
       </div>
     </div>
   );

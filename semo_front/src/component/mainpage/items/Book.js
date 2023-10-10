@@ -36,17 +36,15 @@ export function Book(props) {
           material={materials["White.040"]}
         />
         <mesh
-            geometry={nodes.Cube012_1.geometry}
-            material={materials["Brown.018"]}
-          />
+          geometry={nodes.Cube012_1.geometry}
+          material={materials["Brown.018"]}
+        />
 
         <animated.group
           scale-x={booksScale}
           scale-y={booksScale}
           scale-z={booksScale}
-        >
-
-        </animated.group>
+        ></animated.group>
       </animated.group>
     </group>
   );

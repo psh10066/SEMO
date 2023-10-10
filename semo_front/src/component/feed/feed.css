@@ -1,6 +1,6 @@
 .feed-all-wrap {
-  width: 900px;
-  margin: 70px auto;
+  width: 800px;
+  margin: 20px auto;
 }
 .feed-profile-wrap {
   margin: 20px;
@@ -29,22 +29,26 @@
 .feed-memberName {
   font-size: 20px;
   font-family: ns-b;
-  margin: 20px 0;
+  margin: 10px 0;
 }
-.feed-memberContent {
-  min-height: 70px;
-  height: 70px;
-  overflow: hidden;
-}
+
 .feed-memberContent > div {
   width: 500px;
-  font-size: 17px;
+  font-size: 16px;
+  text-overflow: ellipsis;
+  white-space: pre-line;
+  overflow-wrap: break-word;
+  overflow: hidden;
+  height: 100%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
 }
 .profile-bottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 10px 0;
+  margin-top: 5px;
+  margin-bottom: 20px;
 }
 
 .profile-button > button {
@@ -61,8 +65,8 @@
 .profile-category > a {
   display: inline-block;
   color: #220895;
-  width: 100px;
   font-size: 17px;
+  margin-right: 20px;
 }
 .profile-category > a:hover {
   font-family: ns-b;
@@ -78,8 +82,8 @@
 .profile-menu > ul > li {
   float: left;
   width: 50%;
-  height: 50px;
-  line-height: 50px;
+  height: 60px;
+  line-height: 60px;
   font-size: 19px;
   text-align: center;
 }
@@ -87,7 +91,80 @@
   width: 100%;
   height: 100%;
   display: inline-block;
+  border-top: 1px solid #ccc;
 }
 .profile-menu > ul > li > a.active-profile-menu {
-  border-top: 4px solid #5457e9;
+  border-top: 5px solid #5457e9;
+  font-family: ns-b;
+}
+.feedList-wrap {
+  width: 100%;
+  margin-top: 3px;
+}
+.feed-item-wrap {
+  overflow: hidden;
+}
+.feed-item {
+  float: left;
+  box-sizing: border-box;
+  width: calc(100% / 3);
+  padding: 2px;
+  cursor: pointer;
+}
+.feed-item-img {
+  height: 263px;
+  position: relative;
+}
+.feed-item-img > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.feed-item-img > img:hover {
+  filter: grayscale(10%) brightness(70%);
+}
+.feed-view-wrap {
+  width: 580px;
+  margin: 0 auto;
+}
+.feed-view-top {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+}
+.feed-view-writerImg .css-pl8gqh-MuiStack-root {
+  margin-left: 10px;
+}
+.feed-view-writer {
+  font-size: 18px;
+  font-family: ns-b;
+  width: 73%;
+}
+.feed-view-date {
+  margin-right: 10px;
+  text-align: right;
+  font-size: 14px;
+}
+.feed-view-image {
+  width: 100%;
+  height: 580px;
+}
+.feed-view-image > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.feed-view-content {
+  margin: 10px 5px;
+  font-size: 16px;
+  text-overflow: ellipsis;
+  white-space: pre-line;
+  overflow-wrap: break-word;
+  overflow: hidden;
+  height: 100%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
 }

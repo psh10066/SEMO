@@ -1,0 +1,141 @@
+.mypage-all-wrap {
+  width: 1200px;
+  margin: 50px auto;
+}
+.mypage-title {
+  text-align: center;
+  font-size: 20px;
+  padding: 30px 0px;
+}
+.mypage-title > h2 {
+  color: #8bb4ff;
+}
+
+.mypage-intro {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 70px;
+  width: 810px;
+  margin: 0 auto;
+}
+.mypage-intro > .mypage-name > .material-icons {
+  font-size: 80px;
+  margin-right: 10px;
+}
+.mypage-name {
+  display: flex;
+}
+.mypage-name > div {
+  line-height: 80px;
+}
+.mypage-name span {
+  font-family: ns-black;
+  font-size: 22px;
+}
+
+.mypage-buttons {
+  display: flex;
+}
+.mypage-myfeed {
+  cursor: pointer;
+  height: fit-content;
+  align-self: center;
+  background-color: #8bb4ff;
+  padding: 5px;
+  border-radius: 10px;
+  width: 3.5em;
+}
+.a {
+  margin-right: 5px;
+}
+.texta {
+  text-align: center;
+  font-size: 15px;
+}
+.textb {
+  text-align: center;
+  font-size: 15px;
+}
+.mypage-myfeed > div {
+  align-self: center;
+  color: #fff;
+}
+.mypage-myfeed > .material-icons {
+  font-size: 30px;
+  text-align: center;
+  width: 100%;
+}
+
+/*사이드메뉴*/
+.mysidemenu {
+  width: 200px;
+}
+.mysidemenu > ul {
+  list-style-type: none;
+  margin: 0;
+}
+.mysidemenu > ul > li {
+  padding: 5px 0px;
+}
+.mysidemenu > ul > li > a {
+  display: block;
+  padding: 10px;
+  color: #5457e9;
+  font-family: ns-b;
+}
+.mysidemenu > ul > li > a.active-side {
+  background-color: #5457e9;
+  color: #fff;
+}
+.mysidemenu > ul > li > a.active-side > span {
+  color: #fff;
+}
+
+/*컨텐츠*/
+.mypage-content {
+  display: flex;
+}
+.current-content {
+  flex: 1;
+}
+/**************************************************/
+
+/*비밀번호 확인*/
+
+.pw-auth {
+  width: 810px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pw-currPw {
+  display: flex;
+  align-items: center;
+}
+.pw-currPw label {
+  font-size: 18px;
+  margin-right: 10px;
+}
+.pw-currPw Input {
+  height: 20px;
+}
+.pw-currPw button {
+  border: none;
+  padding: 0.2rem;
+  display: inline-block;
+  box-sizing: border-box;
+  transition-duration: 0.5s;
+  font-size: 16px;
+  font-family: ns-light;
+  background-color: #5457e9;
+  color: #252a34;
+  border: 2px solid #5457e9;
+  margin-left: 4px;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/*******************************************************/
+/*내 정보 수정*/

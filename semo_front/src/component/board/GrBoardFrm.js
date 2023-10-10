@@ -1,16 +1,14 @@
-import { useState } from "react";
 import { Button1 } from "../util/Buttons";
 import Input from "../util/InputFrm";
 import TextEditor from "../util/TextEditor";
 
 const GrBoardFrm = (props) => {
-  const GrBoardTitle = props.GrBoardTitle;
+  const grBoardTitle = props.grBoardTitle;
   const setGrBoardTitle = props.setGrBoardTitle;
-  const GrBoardContent = props.GrBoardContent;
+  const grBoardContent = props.grBoardContent;
   const setGrBoardContent = props.setGrBoardContent;
   const buttonEvent = props.buttonEvent;
   const type = props.type;
-
   return (
     <div className="board-frm-wrap">
       <div className="board-frm-top">
@@ -19,20 +17,16 @@ const GrBoardFrm = (props) => {
             <tbody>
               <tr>
                 <td>
-                  <label htmlFor="GrBoardTitle">제목</label>
+                  <label htmlFor="grBoardTitle">제목</label>
                 </td>
                 <td>
                   <Input
                     type="text"
-                    data={GrBoardTitle}
+                    data={grBoardTitle}
                     setData={setGrBoardTitle}
-                    content="GrBoardTitle"
+                    content="grBoardTitle"
                   />
                 </td>
-              </tr>
-              <tr>
-                <td>작성자</td>
-                <td>테스트</td>
               </tr>
             </tbody>
           </table>
@@ -40,7 +34,7 @@ const GrBoardFrm = (props) => {
       </div>
       <div className="board-content-box">
         <TextEditor
-          data={GrBoardContent}
+          data={grBoardContent}
           setData={setGrBoardContent}
           url="/groupBoard/contentImg"
         />

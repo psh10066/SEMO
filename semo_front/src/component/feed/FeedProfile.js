@@ -6,12 +6,71 @@ import { Link, Route, Routes } from "react-router-dom";
 import { Button1 } from "../util/Buttons";
 import FeedList from "./FeedList";
 import GroupList from "./GroupList";
+import { useEffect } from "react";
+import axios from "axios";
+import FeedModal from "../util/FeedModal";
 
 const FeedProfile = (props) => {
+  const isLogin = props.isLogin;
+  const [member, setMember] = useState({});
+  const [loginMember, setLoginMember] = useState({});
+  const [isOpen, setIsOpen] = useState(false);
+  const [feedList, setFeedList] = useState([]);
+  //   const memberNo = props.memberNo;
+  const memberNo = 53;
+  const feedWriter = memberNo;
+  useEffect(() => {
+    axios
+      .get("/feed/profile/" + memberNo)
+      .then((res) => {
+        setMember(res.data);
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+    if (isLogin) {
+      // console.log(isLogin);
+      const token = window.localStorage.getItem("token");
+      axios
+        .post("/member/getMember", null, {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then((res) => {
+          // console.log(res.data);
+          setLoginMember(res.data);
+        })
+        .catch((res) => {
+          console.log(res.response.status);
+        });
+    }
+  }, [isLogin]);
   const [menus, setMenus] = useState([
     { url: "feedList", text: "피드", active: true },
     { url: "groupList", text: "모임", active: false },
   ]);
+  const handelClick = () => {
+    //모달오픈
+    setIsOpen(true);
+  };
+  const onSubmit = () => {
+    // 특정 로직
+    setIsOpen(false);
+  };
+  const onCancel = () => {
+    setIsOpen(false);
+  };
+  useEffect(() => {
+    axios
+      .get("/feed/list/" + feedWriter)
+      .then((res) => {
+        setFeedList(res.data);
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+  }, []);
   return (
     <div className="feed-profile-all-wrap">
       <div className="feed-profile-wrap">
@@ -20,7 +79,7 @@ const FeedProfile = (props) => {
             <Stack direction="row" spacing={2}>
               <Avatar
                 alt="Remy Sharp"
-                src="/static/images/avatar/1.jpg"
+                src={"/member/" + member.memberImg}
                 sx={{ width: 100, height: 100 }}
               />
             </Stack>
@@ -42,42 +101,58 @@ const FeedProfile = (props) => {
             </table>
           </div>
         </div>
-        <div className="feed-memberName">이름</div>
+        <div className="feed-memberName">{member.memberName}</div>
         <div className="feed-memberContent">
-          <div>
-            ㄴㅁ어리넝러니얼넝히ㅓ니어허ㅑㅐ댜ㅜ파이ㅏㅓㄴㄹ
-            니ㅏㅇ러ㅐㄴ얼ㄴ이ㅏㄹ낭힌어힌ㅇ
-            ㄴㅇ허닝허ㅐ낻ㄱ헞두히ㅏㅟ어ㅠㅏ너이 ㄴㅇ허ㅐㄴㅇ랑
-            ㄴㅁ어리넝러니얼넝히ㅓ니어허ㅑㅐ댜ㅜ파이ㅏㅓㄴㄹ
-            니ㅏㅇ러ㅐㄴ얼ㄴ이ㅏㄹ낭힌어힌ㅇ
-            ㄴㅇ허닝허ㅐ낻ㄱ헞두히ㅏㅟ어ㅠㅏ너이 ㄴㅇ허ㅐㄴㅇ랑
-            ㄴㅁ어리넝러니얼넝히ㅓ니어허ㅑㅐ댜ㅜ파이ㅏㅓㄴㄹ
-            니ㅏㅇ러ㅐㄴ얼ㄴ이ㅏㄹ낭힌어힌ㅇ
-            ㄴㅇ허닝허ㅐ낻ㄱ헞두히ㅏㅟ어ㅠㅏ너이 ㄴㅇ허ㅐㄴㅇ랑
-            ㄴㅁ어리넝러니얼넝히ㅓ니어허ㅑㅐ댜ㅜ파이ㅏㅓㄴㄹ
-            니ㅏㅇ러ㅐㄴ얼ㄴ이ㅏㄹ낭힌어힌ㅇ
-            ㄴㅇ허닝허ㅐ낻ㄱ헞두히ㅏㅟ어ㅠㅏ너이 ㄴㅇ허ㅐㄴㅇ랑
-            ㄴㅁ어리넝러니얼넝히ㅓ니어허ㅑㅐ댜ㅜ파이ㅏㅓㄴㄹ
-            니ㅏㅇ러ㅐㄴ얼ㄴ이ㅏㄹ낭힌어힌ㅇ
-            ㄴㅇ허닝허ㅐ낻ㄱ헞두히ㅏㅟ어ㅠㅏ너이 ㄴㅇ허ㅐㄴㅇ랑
-          </div>
+          <div>{member.memberContent}</div>
         </div>
         <div className="profile-bottom">
           <div className="profile-category">
-            <Link to="#">#카테고리</Link>
-            <Link to="#">#카테고리</Link>
+            <Link to="#">
+              {member.memberCategory1 === 1
+                ? "#문화·예술"
+                : member.memberCategory1 === 2
+                ? "#운동·액티비티"
+                : "#푸드·드링크"}
+            </Link>
+            <Link to="#">
+              {member.memberCategory2 === 1
+                ? "#문화·예술"
+                : member.memberCategory2 === 2
+                ? "#운동·액티비티"
+                : "#푸드·드링크"}
+            </Link>
           </div>
           <div className="profile-button">
-            <Button1 text="팔로우" />
+            <FeedModal
+              isOpen={isOpen}
+              onSubmit={onSubmit}
+              onCancel={onCancel}
+              member={member}
+              type="write"
+            />
+            {isLogin ? (
+              loginMember && loginMember.memberNo === member.memberNo ? (
+                <Button1 text="피드 작성" clickEvent={handelClick} />
+              ) : (
+                <Button1 text="팔로우" />
+              )
+            ) : (
+              <Button1 text="팔로우" />
+            )}
           </div>
         </div>
       </div>
       <div className="feed-profile-bottom-wrap">
         <ProfileMenu menus={menus} setMenus={setMenus} />
-        <div className="feed-profile-current-content">
+        <div className="feed-current-content">
           <Routes>
-            <Route path="feedList" element={<FeedList />} />
             <Route path="groupList" element={<GroupList />} />
+            <Route
+              path="*"
+              element={
+                <FeedList feedList={feedList} setFeedList={setFeedList} />
+              }
+            />
           </Routes>
         </div>
       </div>

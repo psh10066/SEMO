@@ -2,8 +2,10 @@
   overflow: hidden;
   width: 1200px;
   margin: 0 auto;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
-.page-item {
+.page-item-wrap {
   width: 600px;
   height: 300px;
   overflow: hidden;
@@ -16,14 +18,25 @@
 }
 .page-item-img {
   width: 300px;
-  height: 300px;
+  height: 200px;
   float: left;
+  box-sizing: border-box;
+  text-align: center;
+  line-height: 200px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 .page-item-img > img {
   width: 70%;
-  height: 70%;
+  height: 100%;
   object-fit: contain;
 }
 .page-item-info {
+  height: 200px;
   float: left;
+  box-sizing: border-box;
+}
+.page-infos {
+  line-height: 30px;
+  padding-top: 20px;
 }

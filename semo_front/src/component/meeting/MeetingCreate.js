@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
@@ -11,30 +11,40 @@ import { useNavigate } from "react-router-dom";
 
 function MeetingCreate() {
   const [meetingName, setMeetingName] = useState("");
-  const [meetingDate, setMeetingDate] = useState(null);
-  const [meetingLocation, setMeetingLocation] = useState("");
+  const [meetingDate, setMeetingDate] = useState("");
+  const [meetingPlace, setMeetingPlace] = useState("");
   const [meetingPrice, setMeetingPrice] = useState("");
   const [meetingMaxnum, setMeetingMaxnum] = useState("");
   const navigate = useNavigate();
 
-  const meeting = {
-    meetingName,
-    meetingDate,
-    meetingLocation,
-    meetingPrice,
-    meetingMaxnum,
+  const createMeeting = () => {
+    const meeting = {
+      meetingName,
+      meetingDate,
+      meetingPlace,
+      meetingPrice,
+      meetingMaxnum,
+    };
+    const token = window.localStorage.getItem("token");
+    axios
+      .post("meeting/create", meeting, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        //console.log(res.config.data);
+        if (res.data === 1) {
+          navigate("/");
+        } else {
+          navigate("/login");
+        }
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
   };
-  axios
-    .post("meeting/create", meeting)
-    .then((res) => {
-      if (res.data === 1) {
-        navigate("/login");
-      } else {
-      }
-    })
-    .catch((res) => {
-      console.log(res.data);
-    });
 
   //날짜
   let handleColor = (time) => {
@@ -71,28 +81,33 @@ function MeetingCreate() {
         />
       </div>
       <div>
-        <label>장소</label>
-        <Postcode />
+        <Postcode
+          data={meetingPlace}
+          setData={setMeetingPlace}
+          type="type"
+          content="meetingPlace"
+          label="장소"
+        />
       </div>
       <div>
         <MeetingInputWrap
           data={meetingPrice}
           setData={setMeetingPrice}
           type="type"
-          content="meetingName"
-          label="회비"
+          content="meetingPrice"
+          label="금액"
         />
       </div>
-      <div>
+      <div className="meeting-input">
         <MeetingInputWrap
           data={meetingMaxnum}
           setData={setMeetingMaxnum}
           type="number"
           content="meetingMaxnum"
-          label="회비"
+          label="정원"
         />
       </div>
-      <Button2 text="모임 생성"></Button2>
+      <Button2 text="모임 생성" clickEvent={createMeeting}></Button2>
     </div>
   );
 }

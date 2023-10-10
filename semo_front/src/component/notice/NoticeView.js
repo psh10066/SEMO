@@ -32,6 +32,7 @@ const NoticeView = (props) => {
         })
         .then((res) => {
           setMember(res.data);
+          console.log(res.data);
         })
         .catch((res) => {
           console.log(res.response.status);
@@ -66,15 +67,16 @@ const NoticeView = (props) => {
   };
   return (
     <div className="notice-view-wrap">
-      <div className="notice-view-title">{notice.noticeTitle}</div>
+      <div className="notice-view-title">제목 : {notice.noticeTitle}</div>
       <div className="notice-view-info">
-        <div>{notice.memberId}</div>
+        <div>
+          작성자(이름) : {notice.memberId}({notice.memberName})
+        </div>
         <div>{notice.noticeDate}</div>
       </div>
       <div className="notice-view-content">
-        <div>{notice.noticeContent}</div>
+        <div>내용 : {notice.noticeContent}</div>
       </div>
-
       <div className="notice-view-btn-zone">
         {isLogin ? (
           member && member.memberNo === notice.memberNo ? (

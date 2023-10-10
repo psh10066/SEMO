@@ -7,9 +7,11 @@ import Pagination from "../common/Pagination";
 
 const NoticeList = (props) => {
   const isLogin = props.isLogin;
+  const token = window.localStorage.getItem("token");
   const [noticeList, setNoticeList] = useState([]);
   const [reqPage, setReqPage] = useState(1);
   const [pageInfo, setPageInfo] = useState({});
+  const [member, setMember] = useState(null);
   useEffect(() => {
     axios
       .get("/notice/list/" + reqPage)
@@ -21,26 +23,45 @@ const NoticeList = (props) => {
       .catch((res) => {
         console.log(res.response.status);
       });
+    if (isLogin) {
+      const token = window.localStorage.getItem("token");
+      axios
+        .post("/member/getMember", null, {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then((res) => {
+          setMember(res.data);
+        })
+        .catch((res) => {
+          console.log(res.response.status);
+        });
+    }
   }, [reqPage]);
   const navigate = useNavigate();
   const write = () => {
     navigate("write");
   };
   return (
-    <div className="my-content-wrap">
+    <div className="notice-content-wrap">
       <div className="notice-write-wrap">
         {isLogin ? (
-          <div className="notice-write-btn">
-            <Button2 text="글쓰기" clickEvent={write} />
-          </div>
+          member && member.memberType === 1 ? (
+            <div className="notice-write-btn">
+              <Button2 text="글쓰기" clickEvent={write} />
+            </div>
+          ) : (
+            ""
+          )
         ) : (
           ""
         )}
       </div>
 
-      <div className="my-content-title">공지사항</div>
+      <div className="notice-content-title">공지사항</div>
       <div className="notice-list-wrap">
-        <table>
+        <table class="notice-tbl">
           <thead>
             <tr>
               <td width={"20%"}>번호</td>

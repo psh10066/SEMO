@@ -52,7 +52,6 @@ a {
 }
 .content {
   flex: 1;
-  z-index: 2;
 }
 
 /*헤더 푸터 */
@@ -87,13 +86,35 @@ header {
   font-size: 17px;
 }
 
-.login-button {
+.header-leftside {
   flex-grow: 1;
   display: flex;
   justify-content: end;
   align-items: center;
 }
-.login-button button {
+.chatTotal {
+  display: flex;
+  margin-right: 24px;
+}
+.chat {
+  float: right;
+  margin-top: 8px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.chat span {
+  color: #fff;
+}
+.chatNew {
+  color: #fbff00e8;
+  align-self: flex-start;
+  margin-left: 1px;
+  display: block;
+  font-weight: 600;
+  display: none;
+}
+/*로그인 버튼*/
+.header-leftside button {
   float: right;
   width: 20%;
   height: 80%;
@@ -102,7 +123,7 @@ header {
   border-radius: 10px;
   background-color: #f9d8ff;
 }
-.login-button button a {
+.header-leftside button a {
   color: #5457e9;
   font-family: ns-black;
   font-size: 14px;
@@ -127,6 +148,7 @@ header {
   color: #fff;
 }
 
+/*푸터*/
 .footer {
   padding: 50px;
   background-color: #eee;

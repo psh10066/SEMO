@@ -15,9 +15,11 @@ import NoticeMain from "./component/notice/NoticeMain";
 import MeetingCreate from "./component/meeting/MeetingCreate";
 import FeedMain from "./component/feed/FeedMain";
 import PageMain from "./component/page/PageMain";
+import { Mypage } from "./component/mypage/Mypage";
+import Chat from "./component/chat/Chat";
 
 function App() {
-  const [isLogin, setIsLogin] = useState();
+  const [isLogin, setIsLogin] = useState(true);
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     if (token === null) {
@@ -29,31 +31,44 @@ function App() {
   return (
     <div className="wrap">
       <Header isLogin={isLogin} setIsLogin={setIsLogin} />
-      <Routes>
-        <Route path="/" element={<Mainpage />} />
-      </Routes>
       <div className="content">
         <Routes>
-          <Route path="/admin/*" element={<AdminMain />} />
+          <Route
+            path="/admin/*"
+            element={<AdminMain isLogin={isLogin} setIsLogin={setIsLogin} />}
+          />
           <Route path="/login" element={<Login setIsLogin={setIsLogin} />} />
           <Route path="/join" element={<Join />} />
           <Route
             path="/group/*"
             element={<GroupMain isLogin={isLogin} setIsLogin={setIsLogin} />}
           />
-          <Route path="/groupBoard/*" element={<GrBoardMain />} />
+          <Route
+            path="/groupBoard/*"
+            element={<GrBoardMain isLogin={isLogin} setIsLogin={setIsLogin} />}
+          />
           <Route
             path="/notice/*"
             element={<NoticeMain isLogin={isLogin} setIsLogin={setIsLogin} />}
           />
+
           <Route path="/meeting" element={<MeetingCreate />} />
-          <Route path="/feed/*" element={<FeedMain />} />
+          <Route
+            path="/feed/*"
+            element={<FeedMain isLogin={isLogin} setIsLogin={setIsLogin} />}
+          />
           <Route
             path="/page/*"
             element={<PageMain />}
             isLogin={isLogin}
             setIsLogin={setIsLogin}
           />
+          <Route
+            path="/mypage/*"
+            element={<Mypage isLogin={isLogin} setIsLogin={setIsLogin} />}
+          />
+          <Route path="/chat" element={<Chat />} />
+          <Route path="/" element={<Mainpage />} />
         </Routes>
       </div>
 

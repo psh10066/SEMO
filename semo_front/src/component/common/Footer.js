@@ -16,6 +16,9 @@ const Footer = () => {
           <li>
             <Link to="#">제휴문의</Link>
           </li>
+          <li>
+            <Link to="/notice">공지사항</Link>
+          </li>
         </ul>
       </div>
     </footer>
