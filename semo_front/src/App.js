@@ -12,12 +12,12 @@ import GrBoardMain from "./component/board/GrBoardMain";
 import GroupMain from "./component/group/GroupMain";
 import Mainpage from "./component/mainpage/MainPage";
 import NoticeMain from "./component/notice/NoticeMain";
-import MeetingCreate from "./component/meeting/MeetingCreate";
 import FeedMain from "./component/feed/FeedMain";
 import PageMain from "./component/page/PageMain";
 import { Mypage } from "./component/mypage/Mypage";
 import Chat from "./component/chat/Chat";
 import GrPhotoMain from "./component/photo/GrPhotoMain";
+import MeetingMain from "./component/meeting/MeetingMain";
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
@@ -57,7 +57,7 @@ function App() {
             element={<NoticeMain isLogin={isLogin} setIsLogin={setIsLogin} />}
           />
 
-          <Route path="/meeting" element={<MeetingCreate />} />
+          <Route path="/meeting/*" element={<MeetingMain />} />
           <Route
             path="/feed/*"
             element={<FeedMain isLogin={isLogin} setIsLogin={setIsLogin} />}

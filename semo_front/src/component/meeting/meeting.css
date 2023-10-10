@@ -1,4 +1,4 @@
-/* MeetingCreate.css */
+/* MeetingCreate */
 .meeting-wrap {
   max-width: 600px;
   margin: 0 auto;
@@ -27,17 +27,6 @@
   margin-bottom: 5px;
 }
 
-/* .meeting-form input,
-select {
-  width: 100%;
-  display: block;
-  padding: 0.8rem;
-  background-color: #fff;
-  outline: none;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-} */
-
 .meeting-date label {
   display: block;
 }
@@ -61,4 +50,32 @@ select {
 }
 .meeting-input {
   margin-bottom: 5px;
+}
+
+/* MeetingView */
+.meetingView-frm {
+  margin: 20px 85px;
+  text-align: left;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 10px 20px;
+}
+.meetingView-title {
+  padding-bottom: 10px;
+}
+.meetingView-content {
+  margin-left: 20px;
+}
+.meetingView-content div {
+  padding-bottom: 10px;
+}
+.meeting-Dday {
+  padding-bottom: 5px;
+}
+.meeting-Dday span {
+  color: red;
+  padding-left: 10px;
+}
+.meeting-content {
+  font-weight: bold;
 }
