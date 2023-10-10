@@ -14,4 +14,15 @@
 	<select id="selectOneGroup" resultType="Group">
 		select * from group_tbl where group_no=#{groupNo}
 	</select>
+	
+	<insert id="groupJoin">
+		insert into gr_join values(gr_join_seq.nextval,#{groupNo},
+		(select member_No from member where member_Id=#{memberId})
+		,2)
+	</insert>
+	
+	<select id="joinState" resultType="GroupJoin">
+		select * from gr_join where member_no=
+		(select member_No from member where member_Id=#{memberId}) 
+	</select>
 </mapper>

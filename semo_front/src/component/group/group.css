@@ -115,6 +115,7 @@ input[type="file"]::file-selector-button {
 .group-join-btn button {
   background-color: #5457e9;
   border: none;
+  margin: 20px 0;
 }
 .group-view-tap {
   width: 100%;
