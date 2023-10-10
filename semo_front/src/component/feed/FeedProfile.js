@@ -17,6 +17,7 @@ const FeedProfile = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [feedList, setFeedList] = useState([]);
   const [changeFeed, setChangeFeed] = useState(true);
+
   const location = useLocation();
   const memberNo = location.state.memberNo;
   const feedWriter = memberNo;

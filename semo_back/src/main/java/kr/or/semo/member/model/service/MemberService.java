@@ -54,4 +54,13 @@ public class MemberService {
 		}
 		return 0;
 	}
+
+	
+	@Transactional
+	public int updateMember(Member member) {
+		int return1 = memberDao.updateMemberName(member);
+		int return2 = memberDao.updateMemberMail(member);
+		int return3 = memberDao.updateMemberPhone(member);
+		return (return1+return2+return3);
+	}
 }
