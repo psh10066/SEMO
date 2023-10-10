@@ -39,4 +39,16 @@ public class NoticeController {
 		int result = noticeService.insertNotice(n);
 		return result;
 	}
+	
+	@PostMapping(value="/modify")
+	public int modifyNotice(@ModelAttribute Notice n) {
+		System.out.println(n);
+		int result = noticeService.modifyNotice(n);
+			return result;
+	}
+	
+	@GetMapping(value="/delete/{noticeNo}")
+	public int deleteNotice(@PathVariable int noticeNo) {
+		return noticeService.deleteNotice(noticeNo);
+	}
 }
