@@ -4,11 +4,14 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./group.css";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import MeetingView from "../meeting/MeetingView";
 
 const GroupView = (props) => {
   const isLogin = props.isLogin;
   const location = useLocation();
   const groupNo = location.state.groupNo;
+  const [isJoin, setIsJoin] = useState(false);
   const [group, setGroup] = useState({});
   const [member, setMember] = useState(null);
   const navigate = useNavigate();
@@ -30,25 +33,54 @@ const GroupView = (props) => {
           },
         })
         .then((res) => {
-          console.log(res.data);
           setMember(res.data);
+          if (res.data !== null) {
+            axios
+              .post("/group/joinState", null, {
+                headers: {
+                  Authorization: "Bearer " + token,
+                },
+              })
+              .then((res) => {
+                if (res.data === 1) {
+                  setIsJoin(true);
+                }
+              });
+          }
         })
         .catch((res) => {
           console.log(res.response.status);
         });
     }
   }, []);
+
   const groupJoin = (props) => {
     const token = window.localStorage.getItem("token");
-    axios.post(
-      "/group/GroupJoin",
-      { member, group },
-      {
-        headers: {
-          Authorization: "Bearer " + token,
+    const groupNo = group.groupNo;
+    const memberNo = member.memberNo;
+    console.log(memberNo);
+    console.log(groupNo);
+    axios
+      .post(
+        "/group/groupJoin",
+        {
+          groupNo,
         },
-      }
-    );
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      )
+      .then((res) => {
+        Swal.fire({
+          icon: "success",
+          text: "가입완료!",
+        });
+      })
+      .catch((res) => {
+        console.log(res);
+      });
   };
   const [menus, setMenus] = useState([
     { url: "#", text: "아름님메뉴1", active: false },
@@ -75,7 +107,7 @@ const GroupView = (props) => {
             dangerouslySetInnerHTML={{ __html: group.groupContent }}
           ></div>
           <div className="group-view-meeting">
-            <p>성준님 미팅 만든거 넣어주시면 됩니다</p>
+            <MeetingView groupNo={groupNo} />
           </div>
           <div className="group-view-category">
             <Link to="#">
@@ -95,9 +127,15 @@ const GroupView = (props) => {
           </div>
         </div>
         {isLogin ? (
-          <div className="group-join-btn">
-            <Button2 text="가입하기" clickEvent={groupJoin} />
-          </div>
+          isJoin !== true ? (
+            <div className="group-join-btn">
+              <Button2 text="가입하기" clickEvent={groupJoin} />
+            </div>
+          ) : (
+            <div className="group-join-btn">
+              <Button2 text="탈퇴하기" />
+            </div>
+          )
         ) : (
           " "
         )}
