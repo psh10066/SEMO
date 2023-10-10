@@ -18,6 +18,9 @@ public class WebConfig implements WebMvcConfigurer{
 		registry.addResourceHandler("/groupBoard/editor/**")
 		.addResourceLocations("file:///C:/Temp/semo/groupBoard/editor/");
 		
+		registry.addResourceHandler("/groupPhoto/**")
+		.addResourceLocations("file:///C:/Temp/semo/groupPhoto/");
+		
 		registry.addResourceHandler("/group/**")
 		.addResourceLocations("file:///C:/Temp/semo/group/");
 		

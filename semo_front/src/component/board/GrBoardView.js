@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Button2 } from "../util/Buttons";
 import Swal from "sweetalert2";
 
-const BoardView = (props) => {
+const GRBoardView = (props) => {
   const isLogin = props.isLogin;
   const location = useLocation();
   const grBoardNo = location.state.grBoardNo;
@@ -98,4 +98,4 @@ const BoardView = (props) => {
   );
 };
 
-export default BoardView;
+export default GRBoardView;

@@ -15,7 +15,6 @@ const GrBoardModify = () => {
   //수정하기 클릭시 동작할 함수
   const modify = () => {
     const form = new FormData();
-    //boardNo 필수
     form.append("grBoardNo", grBoard.grBoardNo);
     form.append("grBoardTitle", grBoardTitle);
     form.append("grBoardContent", grBoardContent);

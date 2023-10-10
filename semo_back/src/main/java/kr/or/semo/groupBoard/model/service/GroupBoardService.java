@@ -24,7 +24,6 @@ public class GroupBoardService {
 	private MemberDao memberDao;
 	
 	public Map groupBoardList(int groupNo, int reqPage) {
-
 		//게시물 조회, 페이징에 필요한 데이터를 취합
 		int numPerPage = 10;	//한페이지당 게시물 수
 		int pageNaviSize = 5; 	//페이지 네비게이션 길이

@@ -7,7 +7,7 @@
 	
 	<select id="selectgroupBoardList" resultType="groupBoard">
 		select * from
-			(select rownum as rnum, b.*from
+			(select rownum as rnum, b.* from
 			(select 
 			    gr_board_no,
 			    gr_board_title,
