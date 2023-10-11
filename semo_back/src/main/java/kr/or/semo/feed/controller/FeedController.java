@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.or.semo.FileUtil;
 import kr.or.semo.feed.model.service.FeedService;
 import kr.or.semo.feed.model.vo.Feed;
+import kr.or.semo.feed.model.vo.FeedComment;
 import kr.or.semo.member.model.vo.Member;
 
 @RestController
@@ -118,6 +119,17 @@ public class FeedController {
 	public int removeLike(@RequestBody Feed f, @RequestAttribute String memberId) {
 		int feedNo = f.getFeedNo();
 		return feedService.deleteFeedLike(feedNo, memberId);
+	}
+	
+	//피드 댓글 등록
+	@PostMapping(value="/insertComment")
+	public int insertComment(@RequestBody FeedComment fc, @RequestAttribute String memberId) {
+		return feedService.insertComment(fc, memberId);
+	}
+	//피드 댓글 가져오기
+	@GetMapping(value="/feedCommentList/{feedNo}")
+	public List feedCommentList(@PathVariable int feedNo) {
+		return feedService.feedCommentList(feedNo);
 	}
 
 }

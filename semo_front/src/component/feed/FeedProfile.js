@@ -69,7 +69,7 @@ const FeedProfile = (props) => {
     axios
       .get("/feed/list/" + feedWriter)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setFeedList(res.data);
       })
       .catch((res) => {

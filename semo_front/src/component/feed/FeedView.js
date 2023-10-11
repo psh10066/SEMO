@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Button1 } from "../util/Buttons";
 import Swal from "sweetalert2";
 import FeedModal from "../util/FeedModal";
+import Comment from "../util/Comment";
 
 const FeedView = (props) => {
   const isLogin = props.isLogin;
@@ -16,6 +17,7 @@ const FeedView = (props) => {
   const [feedLikeCount, setFeedLikeCount] = useState(0);
   const [isLike, setIsLike] = useState(0);
   const [feedLikeList, setFeedLikeList] = useState([]);
+  const [changeFeed, setChangeFeed] = useState(true);
   const navigate = useNavigate();
   const token = window.localStorage.getItem("token");
 
@@ -71,7 +73,7 @@ const FeedView = (props) => {
       .catch((res) => {
         console.log(res.response.status);
       });
-  }, []);
+  }, [changeFeed]);
   const handelClick = () => {
     //모달오픈
     setIsOpen(true);
@@ -195,6 +197,8 @@ const FeedView = (props) => {
               onCancel={onCancel}
               member={member}
               feed={feed}
+              changeFeed={changeFeed}
+              setChangeFeed={setChangeFeed}
               type="modify"
             />
             <Button1 text="수정" clickEvent={handelClick} />
@@ -273,6 +277,9 @@ const FeedView = (props) => {
           </div> */}
         </div>
         <div className="feed-view-content">{feed.feedContent}</div>
+      </div>
+      <div className="feed-view-bottom">
+        <Comment isLogin={isLogin} member={member} feed={feed} />
       </div>
     </div>
   );

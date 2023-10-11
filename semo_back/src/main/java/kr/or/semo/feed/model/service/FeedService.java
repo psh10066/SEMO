@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.semo.feed.model.dao.FeedDao;
 import kr.or.semo.feed.model.vo.Feed;
+import kr.or.semo.feed.model.vo.FeedComment;
 import kr.or.semo.member.model.dao.MemberDao;
 import kr.or.semo.member.model.vo.Member;
 
@@ -87,5 +88,19 @@ public class FeedService {
 		int likeCount = feedDao.feedLikeCount(feedNo);
 		return likeCount;
 	}
+	public int insertComment(FeedComment fc, String memberId) {
+		Member member = memberDao.selectOneMember(memberId);
+		fc.setFeedCommentWriter(member.getMemberNo());
+		System.out.println("서비스"+fc);
+		String feedCommentRef = fc.getFeedCommentNo2()==0?null:String.valueOf(fc.getFeedCommentNo2());
+		System.out.println(feedCommentRef);
+		fc.setFeedCommentRef(feedCommentRef);
+		return feedDao.insertComment(fc);
+	}
+	public List feedCommentList(int feedNo) {
+		// TODO Auto-generated method stub
+		return feedDao.feedCommentList(feedNo);
+	}
+	
 
 }
