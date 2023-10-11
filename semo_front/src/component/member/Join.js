@@ -8,7 +8,6 @@ import "./member.css";
 import { Button1 } from "../util/Buttons";
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
-import Stack from "@mui/material/Stack";
 
 const Join = () => {
   const [memberId, setMemberId] = useState("");
@@ -169,6 +168,7 @@ const Join = () => {
       }
     }
   };
+
   const thumbnailChange = (e) => {
     const files = e.currentTarget.files;
     if (files.length !== 0 && files[0] != 0) {
@@ -184,6 +184,8 @@ const Join = () => {
       setMemberImg(null);
     }
   };
+  //소셜로그인
+
   return (
     <div className="join-wrap">
       <div className="join-title">회원가입</div>

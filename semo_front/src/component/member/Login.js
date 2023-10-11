@@ -5,6 +5,7 @@ import { Button1, Button2 } from "../util/Buttons";
 import "./member.css";
 import Swal from "sweetalert2";
 import axios from "axios";
+import KakaoLogin from "../member/KakaoLogin";
 
 const Login = (props) => {
   const setIsLogin = props.setIsLogin;
@@ -56,9 +57,7 @@ const Login = (props) => {
         />
       </div>
       <div className="login-icon-box">
-        <Link to="#">
-          <img src="/image/ico-kakao.png" />
-        </Link>
+        <KakaoLogin />
         <Link to="#">
           <img src="/image/ico-naver.png" />
         </Link>
