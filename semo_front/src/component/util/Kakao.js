@@ -3,10 +3,10 @@ import React, { useEffect } from "react";
 /* global kakao */
 const Kakao = (props) => {
   const data = props.data;
-  const setData = props.setData;
+  const index = props.index;
 
   useEffect(() => {
-    const mapContainer = document.getElementById("map"); // 지도를 표시할 div
+    const mapContainer = document.querySelectorAll(".map")[index]; // 지도를 표시할 div
     const mapOption = {
       center: new kakao.maps.LatLng(37.537187, 127.005476), // 기본 중심 좌표
       level: 5, // 지도의 확대 레벨
@@ -14,6 +14,7 @@ const Kakao = (props) => {
 
     // 지도를 미리 생성
     const map = new kakao.maps.Map(mapContainer, mapOption);
+    // console.log(data);
 
     // 주소-좌표 변환 객체를 생성
     const geocoder = new kakao.maps.services.Geocoder();
@@ -39,7 +40,7 @@ const Kakao = (props) => {
   return (
     <div>
       <div
-        id="map"
+        className="map"
         style={{
           width: "400px",
           height: "150px",
