@@ -17,7 +17,7 @@ const GroupView = (props) => {
   const [member, setMember] = useState(null);
   const [groupLevel, setGroupLevel] = useState(0);
   const [changeLevel, setChangeLevel] = useState(true);
-  const [meeting, setMeeting] = useState();
+  const [meetingList, setMeetingList] = useState([]);
   const navigate = useNavigate();
   const [joinNum, setJoinNum] = useState(0);
 
@@ -68,6 +68,7 @@ const GroupView = (props) => {
                 }
               )
               .then((res) => {
+                // console.log(res.data);
                 setGroupLevel(res.data);
               });
             axios
@@ -77,7 +78,7 @@ const GroupView = (props) => {
                 },
               })
               .then((res) => {
-                console.log(res.data);
+                // console.log(res.data);
                 setJoinNum(res.data);
               });
           }
@@ -165,15 +166,17 @@ const GroupView = (props) => {
 
   useEffect(() => {
     // 이 부분에서 selectMeeting 함수를 호출
-    selectMeeting();
+    selectMeetingList();
   }, [groupNo]);
 
-  const selectMeeting = () => {
-    if (!meeting) {
+  const selectMeetingList = () => {
+    if (meetingList) {
       axios
         .get("/meeting/view/" + groupNo)
         .then((res) => {
-          setMeeting(res.data);
+          // console.log(res.data);
+          setMeetingList(res.data);
+          // console.log(meetingList);
         })
         .catch((error) => {
           console.log(error);
@@ -201,11 +204,9 @@ const GroupView = (props) => {
             dangerouslySetInnerHTML={{ __html: group.groupContent }}
           ></div>
           <div className="group-view-member"></div>
-          {meeting ? (
-            <div className="group-view-meeting">
-              <MeetingView groupNo={groupNo} />
-            </div>
-          ) : null}
+          {meetingList.map((meeting, index) => {
+            return <MeetingView key={"meeting" + index} groupNo={groupNo} />;
+          })}
           <div className="group-view-category">
             <Link to="#">
               {group.groupCategory === 1

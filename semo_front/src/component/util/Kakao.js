@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 /* global kakao */
 const Kakao = (props) => {
   const data = props.data;
+  const setData = props.setData;
 
   useEffect(() => {
     const mapContainer = document.getElementById("map"); // 지도를 표시할 div
@@ -41,10 +42,10 @@ const Kakao = (props) => {
         id="map"
         style={{
           width: "400px",
-          height: "250px",
+          height: "150px",
           zIndex: 0,
           boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
-          marginTop: "20px",
+          marginTop: "10px",
           borderRadius: "10px",
         }}
       ></div>
