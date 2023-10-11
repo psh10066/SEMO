@@ -8,7 +8,7 @@ const Pagination = (props) => {
   const changePage = (e) => {
     const changePage = e.currentTarget.innerText;
     setReqPage(changePage);
-    if (setList != null) {
+    if (setList != null && reqPage != changePage) {
       setList([]); //memberType -> 배열을 비워야 함
     }
   };
