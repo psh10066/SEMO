@@ -6,6 +6,7 @@ import "./group.css";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import MeetingView from "../meeting/MeetingView";
+import GroupProFile from "./GroupProfile";
 
 const GroupView = (props) => {
   const isLogin = props.isLogin;
@@ -199,7 +200,9 @@ const GroupView = (props) => {
             className="group-view-content"
             dangerouslySetInnerHTML={{ __html: group.groupContent }}
           ></div>
-          <div className="group-view-member"></div>
+          <div className="group-view-member">
+            <GroupProFile groupNo={groupNo} />
+          </div>
           {meeting ? (
             <div className="group-view-meeting">
               <MeetingView groupNo={groupNo} />
