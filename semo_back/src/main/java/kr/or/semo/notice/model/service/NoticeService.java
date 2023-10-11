@@ -54,4 +54,13 @@ public class NoticeService {
 			return 0;
 		}
 	}
+
+	public int modifyNotice(Notice n) {
+		int result = noticeDao.modifyNotice(n);
+		return result;
+	}
+
+	public int deleteNotice(int noticeNo) {
+		return noticeDao.deleteNotice(noticeNo);
+	}
 }

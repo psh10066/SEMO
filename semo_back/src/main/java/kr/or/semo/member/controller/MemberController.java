@@ -48,7 +48,6 @@ public class MemberController {
 	@PostMapping(value="/pwCheck")
 	public int checkPw(@RequestBody Member member, @RequestAttribute String memberId) {
 		member.setMemberId(memberId);
-		System.out.println(memberService.selectOneMemberByPw(member));
 		return  memberService.selectOneMemberByPw(member);
 	}
 	
@@ -70,4 +69,15 @@ public class MemberController {
 	public Member mypage(@RequestAttribute String memberId) {
 		return memberService.selectOneMember(memberId);
 	}
+	
+	//회원정보수정
+	@PostMapping(value = "/update")
+	public int updateMember(@RequestBody Member member, @RequestAttribute String memberId) {
+		member.setMemberId(memberId);
+		return memberService.updateMember(member);
+		
+	}
+	
+	
+	
 }

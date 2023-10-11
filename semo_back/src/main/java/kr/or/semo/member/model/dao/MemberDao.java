@@ -13,4 +13,12 @@ public interface MemberDao {
 
 	Member selectMember(int memberNo);
 
+	int updateMemberName(Member member);
+
+	int updateMemberMail(Member member);
+
+	int updateMemberPhone(Member member);
+
+
+
 }

@@ -39,5 +39,17 @@
 	<insert id="insertNotice">
 		insert into notice values(notice_seq.nextval,#{noticeTitle},#{noticeContent},#{memberNo},sysdate)
 	</insert>
+	
+	<update id="modifyNotice">
+		update notice set
+			notice_title = #{noticeTitle},
+			notice_content = #{noticeContent}
+		where notice_no = #{noticeNo}
+	</update>
+	
+	<delete id="deleteNotice">
+		delete from notice
+		where notice_no = #{noticeNo}
+	</delete>
 
 </mapper>

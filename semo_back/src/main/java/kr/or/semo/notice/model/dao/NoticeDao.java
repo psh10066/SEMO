@@ -18,4 +18,8 @@ public interface NoticeDao {
 
 	int insertNotice(Notice n);
 
+	int modifyNotice(Notice n);
+
+	int deleteNotice(int noticeNo);
+
 }

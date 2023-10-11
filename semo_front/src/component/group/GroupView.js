@@ -16,16 +16,19 @@ const GroupView = (props) => {
   const [member, setMember] = useState(null);
   const [groupLevel, setGroupLevel] = useState(0);
   const [changeLevel, setChangeLevel] = useState(true);
+  const [meeting, setMeeting] = useState();
   const navigate = useNavigate();
+
   useEffect(() => {
     axios
       .get("/group/view/" + groupNo)
       .then((res) => {
         setGroup(res.data);
       })
-      .catch((res) => {
-        console.log(res.response.status);
+      .catch((error) => {
+        console.log(error.response.status);
       });
+
     if (isLogin) {
       const token = window.localStorage.getItem("token");
       axios
@@ -48,28 +51,24 @@ const GroupView = (props) => {
                   setIsJoin(true);
                 }
               });
-            console.log(groupNo);
             axios
-              .post(
-                "/group/groupLevelState",
-                { groupNo },
-                {
-                  headers: {
-                    Authorization: "Bearer " + token,
-                  },
-                }
-              )
+              .post("/group/groupLevelState", null, {
+                headers: {
+                  Authorization: "Bearer " + token,
+                },
+              })
               .then((res) => {
                 setGroupLevel(res.data);
               });
           }
         })
-        .catch((res) => {
-          console.log(res.response.status);
+        .catch((error) => {
+          console.log(error.response.status);
         });
     }
   }, [changeLevel, isLogin]);
-  const groupExit = (props) => {
+
+  const groupExit = () => {
     const token = window.localStorage.getItem("token");
     axios
       .post("/group/groupExit", null, {
@@ -85,6 +84,7 @@ const GroupView = (props) => {
         setChangeLevel(!changeLevel);
       });
   };
+
   const groupJoin = () => {
     const token = window.localStorage.getItem("token");
     const groupNo = group.groupNo;
@@ -107,10 +107,11 @@ const GroupView = (props) => {
         });
         setChangeLevel(!changeLevel);
       })
-      .catch((res) => {
-        console.log(res);
+      .catch((error) => {
+        console.log(error);
       });
   };
+
   const [menus, setMenus] = useState([
     {
       url: "http://localhost:3000/groupBoard",
@@ -124,17 +125,37 @@ const GroupView = (props) => {
     },
     { url: "/meeting/create", text: "정모 만들기", active: false },
   ]);
+
+  useEffect(() => {
+    // 이 부분에서 selectMeeting 함수를 호출
+    selectMeeting();
+  }, [groupNo]);
+
+  const selectMeeting = () => {
+    if (!meeting) {
+      axios
+        .get("/meeting/view/" + groupNo)
+        .then((res) => {
+          setMeeting(res.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
   return (
     <div className="group-view-wrap">
-      <MySideMenu menus={menus} setMenus={setMenus} />
-
+      <div>
+        <MySideMenu menus={menus} setMenus={setMenus} />
+      </div>
       <div className="group-view-div-content">
         <div>
           <div className="group-view-thumbnail">
             {group.groupImg ? (
-              <img src={"/group/" + group.groupImg} />
+              <img src={"/group/" + group.groupImg} alt="Group Thumbnail" />
             ) : (
-              <img src="/image/default.png" />
+              <img src="/image/default.png" alt="Default Thumbnail" />
             )}
           </div>
           <div className="group-view-name">{group.groupName}</div>
@@ -142,10 +163,15 @@ const GroupView = (props) => {
             className="group-view-content"
             dangerouslySetInnerHTML={{ __html: group.groupContent }}
           ></div>
+
           <div className="group-view-member"></div>
-          <div className="group-view-meeting">
-            <MeetingView groupNo={groupNo} />
-          </div>
+
+          {meeting ? (
+            <div className="group-view-meeting">
+              <MeetingView groupNo={groupNo} />
+            </div>
+          ) : null}
+
           <div className="group-view-category">
             <Link to="#">
               {group.groupCategory === 1
@@ -192,45 +218,35 @@ const GroupView = (props) => {
     </div>
   );
 };
+
 const MySideMenu = (props) => {
   const menus = props.menus;
   const setMenus = props.setMenus;
+
   const activeTab = (index) => {
-    menus.forEach((item) => {
-      item.active = false;
-    });
-    menus[index].active = true;
-    setMenus([...menus]);
+    const updatedMenus = menus.map((menu, i) => ({
+      ...menu,
+      active: i === index,
+    }));
+    setMenus(updatedMenus);
   };
+
   return (
     <div className="group-view-tap">
       <div>
-        {menus.map((menu, index) => {
-          return (
-            <div key={"menu" + index}>
-              {menu.active ? (
-                <Link
-                  to={menu.url}
-                  className="active-groupview-menu"
-                  onClick={() => {
-                    activeTab(index);
-                  }}
-                >
-                  {menu.text}
-                </Link>
-              ) : (
-                <Link
-                  to={menu.url}
-                  onClick={() => {
-                    activeTab(index);
-                  }}
-                >
-                  {menu.text}
-                </Link>
-              )}
-            </div>
-          );
-        })}
+        {menus.map((menu, index) => (
+          <div key={"menu" + index}>
+            <Link
+              to={menu.url}
+              className={menu.active ? "active-side" : ""}
+              onClick={() => {
+                activeTab(index);
+              }}
+            >
+              {menu.text}
+            </Link>
+          </div>
+        ))}
       </div>
     </div>
   );
