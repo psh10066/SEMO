@@ -1,0 +1,45 @@
+.comment-all-wrap {
+  width: 100%;
+}
+.inputCommentBox-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.comment-input-box {
+  width: 75%;
+}
+.comment-input-box > textarea {
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+.comment-submit-btn {
+  width: 13%;
+}
+.comment-submit-btn > button {
+  width: 100%;
+  border-radius: 3px;
+}
+.comment-wrap {
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+}
+.comment-top {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.commentItem-memberName {
+  padding-left: 7px;
+  font-family: ns-b;
+  font-size: 16px;
+}
+.commentItem-date {
+  font-size: 13px;
+  padding-left: 7px;
+}
+.comment-mid {
+  padding: 5px 20px;
+}

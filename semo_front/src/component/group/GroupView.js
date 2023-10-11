@@ -6,7 +6,6 @@ import "./group.css";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import MeetingView from "../meeting/MeetingView";
-import GroupProFile from "./GroupProfile";
 
 const GroupView = (props) => {
   const isLogin = props.isLogin;

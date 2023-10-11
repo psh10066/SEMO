@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import kr.or.semo.feed.model.vo.Feed;
+import kr.or.semo.feed.model.vo.FeedComment;
 
 @Mapper
 public interface FeedDao {
@@ -28,6 +29,10 @@ public interface FeedDao {
 	int insertFeedLike(int feedNo, int memberNo);
 
 	int deleteFeedLike(int feedNo, int memberNo);
+
+	int insertComment(FeedComment fc);
+
+	List feedCommentList(int feedNo);
 
 
 

@@ -65,7 +65,7 @@ const FeedModal = ({
         },
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setShowInsertImg(true);
         setFeedImg(null);
         setFeedConTent("");
@@ -99,6 +99,9 @@ const FeedModal = ({
       })
       .then((res) => {
         console.log(res.data);
+        setShowInsertImg(true);
+        setChangeFeed(!changeFeed);
+        onSubmit();
       })
       .catch((res) => {
         console.log(res.response.status);
