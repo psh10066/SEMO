@@ -14,6 +14,7 @@ const GroupCreate = (props) => {
 
   const create = () => {
     if (
+      groupImg !== null &&
       groupName !== "" &&
       groupContent != "" &&
       groupMaxnum !== 0 &&
