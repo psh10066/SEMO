@@ -79,7 +79,7 @@ public class GroupController {
 	
 	//그룹 탈퇴
 	@PostMapping(value="/groupExit")
-	public int groupExit(@RequestAttribute String memberId, @RequestBody Group g) {
+	public int groupExit(@RequestBody Group g, @RequestAttribute String memberId) {
 		int groupNo = g.getGroupNo();
 		return groupService.groupExit(memberId, groupNo);
 	}

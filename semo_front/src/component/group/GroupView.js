@@ -108,6 +108,9 @@ const GroupView = (props) => {
           text: "탈퇴완료!",
         });
         setChangeLevel(!changeLevel);
+      })
+      .catch((res) => {
+        console.log(res);
       });
   };
 

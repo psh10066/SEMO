@@ -44,7 +44,7 @@
 	
 	<!-- 그룹 탈퇴하기 -->
 	<delete id="groupExit">
-		delete from gr_join where group_no=
+		delete from gr_join where member_no=
 		(select member_No from member where member_Id=#{memberId}) 
 		and
 		group_no=#{groupNo}
