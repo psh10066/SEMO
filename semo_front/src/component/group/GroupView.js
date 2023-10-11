@@ -18,6 +18,7 @@ const GroupView = (props) => {
   const [changeLevel, setChangeLevel] = useState(true);
   const [meeting, setMeeting] = useState();
   const navigate = useNavigate();
+  const [joinNum, setJoinNum] = useState(0);
 
   useEffect(() => {
     axios
@@ -41,11 +42,15 @@ const GroupView = (props) => {
           setMember(res.data);
           if (res.data !== null) {
             axios
-              .post("/group/joinState", null, {
-                headers: {
-                  Authorization: "Bearer " + token,
-                },
-              })
+              .post(
+                "/group/joinState",
+                { groupNo },
+                {
+                  headers: {
+                    Authorization: "Bearer " + token,
+                  },
+                }
+              )
               .then((res) => {
                 if (res.data === 1) {
                   setIsJoin(true);
@@ -62,8 +67,17 @@ const GroupView = (props) => {
                 }
               )
               .then((res) => {
-                console.log(res.data);
                 setGroupLevel(res.data);
+              });
+            axios
+              .post("/group/joinNum", null, {
+                headers: {
+                  Authorization: "Bearer " + token,
+                },
+              })
+              .then((res) => {
+                console.log(res.data);
+                setJoinNum(res.data);
               });
           }
         })
@@ -75,12 +89,19 @@ const GroupView = (props) => {
 
   const groupExit = () => {
     const token = window.localStorage.getItem("token");
+    const groupNo = group.groupNo;
     axios
-      .post("/group/groupExit", null, {
-        headers: {
-          Authorization: "Bearer " + token,
+      .post(
+        "/group/groupExit",
+        {
+          groupNo,
         },
-      })
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      )
       .then((res) => {
         Swal.fire({
           icon: "error",
@@ -93,28 +114,35 @@ const GroupView = (props) => {
   const groupJoin = () => {
     const token = window.localStorage.getItem("token");
     const groupNo = group.groupNo;
-    axios
-      .post(
-        "/group/groupJoin",
-        {
-          groupNo,
-        },
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
-      )
-      .then((res) => {
-        Swal.fire({
-          icon: "success",
-          text: "가입완료!",
-        });
-        setChangeLevel(!changeLevel);
-      })
-      .catch((error) => {
-        console.log(error);
+    if (joinNum === 3) {
+      Swal.fire({
+        icon: "error",
+        text: "최대 모임 가입 가능 수는 3개입니다",
       });
+    } else {
+      axios
+        .post(
+          "/group/groupJoin",
+          {
+            groupNo,
+          },
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        )
+        .then((res) => {
+          Swal.fire({
+            icon: "success",
+            text: "가입완료!",
+          });
+          setChangeLevel(!changeLevel);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   const [menus, setMenus] = useState([
@@ -191,28 +219,22 @@ const GroupView = (props) => {
             </Link>
           </div>
         </div>
-        {isLogin ? (
-          isJoin !== true ? (
-            <div className="group-join-btn">
-              <Button2 text="가입하기" clickEvent={groupJoin} />
-            </div>
-          ) : groupLevel === 2 ? (
-            <div className="group-join-btn">
-              <Button2 text="탈퇴하기" clickEvent={groupExit} />
-            </div>
-          ) : groupLevel === 3 ? (
-            <div className="group-join-btn">
-              <Button2 text="가입대기" />
-            </div>
-          ) : groupLevel === 0 ? (
-            <div className="group-join-btn">
-              <Button2 text="가입하기" clickEvent={groupJoin} />
-            </div>
-          ) : (
-            <div className="group-join-btn">
-              <Button2 text="모임해산" />
-            </div>
-          )
+        {isLogin && isJoin !== true && joinNum < 4 && groupLevel === 0 ? (
+          <div className="group-join-btn">
+            <Button2 text="가입하기" clickEvent={groupJoin} />
+          </div>
+        ) : groupLevel === 2 ? (
+          <div className="group-join-btn">
+            <Button2 text="탈퇴하기" clickEvent={groupExit} />
+          </div>
+        ) : groupLevel === 3 ? (
+          <div className="group-join-btn">
+            <Button2 text="가입대기" />
+          </div>
+        ) : groupLevel === 1 ? (
+          <div className="group-join-btn">
+            <Button2 text="모임해산" />
+          </div>
         ) : (
           " "
         )}

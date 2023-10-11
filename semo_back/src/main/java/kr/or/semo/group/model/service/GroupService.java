@@ -47,8 +47,9 @@ public class GroupService {
 		return groupDao.groupJoin(memberId,groupNo);
 	}
 
-	public int joinState(String memberId) {
-		GroupJoin gj = groupDao.joinState(memberId);
+	public int joinState(String memberId, Group g) {
+		int groupNo = g.getGroupNo(); 
+		GroupJoin gj = groupDao.joinState(memberId,groupNo);
 		if(gj != null) {
 			return 1;
 		}
@@ -65,8 +66,13 @@ public class GroupService {
 	}
 	
 	@Transactional
-	public int groupExit(String memberId) {
+	public int groupExit(String memberId, int groupNo) {
 		// TODO Auto-generated method stub
-		return groupDao.groupExit(memberId);
+		return groupDao.groupExit(memberId,groupNo);
+	}
+
+	public int joinNum(String memberId) {
+		// TODO Auto-generated method stub
+		return groupDao.joinNum(memberId);
 	}
 }
