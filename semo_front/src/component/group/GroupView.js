@@ -52,12 +52,17 @@ const GroupView = (props) => {
                 }
               });
             axios
-              .post("/group/groupLevelState", null, {
-                headers: {
-                  Authorization: "Bearer " + token,
-                },
-              })
+              .post(
+                "/group/groupLevelState",
+                { groupNo },
+                {
+                  headers: {
+                    Authorization: "Bearer " + token,
+                  },
+                }
+              )
               .then((res) => {
+                console.log(res.data);
                 setGroupLevel(res.data);
               });
           }
@@ -163,15 +168,12 @@ const GroupView = (props) => {
             className="group-view-content"
             dangerouslySetInnerHTML={{ __html: group.groupContent }}
           ></div>
-
           <div className="group-view-member"></div>
-
           {meeting ? (
             <div className="group-view-meeting">
               <MeetingView groupNo={groupNo} />
             </div>
           ) : null}
-
           <div className="group-view-category">
             <Link to="#">
               {group.groupCategory === 1
