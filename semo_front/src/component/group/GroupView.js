@@ -204,9 +204,7 @@ const GroupView = (props) => {
             dangerouslySetInnerHTML={{ __html: group.groupContent }}
           ></div>
           <div className="group-view-member"></div>
-          {meetingList.map((meeting, index) => {
-            return <MeetingView key={"meeting" + index} groupNo={groupNo} />;
-          })}
+          <MeetingView groupNo={groupNo} />
           <div className="group-view-category">
             <Link to="#">
               {group.groupCategory === 1
