@@ -99,7 +99,7 @@ input[type="file"]::file-selector-button {
 }
 .group-view-content {
   text-align: center;
-  margin-top: 50px;
+  margin: 50px 0;
 }
 .group-view-div-content {
   background-color: #f4f4f4;
@@ -155,4 +155,16 @@ input[type="file"]::file-selector-button {
 .group-view-meeting > p {
   font-size: 50px;
   background-color: #ccc;
+}
+.group-view-member {
+  width: 600px;
+  display: flex;
+  justify-content: center;
+
+  margin: 0 auto;
+  padding: 20px 0;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 255, 0.4);
+}
+.group-member-profile-wrap {
 }
