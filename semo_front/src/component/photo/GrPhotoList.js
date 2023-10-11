@@ -69,8 +69,8 @@ const PhotoItem = (props) => {
         )}
       </div>
       <div className="photo-item-info">
-        <div className="photo-item-title">{grPhoto.grPhotoNo}</div>
-        <div className="photo-item-writer">{grPhoto.grPhotoTitle}</div>
+        <div className="photo-item-title">{grPhoto.grPhotoTitle}</div>
+        <div className="photo-item-name">{grPhoto.memberId}</div>
       </div>
     </div>
   );
