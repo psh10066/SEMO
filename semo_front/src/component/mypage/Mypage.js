@@ -122,43 +122,21 @@ const Mypage = (props) => {
             <Route path="myInfo" element={<MyInfo />} />
             <Route
               path="modifyMyinfo"
-              element={
-                <ModifyMyInfo
-                  member={member}
-                  setMember={setMember}
-                  setIsLogin={setIsLogin}
-                />
-              }
-            />
-            <Route
-              path="modifyMyFeed"
-              element={
-                <ModifyMyFeed
-                  member={member}
-                  setMember={setMember}
-                  setIsLogin={setIsLogin}
-                />
-              }
-            />
-            <Route
-              path="modifyMyLike"
-              element={
-                <ModifyMyLike
-                  member={member}
-                  setMember={setMember}
-                  setIsLogin={setIsLogin}
-                />
-              }
+              element={<ModifyMyInfo member={member} setMember={setMember} />}
             />
             <Route
               path="modifyMyPassword"
               element={
-                <ModifyMyPassword
-                  member={member}
-                  setMember={setMember}
-                  setIsLogin={setIsLogin}
-                />
+                <ModifyMyPassword member={member} setMember={setMember} />
               }
+            />
+            <Route
+              path="modifyMyFeed"
+              element={<ModifyMyFeed member={member} setMember={setMember} />}
+            />
+            <Route
+              path="modifyMyLike"
+              element={<ModifyMyLike member={member} setMember={setMember} />}
             />
 
             <Route
