@@ -1,5 +1,7 @@
 package kr.or.semo.meeting.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,8 +30,8 @@ public class MeetingController {
 		return result;
 	}
 	@GetMapping(value = "/view/{groupNo}")
-	public Meeting View(@PathVariable int groupNo) {
-		return meetingService.selectOneMeeting(groupNo);
+	public List View(@PathVariable int groupNo) {
+		return meetingService.selectMeetingList(groupNo);
 	}
 	
 

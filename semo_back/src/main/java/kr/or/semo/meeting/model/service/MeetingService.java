@@ -1,5 +1,9 @@
 package kr.or.semo.meeting.model.service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,9 +22,9 @@ public class MeetingService {
 		return meetingDao.createMeeting(meeting);
 	}
 
-	public Meeting selectOneMeeting(int groupNo) {
-		Meeting m = meetingDao.selectOneMeeting(groupNo);
-		return m;
+	public List selectMeetingList(int groupNo) {
+		List meetingList = meetingDao.selectMeetingList(groupNo);
+		return meetingList;
 	}
 
 	
