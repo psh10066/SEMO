@@ -200,9 +200,7 @@ const GroupView = (props) => {
             className="group-view-content"
             dangerouslySetInnerHTML={{ __html: group.groupContent }}
           ></div>
-          <div className="group-view-member">
-            <GroupProFile groupNo={groupNo} />
-          </div>
+          <div className="group-view-member"></div>
           {meeting ? (
             <div className="group-view-meeting">
               <MeetingView groupNo={groupNo} />

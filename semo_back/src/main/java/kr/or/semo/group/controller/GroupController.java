@@ -74,7 +74,7 @@ public class GroupController {
 	public int groupLevelState(@RequestBody Group g, @RequestAttribute String memberId) {
 		int groupNo = g.getGroupNo();
 		return groupService.groupLevelState(groupNo, memberId);
-		//return groupService.groupLevelState();
+		
 	}
 	
 	//그룹 탈퇴
@@ -89,4 +89,17 @@ public class GroupController {
 	public int joinNum(@RequestAttribute String memberId) {
 		return groupService.joinNum(memberId);
 	}
+	
+	//그룹 전체멤버수 조회
+	@PostMapping(value="/totalMemberCount")
+	public int totalMemberCount(@RequestBody Group g) {
+		int groupNo = g.getGroupNo();
+		int result = groupService.totalMemberCount(groupNo);
+		System.out.println("결과확인 : "+result);
+		return result;
+	}
+	
+	
+	
+	
 }

@@ -75,4 +75,9 @@ public class GroupService {
 		// TODO Auto-generated method stub
 		return groupDao.joinNum(memberId);
 	}
+
+	public int totalMemberCount(int groupNo) {
+		// TODO Auto-generated method stub
+		return groupDao.totalMemberCount(groupNo);
+	}
 }

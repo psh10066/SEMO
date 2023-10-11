@@ -55,7 +55,9 @@
 		(select member_No from member where member_Id=#{memberId})
 	</select>
 	
-	
+	<select id="totalMemberCount" resultType="int">
+		select group_maxnum from group_tbl where group_no=#{groupNo}
+	</select>
 	
 	
 </mapper>

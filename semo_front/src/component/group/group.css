@@ -160,11 +160,9 @@ input[type="file"]::file-selector-button {
   width: 600px;
   display: flex;
   justify-content: center;
-
+  height: 50px;
   margin: 0 auto;
   padding: 20px 0;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 255, 0.4);
-}
-.group-member-profile-wrap {
 }

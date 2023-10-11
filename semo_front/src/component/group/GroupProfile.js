@@ -1,9 +1,18 @@
+import { useEffect, useState } from "react";
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import AvatarGroup from "@mui/material/AvatarGroup";
+import axios from "axios";
 
 const GroupProFile = (props) => {
   const groupNo = props.groupNo;
+
+  useEffect(() => {
+    axios.post("/group/totalMemberCount", { groupNo }).then((res) => {
+      console.log(res.data);
+    });
+  });
+
   return (
     <div className="group-member-profile-wrap">
       <AvatarGroup total={24}>

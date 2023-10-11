@@ -29,6 +29,6 @@ public interface GroupDao {
 
 	int joinNum(String memberId);
 
-	
+	int totalMemberCount(int groupNo);
 
 }
