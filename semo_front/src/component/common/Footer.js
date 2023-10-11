@@ -11,12 +11,6 @@ const Footer = () => {
             <Link to="#">개인정보취급</Link>
           </li>
           <li>
-            <Link to="#">인재채용</Link>
-          </li>
-          <li>
-            <Link to="#">제휴문의</Link>
-          </li>
-          <li>
             <Link to="/notice">공지사항</Link>
           </li>
           <li>

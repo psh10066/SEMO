@@ -47,6 +47,14 @@ public class MemberService {
 		return memberDao.insertMember(member);
 	}
 
+	
+	
+	
+	@Transactional
+	public int updateMyInfo(Member member) {
+		return memberDao.updateMyInfo(member);
+	}
+	
 	public int selectOneMemberByPw(Member member) {
 		Member m = memberDao.selectOneMember(member.getMemberId());
 		if(m !=null && bCryptPasswordEncoder.matches(member.getMemberPw(),m.getMemberPw())) {
@@ -55,12 +63,18 @@ public class MemberService {
 		return 0;
 	}
 
+	@Transactional
+	public int updatePwMember(Member member) {
+		return memberDao.updatePwMember(member);
+	}
 	
 	@Transactional
-	public int updateMember(Member member) {
-		int return1 = memberDao.updateMemberName(member);
-		int return2 = memberDao.updateMemberMail(member);
-		int return3 = memberDao.updateMemberPhone(member);
-		return (return1+return2+return3);
+	public int updateMyFeed(Member member) {
+		return memberDao.updateMyFeed(member);
 	}
+
+	public int updateMyLike(Member member) {
+		return memberDao.updateMyLike(member);
+	}
+
 }
