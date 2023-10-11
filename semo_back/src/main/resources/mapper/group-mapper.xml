@@ -31,7 +31,9 @@
 	<!-- 그룹가입여부 조회 -->
 	<select id="joinState" resultType="GroupJoin">
 		select * from gr_join where member_no=
-		(select member_No from member where member_Id=#{memberId}) 
+		(select member_No from member where member_Id=#{memberId})
+		and
+		group_no=#{groupNo} 
 	</select>
 	
 	<!-- 그룹 등급 조회 -->
@@ -42,7 +44,20 @@
 	
 	<!-- 그룹 탈퇴하기 -->
 	<delete id="groupExit">
-		delete from gr_join where group_no=
-		(select member_No from member where member_Id=#{memberId})
+		delete from gr_join where member_no=
+		(select member_No from member where member_Id=#{memberId}) 
+		and
+		group_no=#{groupNo}
 	</delete>
+	
+	<select id="joinNum" resultType="int">
+		select count(*) from gr_join where member_no=
+		(select member_No from member where member_Id=#{memberId})
+	</select>
+	
+	<select id="totalMemberCount" resultType="int">
+		select group_maxnum from group_tbl where group_no=#{groupNo}
+	</select>
+	
+	
 </mapper>

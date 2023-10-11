@@ -2,7 +2,7 @@
   overflow: hidden;
   width: 1200px;
   margin: 0 auto;
-  padding-top: 50px;
+  padding-top: 30px;
   padding-bottom: 50px;
 }
 .page-item-wrap {
@@ -39,4 +39,48 @@
 .page-infos {
   line-height: 30px;
   padding-top: 20px;
+}
+/* 전체페이지 css */
+.page-title > h2 {
+  color: #8bb4ff;
+}
+.page-title {
+  text-align: center;
+  font-size: 20px;
+  padding: 30px 0px;
+}
+.page-all-wrap {
+  width: 1200px;
+  margin: 50px auto;
+}
+.page-category-wrap {
+  margin: 0 auto;
+}
+.page-category {
+  overflow: hidden;
+  display: block;
+  margin: 0 auto;
+  width: 1200px;
+}
+.page-category > div {
+  /*display: block;*/
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+  box-sizing: border-box;
+  width: calc(88% / 7);
+  height: 45px;
+  font-size: 20px;
+  line-height: 43px;
+  text-align: center;
+  /*background-color: aquamarine;*/
+}
+.socialing-explain {
+  height: 100px;
+  line-height: 100px;
+}
+.page-default {
+  border: 1px solid #ccc;
+  background-color: #ccc;
+  border-radius: 10px;
 }

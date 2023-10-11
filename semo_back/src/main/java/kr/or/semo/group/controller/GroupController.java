@@ -64,8 +64,8 @@ public class GroupController {
 	
 	//그룹가입여부 조회
 	@PostMapping(value="/joinState")
-	public int joinState(@RequestAttribute String memberId) {
-		int result = groupService.joinState(memberId);
+	public int joinState(@RequestAttribute String memberId, @RequestBody Group g) {
+		int result = groupService.joinState(memberId,g);
 		return result;
 	}
 	
@@ -74,12 +74,32 @@ public class GroupController {
 	public int groupLevelState(@RequestBody Group g, @RequestAttribute String memberId) {
 		int groupNo = g.getGroupNo();
 		return groupService.groupLevelState(groupNo, memberId);
-		//return groupService.groupLevelState();
+		
 	}
 	
 	//그룹 탈퇴
 	@PostMapping(value="/groupExit")
-	public int groupExit(@RequestAttribute String memberId) {
-		return groupService.groupExit(memberId);
+	public int groupExit(@RequestBody Group g, @RequestAttribute String memberId) {
+		int groupNo = g.getGroupNo();
+		return groupService.groupExit(memberId, groupNo);
 	}
+	
+	//그룹 가입수 조회
+	@PostMapping(value="/joinNum")
+	public int joinNum(@RequestAttribute String memberId) {
+		return groupService.joinNum(memberId);
+	}
+	
+	//그룹 전체멤버수 조회
+	@PostMapping(value="/totalMemberCount")
+	public int totalMemberCount(@RequestBody Group g) {
+		int groupNo = g.getGroupNo();
+		int result = groupService.totalMemberCount(groupNo);
+		System.out.println("결과확인 : "+result);
+		return result;
+	}
+	
+	
+	
+	
 }
