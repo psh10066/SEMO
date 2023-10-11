@@ -80,7 +80,7 @@ const GrPhotoView = (props) => {
         {grPhoto.grPhotoImg ? (
           <img src={"/groupPhoto/" + grPhoto.grPhotoImg} />
         ) : (
-          <img src="/image/default.png" />
+          <img src="/image/photo.png" />
         )}
       </div>
       <div
@@ -89,7 +89,7 @@ const GrPhotoView = (props) => {
       ></div>
       <div className="photo-view-btn-zone">
         {isLogin ? (
-          member && member.memberNo === grPhoto.grPhotoWriter ? (
+          member && member.memberNo === grPhoto.memberNo ? (
             <>
               <Button2 text="수정" clickEvent={modify} />
               <Button2 text="삭제" clickEvent={deletePhoto} />

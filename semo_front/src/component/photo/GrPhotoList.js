@@ -1,5 +1,6 @@
-import "./grPhoto.css";
 import { useEffect, useState } from "react";
+
+import "./grPhoto.css";
 import axios from "axios";
 import Pagination from "../common/Pagination";
 import { Button1 } from "../util/Buttons";
@@ -38,7 +39,7 @@ const GrPhotoList = (props) => {
       )}
       <div className="photo-list-wrap">
         {grPhotoList.map((grPhoto, index) => {
-          return <PhotoItem key={"grPhoto" + index} grphoto={grPhoto} />;
+          return <PhotoItem key={"grPhoto" + index} grPhoto={grPhoto} />;
         })}
       </div>
       {/* 게시물 페이징 */}
@@ -56,21 +57,20 @@ const PhotoItem = (props) => {
   const grPhoto = props.grPhoto;
   const navigate = useNavigate();
   const photoView = () => {
-    navigate("/groupPhoto/view", { state: { grPhotoNo: grPhoto.photoNo } });
+    navigate("/groupPhoto/view", { state: { grPhotoNo: grPhoto.grPhotoNo } });
   };
   return (
     <div className="photo-item" onClick={photoView}>
       <div className="photo-item-img">
         {grPhoto.grPhotoImg === null ? (
-          <img src="/image/default.png" />
+          <img src="/image/photo.png" />
         ) : (
-          <img src={"/groupPhoto/" + grPhoto.photoImg} />
+          <img src={"/groupPhoto/" + grPhoto.grPhotoImg} />
         )}
       </div>
       <div className="photo-item-info">
-        <div className="photo-item-title">{grPhoto.grPhotoTitle}</div>
-        <div className="board-item-writer">{grPhoto.memberId}</div>
-        <div className="photo-item-date">{grPhoto.grphotoDate}</div>
+        <div className="photo-item-title">{grPhoto.grPhotoNo}</div>
+        <div className="photo-item-writer">{grPhoto.grPhotoTitle}</div>
       </div>
     </div>
   );

@@ -26,6 +26,7 @@
   cursor: pointer;
 }
 .page-item.active-page {
-  background-color: #053b50;
+  border-radius: 15px;
+  background-color: #5457e9;
   color: #fff;
 }
