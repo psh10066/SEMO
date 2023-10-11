@@ -142,6 +142,7 @@ const GroupView = (props) => {
             className="group-view-content"
             dangerouslySetInnerHTML={{ __html: group.groupContent }}
           ></div>
+          <div className="group-view-member"></div>
           <div className="group-view-meeting">
             <MeetingView groupNo={groupNo} />
           </div>
