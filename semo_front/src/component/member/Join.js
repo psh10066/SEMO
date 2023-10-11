@@ -270,7 +270,7 @@ const Join = () => {
           )}
           <textarea
             value={memberContent}
-            id={memberContent}
+            id="jointext"
             placeholder="피드 소개글"
             onChange={(e) => {
               setMemberConTent(e.target.value);

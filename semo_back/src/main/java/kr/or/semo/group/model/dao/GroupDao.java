@@ -21,12 +21,14 @@ public interface GroupDao {
 
 	int groupJoin(String memberId, int groupNo);
 
-	GroupJoin joinState(String memberId);
+	GroupJoin joinState(String memberId, int groupNo);
 
 	Integer groupLevelState(int groupNo, String memberId);
 
-	int groupExit(String memberId);
+	int groupExit(String memberId, int groupNo);
 
-	
+	int joinNum(String memberId);
+
+	int totalMemberCount(int groupNo);
 
 }
