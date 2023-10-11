@@ -4,15 +4,15 @@ import Kakao from "../util/Kakao";
 
 const MeetingView = (props) => {
   const groupNo = props.groupNo;
-  const [meeting, setMeeting] = useState({});
+  const [meetingList, setMeetingList] = useState([]);
 
   useEffect(() => {
     axios
       .get("/meeting/view/" + groupNo)
       .then((res) => {
+        setMeetingList(res.data);
         // console.log(res.data[0]);
         // console.log(res.data[1]);
-        setMeeting(res.data);
       })
       .catch((res) => {
         // console.log(res.response.status);
@@ -31,7 +31,7 @@ const MeetingView = (props) => {
 
   //UTC날짜 계산
   const utcDate = new Date();
-  console.log(utcDate);
+  // console.log(utcDate);
   const localDate = new Date(utcDate);
   // 날짜 형식 지정
   const year = localDate.getFullYear() % 100; // 년도를 10의 자리 숫자로 표현
@@ -44,33 +44,33 @@ const MeetingView = (props) => {
   const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
   const justDate = `${year}년 ${month}월 ${day}일 `;
   const localTime = `${year}년 ${month}월 ${day}일 ${ampm} ${formattedHours}:${formattedMinutes}`;
+
   return (
     <div>
-      <div className="meetingView-frm">
-        <h2 className="meetingView-title">정기 모임</h2>
-        <div className="meetingView-content">
-          <div>
-            <h3 className="meeting-Dday">
-              날짜 &nbsp; : &nbsp; {justDate} <span>D - {dDay} </span>
-            </h3>
-            <div className="meeting-content">
-              모임내용 &nbsp; : {meeting.meetingName} &nbsp;{" "}
+      {meetingList.map((meeting, index) => (
+        <div className="meetingView-frm" key={index}>
+          <h2 className="meetingView-title">정기 모임</h2>
+          <div className="meetingView-content">
+            <div>
+              <h3 className="meeting-Dday">
+                날짜 : {justDate} <span>D - {dDay} </span>
+              </h3>
+              <div className="meeting-content">
+                모임내용 : {meeting.meetingName}{" "}
+              </div>
+            </div>
+            <div className="meeting-date">일시 : {localTime} </div>
+            <div className="meeting-price">금액 :{meeting.meetingPrice} </div>
+            <div className="meeting-memberNum">
+              참여수 : {meeting.meetingMember} /{meeting.meetingMaxnum}
+            </div>
+            <div className="meeting-place">
+              장소 : {meeting.meetingPlace}
+              <Kakao data={meeting.meetingPlace} />
             </div>
           </div>
-          <div className="meeting-date">일시 &nbsp; :&nbsp; {localTime} </div>
-          <div className="meeting-price">
-            금액 &nbsp; :&nbsp;{meeting.meetingPrice}{" "}
-          </div>
-          <div className="meeting-memberNum">
-            참여수&nbsp; :&nbsp; {meeting.meetingMember} /
-            {meeting.meetingMaxnum}
-          </div>
-          <div className="meeting-place">
-            장소 &nbsp; :&nbsp; {meeting.meetingPlace}
-            <Kakao data={meeting.meetingPlace} />
-          </div>
         </div>
-      </div>
+      ))}
     </div>
   );
 };

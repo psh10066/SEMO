@@ -3,7 +3,7 @@
 <mapper namespace="kr.or.semo.meeting.model.dao.MeetingDao">
 	<insert id="createMeeting">
 		insert into meeting values(
-    		1,
+    		4,
     		25,
     		64,
     		#{meetingName},
@@ -13,7 +13,7 @@
     		#{meetingMaxnum})
 	</insert>
 	<select id="selectMeetingList" resultType="Meeting">
-		select m.*,(select count(meeting_no) from meeting where group_no=m.group_no) meeting_Member from meeting m where group_no = #{groupNo}
+		select * from meeting where group_no = #{groupNo}
 	</select>
 	
 </mapper>
