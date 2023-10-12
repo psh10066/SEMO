@@ -18,3 +18,23 @@
   width: 75%;
   background-color: #220895;
 }
+.chat-myname {
+  text-align: center;
+}
+.chat-myname-text {
+  color: #fff;
+  font-weight: bold;
+  font-size: 20px;
+}
+.chat-room-info {
+  text-align: center;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  display: flex;
+}
+.chat-room-info-text {
+  color: #fff;
+  font-weight: bold;
+  font-size: 40px;
+}
