@@ -6,6 +6,7 @@ import "./group.css";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import MeetingView from "../meeting/MeetingView";
+import GroupSave from "./GroupSave";
 
 const GroupView = (props) => {
   const isLogin = props.isLogin;
@@ -19,12 +20,20 @@ const GroupView = (props) => {
   const [meetingList, setMeetingList] = useState([]);
   const navigate = useNavigate();
   const [joinNum, setJoinNum] = useState(0);
+  const [groupSave, setGroupSave] = useState(false);
 
   useEffect(() => {
+    const token = window.localStorage.getItem("token");
     axios
-      .get("/group/view/" + groupNo)
+      .get("/group/view/" + groupNo, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
       .then((res) => {
+        console.log(res.data);
         setGroup(res.data);
+        setGroupSave(res.data.groupSave);
       })
       .catch((error) => {
         console.log(error.response.status);
@@ -198,6 +207,11 @@ const GroupView = (props) => {
             )}
           </div>
           <div className="group-view-name">{group.groupName}</div>
+          <GroupSave
+            groupNo={groupNo}
+            groupSave={groupSave}
+            setGroupSave={setGroupSave}
+          />
           <div
             className="group-view-content"
             dangerouslySetInnerHTML={{ __html: group.groupContent }}

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestAttribute;
 import kr.or.semo.group.model.vo.ChatRoom;
 import kr.or.semo.group.model.vo.Group;
 import kr.or.semo.group.model.vo.GroupJoin;
+import kr.or.semo.group.model.vo.GroupSave;
 import kr.or.semo.member.model.vo.Member;
 
 @Mapper
@@ -37,5 +38,11 @@ public interface GroupDao {
 	int insertChatRoom(ChatRoom cr);
 
 	List groupChatRoomName(int memberNo);
+
+	GroupSave selectOneGroupSave(int groupNo, int memberNo);
+
+	int deleteGroupSave(int groupNo, int memberNo);
+
+	int insertGroupSave(int groupNo, int memberNo);
 
 }

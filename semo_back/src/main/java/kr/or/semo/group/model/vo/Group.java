@@ -19,4 +19,5 @@ public class Group {
 	private int groupCategory;
 	private int groupLocal;
 	private String memberId;
+	private boolean groupSave;
 }
