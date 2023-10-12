@@ -71,7 +71,7 @@
 
 /* MeetingView */
 .meetingView-frm {
-  margin: 20px 85px;
+  margin: 20px 85px 0px;
   text-align: left;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -95,6 +95,18 @@
 }
 .meeting-content {
   font-weight: bold;
+}
+#meeting-btn-area {
+  margin: 20px;
+  text-align: right;
+}
+#meeting-btn-area > button {
+  background-color: #5457e9;
+  border-radius: 5px;
+  color: #fff;
+}
+#meeting-btn-area > button:hover {
+  background-color: #8bb4ff;
 }
 
 /* PostCode */

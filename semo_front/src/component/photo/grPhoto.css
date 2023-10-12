@@ -107,9 +107,9 @@
   border: none;
   padding: 0;
 }
-.input > input[type="text"] {
+/* .input {
   height: 230px;
-}
+} */
 .photo-content-box {
   margin: 10px 0px;
 }

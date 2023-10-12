@@ -58,7 +58,7 @@ const Postcode = (props) => {
       </div>
       <div id="address-btn">
         <Button3 clickEvent={handleClick} text="주소검색" />
-        {showMap && <Kakao data={data} setData={setData} type={type} />}
+        {showMap && <Kakao data={data} setData={setData} />}
       </div>
     </div>
   );

@@ -4,9 +4,10 @@ import React, { useEffect } from "react";
 const Kakao = (props) => {
   const data = props.data;
   const index = props.index;
+  const setData = props.setData;
 
   useEffect(() => {
-    const mapContainer = document.querySelectorAll(".map")[index]; // 지도를 표시할 div
+    const mapContainer = document.querySelector(`#map-${index}`); // 지도를 표시할 div
     const mapOption = {
       center: new kakao.maps.LatLng(37.537187, 127.005476), // 기본 중심 좌표
       level: 5, // 지도의 확대 레벨
@@ -32,14 +33,14 @@ const Kakao = (props) => {
 
         // 지도 중심을 변경
         map.setCenter(coords);
-      } else {
       }
     });
-  }, [data]);
+  }, [data, index]);
 
   return (
     <div>
       <div
+        id={`map-${index}`}
         className="map"
         style={{
           width: "400px",
