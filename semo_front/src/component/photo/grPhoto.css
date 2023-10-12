@@ -107,9 +107,9 @@
   border: none;
   padding: 0;
 }
-/* .input {
+.input-content > textarea {
   height: 230px;
-} */
+}
 .photo-content-box {
   margin: 10px 0px;
 }

@@ -76,7 +76,16 @@
         WHERE gj.member_no = #{memberNo}
     )
 </select>
-
-	
+	<select id="selectOneGroupSave" resultType="GroupSave">
+		select * from group_save
+		where group_no = #{groupNo} and member_no = #{memberNo}
+	</select>
+	<delete id="deleteGroupSave">
+		delete from group_save 
+		where group_no = #{groupNo} and member_no = #{memberNo}
+	</delete>
+	<insert id="insertGroupSave">
+		insert into group_save values(group_save_seq.nextval, #{groupNo}, #{memberNo})
+	</insert>
 	
 </mapper>

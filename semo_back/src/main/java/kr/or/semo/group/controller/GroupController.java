@@ -57,8 +57,8 @@ public class GroupController {
 	
 	//상세보기 조회
 	@GetMapping(value="/view/{groupNo}")
-	public Group View(@PathVariable int groupNo) {
-		return groupService.selectOneGroup(groupNo);
+	public Group View(@PathVariable int groupNo, @RequestAttribute String memberId) {
+		return groupService.selectOneGroup(groupNo, memberId);
 	}
 	
 	//그룹 가입
@@ -102,6 +102,11 @@ public class GroupController {
 		int result = groupService.totalMemberCount(groupNo);
 		System.out.println("결과확인 : "+result);
 		return result;
+	}
+	//그룹 찜하기
+	@PostMapping(value="/save/toggle/{groupNo}")
+	public int groupSaveToggle(@PathVariable int groupNo, @RequestAttribute String memberId) {
+		return groupService.groupSaveToggle(groupNo,memberId);
 	}
 	
 	

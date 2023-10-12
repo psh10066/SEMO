@@ -13,6 +13,7 @@ import kr.or.semo.group.model.dao.GroupDao;
 import kr.or.semo.group.model.vo.ChatRoom;
 import kr.or.semo.group.model.vo.Group;
 import kr.or.semo.group.model.vo.GroupJoin;
+import kr.or.semo.group.model.vo.GroupSave;
 import kr.or.semo.member.model.dao.MemberDao;
 import kr.or.semo.member.model.vo.Member;
 
@@ -48,8 +49,14 @@ public class GroupService {
 		return 0;
 	}
 
-	public Group selectOneGroup(int groupNo) {
+	public Group selectOneGroup(int groupNo, String memberId) {
 		Group g = groupDao.selectOneGroup(groupNo);
+
+		Member member = memberDao.selectOneMember(memberId);
+		GroupSave groupSave = groupDao.selectOneGroupSave(groupNo,member.getMemberNo());
+		if (groupSave != null) {
+			g.setGroupSave(true);
+		}
 		return g;
 	}
 	
@@ -97,13 +104,18 @@ public class GroupService {
 		Member member = memberDao.selectOneMember(g.getMemberId());
 		return groupDao.groupChatRoomName(member.getMemberNo());
 	}
-
-
-
-
-
-
-
-
 	
+	//찜하기
+	@Transactional
+	public int groupSaveToggle(int groupNo, String memberId) {
+		Member member = memberDao.selectOneMember(memberId);
+		GroupSave groupSave = groupDao.selectOneGroupSave(groupNo,member.getMemberNo());
+		if(groupSave != null) {
+			return groupDao.deleteGroupSave(groupNo, member.getMemberNo());
+			
+		}else {
+			return groupDao.insertGroupSave(groupNo, member.getMemberNo());
+			
+		}		
+	}
 }
