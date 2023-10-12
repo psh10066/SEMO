@@ -73,7 +73,11 @@ function App() {
             path="/mypage/*"
             element={<Mypage isLogin={isLogin} setIsLogin={setIsLogin} />}
           />
-          <Route path="/chat" element={<Chat />} />
+          <Route
+            path="/chat/*"
+            element={<Chat isLogin={isLogin} setIsLogin={setIsLogin} />}
+          />
+
           <Route path="/" element={<Mainpage />} />
         </Routes>
       </div>

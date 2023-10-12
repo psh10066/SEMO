@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestAttribute;
 
+import kr.or.semo.group.model.vo.ChatRoom;
 import kr.or.semo.group.model.vo.Group;
 import kr.or.semo.group.model.vo.GroupJoin;
 import kr.or.semo.member.model.vo.Member;
@@ -30,5 +31,7 @@ public interface GroupDao {
 	int joinNum(String memberId);
 
 	int totalMemberCount(int groupNo);
+
+	int insertChatRoom(ChatRoom cr);
 
 }
