@@ -19,7 +19,7 @@ public class Meeting {
 	private String meetingPlace;
 	private String meetingPrice;
 	private int meetingMaxnum;
-	private int meetingMember;
+	private String memberId;
 }
 
 
