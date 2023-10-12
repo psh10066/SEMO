@@ -4,6 +4,43 @@ import { Button1 } from "./Buttons";
 import Swal from "sweetalert2";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import ReComment from "./ReComment";
+
+const feedCommentRegist = (
+  feedNo,
+  feedCommentContent,
+  feedCommentNo2,
+  isLogin,
+  changeFeedComment,
+  setChangeFeedComment
+) => {
+  const feedCommentInesrt = { feedNo, feedCommentContent, feedCommentNo2 };
+  if (isLogin) {
+    if (feedCommentContent !== "") {
+      const token = window.localStorage.getItem("token");
+      axios
+        .post("/feed/insertComment", feedCommentInesrt, {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then((res) => {
+          if (res.data === 1) {
+            setChangeFeedComment(!changeFeedComment);
+          }
+        })
+        .catch((res) => {
+          console.log(res.response.status);
+        });
+    } else {
+      Swal.fire("댓글을 입력해 주세요.");
+    }
+  } else {
+    Swal.fire("로그인 후 이용해 주세요.");
+  }
+};
+
+//댓글 전체
 const Comment = (props) => {
   const member = props.member;
   const isLogin = props.isLogin;
@@ -12,46 +49,31 @@ const Comment = (props) => {
   const [feedCommentNo2, setFeedCommentNo2] = useState(0);
   const [commentList, setCommentList] = useState([]);
   const [reCommentList, setReCommentList] = useState([]);
-
-  //   console.log(feed.feedNo);
+  const [feedReCommentContent, setFeedRecommentContent] = useState("");
+  const [changeFeedComment, setChangeFeedComment] = useState([true]); //피드댓글 새로고침
   const feedNo = feed.feedNo;
-  //   console.log(member);
 
+  //댓글 작성하기
   const feedCommentSubmit = () => {
-    const feedCommentInesrt = { feedNo, feedCommentContent, feedCommentNo2 };
-    if (isLogin) {
-      if (feedCommentContent !== "") {
-        const token = window.localStorage.getItem("token");
-        axios
-          .post("/feed/insertComment", feedCommentInesrt, {
-            headers: {
-              Authorization: "Bearer " + token,
-            },
-          })
-          .then((res) => {
-            console.log(res.data);
-          })
-          .catch((res) => {
-            console.log(res.response.status);
-          });
-      } else {
-        Swal.fire("댓글을 입력해 주세요.");
-      }
-    } else {
-      Swal.fire("로그인 후 이용해 주세요.");
-    }
+    feedCommentRegist(
+      feedNo,
+      feedCommentContent,
+      feedCommentNo2,
+      isLogin,
+      changeFeedComment,
+      setChangeFeedComment
+    );
   };
   useEffect(() => {
     axios
       .get("/feed/feedCommentList/" + feedNo)
       .then((res) => {
-        // console.log(res.data);
         setCommentList(res.data);
       })
       .catch((res) => {
         console.log(res.response.status);
       });
-  }, [member, feedNo]);
+  }, [member, feedNo, changeFeedComment]);
 
   return (
     <div className="comment-all-wrap">
@@ -70,6 +92,14 @@ const Comment = (props) => {
               comment={comment}
               isLogin={isLogin}
               member={member}
+              feedNo={feedNo}
+              changeFeedComment={changeFeedComment}
+              setChangeFeedComment={setChangeFeedComment}
+              feedCommentSubmit={feedCommentSubmit}
+              feedReCommentContent={feedReCommentContent}
+              setFeedRecommentContent={setFeedRecommentContent}
+              reCommentList={reCommentList}
+              setReCommentList={setReCommentList}
             />
           );
         })}
@@ -77,20 +107,32 @@ const Comment = (props) => {
     </div>
   );
 };
+//작성한 댓글 불러오기
 const CommentItem = (props) => {
   const comment = props.comment;
   const isLogin = props.isLogin;
-  const member = props.member;
-  const [commentContent, setCommentContent] = useState("");
+  const member = props.member; //로그인된 회원정보
+  const changeFeedComment = props.changeFeedComment;
+  const setChangeFeedComment = props.setChangeFeedComment;
+  const feedReCommentContent = props.feedReCommentContent;
+  const setFeedRecommentContent = props.setFeedRecommentContent;
+  const reCommentList = props.reCommentList;
+  const setReCommentList = props.setReCommentList;
+  const feedNo = props.feedNo;
+  const [feedCommentContent, setFeedCommentContent] = useState(
+    comment.feedCommentContent
+  ); //댓글 내용
+  const [feedCommentNo, setFeedCommentNo] = useState(comment.feedCommentNo);
   const [modifyState, setModifyState] = useState(true); //수정 눌렀을 때 확인
-  const [recommentState, SetRecommentState] = useState(true); //답글 눌렀을 때 확인
+  const [recommentState, setRecommentState] = useState(true); //답글 눌렀을 때 확인
+  //댓글 textarea 크기 조절
   const textRef = useRef();
   const resizeHeight = () => {
     textRef.current.style.height = "auto";
     textRef.current.style.height = textRef.current.scrollHeight + "px";
   };
 
-  //   console.log(comment);
+  //댓글 작성 시간
   function formatTime(postTime) {
     const currentTime = new Date();
     const postDate = new Date(postTime);
@@ -122,9 +164,11 @@ const CommentItem = (props) => {
       return "방금";
     }
   }
+  //로그인 안되었을 때 메세지
   const loginMsg = () => {
     Swal.fire("로그인 후 이용해 주세요.");
   };
+  //댓글 삭제
   const deleteComment = () => {
     Swal.fire({
       icon: "question",
@@ -137,23 +181,55 @@ const CommentItem = (props) => {
         axios
           .get("/feed/deleteComment/" + comment.feedCommentNo)
           .then((res) => {
-            console.log(res.data);
+            if (res.data === 1) {
+              setChangeFeedComment(!changeFeedComment);
+            }
           })
           .catch((res) => {
             console.log(res.response.status);
           });
       }
     });
-    console.log("삭제하기");
-    console.log(comment.feedCommentNo);
   };
+  //댓글 수정버튼 눌렀을 때
   const modifyClick = () => {
     setModifyState(false);
   };
+  //댓글 수정취소 버튼 눌렀을 때
   const modifyCancel = () => {
+    setFeedCommentContent(comment.feedCommentContent);
     setModifyState(true);
   };
-  const modifyComment = () => {};
+  //댓글 수정
+  const modifyComment = () => {
+    if (feedCommentContent !== "") {
+      axios
+        .get("/feed/modifyComment", {
+          params: { feedCommentNo, feedCommentContent },
+        })
+        .then((res) => {
+          if (res.data === 1) {
+            setChangeFeedComment(!changeFeedComment);
+          }
+          setModifyState(true);
+        })
+        .catch((res) => {
+          console.log(res.response.status);
+        });
+    } else {
+      Swal.fire("댓글을 입력해 주세요.");
+    }
+  };
+  const feedCommentSubmit = () => {
+    feedCommentRegist(
+      comment.feedNo,
+      feedReCommentContent,
+      comment.feedCommentNo,
+      isLogin,
+      changeFeedComment,
+      setChangeFeedComment
+    );
+  };
   return (
     <div className="comment-wrap">
       <div className="comment-top">
@@ -195,10 +271,10 @@ const CommentItem = (props) => {
             placeholder="댓글 추가..."
             ref={textRef}
             onInput={resizeHeight}
-            defaultValue={comment.feedCommentContent}
-            id={comment.feedCommentContent}
+            defaultValue={feedCommentContent}
+            id={feedCommentContent}
             onChange={(e) => {
-              setCommentContent(e.target.value);
+              setFeedCommentContent(e.target.value);
             }}
           />
         )}
@@ -216,7 +292,7 @@ const CommentItem = (props) => {
                 </div>
                 <ReCommentWrite
                   recommentState={recommentState}
-                  SetRecommentState={SetRecommentState}
+                  setRecommentState={setRecommentState}
                 />
               </div>
             ) : (
@@ -242,18 +318,39 @@ const CommentItem = (props) => {
           </div>
         )}
       </div>
+      <div className="recomment-input-all-wrap">
+        {recommentState ? (
+          ""
+        ) : (
+          <InputCommentBox
+            member={member}
+            isLogin={isLogin}
+            commentContent={feedReCommentContent}
+            setCommentContent={setFeedRecommentContent}
+            feedCommentSubmit={feedCommentSubmit}
+          />
+        )}
+      </div>
+      <ReComment
+        isLogin={isLogin}
+        member={member}
+        feedNo={feedNo}
+        feedCommentNo={feedCommentNo}
+        reCommentList={reCommentList}
+        setReCommentList={setReCommentList}
+      />
     </div>
   );
 };
 //답글달기 버튼 변경
 const ReCommentWrite = (props) => {
   const recommentState = props.recommentState;
-  const SetRecommentState = props.SetRecommentState;
+  const setRecommentState = props.setRecommentState;
   const recommentClick = () => {
-    SetRecommentState(false);
+    setRecommentState(false);
   };
   const recommentCancelClick = () => {
-    SetRecommentState(true);
+    setRecommentState(true);
   };
   return (
     <>
