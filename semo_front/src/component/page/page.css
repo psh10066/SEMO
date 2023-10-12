@@ -55,14 +55,12 @@
 }
 .page-category-wrap {
   margin: 0 auto;
-}
-.page-category {
   overflow: hidden;
   display: block;
   margin: 0 auto;
   width: 1200px;
 }
-.page-category > div {
+.page-category {
   /*display: block;*/
   float: left;
   margin-left: 10px;
@@ -79,8 +77,21 @@
   height: 100px;
   line-height: 100px;
 }
-.page-default {
+.page-category-wrap > ul > li > div {
   border: 1px solid #ccc;
+  color: black;
+  /*background-color: #ccc;*/
+  border-radius: 10px;
+}
+.page-category-wrap > ul > li > div.category-active {
+  border: 1px solid #ccc;
+  color: black;
   background-color: #ccc;
   border-radius: 10px;
+}
+.page-category-wrap > ul {
+  list-style-type: none;
+  box-sizing: border-box;
+  padding-top: 30px;
+  margin: 0;
 }

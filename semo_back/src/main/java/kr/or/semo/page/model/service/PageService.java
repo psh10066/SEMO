@@ -19,21 +19,35 @@ public class PageService {
 	private Pagination pagination;
 	
 	public Map pageList(int reqPage, String categoryLocal, String categoryValue) {
-		int numPerPage = 12;
+		int numPerPage = 6;
 		int pageNaviSize = 5;
-		int totalCount = pageDao.totalCount();
-		PageInfo pi = pagination.getPageInfo(reqPage, numPerPage, pageNaviSize, totalCount);
-		System.out.println("pi는 "+pi);
+
 		List pageList = null;
+		PageInfo pi = null;
 		
 		if(categoryLocal.equals("all")) {
-			pageList = pageDao.selectPageList1(pi);
+			int totalCount = pageDao.totalCount1();
+			pi = pagination.getPageInfo(reqPage, numPerPage, pageNaviSize, totalCount);
+			System.out.println("pi는 "+pi);
+			
+			HashMap<String, Object> mapCat = new HashMap<String, Object>();
+			mapCat.put("start",pi.getStart());
+			mapCat.put("end",pi.getEnd());
+			
+			pageList = pageDao.selectPageList1(mapCat);
 			System.out.println("pageList는 "+pageList);
 			
 		}else if(categoryLocal.equals("groupCategory")) {
+			
+			int totalCount = pageDao.totalCount2(categoryValue);
+			pi = pagination.getPageInfo(reqPage, numPerPage, pageNaviSize, totalCount);
+			System.out.println("pi는 "+pi);
+			
 			HashMap<String, Object> mapCat = new HashMap<String, Object>();
-			mapCat.put("pi", pi);
-			mapCat.put("categoryLocal", categoryLocal);
+			mapCat.put("start",pi.getStart());
+			mapCat.put("end",pi.getEnd());
+			
+			//mapCat.put("categoryLocal", categoryLocal);
 			mapCat.put("categoryValue", categoryValue);
 			System.out.println("mapCat은 "+mapCat);
 			
@@ -41,16 +55,24 @@ public class PageService {
 			System.out.println("pageList는 "+pageList);
 			
 		}else if(categoryLocal.equals("groupLocal")) {
+			
+			int totalCount = pageDao.totalCount3(categoryValue);
+			pi = pagination.getPageInfo(reqPage, numPerPage, pageNaviSize, totalCount);
+			System.out.println("pi는 "+pi);
+			
 			HashMap<String, Object> mapCat = new HashMap<String, Object>();
-			mapCat.put("pi", pi);
-			mapCat.put("categoryLocal", categoryLocal);
+			mapCat.put("start",pi.getStart());
+			mapCat.put("end",pi.getEnd());
+			
+			//mapCat.put("categoryLocal", categoryLocal);
 			mapCat.put("categoryValue", categoryValue);
 			System.out.println("mapCat은 "+mapCat);
 			
 			pageList = pageDao.selectPageList3(mapCat);
 			System.out.println("pageList는 "+pageList);
 		}
-			
+			//System.out.println(mapCat);
+			System.out.println(pageList);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("pageList", pageList);
 		map.put("pi", pi);
