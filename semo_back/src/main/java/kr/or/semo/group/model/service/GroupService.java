@@ -1,5 +1,8 @@
 package kr.or.semo.group.model.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +33,7 @@ public class GroupService {
 		
 		GroupJoin gj = new GroupJoin();
 		ChatRoom cr = new ChatRoom();
+		
 		if(result>0) {
 			gj.setGroupNo(groupNo);
 			gj.setMemberNo(member.getMemberNo());
@@ -40,6 +44,7 @@ public class GroupService {
 			
 			return result2+result3;
 		}
+	
 		return 0;
 	}
 
@@ -87,4 +92,18 @@ public class GroupService {
 		// TODO Auto-generated method stub
 		return groupDao.totalMemberCount(groupNo);
 	}
+
+	public List groupChatRoomName(Group g,String memberId) {
+		Member member = memberDao.selectOneMember(g.getMemberId());
+		return groupDao.groupChatRoomName(member.getMemberNo());
+	}
+
+
+
+
+
+
+
+
+	
 }

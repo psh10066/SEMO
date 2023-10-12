@@ -1,5 +1,8 @@
 package kr.or.semo.group.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +18,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.semo.FileUtil;
 import kr.or.semo.group.model.service.GroupService;
+import kr.or.semo.group.model.vo.ChatRoom;
 import kr.or.semo.group.model.vo.Group;
+import kr.or.semo.group.model.vo.GroupJoin;
 import kr.or.semo.member.model.vo.Member;
 
 @RestController
@@ -98,6 +103,15 @@ public class GroupController {
 		System.out.println("결과확인 : "+result);
 		return result;
 	}
+	
+	
+	//채팅방이름 불러오기 (= 내가 가입한 그룹이름 불러오기)
+	@PostMapping(value="/groupChatRoomName")
+	public List groupChatRoomName(@RequestBody Group g,@RequestAttribute String memberId) {
+		g.setMemberId(memberId);
+		return groupService.groupChatRoomName(g,memberId);
+	}
+	
 	
 	
 	
