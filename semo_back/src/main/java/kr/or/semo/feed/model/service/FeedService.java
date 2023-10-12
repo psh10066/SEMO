@@ -101,6 +101,10 @@ public class FeedService {
 		// TODO Auto-generated method stub
 		return feedDao.feedCommentList(feedNo);
 	}
+	public int deleteComment(int feedCommentNo) {
+		// TODO Auto-generated method stub
+		return feedDao.deleteComment(feedCommentNo);
+	}
 	
 
 }

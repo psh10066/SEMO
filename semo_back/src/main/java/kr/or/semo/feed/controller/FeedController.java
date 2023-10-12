@@ -131,5 +131,10 @@ public class FeedController {
 	public List feedCommentList(@PathVariable int feedNo) {
 		return feedService.feedCommentList(feedNo);
 	}
+	//피드 댓글 삭제
+	@GetMapping(value="/deleteComment/{feedCommentNo}")
+	public int deleteComment(@PathVariable int feedCommentNo) {
+		return feedService.deleteComment(feedCommentNo);
+	}
 
 }

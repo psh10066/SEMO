@@ -34,6 +34,8 @@ public interface FeedDao {
 
 	List feedCommentList(int feedNo);
 
+	int deleteComment(int feedCommentNo);
+
 
 
 }

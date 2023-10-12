@@ -97,7 +97,7 @@ const FeedView = (props) => {
         axios
           .get("/feed/delete/" + feed.feedNo)
           .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             if (res.data === 1) {
               navigate("/feed/profile", {
                 state: { memberNo: member.memberNo },

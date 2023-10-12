@@ -1,4 +1,4 @@
-import { Avatar, Stack } from "@mui/material";
+import { Avatar, PopoverPaper, Stack } from "@mui/material";
 import "./comment.css";
 import { Button1 } from "./Buttons";
 import Swal from "sweetalert2";
@@ -12,6 +12,7 @@ const Comment = (props) => {
   const [feedCommentNo2, setFeedCommentNo2] = useState(0);
   const [commentList, setCommentList] = useState([]);
   const [reCommentList, setReCommentList] = useState([]);
+
   //   console.log(feed.feedNo);
   const feedNo = feed.feedNo;
   //   console.log(member);
@@ -81,6 +82,8 @@ const CommentItem = (props) => {
   const isLogin = props.isLogin;
   const member = props.member;
   const [commentContent, setCommentContent] = useState("");
+  const [modifyState, setModifyState] = useState(true); //수정 눌렀을 때 확인
+  const [recommentState, SetRecommentState] = useState(true); //답글 눌렀을 때 확인
   const textRef = useRef();
   const resizeHeight = () => {
     textRef.current.style.height = "auto";
@@ -123,22 +126,34 @@ const CommentItem = (props) => {
     Swal.fire("로그인 후 이용해 주세요.");
   };
   const deleteComment = () => {
-    // const token = window.localStorage.getItem("token");
-    // axios
-    //   .post("/feed/deleteComment", comment, {
-    //     headers: {
-    //       Authorization: "Bearer " + token,
-    //     },
-    //   })
-    //   .then((res) => {
-    //     console.log(res.data);
-    //   })
-    //   .catch((res) => {
-    //     console.log(res.response.status);
-    //   });
+    Swal.fire({
+      icon: "question",
+      text: "피드를 삭제하시겠습니까?",
+      showCancelButton: true,
+      confirmButtonText: "삭제",
+      cancelButtonText: "취소",
+    }).then((res) => {
+      if (res.isConfirmed) {
+        axios
+          .get("/feed/deleteComment/" + comment.feedCommentNo)
+          .then((res) => {
+            console.log(res.data);
+          })
+          .catch((res) => {
+            console.log(res.response.status);
+          });
+      }
+    });
     console.log("삭제하기");
-    console.log(comment);
+    console.log(comment.feedCommentNo);
   };
+  const modifyClick = () => {
+    setModifyState(false);
+  };
+  const modifyCancel = () => {
+    setModifyState(true);
+  };
+  const modifyComment = () => {};
   return (
     <div className="comment-wrap">
       <div className="comment-top">
@@ -169,33 +184,54 @@ const CommentItem = (props) => {
         </div>
       </div>
       <div className="comment-mid">
-        <div className="commentItem-content">{comment.feedCommentContent}</div>
-        <textarea
-          name="commentContent"
-          className="comment-modify-form"
-          placeholder="댓글 추가..."
-          ref={textRef}
-          onInput={resizeHeight}
-          defaultValue={comment.feedCommentContent}
-          id={comment.feedCommentContent}
-          onChange={(e) => {
-            setCommentContent(e.target.value);
-          }}
-        />
+        {modifyState ? (
+          <div className="commentItem-content">
+            {comment.feedCommentContent}
+          </div>
+        ) : (
+          <textarea
+            name="commentContent"
+            className="comment-modify-form"
+            placeholder="댓글 추가..."
+            ref={textRef}
+            onInput={resizeHeight}
+            defaultValue={comment.feedCommentContent}
+            id={comment.feedCommentContent}
+            onChange={(e) => {
+              setCommentContent(e.target.value);
+            }}
+          />
+        )}
       </div>
       <div className="comment-bottom">
         {isLogin ? (
           member && member.memberNo === comment.feedCommentWriter ? (
-            <div className="comment-bottom-right">
-              <div className="comment-modify">수정</div>
-              <div className="comment-delete" onClick={deleteComment}>
-                삭제
+            modifyState ? (
+              <div className="comment-bottom-right">
+                <div className="comment-modify" onClick={modifyClick}>
+                  수정
+                </div>
+                <div className="comment-delete" onClick={deleteComment}>
+                  삭제
+                </div>
+                <ReCommentWrite
+                  recommentState={recommentState}
+                  SetRecommentState={SetRecommentState}
+                />
               </div>
-              <div className="comment-recommentWrite">답글달기</div>
-            </div>
+            ) : (
+              <div className="comment-bottom-right">
+                <div className="comment-modify" onClick={modifyComment}>
+                  수정
+                </div>
+                <div className="comment-delete" onClick={modifyCancel}>
+                  취소
+                </div>
+              </div>
+            )
           ) : (
             <div className="comment-bottom-right">
-              <div className="comment-recommentWrite">답글달기</div>
+              <ReCommentWrite />
             </div>
           )
         ) : (
@@ -209,7 +245,31 @@ const CommentItem = (props) => {
     </div>
   );
 };
-
+//답글달기 버튼 변경
+const ReCommentWrite = (props) => {
+  const recommentState = props.recommentState;
+  const SetRecommentState = props.SetRecommentState;
+  const recommentClick = () => {
+    SetRecommentState(false);
+  };
+  const recommentCancelClick = () => {
+    SetRecommentState(true);
+  };
+  return (
+    <>
+      {recommentState ? (
+        <div className="comment-recommentWrite" onClick={recommentClick}>
+          답글달기
+        </div>
+      ) : (
+        <div className="comment-recommentWrite" onClick={recommentCancelClick}>
+          답글취소
+        </div>
+      )}
+    </>
+  );
+};
+//댓글폼
 const InputCommentBox = (props) => {
   const member = props.member;
   const isLogin = props.isLogin;
@@ -261,7 +321,7 @@ const InputCommentBox = (props) => {
     </div>
   );
 };
-
+//댓글 inputform
 const CommentContent = (props) => {
   const commentContent = props.commentContent;
   const setCommentContent = props.setCommentContent;
