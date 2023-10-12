@@ -28,6 +28,13 @@
 		,3)
 	</insert>
 	
+	
+	<!-- 채팅방 생성 -->
+	<insert id="insertChatRoom">
+		insert into CHAT_ROOM values (CHAT_ROOM_SEQ.nextval,#{groupNo})
+	</insert>
+	
+	
 	<!-- 그룹가입여부 조회 -->
 	<select id="joinState" resultType="GroupJoin">
 		select * from gr_join where member_no=

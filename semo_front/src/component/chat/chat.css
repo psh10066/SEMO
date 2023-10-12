@@ -1,0 +1,20 @@
+.chat-wrap {
+  width: 1200px;
+  height: 80vh;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+.chat-wrap2 {
+  display: flex;
+  height: 70vh;
+}
+.chat-list {
+  width: 25%;
+  background-color: rgba(34, 8, 149, 0.8);
+}
+.chat-room {
+  width: 75%;
+  background-color: #220895;
+}
