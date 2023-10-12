@@ -7,14 +7,18 @@ import axios from "axios";
 import { Button1, Button2, Button3 } from "../util/Buttons";
 import Input from "../util/InputFrm";
 import Postcode from "../util/PostCode";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
-function MeetingCreate() {
+const MeetingCreate = (props) => {
+  const isLogin = props.isLogin;
+  const setIsLogin = props.setIsLogin;
   const [meetingName, setMeetingName] = useState("");
   const [meetingDate, setMeetingDate] = useState("");
   const [meetingPlace, setMeetingPlace] = useState("");
   const [meetingPrice, setMeetingPrice] = useState("");
   const [meetingMaxnum, setMeetingMaxnum] = useState("");
+  const location = useLocation();
+  const groupNo = location.state.groupNo;
   const navigate = useNavigate();
   const createMeeting = () => {
     const meeting = {
@@ -24,18 +28,25 @@ function MeetingCreate() {
       meetingPrice,
       meetingMaxnum,
     };
+
     const token = window.localStorage.getItem("token");
+    console.log(meeting);
+    console.log(groupNo);
     axios
-      .post("create", meeting, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      })
+      .post(
+        "/meeting/create",
+        { meeting, groupNo },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      )
       .then((res) => {
         console.log(res);
         //console.log(res.config.data);
         if (res.data === 1) {
-          navigate("/");
+          navigate("/group/view" + groupNo);
         } else {
           navigate("/login");
         }
@@ -111,7 +122,7 @@ function MeetingCreate() {
       </div>
     </div>
   );
-}
+};
 
 const MeetingInputWrap = (props) => {
   const data = props.data;
