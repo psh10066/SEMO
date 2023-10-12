@@ -28,6 +28,13 @@
 		,3)
 	</insert>
 	
+	
+	<!-- 채팅방 생성 -->
+	<insert id="insertChatRoom">
+		insert into CHAT_ROOM values (CHAT_ROOM_SEQ.nextval,#{groupNo})
+	</insert>
+	
+	
 	<!-- 그룹가입여부 조회 -->
 	<select id="joinState" resultType="GroupJoin">
 		select * from gr_join where member_no=
@@ -58,6 +65,18 @@
 	<select id="totalMemberCount" resultType="int">
 		select group_maxnum from group_tbl where group_no=#{groupNo}
 	</select>
+	
+<select id="groupChatRoomName" resultType="java.lang.String">
+    SELECT g.group_name
+    FROM group_tbl g
+    WHERE g.group_no IN (
+        SELECT cr.group_no
+        FROM chat_room cr
+        JOIN gr_join gj ON cr.group_no = gj.group_no
+        WHERE gj.member_no = #{memberNo}
+    )
+</select>
+
 	
 	
 </mapper>

@@ -36,6 +36,10 @@ public interface FeedDao {
 
 	int deleteComment(int feedCommentNo);
 
+	int modifyComment(FeedComment fc);
+
+	List feedReCommentList(int feedNo);
+
 
 
 }

@@ -136,5 +136,16 @@ public class FeedController {
 	public int deleteComment(@PathVariable int feedCommentNo) {
 		return feedService.deleteComment(feedCommentNo);
 	}
+	//피드 댓글 수정
+	@GetMapping(value="/modifyComment")
+	public int modifyComment(int feedCommentNo, String feedCommentContent) {
+		return feedService.modifyComment(feedCommentNo, feedCommentContent);
+	}
+	//피드 대댓글 가져오기
+	@GetMapping(value="/feedReCommentList/{feedNo}")
+	public List feedReCommentList(@PathVariable int feedNo) {
+		System.out.println("피드번호 : "+feedNo);
+		return feedService.feedReCommentList(feedNo);
+	}
 
 }

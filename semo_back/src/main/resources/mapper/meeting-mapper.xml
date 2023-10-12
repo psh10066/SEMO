@@ -3,16 +3,16 @@
 <mapper namespace="kr.or.semo.meeting.model.dao.MeetingDao">
 	<insert id="createMeeting">
 		insert into meeting values(
-    		4,
-    		25,
-    		64,
+    		meeting_seq.nextval,
+    		#{group_no},
+    		#{gr_join},
     		#{meetingName},
     		#{meetingDate},
     		#{meetingPlace},
     		#{meetingPrice},
     		#{meetingMaxnum})
 	</insert>
-	<select id="selectMeetingList" resultType="Meeting">
+	<select id="selectMeetingList" resultType="meeting">
 		select * from meeting where group_no = #{groupNo}
 	</select>
 	

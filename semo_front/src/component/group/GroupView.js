@@ -160,7 +160,7 @@ const GroupView = (props) => {
       text: "아름님메뉴2",
       active: false,
     },
-    { url: "/meeting/create", text: "정모 만들기", active: false },
+    { url: "/", text: "모임 맴버", active: false },
   ]);
 
   useEffect(() => {
@@ -203,7 +203,13 @@ const GroupView = (props) => {
             dangerouslySetInnerHTML={{ __html: group.groupContent }}
           ></div>
           <div className="group-view-member"></div>
-          <MeetingView groupNo={groupNo} />
+          <MeetingView
+            group={group}
+            groupNo={groupNo}
+            isLogin={isLogin}
+            isJoin={isJoin}
+            groupLevel={groupLevel}
+          />
           <div className="group-view-category">
             <Link to="#">
               {group.groupCategory === 1
