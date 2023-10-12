@@ -35,7 +35,7 @@
 .board-list-wrap > table > thead > tr {
   font-weight: bold;
   background-color: #8bb4ff;
-  height: 40px;
+  height: 50px;
   text-align: center;
   box-sizing: border-box;
 }
@@ -80,12 +80,12 @@
   width: 150px;
   padding: 15px 20px;
   background-color: rgba(5, 59, 80, 0.1);
-  border: 1px solid rgba(5, 59, 80, 0.1);
+  border: 1px solid lightgray;
   text-align: center;
 }
 .board-info-tbl tr > td:last-child {
   padding: 10px 20px;
-  border: 1px solid #ccc;
+  border: 1px solid lightgray;
 }
 .board-info-tbl tr > td > input[type="text"] {
   border: none;
@@ -98,34 +98,30 @@
   margin-top: 20px;
   text-align: center;
 }
+.board-content-box .ql-container {
+  height: 400px;
+}
 .board-view-wrap {
-  width: 1000px;
+  width: 1200px;
   margin: 0 auto;
   padding: 20px;
   box-sizing: border-box;
 }
-.board-view-wrap > div {
-  padding: 10px;
-  border-top: 1px solid #ccc;
-}
-.board-view-wrap > .board-view-title {
-  font-size: 1.2em;
-  font-family: ns-b;
-  border-top: 1px solid #053b50;
+.board-view-table {
+  border-collapse: collapse;
 }
 .board-view-info {
-  display: flex;
+  width: 200px;
+  height: 50px;
+  background-color: #5457e9;
+  color: white;
+  border: 1px solid lightgray;
 }
-.board-view-info > div {
-  margin-right: 10px;
-  font-size: 0.9em;
-}
-.board-view-detail {
-  min-height: 400px;
-  border-bottom: 1px solid #053b50;
-}
-.board-content-box .ql-container {
-  height: 400px;
+.board-view-info-content {
+  width: 1000px;
+  height: 50px;
+  text-align: center;
+  border: 1px solid lightgray;
 }
 .board-view-btn-zone {
   padding: 20px 0px;

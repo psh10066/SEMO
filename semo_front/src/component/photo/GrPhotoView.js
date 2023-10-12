@@ -71,25 +71,38 @@ const GrPhotoView = (props) => {
   };
   return (
     <div className="photo-view-wrap">
-      <div className="photo-view-title">{grPhoto.grPhotoNo}</div>
-      <div className="photo-view-info">
-        <div>{grPhoto.memberId}</div>
-        <div>{grPhoto.grPhotodDate}</div>
-      </div>
-      <div className="photo-view-thumbnail">
-        {grPhoto.grPhotoImg ? (
-          <img src={"/groupPhoto/" + grPhoto.grPhotoImg} />
-        ) : (
-          <img src="/image/default.png" />
-        )}
-      </div>
-      <div
-        className="photo-view-detail"
-        dangerouslySetInnerHTML={{ __html: grPhoto.grPhotoContent }}
-      ></div>
+      <table className="photo-view-table">
+        <thead>
+          <tbody>
+            <tr>
+              <th className="photo-view-info">제목</th>
+              <td className="photo-view-info-content">
+                {grPhoto.grPhotoTitle}
+              </td>
+            </tr>
+            <tr>
+              <th className="photo-view-info">이미지</th>
+              <td className="photo-view-thumbnail">
+                {grPhoto.grPhotoImg ? (
+                  <img src={"/groupPhoto/" + grPhoto.grPhotoImg} />
+                ) : (
+                  <img src="/image/photo.png" />
+                )}
+              </td>
+            </tr>
+            <tr>
+              <th className="photo-view-info">내용</th>
+              <td
+                className="photo-view-info-content"
+                dangerouslySetInnerHTML={{ __html: grPhoto.grPhotoContent }}
+              ></td>
+            </tr>
+          </tbody>
+        </thead>
+      </table>
       <div className="photo-view-btn-zone">
         {isLogin ? (
-          member && member.memberNo === grPhoto.grPhotoWriter ? (
+          member && member.memberNo === grPhoto.memberNo ? (
             <>
               <Button2 text="수정" clickEvent={modify} />
               <Button2 text="삭제" clickEvent={deletePhoto} />

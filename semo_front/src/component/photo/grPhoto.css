@@ -1,0 +1,155 @@
+/* 
+  사이트 사용 색상 
+  balck : #252A34
+  darkgray : #393E46
+  lightgray : #EEEEEE
+  white : #fff
+  
+  메인색상 (찐한순)
+  #220895 rgba(34,8,149)
+  #5457E9 rgba(84,87,233)
+  #8BB4FF rgba(139,180,255)
+    */
+
+.photo-all-wrap {
+  width: 1200px;
+  margin: 50px auto;
+}
+.photo-title {
+  font-size: 20px;
+  color: #8bb4ff;
+  padding: 30px 0px;
+  border-bottom: 2px solid #220895;
+  font-weight: bold;
+  text-align: center;
+}
+.photo-list-wrap {
+  overflow: hidden;
+  margin-top: 20px;
+}
+.photo-item {
+  float: left;
+  box-sizing: border-box;
+  width: calc(100% / 4);
+  padding: 30px;
+  cursor: pointer;
+}
+.photo-item:hover {
+  box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.2);
+}
+.photo-item-img {
+  height: 240px;
+}
+.photo-item-img > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.photo-item-info {
+  margin-top: 30px;
+}
+.photo-item-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: ns-eb;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+.photo-page {
+  margin-top: 30px;
+}
+.photo-write-btn {
+  padding: 20px 0px;
+}
+.photo-write-btn > button {
+  width: 100px;
+}
+.photo-frm-top {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+.photo-thumbnail {
+  width: 400px;
+  box-sizing: border-box;
+  padding: 15px;
+  border: 1px solid #ccc;
+}
+.photo-thumbnail > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.photo-info {
+  width: 90%;
+  margin-left: 40px;
+}
+.photo-info-tbl {
+  border-spacing: 0;
+}
+.photo-info-tbl tr > td {
+  font-weight: bold;
+  width: 80%;
+}
+.photo-info-tbl tr > td:first-child {
+  width: 150px;
+  padding: 15px 20px;
+  background-color: rgba(5, 59, 80, 0.1);
+  border: 1px solid lightgray;
+  text-align: center;
+}
+.photo-info-tbl tr > td:last-child {
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+}
+.photo-info-tbl tr > td > input[type="text"] {
+  border: none;
+  padding: 0;
+}
+.input > input[type="text"] {
+  height: 230px;
+}
+.photo-content-box {
+  margin: 10px 0px;
+}
+.photo-btn-box {
+  margin-top: 20px;
+  text-align: center;
+}
+/* view */
+.photo-view-wrap {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.photo-view-table {
+  border-collapse: collapse;
+}
+.photo-view-info {
+  width: 200px;
+  height: 50px;
+  background-color: #5457e9;
+  color: white;
+  border: 1px solid lightgray;
+}
+.photo-view-thumbnail {
+  text-align: center;
+}
+.photo-view-thumbnail > img {
+  max-width: 100%;
+}
+.photo-view-info-content {
+  width: 1000px;
+  height: 50px;
+  text-align: center;
+  border: 1px solid lightgray;
+}
+.photo-view-btn-zone {
+  padding: 20px 0px;
+  text-align: center;
+}
+.photo-view-btn-zone > button {
+  margin-right: 20px;
+}

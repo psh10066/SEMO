@@ -69,17 +69,32 @@ const GRBoardView = (props) => {
       }
     });
   };
+
   return (
     <div className="board-view-wrap">
-      <div className="board-view-title">{grBoard.grBoardTitle}</div>
-      <div className="board-view-info">
-        <div>{grBoard.memberId}</div>
-        <div>{grBoard.grBoardDate}</div>
-      </div>
-      <div
-        className="board-view-content"
-        dangerouslySetInnerHTML={{ __html: grBoard.grBoardContent }}
-      ></div>
+      <table className="board-view-table">
+        <thead>
+          <tbody>
+            <tr>
+              <th className="board-view-info">제목</th>
+              <td className="board-view-info-content">
+                {grBoard.grBoardTitle}
+              </td>
+            </tr>
+            <tr>
+              <th className="board-view-info">작성일</th>
+              <td className="board-view-info-content">{grBoard.grBoardDate}</td>
+            </tr>
+            <tr>
+              <th className="board-view-info">내용</th>
+              <td
+                className="board-view-info-content"
+                dangerouslySetInnerHTML={{ __html: grBoard.grBoardContent }}
+              ></td>
+            </tr>
+          </tbody>
+        </thead>
+      </table>
       <div className="board-view-btn-zone">
         {isLogin ? (
           member && member.memberNo === grBoard.grBoardWriter ? (

@@ -9,7 +9,6 @@ const ModifyMyInfo = (props) => {
   const member = props.member;
   const setMember = props.setMember;
   const token = window.localStorage.getItem("token");
-  const setIsLogin = props.setIsLogin;
 
   const modifyMyPassword = () => {
     navigate("/mypage/modifyMyPassword");
@@ -45,16 +44,11 @@ const ModifyMyInfo = (props) => {
     setMember({ ...member });
   };
 
-  //
-  //
-  //
-  //
-  //
-
+  //저장버튼
   const updateMember = () => {
     const token = window.localStorage.getItem("token");
     axios
-      .post("/member/update", member, {
+      .post("/member/updateMyInfo", member, {
         headers: {
           Authorization: "Bearer " + token,
         },
@@ -67,7 +61,13 @@ const ModifyMyInfo = (props) => {
       })
       .catch((res) => {
         if (res.response.status === 403) {
-          navigate("/login");
+          Swal.fire({
+            title: "로그인이 필요한 서비스 입니다.",
+            text: "로그인 페이지로 이동합니다.",
+            icon: "info",
+          }).then(() => {
+            navigate("/login");
+          });
         }
       });
   };
@@ -95,8 +95,6 @@ const ModifyMyInfo = (props) => {
             <td>
               <input
                 type="text"
-                data={member.memberName}
-                setData={setMemberName}
                 content="memberName"
                 value={member.memberName}
                 className="input-style"
@@ -109,8 +107,6 @@ const ModifyMyInfo = (props) => {
             <td>
               <input
                 type="text"
-                data={member.memberPhone}
-                setData={setMemberPhone}
                 content="memberPhone"
                 value={member.memberPhone}
                 className="input-style"
@@ -123,8 +119,6 @@ const ModifyMyInfo = (props) => {
             <td>
               <input
                 type="text"
-                data={member.memberMail}
-                setData={setMemberMail}
                 id="memberMail"
                 value={member.memberMail}
                 className="input-style"

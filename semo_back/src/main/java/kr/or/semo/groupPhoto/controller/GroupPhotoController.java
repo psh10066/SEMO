@@ -1,5 +1,6 @@
 package kr.or.semo.groupPhoto.controller;
 
+import java.io.File;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,12 +34,12 @@ public class GroupPhotoController {
 		return map;
 	}
 	@PostMapping(value="/insert")
-	public int insertGroupPhoto(@ModelAttribute GroupPhoto gp, @ModelAttribute MultipartFile thnmbnail, @ModelAttribute MultipartFile[] grPhotoFile, @RequestAttribute String memberId) {
+	public int insertGroupPhoto(@ModelAttribute GroupPhoto gp, @ModelAttribute MultipartFile thumbnail, @RequestAttribute String memberId) {
 		gp.setMemberId(memberId);
-		String savepath = root+"/groupPhoto";
-		if(thnmbnail != null) {
-			String filename = thnmbnail.getOriginalFilename();
-			String filepath = fileUtil.getfilepath(savepath, filename, thnmbnail);
+		String savepath = root+"groupPhoto/";
+		if(thumbnail != null) {
+			String filename = thumbnail.getOriginalFilename();
+			String filepath = fileUtil.getfilepath(savepath, filename, thumbnail);
 			gp.setGrPhotoImg(filepath);
 		}
 		int result = groupPhotoService.insertGroupPhoto(gp);
@@ -49,5 +50,34 @@ public class GroupPhotoController {
 	public GroupPhoto view(@PathVariable int grPhotoNo) {
 		return groupPhotoService.selectOneGroupPhoto(grPhotoNo);
 	}
-	
+	//수정
+	@PostMapping(value="/modify")
+	public int modify(@ModelAttribute GroupPhoto gp, @ModelAttribute MultipartFile thumbnail) {
+		if(gp.getGrPhotoImg().equals("null")) {
+			gp.setGrPhotoImg(null);
+		}
+		String savepath = root+"groupPhoto/";
+		File delFile = new File(savepath + gp.getGrPhotoImg());
+		delFile.delete();
+		if(thumbnail != null) {
+			String filepath = fileUtil.getfilepath(savepath, thumbnail.getOriginalFilename(), thumbnail);
+			gp.setGrPhotoImg(filepath);
+		}
+		int result = groupPhotoService.updateGroupPhoto(gp);
+		return result;
+		}
+			
+	//삭제
+	@GetMapping(value="/delete/{grPhotoNo}")
+	public int deletePhoto(@PathVariable int grPhotoNo) {
+		String grPhotoImg = groupPhotoService.delete(grPhotoNo);
+		if(grPhotoImg != null) {
+			String savepath = root+"groupPhoto/";
+			File delFile = new File(savepath+grPhotoImg);
+			delFile.delete();
+			return 1;
+		}else {
+			return 0;
+		}
+	}
 }

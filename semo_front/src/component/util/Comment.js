@@ -80,6 +80,12 @@ const CommentItem = (props) => {
   const comment = props.comment;
   const isLogin = props.isLogin;
   const member = props.member;
+  const [commentContent, setCommentContent] = useState("");
+  const textRef = useRef();
+  const resizeHeight = () => {
+    textRef.current.style.height = "auto";
+    textRef.current.style.height = textRef.current.scrollHeight + "px";
+  };
 
   //   console.log(comment);
   function formatTime(postTime) {
@@ -113,6 +119,26 @@ const CommentItem = (props) => {
       return "방금";
     }
   }
+  const loginMsg = () => {
+    Swal.fire("로그인 후 이용해 주세요.");
+  };
+  const deleteComment = () => {
+    // const token = window.localStorage.getItem("token");
+    // axios
+    //   .post("/feed/deleteComment", comment, {
+    //     headers: {
+    //       Authorization: "Bearer " + token,
+    //     },
+    //   })
+    //   .then((res) => {
+    //     console.log(res.data);
+    //   })
+    //   .catch((res) => {
+    //     console.log(res.response.status);
+    //   });
+    console.log("삭제하기");
+    console.log(comment);
+  };
   return (
     <div className="comment-wrap">
       <div className="comment-top">
@@ -144,13 +170,27 @@ const CommentItem = (props) => {
       </div>
       <div className="comment-mid">
         <div className="commentItem-content">{comment.feedCommentContent}</div>
+        <textarea
+          name="commentContent"
+          className="comment-modify-form"
+          placeholder="댓글 추가..."
+          ref={textRef}
+          onInput={resizeHeight}
+          defaultValue={comment.feedCommentContent}
+          id={comment.feedCommentContent}
+          onChange={(e) => {
+            setCommentContent(e.target.value);
+          }}
+        />
       </div>
       <div className="comment-bottom">
         {isLogin ? (
           member && member.memberNo === comment.feedCommentWriter ? (
             <div className="comment-bottom-right">
               <div className="comment-modify">수정</div>
-              <div className="comment-delete">삭제</div>
+              <div className="comment-delete" onClick={deleteComment}>
+                삭제
+              </div>
               <div className="comment-recommentWrite">답글달기</div>
             </div>
           ) : (
@@ -159,7 +199,11 @@ const CommentItem = (props) => {
             </div>
           )
         ) : (
-          ""
+          <div className="comment-bottom-right">
+            <div className="comment-recommentWrite" onClick={loginMsg}>
+              답글달기
+            </div>
+          </div>
         )}
       </div>
     </div>

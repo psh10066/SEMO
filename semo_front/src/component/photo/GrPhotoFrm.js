@@ -1,21 +1,18 @@
 import { useState } from "react";
 import { Button1 } from "../util/Buttons";
 import Input from "../util/InputFrm";
-import TextEditor from "../util/TextEditor";
 
 const GrPhotoFrm = (props) => {
   const grPhotoTitle = props.grPhotoTitle;
   const setGrPhotoTitle = props.setGrPhotoTitle;
   const grPhotoContent = props.grPhotoContent;
   const setGrPhotoContent = props.setGrPhotoContent;
-  const grThumbnail = props.grThmbnail;
-  const setGrThumbnail = props.setGrThmbnail;
+  const thumbnail = props.thumbnail;
+  const setThumbnail = props.setThumbnail;
   const grPhotoFile = props.grPhotoFile;
   const setGrPhotoFile = props.setGrPhotoFile;
   const grPhotoImg = props.grPhotoImg;
-  const setGrPhotoImg = props.setGrPtohoImg;
-  const fileList = props.fileList;
-  const setFileList = props.setFileList;
+  const setGrPhotoImg = props.setGrPhotoImg;
   const buttonEvent = props.buttonEvent;
   const type = props.type;
   //새첨부파일 출력용 state
@@ -23,7 +20,7 @@ const GrPhotoFrm = (props) => {
   const thumbnailChange = (e) => {
     const files = e.currentTarget.files;
     if (files.length !== 0 && files[0] != 0) {
-      setGrThumbnail(files[0]);
+      setThumbnail(files[0]);
       //화면에 썸네일 미리보기
       const reader = new FileReader();
       reader.readAsDataURL(files[0]);
@@ -31,7 +28,7 @@ const GrPhotoFrm = (props) => {
         setGrPhotoImg(reader.result);
       };
     } else {
-      setGrThumbnail({});
+      setThumbnail({});
       setGrPhotoImg(null);
     }
   };
@@ -49,7 +46,7 @@ const GrPhotoFrm = (props) => {
       <div className="photo-frm-top">
         <div className="photo-thumbnail">
           {grPhotoImg === null ? (
-            <img src="/image/default.png" />
+            <img src="/image/photo.png" />
           ) : (
             <img src={grPhotoImg} />
           )}
@@ -77,7 +74,7 @@ const GrPhotoFrm = (props) => {
                 <td>
                   <input
                     type="file"
-                    id="thumbnail"
+                    id="photo-thumbnail"
                     accept="img/*"
                     onChange={thumbnailChange}
                   />
@@ -90,10 +87,12 @@ const GrPhotoFrm = (props) => {
                 <td>
                   <input type="file" onChange={changeFile} multiple />
                 </td>
+              </tr>
+              <tr>
                 <td>
                   <label htmlFor="grPhotoContent">내용</label>
                 </td>
-                <td>
+                <td className="input">
                   <Input
                     type="text"
                     data={grPhotoContent}

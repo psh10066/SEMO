@@ -17,3 +17,4 @@ npm install leva
 
 npm install react-daum-postcode
 npm install react-kakao-maps-sdk
+npm install nodemailer --save
