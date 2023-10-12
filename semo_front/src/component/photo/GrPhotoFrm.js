@@ -92,13 +92,13 @@ const GrPhotoFrm = (props) => {
                 <td>
                   <label htmlFor="grPhotoContent">내용</label>
                 </td>
-                <td className="input">
-                  <Input
+                <td className="input-content">
+                  <textarea
+                    className="input-form"
                     type="text"
-                    data={grPhotoContent}
-                    setData={setGrPhotoContent}
-                    content="grPhotoContent"
-                  />
+                    value={grPhotoContent || ""}
+                    onChange={(e) => setGrPhotoContent(e.currentTarget.value)}
+                  ></textarea>
                 </td>
               </tr>
             </tbody>
