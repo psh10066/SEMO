@@ -79,11 +79,6 @@ const PageList = (props) => {
     <div>
       <div className="page-category-wrap">
         <ul>
-          {/* 
-        {pageList.map((page, index) => {
-          return <PageItem key={"page" + index} page={page} />;
-        })}
-         */}
           {categories.map((category, index) => {
             return (
               <li key={"category" + index}>
@@ -117,100 +112,9 @@ const PageList = (props) => {
                   </div>
                 )}
               </li>
-            ); //리턴 닫기
+            );
           })}
         </ul>
-        {/* 
-          <div
-            className="page-default"
-            onClick={() => {
-              setCategoryLocal("all");
-              //setCategoryValue(0);
-              console.log(categoryLocal);
-              console.log(categoryValue);
-            }}
-          >
-            전체
-          </div>
-          <div
-            className="page-category"
-            onClick={() => {
-              //document.querySelectorAll(".page-item a")[0].click();
-              setReqPage(1);
-              setCategoryLocal("groupCategory");
-              setCategoryValue(1);
-              console.log(categoryLocal);
-              console.log(categoryValue);
-            }}
-          >
-            문화·예술
-          </div>
-          <div
-            className="page-category"
-            onClick={() => {
-              //document.querySelectorAll(".page-item a")[0].click();
-              setReqPage(1);
-              setCategoryLocal("groupCategory");
-              setCategoryValue(2);
-              console.log(categoryLocal);
-              console.log(categoryValue);
-            }}
-          >
-            운동·액티비티
-          </div>
-          <div
-            className="page-category"
-            onClick={() => {
-              //document.querySelectorAll(".page-item a")[0].click();
-              setReqPage(1);
-              setCategoryLocal("groupCategory");
-              setCategoryValue(3);
-              console.log(categoryLocal);
-              console.log(categoryValue);
-            }}
-          >
-            푸드·드링크
-          </div>
-          <div
-            className="page-category"
-            onClick={() => {
-              //document.querySelectorAll(".page-item a")[0].click();
-              setReqPage(1);
-              setCategoryLocal("groupLocal");
-              setCategoryValue(1);
-              console.log(categoryLocal);
-              console.log(categoryValue);
-            }}
-          >
-            서울
-          </div>
-          <div
-            className="page-category"
-            onClick={() => {
-              //document.querySelectorAll(".page-item a")[0].click();
-              setReqPage(1);
-              setCategoryLocal("groupLocal");
-              setCategoryValue(2);
-              console.log(categoryLocal);
-              console.log(categoryValue);
-            }}
-          >
-            경기
-          </div>
-          <div
-            className="page-category"
-            onClick={() => {
-              //document.querySelectorAll(".page-item a")[0].click();
-              setReqPage(1);
-              setCategoryLocal("groupLocal");
-              setCategoryValue(3);
-              console.log(categoryLocal);
-              console.log(categoryValue);
-            }}
-          >
-            부산
-          </div>
-          */}
       </div>
       <div className="page-list-wrap">
         {pageList.map((page, index) => {
@@ -227,20 +131,7 @@ const PageList = (props) => {
     </div>
   );
 };
-{
-  /* 
-const PageCategoryItem = (props) => {
-  const pageCategory = props.pageCategory;
-  console.log(pageCategory);
-  const navigate = useNavigate();
-  return (
-    <div className="page-category">
-      <div>{pageCategory.groupCategory}테스트</div>
-    </div>
-  );
-};
-*/
-}
+
 const PageItem = (props) => {
   const page = props.page;
   //console.log(page);
