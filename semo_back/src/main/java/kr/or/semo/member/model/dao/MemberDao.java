@@ -27,6 +27,8 @@ public interface MemberDao {
 
 
 
+	Member selectByOauthLogin(Member accessMember);
+
 
 
 }

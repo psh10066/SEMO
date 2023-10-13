@@ -66,8 +66,8 @@
 		select group_maxnum from group_tbl where group_no=#{groupNo}
 	</select>
 	
-<select id="groupChatRoomName" resultType="java.lang.String">
-    SELECT g.group_name
+<select id="groupChatRoomName" resultType="Group">
+    SELECT g.group_name,g.group_no
     FROM group_tbl g
     WHERE g.group_no IN (
         SELECT cr.group_no

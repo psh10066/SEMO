@@ -19,9 +19,11 @@ import { Mypage } from "./component/mypage/Mypage";
 import Chat from "./component/chat/Chat";
 import GrPhotoMain from "./component/photo/GrPhotoMain";
 import MeetingMain from "./component/meeting/MeetingMain";
+import KakaoCallBack from "./component/member/KakaoCallback";
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
+
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     if (token === null) {
@@ -41,6 +43,7 @@ function App() {
             element={<AdminMain isLogin={isLogin} setIsLogin={setIsLogin} />}
           />
           <Route path="/login" element={<Login setIsLogin={setIsLogin} />} />
+          <Route path="/oauth2/kakao" element={<KakaoCallBack />} />
           <Route path="/join" element={<Join />} />
           <Route
             path="/group/*"
