@@ -173,24 +173,17 @@ const GroupView = (props) => {
   ]);
 
   useEffect(() => {
-    // 이 부분에서 selectMeeting 함수를 호출
-    selectMeetingList();
-  }, [groupNo]);
-
-  const selectMeetingList = () => {
-    if (meetingList) {
+    if (!meetingList) {
       axios
         .get("/meeting/view/" + groupNo)
         .then((res) => {
-          // console.log(res.data);
           setMeetingList(res.data);
-          // console.log(meetingList);
         })
         .catch((error) => {
           console.log(error);
         });
     }
-  };
+  }, [groupNo]);
 
   return (
     <div className="group-view-wrap">
@@ -222,6 +215,7 @@ const GroupView = (props) => {
             groupNo={groupNo}
             isLogin={isLogin}
             isJoin={isJoin}
+            member={member}
             groupLevel={groupLevel}
           />
           <div className="group-view-category">
