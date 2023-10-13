@@ -50,7 +50,8 @@ const Comment = (props) => {
   const [commentList, setCommentList] = useState([]);
   const [reCommentList, setReCommentList] = useState([]);
   const [feedReCommentContent, setFeedRecommentContent] = useState("");
-  const [changeFeedComment, setChangeFeedComment] = useState([true]); //피드댓글 새로고침
+  const changeFeedComment = props.changeFeedComment;
+  const setChangeFeedComment = props.setChangeFeedComment;
   const feedNo = feed.feedNo;
 
   //댓글 작성하기

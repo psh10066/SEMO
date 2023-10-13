@@ -40,6 +40,10 @@ public interface FeedDao {
 
 	List feedReCommentList(int feedNo);
 
+	int getCommentCount(int feedNo);
+
+	int feedCount(int feedWriter);
+
 
 
 }

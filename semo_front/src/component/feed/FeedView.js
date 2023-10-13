@@ -6,6 +6,7 @@ import { Button1 } from "../util/Buttons";
 import Swal from "sweetalert2";
 import FeedModal from "../util/FeedModal";
 import Comment from "../util/Comment";
+import MyModal from "../util/MyModal";
 
 const FeedView = (props) => {
   const isLogin = props.isLogin;
@@ -14,12 +15,15 @@ const FeedView = (props) => {
   const [feed, setFeed] = useState({});
   const [member, setMember] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [feedLikeCount, setFeedLikeCount] = useState(0);
   const [isLike, setIsLike] = useState(0);
-  const [feedLikeList, setFeedLikeList] = useState([]);
+  const [memberList, setMemberList] = useState([]);
   const [changeFeed, setChangeFeed] = useState(true);
   const navigate = useNavigate();
   const token = window.localStorage.getItem("token");
+  const [commentCount, setCommentCount] = useState(0);
+  const [changeFeedComment, setChangeFeedComment] = useState([true]); //피드댓글 새로고침
 
   useEffect(() => {
     axios
@@ -68,12 +72,22 @@ const FeedView = (props) => {
       .get("/feed/getFeedLike/" + feedNo)
       .then((res) => {
         setFeedLikeCount(res.data.feedLikeCount);
-        setFeedLikeList(res.data.list);
+        setMemberList(res.data.list);
+        // console.log(res.data);
+        // console.log(memberList);
       })
       .catch((res) => {
         console.log(res.response.status);
       });
-  }, [changeFeed]);
+    axios
+      .get("/feed/getCommentCount/" + feedNo)
+      .then((res) => {
+        setCommentCount(res.data);
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+  }, [changeFeed, changeFeedComment]);
   const handelClick = () => {
     //모달오픈
     setIsOpen(true);
@@ -84,6 +98,12 @@ const FeedView = (props) => {
   };
   const onCancel = () => {
     setIsOpen(false);
+  };
+  const modalClick = () => {
+    setIsModalOpen(true);
+  };
+  const onModalCancel = () => {
+    setIsModalOpen(false);
   };
   const deleteFeed = () => {
     Swal.fire({
@@ -246,11 +266,20 @@ const FeedView = (props) => {
                 favorite_border
               </span>
             )}
-            <span className="feed-count">{feedLikeCount}</span>
+            <span className="feed-count" onClick={modalClick}>
+              {feedLikeCount}
+            </span>
+            <MyModal
+              isModalOpen={isModalOpen}
+              onModalCancel={onModalCancel}
+              memberList={memberList}
+              isLogin={isLogin}
+              member={member}
+            />
           </div>
           <div className="feed-view-commentCount">
             <span className="material-icons">chat_bubble_outline</span>
-            <span className="feed-count">15</span>
+            <span className="feed-count">{commentCount}</span>
           </div>
           {/* <div className="feed-like-person-wrap">
             <AvatarGroup max={4} total={feedLikeCount}>
@@ -279,7 +308,13 @@ const FeedView = (props) => {
         <div className="feed-view-content">{feed.feedContent}</div>
       </div>
       <div className="feed-view-bottom">
-        <Comment isLogin={isLogin} member={member} feed={feed} />
+        <Comment
+          isLogin={isLogin}
+          member={member}
+          feed={feed}
+          changeFeedComment={changeFeedComment}
+          setChangeFeedComment={setChangeFeedComment}
+        />
       </div>
     </div>
   );

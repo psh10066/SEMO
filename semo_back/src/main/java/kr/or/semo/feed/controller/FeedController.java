@@ -55,7 +55,6 @@ public class FeedController {
 	//피드리스트 가져오기
 	@GetMapping(value="/list/{feedWriter}")
 	public List feedList(@PathVariable int feedWriter) {
-		System.out.println("feedWriter : "+feedWriter);
 		return feedService.selectFeedList(feedWriter);
 	}
 	
@@ -144,8 +143,17 @@ public class FeedController {
 	//피드 대댓글 가져오기
 	@GetMapping(value="/feedReCommentList/{feedNo}")
 	public List feedReCommentList(@PathVariable int feedNo) {
-		System.out.println("피드번호 : "+feedNo);
 		return feedService.feedReCommentList(feedNo);
+	}
+	//피드 댓글 수
+	@GetMapping(value="/getCommentCount/{feedNo}")
+	public int getCommentCount(@PathVariable int feedNo) {
+		return feedService.getCommentCount(feedNo);
+	}
+	//피드 수
+	@GetMapping(value="/feedCount/{feedWriter}")
+	public int feedCount(@PathVariable int feedWriter) {
+		return feedService.feedCount(feedWriter);
 	}
 
 }

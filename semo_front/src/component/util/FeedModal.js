@@ -110,7 +110,7 @@ const FeedModal = ({
 
   return (
     <ReactModal isOpen={isOpen}>
-      <div className="feed-write-cancel">
+      <div className="modal-cancel">
         {type === "write" ? (
           <span
             className="material-icons cancel-icon"

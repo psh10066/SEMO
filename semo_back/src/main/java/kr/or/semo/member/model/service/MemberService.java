@@ -1,5 +1,7 @@
 package kr.or.semo.member.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -72,9 +74,15 @@ public class MemberService {
 	public int updateMyFeed(Member member) {
 		return memberDao.updateMyFeed(member);
 	}
-
+	@Transactional
 	public int updateMyLike(Member member) {
 		return memberDao.updateMyLike(member);
+	}
+
+	public List memberList(String memberNoList) {
+		String[] memberNo = {};
+		memberNo = memberNoList.split(",");
+		return memberDao.memberList(memberNo);
 	}
 
 }
