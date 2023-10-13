@@ -118,8 +118,9 @@ public class GroupController {
 	}
 	//그룹에 있는 모든 회원번호, 회원이름 불러오기
 	@PostMapping(value="/groupAllMember")
-	public List groupAllMember(@RequestBody int groupNo ) {
-		return groupService.groupAllMember(groupNo);
+	public List groupAllMember(@RequestBody Map<String, Integer> request) {
+	    int groupNo = request.get("groupNo"); //객체로 보낸거 키(groupNo) , 값 가지고옴 
+	    return groupService.groupAllMember(groupNo);
 	}
 	
 	

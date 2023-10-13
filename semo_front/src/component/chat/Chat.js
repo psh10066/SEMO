@@ -8,6 +8,7 @@ import ChatRoom from "./ChatRoom";
 const Chat = (props) => {
   const navigate = useNavigate();
   const isLogin = props.isLogin;
+  const token = window.localStorage.getItem("token");
 
   //로그인한 유저 (이름) 불러오기
   const [member, setMember] = useState({});
@@ -23,22 +24,16 @@ const Chat = (props) => {
       })
       .catch((res) => {
         if (res.response.status === 403) {
-          console.log(res.response.status);
+          Swal.fire({
+            title: "로그인이 필요한 서비스 입니다.",
+            text: "로그인 페이지로 이동합니다.",
+            icon: "info",
+          }).then(() => {
+            navigate("/login");
+          });
         }
       });
   }, []);
-
-  //메인에서 '채팅'클릭했는데 로그인 안되있으면
-  if (!isLogin) {
-    Swal.fire({
-      title: "로그인이 필요한 서비스 입니다.",
-      text: "로그인 페이지로 이동합니다.",
-      icon: "info",
-    }).then(() => {
-      navigate("/login");
-    });
-  }
-  const token = window.localStorage.getItem("token");
 
   //채팅방이름 불러오기 == 그룹이름
   const [roomName, setRoomName] = useState([]);
@@ -67,18 +62,17 @@ const Chat = (props) => {
   //그룹에 있는 모든 멤버들 불러오기
   const [groupAllMemberNo, setGroupAllMemberNo] = useState([]); //모든 멤버 번호
   const [groupAllMemberName, setGroupAllMemberName] = useState([]); //모든 멤버 이름
-  const [selectedGroupNumber, setSelectedGroupNumber] = useState(""); //전달받은 그룹번호
+  const [selectedGroupNumber, setSelectedGroupNumber] = useState(-1); //탭 클릭시 전달받은 그룹번호
 
   const groupNumber = (number) => {
     setSelectedGroupNumber(number);
   };
   console.log(selectedGroupNumber);
-
   useEffect(() => {
     axios
       .post(
-        "/group/groupAllMember", //객체로 멤버넘버,멤버이름 불러옴
-        selectedGroupNumber,
+        "/group/groupAllMember", 
+        {groupNo:selectedGroupNumber},
         {
           headers: {
             Authorization: "Bearer " + token,
@@ -92,9 +86,14 @@ const Chat = (props) => {
       .catch((res) => {
         console.log(res.response.status);
       });
-  }, []);
+  }, [selectedGroupNumber]); //탭한 그룹이 바뀔때마다
+  const chatTap = () => {
+    navigate("/chat/rooms")
+  }
+
 
   console.log(groupAllMemberNo);
+  console.log(groupAllMemberName);
 
   return (
     <div className="chat-wrap">
@@ -108,7 +107,8 @@ const Chat = (props) => {
             <div
               className="chatEnter"
               key={index}
-              onClick={() => groupNumber(chatHostAddress[index])}
+              onClick={(e) => {groupNumber(chatHostAddress[index]);
+              chatTap(e)}}
             >
               {name}
             </div>
@@ -117,12 +117,13 @@ const Chat = (props) => {
         <div className="chat-room">
           <Routes>
             <Route
+            path="rooms/*"
               element={
                 <ChatRoom
-                  setGroupAllMemberNo={setGroupAllMemberNo}
-                  setGroupAllMemberName={setGroupAllMemberName}
+                  groupAllMemberNo={groupAllMemberNo}
+                  groupAllMemberName={groupAllMemberName}
                   senderName={member.memberName}
-                  roomId={setSelectedGroupNumber}
+                  roomId={selectedGroupNumber}
                 />
               }
             />

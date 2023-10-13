@@ -1,168 +1,81 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Client } from "@stomp/stompjs";
-import SockJS from "sockjs-client";
-
-let stompClient = null;
 
 const ChatRoom = (props) => {
-  const roomId = props.roomId;
-  const senderName = props.senderName;
-  const setGroupAllMemberName = props.setGroupAllMemberName;
-  const setGroupAllMemberNo = props.setGroupAllMemberNo;
-
-  const [groupchats, setGroupchats] = useState(new Map());
-  const [tab, setTab] = useState("채팅방");
-  const [userData, setUserData] = useState({
-    username: "",
-    recievername: "",
-    connected: false,
-    message: "",
-  });
+  const { roomId, senderName } = props;
+  const [messages, setMessages] = useState({}); 
+  const [newMessage, setNewMessage] = useState("");
+  const clientRef = useRef(null);
 
   useEffect(() => {
-    setUserData((prevData) => ({ ...prevData, username: senderName }));
-  }, [senderName]);
-
-  const handleMessage = (event) => {
-    const { value } = event.target;
-    setUserData((prevData) => ({ ...prevData, message: value }));
-  };
-
-  const registerUser = () => {
-    const socket = new SockJS("http://localhost:9999/ws");
-    stompClient = new Client({
-      webSocketFactory: () => socket,
-      debug: (str) => console.log(str),
+    const client = new Client({
+      brokerURL: "ws://localhost:9999/ws",
+      onConnect: () => {
+        console.log("WebSocket connected");
+        client.subscribe(`/chat/rooms/${roomId}`, (message) => {
+          const receivedMsg = JSON.parse(message.body);
+          console.log("Received message:", receivedMsg);  
+          onMessageReceive(receivedMsg, `/chat/rooms/${roomId}`);
+        });
+      },
+      onDisconnect: () => {
+        console.log("WebSocket disconnected");
+      },
     });
 
-    stompClient.onConnect = (frame) => {
-      setUserData((prevData) => ({ ...prevData, connected: true }));
-      stompClient.subscribe(`/chat/rooms/${roomId}`, onGroupMessageReceived);
-      userJoin();
+    client.onStompError = (frame) => {
+      console.error('STOMP error', frame);
     };
 
-    stompClient.onStompError = (frame) => {
-      console.error(
-        "Broker reported error: " + frame.headers["message"],
-        "Additional details: " + frame.body
-      );
+    client.activate();
+    clientRef.current = client;  
+
+    return () => {
+      client.deactivate();
     };
+  }, [roomId]);
 
-    stompClient.activate();
-  };
-
-  const onGroupMessageReceived = (payload) => {
-    const payloadData = JSON.parse(payload.body);
-    setGroupchats((prevGroupChats) => {
-      const updatedGroupChats = new Map(prevGroupChats);
-      if (updatedGroupChats.get(payloadData.senderName)) {
-        updatedGroupChats.get(payloadData.senderName).push(payloadData);
-      } else {
-        updatedGroupChats.set(payloadData.senderName, [payloadData]);
-      }
-      return updatedGroupChats;
+  const onMessageReceive = (msg, topic) => {
+    setMessages((prevMessages) => {
+      const currentRoomMessages = prevMessages[roomId] || [];
+      return {
+        ...prevMessages,
+        [roomId]: [...currentRoomMessages, msg],
+      };
     });
   };
 
-  const onError = (error) => {
-    console.log("Error:", error);
-  };
-
-  const userJoin = () => {
-    if (stompClient) {
-      const chatMessage = {
-        senderName: userData.username,
-        message: "",
-        status: "JOIN",
+  const sendMessage = () => {
+    if (clientRef.current && newMessage) {
+      const messagePayload = {
+        message: newMessage,
+        senderName: senderName,
+        roomId: roomId,
       };
-      stompClient.publish({
-        destination: `/app/chat/${roomId}`,
-        body: JSON.stringify(chatMessage),
-      });
-    }
-  };
-
-  const sendGroupChatMessage = () => {
-    if (stompClient) {
-      const chatMessage = {
-        senderName: userData.username,
-        recievername: tab,
-        message: userData.message,
-        status: "MESSAGE",
-      };
-      stompClient.publish({
-        destination: `/app/chat/${roomId}`,
-        body: JSON.stringify(chatMessage),
-      });
-      setUserData((prevData) => ({ ...prevData, message: "" }));
+      clientRef.current.publish({destination: "/app/chat/" + roomId, body: JSON.stringify(messagePayload)});
+      setNewMessage("");
     }
   };
 
   return (
-    <div className="chat-container">
-      {userData.connected ? (
-        <div className="chat-box">
-          <div className="chat-member-list">
-            <ul>
-              <li
-                onClick={() => {
-                  setTab("채팅방");
-                }}
-                className={`member ${tab === "채팅방" && "active"}`}
-              >
-                채팅방
-              </li>
-              {[...groupchats.keys()].map((name, index) => (
-                <li
-                  className={`member ${tab === name && "active"}`}
-                  key={index}
-                >
-                  {name}
-                </li>
-              ))}
-            </ul>
-          </div>
-          {tab !== "채팅방" && (
-            <div className="chat-content">
-              <ul className="chat-messages">
-                {[...groupchats.get(tab)].map((chat, index) => (
-                  <li className="chat-message" key={index}>
-                    {chat.senderName !== userData.username && (
-                      <div className="avatar">{chat.senderName}</div>
-                    )}
-                    <div className="chat-message-data">{chat.message}</div>
-                    {chat.senderName === userData.username && (
-                      <div className="avatar self">{chat.senderName}</div>
-                    )}
-                  </li>
-                ))}
-              </ul>
-
-              <div className="send-message">
-                <input
-                  type="text"
-                  className="input-message"
-                  placeholder="메세지를 입력하세요"
-                  name="message"
-                  value={userData.message}
-                  onChange={handleMessage}
-                />
-                <button
-                  type="button"
-                  className="send-button"
-                  onClick={sendGroupChatMessage}
-                >
-                  전송
-                </button>
-              </div>
-            </div>
-          )}
+    <div>
+      <div>
+        <h2>Room: {roomId}</h2>
+        <div>
+          {messages[roomId]?.map((msg, idx) => (
+            <div key={idx}>{msg.senderName}: {msg.message}</div>
+          ))}
         </div>
-      ) : (
-        <div className="chatting-regist"></div>
-      )}
+        <input
+          type="text"
+          value={newMessage}
+          onChange={(e) => setNewMessage(e.target.value)}
+        />
+        <button onClick={sendMessage}>Send</button>
+      </div>
     </div>
   );
 };
 
 export default ChatRoom;
+

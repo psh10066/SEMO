@@ -82,7 +82,7 @@
 		SELECT m.member_no,m.member_name
 		FROM gr_join gj
 		JOIN member m ON gj.member_no = m.member_no
-		WHERE gj.group_no = #{groupNo};
+		WHERE gj.group_no = #{groupNo}
 	</select>
 	
 	
