@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import kr.or.semo.PageInfo;
 import kr.or.semo.groupBoard.model.vo.GroupBoard;
+import kr.or.semo.groupBoard.model.vo.GroupBoardComment;
 
 @Mapper
 public interface GroupBoardDao {
@@ -21,5 +22,17 @@ public interface GroupBoardDao {
 	int updateGroupBoard(GroupBoard gb);
 
 	int deleteGroupBoard(int grBoardNo);
+	
+	int insertComment(GroupBoardComment gbc);
+
+	List groupBoardCommentList(int grBoardNo);
+
+	int deleteComment(int grBoardCommentNo);
+
+	int modifyComment(GroupBoardComment gbc);
+
+	List groupBoardReCommentList(int grBoardNo);
+
+	
 
 }
