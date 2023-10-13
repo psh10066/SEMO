@@ -32,6 +32,7 @@ public class FileUtil {
 			}
 			//C:/Temp/upload/notice/+filepath
 			File checkFile = new File(savepath+filepath);
+			
 			if(!checkFile.exists()) {
 				try {
 					uploadFile.transferTo(checkFile);

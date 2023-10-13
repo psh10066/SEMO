@@ -71,6 +71,9 @@ const Mypage = (props) => {
   const myfeed = () => {
     navigate("/feed/profile", { state: { memberNo: member.memberNo } });
   };
+  const mychat = () => {
+    navigate("/chat");
+  };
 
   return (
     <div className="mypage-all-wrap">
@@ -89,7 +92,7 @@ const Mypage = (props) => {
             <div className="material-icons">interests</div>
             <div className="texta">내 피드</div>
           </div>
-          <div className="mypage-myfeed b">
+          <div className="mypage-myfeed b" onClick={mychat}>
             <div className="material-icons">chat_bubble</div>
             <div className="textb">내 채팅</div>
           </div>
@@ -122,43 +125,21 @@ const Mypage = (props) => {
             <Route path="myInfo" element={<MyInfo />} />
             <Route
               path="modifyMyinfo"
-              element={
-                <ModifyMyInfo
-                  member={member}
-                  setMember={setMember}
-                  setIsLogin={setIsLogin}
-                />
-              }
-            />
-            <Route
-              path="modifyMyFeed"
-              element={
-                <ModifyMyFeed
-                  member={member}
-                  setMember={setMember}
-                  setIsLogin={setIsLogin}
-                />
-              }
-            />
-            <Route
-              path="modifyMyLike"
-              element={
-                <ModifyMyLike
-                  member={member}
-                  setMember={setMember}
-                  setIsLogin={setIsLogin}
-                />
-              }
+              element={<ModifyMyInfo member={member} setMember={setMember} />}
             />
             <Route
               path="modifyMyPassword"
               element={
-                <ModifyMyPassword
-                  member={member}
-                  setMember={setMember}
-                  setIsLogin={setIsLogin}
-                />
+                <ModifyMyPassword member={member} setMember={setMember} />
               }
+            />
+            <Route
+              path="modifyMyFeed"
+              element={<ModifyMyFeed member={member} setMember={setMember} />}
+            />
+            <Route
+              path="modifyMyLike"
+              element={<ModifyMyLike member={member} setMember={setMember} />}
             />
 
             <Route

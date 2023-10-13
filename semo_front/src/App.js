@@ -61,7 +61,12 @@ function App() {
             path="/notice/*"
             element={<NoticeMain isLogin={isLogin} setIsLogin={setIsLogin} />}
           />
-          <Route path="/meeting/*" element={<MeetingMain />} />
+          <Route
+            path="/meeting/*"
+            element={<MeetingMain />}
+            isLogin={isLogin}
+            setIsLogin={setIsLogin}
+          />
           <Route
             path="/feed/*"
             element={<FeedMain isLogin={isLogin} setIsLogin={setIsLogin} />}
@@ -76,7 +81,11 @@ function App() {
             path="/mypage/*"
             element={<Mypage isLogin={isLogin} setIsLogin={setIsLogin} />}
           />
-          <Route path="/chat" element={<Chat />} />
+          <Route
+            path="/chat/*"
+            element={<Chat isLogin={isLogin} setIsLogin={setIsLogin} />}
+          />
+
           <Route path="/" element={<Mainpage />} />
         </Routes>
       </div>

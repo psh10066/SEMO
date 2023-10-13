@@ -1,10 +1,21 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Kakao from "../util/Kakao";
+import { Button1, Button2, Button3 } from "../util/Buttons";
+import { useNavigate } from "react-router";
 
 const MeetingView = (props) => {
+  const group = props.group;
   const groupNo = props.groupNo;
+  const isLogin = props.isLogin;
+  const isJoin = props.isJoin;
+  const groupLevel = props.groupLevel;
+
   const [meetingList, setMeetingList] = useState([]);
+  const navigate = useNavigate();
+  const meetingCreate = () => {
+    navigate("/meeting/create", { state: { groupNo: group.groupNo } });
+  };
 
   useEffect(() => {
     axios
@@ -81,6 +92,13 @@ const MeetingView = (props) => {
             </div>
           ))
         : ""}
+      {groupLevel == 1 ? (
+        <div id="meeting-btn-area">
+          <Button3 text="정모 만들기" clickEvent={meetingCreate} />
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

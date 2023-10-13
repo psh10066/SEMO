@@ -17,6 +17,7 @@ const PageList = (props) => {
     axios
       .get("/page/list/" + reqPage + "/" + categoryLocal + "/" + categoryValue)
       .then((res) => {
+        //document.querySelectorAll(".page-category-wrap div")[0].click();
         console.log(res.data);
         setPageList(res.data.pageList);
         setPageInfo(res.data.pi);
@@ -24,94 +25,96 @@ const PageList = (props) => {
       .catch((res) => {
         console.log(res.response.status);
       });
-  }, [reqPage, categoryLocal]);
+  }, [reqPage, categoryLocal, categoryValue]);
 
-  // axios.get("/page/list/"+(reqPage,groupCategory)).then((res)=>{
-  //   console.log(res.data)
-  //   setPageList
-  // })
+  const [categories, setCategories] = useState([
+    { text: "전체", categoryLocal: "all", categoryValue: 0, active: true },
+    {
+      text: "문화·예술",
+      categoryLocal: "groupCategory",
+      categoryValue: 1,
+      active: false,
+    },
+    {
+      text: "운동·액티비티",
+      categoryLocal: "groupCategory",
+      categoryValue: 2,
+      active: false,
+    },
+    {
+      text: "푸드·드링크",
+      categoryLocal: "groupCategory",
+      categoryValue: 3,
+      active: false,
+    },
+    {
+      text: "서울",
+      categoryLocal: "groupLocal",
+      categoryValue: 1,
+      active: false,
+    },
+    {
+      text: "경기",
+      categoryLocal: "groupLocal",
+      categoryValue: 2,
+      active: false,
+    },
+    {
+      text: "부산",
+      categoryLocal: "groupLocal",
+      categoryValue: 3,
+      active: false,
+    },
+  ]);
+
+  const activeCategory = (index) => {
+    categories.forEach((item) => {
+      item.active = false;
+    });
+    categories[index].active = true;
+    setCategories([...categories]);
+  };
 
   return (
     <div>
       <div className="page-category-wrap">
-        <div className="page-category">
-          {/* 
-        {pageList.map((page, index) => {
-          return <PageItem key={"page" + index} page={page} />;
-        })}
-         */}
-          <div
-            className="page-default"
-            onClick={() => {
-              setCategoryLocal("all");
-              //setCategoryValue(0);
-              console.log(categoryLocal);
-              console.log(categoryValue);
-            }}
-          >
-            전체
-          </div>
-          <div
-            onClick={() => {
-              setCategoryLocal("groupCategory");
-              setCategoryValue(1);
-              console.log(categoryLocal);
-              console.log(categoryValue);
-            }}
-          >
-            문화·예술
-          </div>
-          <div
-            onClick={() => {
-              setCategoryLocal("groupCategory");
-              setCategoryValue(2);
-              console.log(categoryLocal);
-              console.log(categoryValue);
-            }}
-          >
-            운동·액티비티
-          </div>
-          <div
-            onClick={() => {
-              setCategoryLocal("groupCategory");
-              setCategoryValue(3);
-              console.log(categoryLocal);
-              console.log(categoryValue);
-            }}
-          >
-            푸드·드링크
-          </div>
-          <div
-            onClick={() => {
-              setCategoryLocal("groupLocal");
-              setCategoryValue(1);
-              console.log(categoryLocal);
-              console.log(categoryValue);
-            }}
-          >
-            서울
-          </div>
-          <div
-            onClick={() => {
-              setCategoryLocal("groupLocal");
-              setCategoryValue(2);
-              console.log(categoryLocal);
-              console.log(categoryValue);
-            }}
-          >
-            경기
-          </div>
-          <div
-            onClick={() => {
-              setCategoryLocal("groupLocal");
-              setCategoryValue(3);
-              console.log(categoryLocal);
-              console.log(categoryValue);
-            }}
-          >
-            부산
-          </div>
-        </div>
+        <ul>
+          {categories.map((category, index) => {
+            return (
+              <li key={"category" + index}>
+                {category.active ? (
+                  <div
+                    className="page-category category-active"
+                    onClick={() => {
+                      activeCategory(index);
+                      setReqPage(1);
+                      setCategoryLocal(category.categoryLocal);
+                      setCategoryValue(category.categoryValue);
+                      console.log(category.categoryLocal);
+                      console.log(category.categoryValue);
+                    }}
+                  >
+                    {category.text}
+                  </div>
+                ) : (
+                  <div
+                    className="page-category"
+                    onClick={() => {
+                      activeCategory(index);
+                      setReqPage(1);
+                      setCategoryLocal(category.categoryLocal);
+                      setCategoryValue(category.categoryValue);
+                      console.log(categoryLocal);
+                      console.log(categoryValue);
+                    }}
+                  >
+                    {category.text}
+                  </div>
+                )}
+              </li>
+            );
+          })}
+        </ul>
       </div>
       <div className="page-list-wrap">
         {pageList.map((page, index) => {
@@ -128,20 +131,7 @@ const PageList = (props) => {
     </div>
   );
 };
-{
-  /* 
-const PageCategoryItem = (props) => {
-  const pageCategory = props.pageCategory;
-  console.log(pageCategory);
-  const navigate = useNavigate();
-  return (
-    <div className="page-category">
-      <div>{pageCategory.groupCategory}테스트</div>
-    </div>
-  );
-};
-*/
-}
+
 const PageItem = (props) => {
   const page = props.page;
   //console.log(page);

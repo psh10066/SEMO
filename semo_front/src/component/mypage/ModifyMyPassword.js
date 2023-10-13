@@ -53,7 +53,7 @@ const ModifyMyPassword = () => {
     if (checkPwMsg === "") {
       axios
         .post(
-          "/member/updateMember",
+          "/member/updatePwMember",
           { memberPw: memberPw },
           {
             headers: {
@@ -94,21 +94,29 @@ const ModifyMyPassword = () => {
                   <label htmlFor="memberPw">새 비밀번호</label>
                   <input
                     type="password"
-                    data={memberPw}
-                    setData={setMemberPw}
+                    value={memberPw}
                     content="memberPw"
+                    onBlur={pwCheckMsg}
+                    onChange={(e) => {
+                      // onChange prop으로 변경하고 pwCheckMsg도 호출
+                      setMemberPw(e.target.value);
+                      pwCheckMsg();
+                    }}
                   />
                 </div>
                 <div>
                   <label htmlFor="memberPw">새 비밀번호 확인</label>
                   <input
                     type="password"
-                    data={memberPwRe}
-                    setData={setMemberPwRe}
+                    value={memberPwRe}
                     content="memberPwRe"
-                    //
                     checkMsg={checkPwMsg}
-                    blurEvent={pwCheckMsg}
+                    onBlur={pwCheckMsg}
+                    onChange={(e) => {
+                      // onChange prop으로 변경하고 pwCheckMsg도 호출
+                      setMemberPwRe(e.target.value);
+                      pwCheckMsg();
+                    }}
                   />
                 </div>
               </div>

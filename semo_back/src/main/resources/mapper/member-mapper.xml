@@ -15,19 +15,16 @@
   </select>
   
   
- 	 <update id="updateMemberName">
+ 	<update id="updateMyInfo">
  			update MEMBER set
-			member_name = #{memberName}
-			where member_id=#{memberId}
- 	</update>
-   	 <update id="updateMemberMail">
- 			update MEMBER set
-			member_mail = #{memberMail}
-			where member_id=#{memberId}
- 	</update>
-     	 <update id="updateMemberPhone">
- 			update MEMBER set
+			member_name = #{memberName},
+			member_mail = #{memberMail},
 			member_phone = #{memberPhone}
+			where member_id=#{memberId}
+ 	</update>
+ 	 <update id="updatePwMember">
+ 			update MEMBER set
+			member_pw = #{memberPw}
 			where member_id=#{memberId}
  	</update>
   
@@ -35,6 +32,20 @@
   		select * from member where member_name=#{memberName} and member_id=#{memberId}
   	</select>
   
+   	<update id="updateMyFeed">
+ 			update MEMBER set
+			member_img = #{memberImg},
+			member_content = #{memberContent}
+			where member_id=#{memberId}
+ 	</update>
+   	<update id="updateMyLike">
+ 			update MEMBER set
+			member_category1 = #{memberCategory1},
+			member_category2 = #{memberCategory2},
+			member_local = #{memberLocal}
+			where member_id=#{memberId}
+ 	</update>
+   	 
   
   
 </mapper>

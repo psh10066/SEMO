@@ -16,4 +16,11 @@ public interface GroupPhotoDao {
 
 	GroupPhoto selectOneGroupPhoto(int grPhotoNo);
 
+	int insertGroupPhoto(GroupPhoto gp);
+
+	int updateGroupPhoto(GroupPhoto gp);
+
+	int deleteGroupPhoto(int grPhotoNo);
+
+
 }

@@ -11,6 +11,7 @@ const GrPhotoView = (props) => {
   const [grPhoto, setGrPhoto] = useState({});
   //회원정보 가져오기 위해서
   const [member, setMember] = useState(null);
+  const [grPhotoContentHtml, setGrPhotoContentHtml] = useState("");
   const navigate = useNavigate();
   //게시판정보
   useEffect(() => {
@@ -19,6 +20,9 @@ const GrPhotoView = (props) => {
       .then((res) => {
         console.log(res.data);
         setGrPhoto(res.data);
+        setGrPhotoContentHtml(
+          res.data.grPhotoContent.replaceAll("\r\n", "<br>")
+        );
       })
       .catch((res) => {
         console.log(res.response.status);
@@ -48,9 +52,9 @@ const GrPhotoView = (props) => {
   const deletePhoto = () => {
     Swal.fire({
       icon: "warning",
-      text: "게시글을 삭제하시겠습니까",
+      text: "게시글을 삭제하시겠습니까?",
       showCancelButton: true,
-      confirmButtonText: "삭제",
+      confirmButtonText: "확인",
       cancelButtonText: "취소",
     }).then((res) => {
       if (res.isConfirmed) {
@@ -71,25 +75,34 @@ const GrPhotoView = (props) => {
   };
   return (
     <div className="photo-view-wrap">
-      <div className="photo-view-title">{grPhoto.grPhotoNo}</div>
-      <div className="photo-view-info">
-        <div>{grPhoto.memberId}</div>
-        <div>{grPhoto.grPhotodDate}</div>
-      </div>
-      <div className="photo-view-thumbnail">
-        {grPhoto.grPhotoImg ? (
-          <img src={"/groupPhoto/" + grPhoto.grPhotoImg} />
-        ) : (
-          <img src="/image/default.png" />
-        )}
-      </div>
-      <div
-        className="photo-view-detail"
-        dangerouslySetInnerHTML={{ __html: grPhoto.grPhotoContent }}
-      ></div>
+      <table className="photo-view-table">
+        <tbody>
+          <tr>
+            <th className="photo-view-info">제목</th>
+            <td className="photo-view-info-content">{grPhoto.grPhotoTitle}</td>
+          </tr>
+          <tr>
+            <th className="photo-view-info">이미지</th>
+            <td className="photo-view-thumbnail">
+              {grPhoto.grPhotoImg ? (
+                <img src={"/groupPhoto/" + grPhoto.grPhotoImg} />
+              ) : (
+                <img src="/image/photo.png" />
+              )}
+            </td>
+          </tr>
+          <tr>
+            <th className="photo-view-info">내용</th>
+            <td
+              className="photo-view-info-content"
+              dangerouslySetInnerHTML={{ __html: grPhotoContentHtml }}
+            ></td>
+          </tr>
+        </tbody>
+      </table>
       <div className="photo-view-btn-zone">
         {isLogin ? (
-          member && member.memberNo === grPhoto.grPhotoWriter ? (
+          member && member.memberNo === grPhoto.memberNo ? (
             <>
               <Button2 text="수정" clickEvent={modify} />
               <Button2 text="삭제" clickEvent={deletePhoto} />

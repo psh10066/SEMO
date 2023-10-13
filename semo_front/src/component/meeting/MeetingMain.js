@@ -4,9 +4,13 @@ import MeetingView from "./MeetingView";
 
 const MeetingMain = (props) => {
   const isLogin = props.isLogin;
+  const setIsLogin = props.setIsLogin;
   return (
     <Routes>
-      <Route path="create" element={<MeetingCreate />} />
+      <Route
+        path="create"
+        element={<MeetingCreate isLogin={isLogin} setIsLogin={setIsLogin} />}
+      />
       <Route path="view" element={<MeetingView />} />
     </Routes>
   );

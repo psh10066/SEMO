@@ -55,7 +55,22 @@
   	select fc.*,member_name,member_img
 	from (select * from feed_comment)fc
 	join member on (feed_comment_writer = member_no)
-	where feed_no=#{feedNo} and feed_comment_no2 is null order by 1
+	where feed_no=#{feedNo} and feed_comment_no2 is null order by 1 desc
+  </select>
+  <delete id="deleteComment">
+  	delete from feed_comment where feed_comment_no=#{feedCommentNo}
+  </delete>
+  <update id="modifyComment">
+  	update feed_comment set feed_comment_content=#{feedCommentContent} where feed_comment_no=#{feedCommentNo}
+  </update>
+  <select id="feedReCommentList" resultType="feedComment">
+  	select fc.*,member_name,member_img
+	from (select * from feed_comment)fc
+	join member on (feed_comment_writer = member_no)
+	where feed_no=#{feedNo} and feed_comment_no2 is not null order by 1 desc
+  </select>
+  <select id="getCommentCount" resultType="int">
+  	select count(*) from feed_comment where feed_no=#{feedNo}
   </select>
 
 </mapper>

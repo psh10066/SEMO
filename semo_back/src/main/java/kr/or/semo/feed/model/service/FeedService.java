@@ -80,7 +80,7 @@ public class FeedService {
 		int likeCount = feedDao.feedLikeCount(feedNo);
 		return likeCount;
 	}
-
+	@Transactional
 	public int deleteFeedLike(int feedNo, String memberId) {
 		Member member = memberDao.selectOneMember(memberId);
 		int memberNo = member.getMemberNo();
@@ -88,6 +88,7 @@ public class FeedService {
 		int likeCount = feedDao.feedLikeCount(feedNo);
 		return likeCount;
 	}
+	@Transactional
 	public int insertComment(FeedComment fc, String memberId) {
 		Member member = memberDao.selectOneMember(memberId);
 		fc.setFeedCommentWriter(member.getMemberNo());
@@ -100,6 +101,26 @@ public class FeedService {
 	public List feedCommentList(int feedNo) {
 		// TODO Auto-generated method stub
 		return feedDao.feedCommentList(feedNo);
+	}
+	@Transactional
+	public int deleteComment(int feedCommentNo) {
+		// TODO Auto-generated method stub
+		return feedDao.deleteComment(feedCommentNo);
+	}
+	@Transactional
+	public int modifyComment(int feedCommentNo, String feedCommentContent) {
+		FeedComment fc = new FeedComment();
+		fc.setFeedCommentContent(feedCommentContent);
+		fc.setFeedCommentNo(feedCommentNo);
+		return feedDao.modifyComment(fc);
+	}
+	public List feedReCommentList(int feedNo) {
+		// TODO Auto-generated method stub
+		return feedDao.feedReCommentList(feedNo);
+	}
+	public int getCommentCount(int feedNo) {
+		// TODO Auto-generated method stub
+		return feedDao.getCommentCount(feedNo);
 	}
 	
 

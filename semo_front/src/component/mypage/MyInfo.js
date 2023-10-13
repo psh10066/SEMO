@@ -29,7 +29,7 @@ const Myinfo = () => {
           </div>
           <div className="mypage-myfeed edit">
             <div className="textb" onClick={modifyMyLike}>
-              내 관심사 수정
+              내 관심사·지역 수정
             </div>
           </div>
         </div>

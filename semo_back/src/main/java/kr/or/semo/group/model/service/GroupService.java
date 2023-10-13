@@ -1,5 +1,8 @@
 package kr.or.semo.group.model.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -7,8 +10,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestAttribute;
 
 import kr.or.semo.group.model.dao.GroupDao;
+import kr.or.semo.group.model.vo.ChatRoom;
 import kr.or.semo.group.model.vo.Group;
 import kr.or.semo.group.model.vo.GroupJoin;
+import kr.or.semo.group.model.vo.GroupSave;
 import kr.or.semo.member.model.dao.MemberDao;
 import kr.or.semo.member.model.vo.Member;
 
@@ -26,18 +31,32 @@ public class GroupService {
 		int result = groupDao.insertGroup(g);
 		Member member = memberDao.selectOneMember(g.getMemberId());
 		int groupNo = groupDao.selectGroupNo();
+		
 		GroupJoin gj = new GroupJoin();
+		ChatRoom cr = new ChatRoom();
+		
 		if(result>0) {
 			gj.setGroupNo(groupNo);
 			gj.setMemberNo(member.getMemberNo());
 			int result2 = groupDao.insertGroupJoin(gj);
-			return result2;
+
+			cr.setGroupNo(groupNo);
+			int result3 = groupDao.insertChatRoom(cr);
+			
+			return result2+result3;
 		}
+	
 		return 0;
 	}
 
-	public Group selectOneGroup(int groupNo) {
+	public Group selectOneGroup(int groupNo, String memberId) {
 		Group g = groupDao.selectOneGroup(groupNo);
+
+		Member member = memberDao.selectOneMember(memberId);
+		GroupSave groupSave = groupDao.selectOneGroupSave(groupNo,member.getMemberNo());
+		if (groupSave != null) {
+			g.setGroupSave(true);
+		}
 		return g;
 	}
 	
@@ -79,5 +98,24 @@ public class GroupService {
 	public int totalMemberCount(int groupNo) {
 		// TODO Auto-generated method stub
 		return groupDao.totalMemberCount(groupNo);
+	}
+
+	public List groupChatRoomName(Group g,String memberId) {
+		Member member = memberDao.selectOneMember(g.getMemberId());
+		return groupDao.groupChatRoomName(member.getMemberNo());
+	}
+	
+	//찜하기
+	@Transactional
+	public int groupSaveToggle(int groupNo, String memberId) {
+		Member member = memberDao.selectOneMember(memberId);
+		GroupSave groupSave = groupDao.selectOneGroupSave(groupNo,member.getMemberNo());
+		if(groupSave != null) {
+			return groupDao.deleteGroupSave(groupNo, member.getMemberNo());
+			
+		}else {
+			return groupDao.insertGroupSave(groupNo, member.getMemberNo());
+			
+		}		
 	}
 }
