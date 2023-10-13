@@ -64,6 +64,7 @@ const Comment = (props) => {
       setChangeFeedComment
     );
   };
+  //댓글 리스트 불러오기
   useEffect(() => {
     axios
       .get("/feed/feedCommentList/" + feedNo)
@@ -335,9 +336,11 @@ const CommentItem = (props) => {
         isLogin={isLogin}
         member={member}
         feedNo={feedNo}
-        feedCommentNo={feedCommentNo}
+        feedCommentNo={comment.feedCommentNo}
         reCommentList={reCommentList}
         setReCommentList={setReCommentList}
+        changeFeedComment={changeFeedComment}
+        setChangeFeedComment={setChangeFeedComment}
       />
     </div>
   );
