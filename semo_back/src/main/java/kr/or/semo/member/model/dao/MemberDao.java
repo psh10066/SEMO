@@ -19,6 +19,8 @@ public interface MemberDao {
 
 	int updateMemberPhone(Member member);
 
+	Member selectByOauthLogin(Member accessMember);
+
 
 
 }
