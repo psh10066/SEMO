@@ -8,6 +8,7 @@ import { Button1, Button2, Button3 } from "../util/Buttons";
 import Input from "../util/InputFrm";
 import Postcode from "../util/PostCode";
 import { useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const MeetingCreate = (props) => {
   const isLogin = props.isLogin;
@@ -27,33 +28,32 @@ const MeetingCreate = (props) => {
       meetingPlace,
       meetingPrice,
       meetingMaxnum,
+      groupNo,
     };
+    // if문을 위해 값이 무조건 들어가야 하는 값만 넣음
+    const notNullData = [meetingName, meetingDate, meetingPlace, meetingMaxnum];
 
     const token = window.localStorage.getItem("token");
-    console.log(meeting);
-    console.log(groupNo);
-    axios
-      .post(
-        "/meeting/create",
-        { meeting, groupNo },
-        {
+    if (notNullData.every((data) => data != null && data != "")) {
+      axios
+        .post("create", meeting, {
           headers: {
             Authorization: "Bearer " + token,
           },
-        }
-      )
-      .then((res) => {
-        console.log(res);
-        //console.log(res.config.data);
-        if (res.data === 1) {
-          navigate("/group/view" + groupNo);
-        } else {
-          navigate("/login");
-        }
-      })
-      .catch((res) => {
-        console.log(res.response.status);
-      });
+        })
+        .then((res) => {
+          // console.log(res);
+          //console.log(res.config.data);
+          if (res.data > 0) {
+            navigate("/group/view" + groupNo);
+          }
+        })
+        .catch((res) => {
+          console.log(res.response.status);
+        });
+    } else {
+      Swal.fire("입력값을 확인해주세요!");
+    }
   };
 
   //날짜
@@ -64,7 +64,6 @@ const MeetingCreate = (props) => {
   return (
     <div className="meeting-wrap">
       <h2 className="meeting-title">정모 생성</h2>
-
       <div className="meeting-name">
         <MeetingInputWrap
           data={meetingName}

@@ -11,8 +11,9 @@ import lombok.NoArgsConstructor;
 @Data
 @Alias(value = "meetingJoin")
 public class MeetingJoin {
-	private int mt_join;
-	private int member_no;
-	private int meeting_no;
-
+	private int mtJoin;
+	private int memberNo;
+	private int meetingNo;
+	private int mtJoinStatus;
+	private String memberId;
 }

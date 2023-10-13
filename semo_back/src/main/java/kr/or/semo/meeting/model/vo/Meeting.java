@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 public class Meeting {
 	private int meetingNo;
 	private int groupNo;
-	private int grJoin;
 	private String meetingName;
 	private String meetingDate;
 	private String meetingPlace;
