@@ -1,5 +1,3 @@
-import "./chat.css";
-
 const ChatInfo = () => {
   return (
     <div className="chat-room-info">
