@@ -69,5 +69,8 @@
 	join member on (feed_comment_writer = member_no)
 	where feed_no=#{feedNo} and feed_comment_no2 is not null order by 1 desc
   </select>
+  <select id="getCommentCount" resultType="int">
+  	select count(*) from feed_comment where feed_no=#{feedNo}
+  </select>
 
 </mapper>

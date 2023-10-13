@@ -116,8 +116,11 @@ public class FeedService {
 	}
 	public List feedReCommentList(int feedNo) {
 		// TODO Auto-generated method stub
-		System.out.println("서비스 피드 번호 : "+ feedNo);
 		return feedDao.feedReCommentList(feedNo);
+	}
+	public int getCommentCount(int feedNo) {
+		// TODO Auto-generated method stub
+		return feedDao.getCommentCount(feedNo);
 	}
 	
 

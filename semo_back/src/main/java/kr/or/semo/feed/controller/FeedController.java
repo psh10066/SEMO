@@ -144,8 +144,12 @@ public class FeedController {
 	//피드 대댓글 가져오기
 	@GetMapping(value="/feedReCommentList/{feedNo}")
 	public List feedReCommentList(@PathVariable int feedNo) {
-		System.out.println("피드번호 : "+feedNo);
 		return feedService.feedReCommentList(feedNo);
+	}
+	//피드 댓글 수
+	@GetMapping(value="/getCommentCount/{feedNo}")
+	public int getCommentCount(@PathVariable int feedNo) {
+		return feedService.getCommentCount(feedNo);
 	}
 
 }

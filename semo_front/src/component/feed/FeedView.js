@@ -20,6 +20,8 @@ const FeedView = (props) => {
   const [changeFeed, setChangeFeed] = useState(true);
   const navigate = useNavigate();
   const token = window.localStorage.getItem("token");
+  const [commentCount, setCommentCount] = useState(0);
+  const [changeFeedComment, setChangeFeedComment] = useState([true]); //피드댓글 새로고침
 
   useEffect(() => {
     axios
@@ -73,7 +75,15 @@ const FeedView = (props) => {
       .catch((res) => {
         console.log(res.response.status);
       });
-  }, [changeFeed]);
+    axios
+      .get("/feed/getCommentCount/" + feedNo)
+      .then((res) => {
+        setCommentCount(res.data);
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+  }, [changeFeed, changeFeedComment]);
   const handelClick = () => {
     //모달오픈
     setIsOpen(true);
@@ -250,7 +260,7 @@ const FeedView = (props) => {
           </div>
           <div className="feed-view-commentCount">
             <span className="material-icons">chat_bubble_outline</span>
-            <span className="feed-count">15</span>
+            <span className="feed-count">{commentCount}</span>
           </div>
           {/* <div className="feed-like-person-wrap">
             <AvatarGroup max={4} total={feedLikeCount}>
@@ -279,7 +289,13 @@ const FeedView = (props) => {
         <div className="feed-view-content">{feed.feedContent}</div>
       </div>
       <div className="feed-view-bottom">
-        <Comment isLogin={isLogin} member={member} feed={feed} />
+        <Comment
+          isLogin={isLogin}
+          member={member}
+          feed={feed}
+          changeFeedComment={changeFeedComment}
+          setChangeFeedComment={setChangeFeedComment}
+        />
       </div>
     </div>
   );
