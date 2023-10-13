@@ -38,3 +38,12 @@
   font-weight: bold;
   font-size: 40px;
 }
+.chatEnter {
+  cursor: pointer;
+}
+.chatEnter div {
+  color: #fff;
+}
+.chatting-wrap {
+  color: #fff;
+}

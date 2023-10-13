@@ -1,9 +1,12 @@
 package kr.or.semo.member.controller;
 
 import java.io.File;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.semo.FileUtil;
+
 import kr.or.semo.member.model.service.MemberService;
 import kr.or.semo.member.model.vo.Member;
 
@@ -28,6 +32,9 @@ public class MemberController {
 	private FileUtil fileUtil;
 	@Value("${file.root}")
 	private String root;
+
+
+	
 
 	// 로그인
 	@PostMapping(value = "/login")
@@ -96,6 +103,7 @@ public class MemberController {
 
 		member.setMemberId(memberId);
 	
+
 		String savepath = root + "member/";
 
 		if (feedThumbnail != null) {
@@ -119,7 +127,12 @@ public class MemberController {
 	public int updateMyLike(@RequestBody Member member, @RequestAttribute String memberId) {
 		member.setMemberId(memberId);
 		return memberService.updateMyLike(member);
-
+	}
+	
+	//팔로우 관련 멤버리스트 가져오기
+	@GetMapping(value="/memberList")
+	public List memberList(String memberNoList) {
+		return memberService.memberList(memberNoList);
 	}
 
 }

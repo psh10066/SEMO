@@ -50,7 +50,8 @@ const Comment = (props) => {
   const [commentList, setCommentList] = useState([]);
   const [reCommentList, setReCommentList] = useState([]);
   const [feedReCommentContent, setFeedRecommentContent] = useState("");
-  const [changeFeedComment, setChangeFeedComment] = useState([true]); //피드댓글 새로고침
+  const changeFeedComment = props.changeFeedComment;
+  const setChangeFeedComment = props.setChangeFeedComment;
   const feedNo = feed.feedNo;
 
   //댓글 작성하기
@@ -64,6 +65,7 @@ const Comment = (props) => {
       setChangeFeedComment
     );
   };
+  //댓글 리스트 불러오기
   useEffect(() => {
     axios
       .get("/feed/feedCommentList/" + feedNo)
@@ -335,9 +337,11 @@ const CommentItem = (props) => {
         isLogin={isLogin}
         member={member}
         feedNo={feedNo}
-        feedCommentNo={feedCommentNo}
+        feedCommentNo={comment.feedCommentNo}
         reCommentList={reCommentList}
         setReCommentList={setReCommentList}
+        changeFeedComment={changeFeedComment}
+        setChangeFeedComment={setChangeFeedComment}
       />
     </div>
   );
