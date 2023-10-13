@@ -18,6 +18,10 @@
   font-family: ns-black;
   src: url(/public/font/NotoSansKR-Black.ttf);
 }
+@font-face {
+  font-family: jalnan;
+  src: url(/public/font/Jalnan.ttf);
+}
 /* 
   사이트 사용 색상 
   balck : #252A34
@@ -62,6 +66,7 @@ header {
 .header {
   position: inherit;
   width: 1200px;
+  height: 50px;
   margin: 0 auto;
   display: flex;
   margin-left: auto;
@@ -129,10 +134,12 @@ header {
   font-size: 14px;
   letter-spacing: 1px;
 }
-
+.main-logo {
+  align-self: center;
+}
 .main-logo > a {
   font-size: 32px;
-  font-family: ns-black;
+  font-family: jalnan;
   color: #fff;
 }
 .header-link {
