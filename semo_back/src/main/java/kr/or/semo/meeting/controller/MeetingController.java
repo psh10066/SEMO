@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kr.or.semo.meeting.model.service.MeetingService;
 import kr.or.semo.meeting.model.vo.Meeting;
+import kr.or.semo.meeting.model.vo.MeetingJoin;
+import kr.or.semo.member.model.vo.Member;
 
 
 @RestController
@@ -22,17 +24,24 @@ public class MeetingController {
 	@Autowired
 	private MeetingService meetingService;
 	
+	// 약속 생성
 	@PostMapping(value = "/create")
-	public int create(@ModelAttribute Meeting meeting,@RequestAttribute String memberId,@ModelAttribute int groupNo) {		
-		
-		
-		int result = meetingService.createMeeting(meeting);
-		return result;
+	public int create(@RequestBody Meeting meeting,@RequestAttribute String memberId) {		
+		meeting.setMemberId(memberId);
+		return meetingService.createMeeting(meeting);
 	}
+	// 약속 보이기
 	@GetMapping(value = "/view/{groupNo}")
-	public List View(@PathVariable int groupNo) {
+	public List view(@PathVariable int groupNo) {
 		return meetingService.selectMeetingList(groupNo);
 	}
+	// 약속 참가
+	@PostMapping(value = "/join")
+	public int join(@RequestBody MeetingJoin meetingJoin, @RequestAttribute String memberId) {
+		meetingJoin.setMemberId(memberId);
+		return meetingService.joinMeeting(meetingJoin);
+	}
+
 	
 
 }
