@@ -1,6 +1,7 @@
 package kr.or.semo.member.controller;
 
 import java.io.File;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -121,5 +122,10 @@ public class MemberController {
 		return memberService.updateMyLike(member);
 
 	}
-
+	
+	//팔로우 관련 멤버리스트 가져오기
+	@GetMapping(value="/memberList")
+	public List memberList(String memberNoList) {
+		return memberService.memberList(memberNoList);
+	}
 }

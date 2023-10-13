@@ -17,7 +17,7 @@ const FeedProfile = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [feedList, setFeedList] = useState([]);
   const [changeFeed, setChangeFeed] = useState(true);
-
+  const [feedCount, setFeedCount] = useState(0);
   const location = useLocation();
   const memberNo = location.state.memberNo;
   const feedWriter = memberNo;
@@ -75,6 +75,14 @@ const FeedProfile = (props) => {
       .catch((res) => {
         console.log(res.response.status);
       });
+    axios
+      .get("/feed/feedCount/" + feedWriter)
+      .then((res) => {
+        setFeedCount(res.data);
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
   }, [changeFeed]);
   return (
     <div className="feed-profile-all-wrap">
@@ -111,7 +119,7 @@ const FeedProfile = (props) => {
                   <td>팔로잉</td>
                 </tr>
                 <tr>
-                  <th>123</th>
+                  <th>{feedCount}</th>
                   <th>123</th>
                   <th>123</th>
                 </tr>

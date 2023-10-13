@@ -122,6 +122,9 @@ public class FeedService {
 		// TODO Auto-generated method stub
 		return feedDao.getCommentCount(feedNo);
 	}
+	public int feedCount(int feedWriter) {
+		return feedDao.feedCount(feedWriter);
+	}
 	
 
 }

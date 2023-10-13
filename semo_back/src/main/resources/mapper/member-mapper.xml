@@ -42,6 +42,11 @@
 			where member_id=#{memberId}
  	</update>
    	 
-  
+  	<select id="memberList" resultType="member">
+  		select * from member where member_no in
+  		<foreach collection="array" open="(" close=")" separator="," item="memberNo">
+  			#{memberNo}
+  		</foreach>
+  	</select>
   
 </mapper>
