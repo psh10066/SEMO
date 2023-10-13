@@ -1,5 +1,7 @@
 package kr.or.semo.member.model.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import kr.or.semo.member.model.vo.Member;
@@ -20,6 +22,8 @@ public interface MemberDao {
 	int updateMyFeed(Member member);
 
 	int updateMyLike(Member member);
+
+	List memberList(String[] memberNo);
 
 
 

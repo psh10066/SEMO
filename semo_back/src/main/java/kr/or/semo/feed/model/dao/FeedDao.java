@@ -42,6 +42,8 @@ public interface FeedDao {
 
 	int getCommentCount(int feedNo);
 
+	int feedCount(int feedWriter);
+
 
 
 }

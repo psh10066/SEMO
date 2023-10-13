@@ -1,7 +1,7 @@
 import { useDaumPostcodePopup } from "react-daum-postcode";
-import { Button1, Button3 } from "./Buttons";
+import { Button3 } from "./Buttons";
 import Kakao from "./Kakao";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const Postcode = (props) => {
   const data = props.data;

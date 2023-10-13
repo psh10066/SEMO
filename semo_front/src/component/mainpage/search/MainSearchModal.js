@@ -10,12 +10,16 @@ const MainSearchModal = (props) => {
   const [searchContent, setSearchContent] = useState("");
 
   const search = () => {
-    const searchContent = { searchContent };
+    const groupName = { groupName: searchContent };
+    console.log(groupName);
     axios
-      .post("#", searchContent)
-      .then((res) => {})
+      .post("/page/search", groupName)
+      .then((res) => {
+        console.log(res.data);
+      })
       .catch((res) => {
-        console.log(res);
+        console.log(res.data);
+        console.log(res.response.status);
       });
   };
 
@@ -50,7 +54,7 @@ const MainSearchModal = (props) => {
               placeholder="관심사 , 지역명을 검색해보세요"
             />
             <div>
-              <span className="material-icons" clickEvent={search}>
+              <span className="material-icons" onClick={search}>
                 search
               </span>
             </div>

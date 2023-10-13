@@ -3,7 +3,7 @@
   /* height: 800px; */
   margin: 0 auto;
 }
-.feed-write-cancel {
+.modal-cancel {
   text-align: right;
   cursor: pointer;
 }
@@ -91,4 +91,7 @@
 }
 .feed-write-btn > button {
   width: 180px;
+}
+.follow-list-all-wrap {
+  margin: 30px 40px;
 }

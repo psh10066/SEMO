@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.semo.meeting.model.dao.MeetingDao;
 import kr.or.semo.meeting.model.vo.Meeting;
+import kr.or.semo.meeting.model.vo.MeetingJoin;
 
 @Service
 public class MeetingService {
@@ -25,6 +26,11 @@ public class MeetingService {
 	public List selectMeetingList(int groupNo) {
 		List meetingList = meetingDao.selectMeetingList(groupNo);
 		return meetingList;
+	}
+
+	public int joinMeeting(MeetingJoin meetingJoin) {
+		// TODO Auto-generated method stub
+		return meetingDao.joinMeeting(meetingJoin);
 	}
 
 	
