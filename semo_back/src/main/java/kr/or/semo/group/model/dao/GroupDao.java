@@ -45,4 +45,6 @@ public interface GroupDao {
 
 	int insertGroupSave(int groupNo, int memberNo);
 
+	List groupAllMember(int groupNo);
+
 }

@@ -118,4 +118,8 @@ public class GroupService {
 			
 		}		
 	}
+
+	public List groupAllMember( int groupNo) {
+		return groupDao.groupAllMember(groupNo);
+	}
 }

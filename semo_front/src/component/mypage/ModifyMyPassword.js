@@ -67,7 +67,7 @@ const ModifyMyPassword = () => {
               icon: "success",
               title: "비밀번호가 수정되었습니다.",
             });
-            navigate("/");
+            navigate("/mypage/myInfo");
           } else {
             Swal.fire("에러가 발생했습니다. 잠시후 다시 시도해주세요");
           }
