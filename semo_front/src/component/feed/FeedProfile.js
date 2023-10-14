@@ -9,6 +9,7 @@ import GroupList from "./GroupList";
 import { useEffect } from "react";
 import axios from "axios";
 import FeedModal from "../util/FeedModal";
+import Swal from "sweetalert2";
 
 const FeedProfile = (props) => {
   const isLogin = props.isLogin;
@@ -21,6 +22,12 @@ const FeedProfile = (props) => {
   const location = useLocation();
   const memberNo = location.state.memberNo;
   const feedWriter = memberNo;
+  const [followerCount, setFollowerCount] = useState(0);
+  const [followingCount, setFollowingCount] = useState(0);
+  const [follower, setFollower] = useState([]);
+  const [following, setFollowing] = useState([]);
+  const [isFollow, setIsFollow] = useState(0);
+  const token = window.localStorage.getItem("token");
 
   useEffect(() => {
     axios
@@ -33,7 +40,6 @@ const FeedProfile = (props) => {
         console.log(res.response.status);
       });
     if (isLogin) {
-      const token = window.localStorage.getItem("token");
       axios
         .post("/member/getMember", null, {
           headers: {
@@ -43,6 +49,23 @@ const FeedProfile = (props) => {
         .then((res) => {
           // console.log(res.data);
           setLoginMember(res.data);
+        })
+        .catch((res) => {
+          console.log(res.response.status);
+        });
+      axios
+        .post(
+          "/member/isFollow",
+          { memberNo },
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        )
+        .then((res) => {
+          // console.log(res.data);
+          setIsFollow(res.data);
         })
         .catch((res) => {
           console.log(res.response.status);
@@ -84,6 +107,47 @@ const FeedProfile = (props) => {
         console.log(res.response.status);
       });
   }, [changeFeed]);
+  const loginMsg = () => {
+    Swal.fire("로그인 후 이용해 주세요.");
+  };
+  const follow = () => {
+    axios
+      .post(
+        "/member/follow",
+        { memberNo },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        setIsFollow(1);
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+  };
+  const unfollow = () => {
+    axios
+      .post(
+        "/member/unfollow",
+        { memberNo },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        setIsFollow(0);
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+  };
   return (
     <div className="feed-profile-all-wrap">
       <div className="feed-profile-wrap">
@@ -120,8 +184,8 @@ const FeedProfile = (props) => {
                 </tr>
                 <tr>
                   <th>{feedCount}</th>
-                  <th>123</th>
-                  <th>123</th>
+                  <th>{followerCount}</th>
+                  <th>{followingCount}</th>
                 </tr>
               </tbody>
             </table>
@@ -161,11 +225,13 @@ const FeedProfile = (props) => {
             {isLogin ? (
               loginMember && loginMember.memberNo === member.memberNo ? (
                 <Button1 text="피드 작성" clickEvent={handelClick} />
+              ) : isFollow === 1 ? (
+                <Button1 text="팔로잉" clickEvent={unfollow} />
               ) : (
-                <Button1 text="팔로우" />
+                <Button1 text="팔로우" clickEvent={follow} />
               )
             ) : (
-              <Button1 text="팔로우" />
+              <Button1 text="팔로우" clickEvent={loginMsg} />
             )}
           </div>
         </div>

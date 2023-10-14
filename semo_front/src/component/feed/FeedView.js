@@ -73,7 +73,7 @@ const FeedView = (props) => {
       .then((res) => {
         setFeedLikeCount(res.data.feedLikeCount);
         setMemberList(res.data.list);
-        // console.log(res.data);
+        // console.log("멤버리스트" + res.data);
         // console.log(memberList);
       })
       .catch((res) => {
@@ -206,6 +206,12 @@ const FeedView = (props) => {
       return "방금";
     }
   }
+  const naviFeedProfile = () => {
+    navigate("/feed/profile", {
+      state: { memberNo: feed.feedWriter },
+    });
+    console.log(feed);
+  };
   return (
     <div className="feed-view-wrap">
       {isLogin ? (
@@ -231,16 +237,30 @@ const FeedView = (props) => {
         ""
       )}
       <div className="feed-view-top">
-        <div className="feed-view-writerImg">
-          <Stack direction="row" spacing={2}>
-            <Avatar
-              alt="Remy Sharp"
-              src={"/member/" + feed.memberImg}
-              sx={{ width: 40, height: 40 }}
-            />
-          </Stack>
+        {feed.memberImg === null ? (
+          <div className="feed-view-writerImg">
+            <Stack direction="row" spacing={2} onClick={naviFeedProfile}>
+              <Avatar
+                alt="Remy Sharp"
+                src="/image/person.png"
+                sx={{ width: 40, height: 40 }}
+              />
+            </Stack>
+          </div>
+        ) : (
+          <div className="feed-view-writerImg">
+            <Stack direction="row" spacing={2} onClick={naviFeedProfile}>
+              <Avatar
+                alt="Remy Sharp"
+                src={"/member/" + feed.memberImg}
+                sx={{ width: 40, height: 40 }}
+              />
+            </Stack>
+          </div>
+        )}
+        <div className="feed-view-writer" onClick={naviFeedProfile}>
+          {feed.memberName}
         </div>
-        <div className="feed-view-writer">{feed.memberName}</div>
         <div className="feed-view-date">
           {feed.feedDate ? formatTime(feed.feedDate) : ""}
         </div>
@@ -274,7 +294,6 @@ const FeedView = (props) => {
               onModalCancel={onModalCancel}
               memberList={memberList}
               isLogin={isLogin}
-              member={member}
             />
           </div>
           <div className="feed-view-commentCount">

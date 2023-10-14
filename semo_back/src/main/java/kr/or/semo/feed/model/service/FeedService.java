@@ -92,9 +92,7 @@ public class FeedService {
 	public int insertComment(FeedComment fc, String memberId) {
 		Member member = memberDao.selectOneMember(memberId);
 		fc.setFeedCommentWriter(member.getMemberNo());
-		System.out.println("서비스"+fc);
 		String feedCommentRef = fc.getFeedCommentNo2()==0?null:String.valueOf(fc.getFeedCommentNo2());
-		System.out.println(feedCommentRef);
 		fc.setFeedCommentRef(feedCommentRef);
 		return feedDao.insertComment(fc);
 	}

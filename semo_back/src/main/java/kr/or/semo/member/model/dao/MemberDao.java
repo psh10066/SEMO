@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import kr.or.semo.member.model.vo.Follow;
 import kr.or.semo.member.model.vo.Member;
 
 @Mapper
@@ -28,6 +29,12 @@ public interface MemberDao {
 
 
 	Member selectByOauthLogin(Member accessMember);
+
+	int insertFollow(Follow f);
+
+	int deleteFollow(Follow f);
+
+	int getIsFollow(Follow f);
 
 
 

@@ -52,5 +52,13 @@
   			#{memberNo}
   		</foreach>
   	</select>
-  
+  	<insert id="insertFollow">
+  		insert into follow values(follow_seq.nextval,#{followerNo},#{followingNo})
+  	</insert>
+  	<delete id="deleteFollow">
+  		delete from follow where follower_no=#{followerNo} and following_no=#{followingNo}
+  	</delete>
+  	<select id="getIsFollow" resultType="int">
+  		select count(*) as is_follow from follow where follower_no=#{followerNo} and following_no=#{followingNo}
+  	</select>
 </mapper>

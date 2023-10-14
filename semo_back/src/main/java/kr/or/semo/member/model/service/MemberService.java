@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.semo.JwtUtil;
 import kr.or.semo.member.model.dao.MemberDao;
+import kr.or.semo.member.model.vo.Follow;
 import kr.or.semo.member.model.vo.Member;
 
 @Service
@@ -83,6 +84,34 @@ public class MemberService {
 		String[] memberNo = {};
 		memberNo = memberNoList.split(",");
 		return memberDao.memberList(memberNo);
+	}
+	
+	@Transactional
+	public int insertFollow(int memberNo, String memberId) {
+		Member member = memberDao.selectOneMember(memberId);
+		int followerNo = member.getMemberNo();
+		Follow f = new Follow();
+		f.setFollowerNo(followerNo);
+		f.setFollowingNo(memberNo);
+		return memberDao.insertFollow(f);
+	}
+
+	public int deleteFollow(int memberNo, String memberId) {
+		Member member = memberDao.selectOneMember(memberId);
+		int followerNo = member.getMemberNo();
+		Follow f = new Follow();
+		f.setFollowerNo(followerNo);
+		f.setFollowingNo(memberNo);
+		return memberDao.deleteFollow(f);
+	}
+
+	public int getIsFollow(int memberNo, String memberId) {
+		Member member = memberDao.selectOneMember(memberId);
+		int followerNo = member.getMemberNo();
+		Follow f = new Follow();
+		f.setFollowerNo(followerNo);
+		f.setFollowingNo(memberNo);
+		return memberDao.getIsFollow(f);
 	}
 
 }

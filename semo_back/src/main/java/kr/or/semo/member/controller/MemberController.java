@@ -134,5 +134,24 @@ public class MemberController {
 	public List memberList(String memberNoList) {
 		return memberService.memberList(memberNoList);
 	}
+	
+	//팔로우
+	@PostMapping(value="/follow")
+	public int follow(@RequestBody Member m, @RequestAttribute String memberId) {
+		int memberNo = m.getMemberNo();
+		return memberService.insertFollow(memberNo, memberId);
+	}
+	//언팔로우
+	@PostMapping(value="/unfollow")
+	public int unfollow(@RequestBody Member m, @RequestAttribute String memberId) {
+		int memberNo = m.getMemberNo();
+		return memberService.deleteFollow(memberNo, memberId);
+	}
+	//팔로우 여부 isFollow 조회
+	@PostMapping(value="/isFollow")
+	public int isFollow(@RequestBody Member m, @RequestAttribute String memberId) {
+		int memberNo = m.getMemberNo();
+		return memberService.getIsFollow(memberNo, memberId);
+	}
 
 }

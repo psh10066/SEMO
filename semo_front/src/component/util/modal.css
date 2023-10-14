@@ -13,6 +13,7 @@
 .cancel-icon:hover {
   font-weight: bold;
 }
+/* 피드모달 */
 .feed-write-all-wrap {
   padding: 30px 40px;
 }
@@ -92,6 +93,40 @@
 .feed-write-btn > button {
   width: 180px;
 }
+/* 팔로우리스트 모달 */
 .follow-list-all-wrap {
-  margin: 30px 40px;
+  margin: 30px 60px;
+}
+.follow-member-wrap {
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* border-bottom: 1px solid #ccc; */
+}
+.follow-member-mid {
+  width: 63%;
+}
+.follow-member-name {
+  font-size: 17px;
+  font-family: ns-b;
+}
+.follow-member-content {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 13px;
+  color: #999999;
+}
+.follow-btn-wrap {
+  margin-left: 5%;
+  width: 19%;
+}
+.follow-btn-wrap > button {
+  cursor: pointer;
+  width: 100%;
+  border: none;
+  height: 37px;
+  border-radius: 7px;
+  /* css 나중에 수정하기 */
 }

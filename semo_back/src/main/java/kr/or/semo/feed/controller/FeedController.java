@@ -108,7 +108,7 @@ public class FeedController {
 		return feedService.getIsLike(feedNo, memberId);
 	}
 	//피드 좋아요 
-	@PostMapping(value="addLike")
+	@PostMapping(value="/addLike")
 	public int addLike(@RequestBody Feed f, @RequestAttribute String memberId) {
 		int feedNo = f.getFeedNo();
 		return feedService.insertFeedLike(feedNo,memberId);

@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import ReComment from "./ReComment";
+import { useNavigate } from "react-router-dom";
 
 const feedCommentRegist = (
   feedNo,
@@ -232,12 +233,18 @@ const CommentItem = (props) => {
       setChangeFeedComment
     );
   };
+  const navigate = useNavigate();
+  const naviFeedProfile = () => {
+    navigate("/feed/profile", {
+      state: { memberNo: comment.feedCommentWriter },
+    });
+  };
   return (
     <div className="comment-wrap">
       <div className="comment-top">
         {comment.memberImg === null ? (
           <div className="commentItem-profile-image">
-            <Stack direction="row" spacing={2}>
+            <Stack direction="row" spacing={2} onClick={naviFeedProfile}>
               <Avatar
                 alt="Remy Sharp"
                 src="/image/person.png"
@@ -247,7 +254,7 @@ const CommentItem = (props) => {
           </div>
         ) : (
           <div className="commentItem-profile-image">
-            <Stack direction="row" spacing={2}>
+            <Stack direction="row" spacing={2} onClick={naviFeedProfile}>
               <Avatar
                 alt="Remy Sharp"
                 src={"/member/" + comment.memberImg}
@@ -256,7 +263,9 @@ const CommentItem = (props) => {
             </Stack>
           </div>
         )}
-        <div className="commentItem-memberName">{comment.memberName}</div>
+        <div className="commentItem-memberName" onClick={naviFeedProfile}>
+          {comment.memberName}
+        </div>
         <div className="commentItem-date">
           {comment.feedCommentDate ? formatTime(comment.feedCommentDate) : ""}
         </div>

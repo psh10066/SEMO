@@ -1,6 +1,7 @@
 import { Avatar, Stack } from "@mui/material";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const ReComment = (props) => {
@@ -150,6 +151,12 @@ const ReCommentItem = (props) => {
       Swal.fire("댓글을 입력해 주세요.");
     }
   };
+  const navigate = useNavigate();
+  const naviFeedProfile = () => {
+    navigate("/feed/profile", {
+      state: { memberNo: recomment.feedCommentWriter },
+    });
+  };
   return (
     <>
       {feedCommentRef === recomment.feedCommentNo2 ? (
@@ -157,7 +164,7 @@ const ReCommentItem = (props) => {
           <div className="comment-top">
             {recomment.memberImg === null ? (
               <div className="commentItem-profile-image">
-                <Stack direction="row" spacing={2}>
+                <Stack direction="row" spacing={2} onClick={naviFeedProfile}>
                   <Avatar
                     alt="Remy Sharp"
                     src="/image/person.png"
@@ -167,7 +174,7 @@ const ReCommentItem = (props) => {
               </div>
             ) : (
               <div className="commentItem-profile-image">
-                <Stack direction="row" spacing={2}>
+                <Stack direction="row" spacing={2} onClick={naviFeedProfile}>
                   <Avatar
                     alt="Remy Sharp"
                     src={"/member/" + recomment.memberImg}
@@ -176,7 +183,9 @@ const ReCommentItem = (props) => {
                 </Stack>
               </div>
             )}
-            <div className="commentItem-memberName">{recomment.memberName}</div>
+            <div className="commentItem-memberName" onClick={naviFeedProfile}>
+              {recomment.memberName}
+            </div>
             <div className="commentItem-date">
               {recomment.feedCommentDate
                 ? formatTime(recomment.feedCommentDate)
