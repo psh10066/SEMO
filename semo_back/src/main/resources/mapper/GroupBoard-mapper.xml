@@ -41,4 +41,25 @@
 	<delete id="deleteGroupBoard">
 		delete from gr_board where gr_board_no = #{grBoardNo}
 	</delete>
+	<insert id="insertComment">
+  		insert into gr_board_comment values(gr_board_comment_seq.nextval,#{grBoardNo},#{grBoardCommentWriter},#{grBoardCommentContent},#{grBoardCommentRef},sysdate)
+  	</insert>
+  	<select id="groupBoardCommentList" resultType="groupBoardComment">
+	  	select fc.*,member_name, member_img
+		from (select * from gr_board_comment)fc
+		join member on (gr_board_comment_writer = member_no)
+		where gr_board_no=#{grBoardNo} and gr_board_comment_no2 is null order by 1 desc
+	 </select>
+  	<delete id="deleteComment">
+  		delete from gr_Board_comment where gr_Board_comment_no=#{grBoardCommentNo}
+  	</delete>
+  	<update id="modifyComment">
+  		update gr_Board_comment set gr_Board_comment_content=#{grBoardCommentContent} where gr_Board_comment_no=#{grBoardCommentNo}
+  	</update>
+  	<select id="groupBoardReCommentList" resultType="groupBoardComment">
+	  	select fc.*,member_name, member_img
+		from (select * from gr_board_comment)fc
+		join member on (gr_board_comment_writer = member_no)
+		where gr_board_no=#{grBoardNo} and gr_board_comment_no2 is not null order by 1 desc
+	</select>
 </mapper>

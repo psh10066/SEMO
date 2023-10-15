@@ -74,7 +74,7 @@ public class GroupBoardController {
 		
 	}
 	//댓글 가져오기
-	@GetMapping(value="/groupBoardCommentList/{groupNo}")
+	@GetMapping(value="/groupBoardCommentList/{grBoardNo}")
 	public List groupBoardCommentList(@PathVariable int grBoardNo) {
 		return groupBoardService.groupBoardCommentList(grBoardNo);
 	}
