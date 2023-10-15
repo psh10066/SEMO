@@ -1,0 +1,13 @@
+/* 전체페이지 css */
+.searchresult-title > h2 {
+  color: #220895;
+}
+.searchresult-title {
+  /*text-align: center;*/
+  font-size: 16px;
+  padding: 30px 0px;
+}
+.searchresult-all-wrap {
+  width: 1200px;
+  margin: 50px auto;
+}

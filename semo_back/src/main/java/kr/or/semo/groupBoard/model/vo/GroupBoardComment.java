@@ -1,5 +1,7 @@
 package kr.or.semo.groupBoard.model.vo;
 
+import java.util.Date;
+
 import org.apache.ibatis.type.Alias;
 
 import lombok.AllArgsConstructor;
@@ -12,11 +14,12 @@ import lombok.NoArgsConstructor;
 @Alias(value="groupBoardComment")
 public class GroupBoardComment {
 	private int grBoardCommentNo;
-	private String grBoardCommentContent;
-	private String grBoardCommentDate;
 	private int grBoardNo;
-	private int grBoardCommentNo2;
 	private int grBoardCommentWriter;
+	private String memberName;
+	private String grBoardCommentContent;
+	private int grBoardCommentNo2;
 	private String grBoardCommentRef;
+	private Date grBoardCommentDate;
 	private String memberImg;
 }

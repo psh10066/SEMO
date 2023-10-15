@@ -1,4 +1,6 @@
+import { colors } from "@mui/material";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const GroupSave = (props) => {
   const groupNo = props.groupNo;
@@ -16,8 +18,13 @@ const GroupSave = (props) => {
       })
       .then((res) => {
         console.log(res.data);
-        // 여기에서 alert를 띄울 때 groupSave가 false이면 찜 등록한 것, true이면 찜 해제한 것.
-        setGroupSave(!groupSave);
+        if (res.data) {
+          Swal.fire("찜모임에 추가되었습니다.");
+          setGroupSave(true);
+        } else {
+          Swal.fire("찜모임에서 삭제되었습니다.");
+          setGroupSave(false);
+        }
       })
       .catch((res) => {
         console.log(res.response.status);
@@ -27,7 +34,11 @@ const GroupSave = (props) => {
   return (
     <>
       {groupSave ? (
-        <span className="material-icons" onClick={groupSaveClick}>
+        <span
+          className="material-icons"
+          style={{ color: "red" }}
+          onClick={groupSaveClick}
+        >
           favorite
         </span>
       ) : (

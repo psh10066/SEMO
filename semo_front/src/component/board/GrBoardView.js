@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button2 } from "../util/Buttons";
 import Swal from "sweetalert2";
+import GrComment from "../board/GrComment";
 
 const GrBoardView = (props) => {
   const isLogin = props.isLogin;
@@ -11,6 +12,7 @@ const GrBoardView = (props) => {
   const [grBoard, setGrBoard] = useState({});
   //회원정보 가져오기 위해서
   const [member, setMember] = useState(null);
+  const [changeGrBoardComment, setChangeGrBoardComment] = useState([true]); //댓글 새로고침
   const navigate = useNavigate();
   //게시판정보
   useEffect(() => {
@@ -73,27 +75,23 @@ const GrBoardView = (props) => {
   return (
     <div className="board-view-wrap">
       <table className="board-view-table">
-        <thead>
-          <tbody>
-            <tr>
-              <th className="board-view-info">제목</th>
-              <td className="board-view-info-content">
-                {grBoard.grBoardTitle}
-              </td>
-            </tr>
-            <tr>
-              <th className="board-view-info">작성일</th>
-              <td className="board-view-info-content">{grBoard.grBoardDate}</td>
-            </tr>
-            <tr>
-              <th className="board-view-info">내용</th>
-              <td
-                className="board-view-info-content"
-                dangerouslySetInnerHTML={{ __html: grBoard.grBoardContent }}
-              ></td>
-            </tr>
-          </tbody>
-        </thead>
+        <tbody>
+          <tr>
+            <th className="board-view-info">제목</th>
+            <td className="board-view-info-content">{grBoard.grBoardTitle}</td>
+          </tr>
+          <tr>
+            <th className="board-view-info">작성일</th>
+            <td className="board-view-info-content">{grBoard.grBoardDate}</td>
+          </tr>
+          <tr>
+            <th className="board-view-info">내용</th>
+            <td
+              className="board-view-info-content"
+              dangerouslySetInnerHTML={{ __html: grBoard.grBoardContent }}
+            ></td>
+          </tr>
+        </tbody>
       </table>
       <div className="board-view-btn-zone">
         {isLogin ? (
@@ -108,6 +106,15 @@ const GrBoardView = (props) => {
         ) : (
           ""
         )}
+      </div>
+      <div className="board-view-bottom">
+        <GrComment
+          isLogin={isLogin}
+          member={member}
+          grBoardNo={grBoardNo}
+          changeGrBoardComment={changeGrBoardComment}
+          setChangeGrBoardComment={setChangeGrBoardComment}
+        />
       </div>
     </div>
   );

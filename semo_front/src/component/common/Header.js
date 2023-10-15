@@ -50,6 +50,9 @@ const Header = (props) => {
   if (location.pathname.includes("/chat")) {
     headerStyle = { color: "#220895" };
   }
+  if (location.pathname.includes("/searchresult")) {
+    headerStyle = { color: "#220895" };
+  }
 
   return (
     <header>
@@ -132,6 +135,9 @@ const Navi = (props) => {
     naviStyle = { color: "#220895" };
   }
   if (location.pathname.includes("/chat")) {
+    naviStyle = { color: "#220895" };
+  }
+  if (location.pathname.includes("/searchresult")) {
     naviStyle = { color: "#220895" };
   }
 
