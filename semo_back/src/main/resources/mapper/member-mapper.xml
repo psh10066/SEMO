@@ -61,4 +61,16 @@
   	<select id="getIsFollow" resultType="int">
   		select count(*) as is_follow from follow where follower_no=#{followerNo} and following_no=#{followingNo}
   	</select>
+  	<select id="followerCount" resultType="int">
+  		select count(*) as follower_count from follow where following_no=#{memberNo}
+  	</select>
+  	<select id="getFollower" resultType="int">
+  		select follower_no from follow where following_no = #{memberNo} order by follow_no desc
+  	</select>
+  	<select id="followingCount" resultType="int">
+  		select count(*) as follower_count from follow where follower_no=#{memberNo}
+  	</select>
+  	<select id="getFollowing" resultType="int">
+  		select following_no from follow where follower_no = #{memberNo} order by follow_no desc
+  	</select>
 </mapper>

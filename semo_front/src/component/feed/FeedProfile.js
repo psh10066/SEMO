@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import FeedModal from "../util/FeedModal";
 import Swal from "sweetalert2";
+import MyModal from "../util/MyModal";
 
 const FeedProfile = (props) => {
   const isLogin = props.isLogin;
@@ -17,16 +18,19 @@ const FeedProfile = (props) => {
   const [loginMember, setLoginMember] = useState({});
   const [isOpen, setIsOpen] = useState(false);
   const [feedList, setFeedList] = useState([]);
+  const [groupList, setGroupList] = useState([]);
   const [changeFeed, setChangeFeed] = useState(true);
   const [feedCount, setFeedCount] = useState(0);
   const location = useLocation();
-  const memberNo = location.state.memberNo;
+  const memberNo = location.state ? location.state.memberNo : null;
   const feedWriter = memberNo;
   const [followerCount, setFollowerCount] = useState(0);
   const [followingCount, setFollowingCount] = useState(0);
   const [follower, setFollower] = useState([]);
   const [following, setFollowing] = useState([]);
   const [isFollow, setIsFollow] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [memberList, setMemberList] = useState([]);
   const token = window.localStorage.getItem("token");
 
   useEffect(() => {
@@ -39,6 +43,25 @@ const FeedProfile = (props) => {
       .catch((res) => {
         console.log(res.response.status);
       });
+    axios
+      .get("/member/getFollower/" + memberNo)
+      .then((res) => {
+        setFollowerCount(res.data.followerCount);
+        setFollower(res.data.followerList);
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+    axios
+      .get("/member/getFollowing/" + memberNo)
+      .then((res) => {
+        setFollowingCount(res.data.followingCount);
+        setFollowing(res.data.followingList);
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+
     if (isLogin) {
       axios
         .post("/member/getMember", null, {
@@ -106,6 +129,14 @@ const FeedProfile = (props) => {
       .catch((res) => {
         console.log(res.response.status);
       });
+    axios
+      .get("/feed/groupList/" + memberNo)
+      .then((res) => {
+        setGroupList(res.data);
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
   }, [changeFeed]);
   const loginMsg = () => {
     Swal.fire("로그인 후 이용해 주세요.");
@@ -148,6 +179,17 @@ const FeedProfile = (props) => {
         console.log(res.response.status);
       });
   };
+  const onModalCancel = () => {
+    setIsModalOpen(false);
+  };
+  const followerClick = () => {
+    setMemberList(follower);
+    setIsModalOpen(true);
+  };
+  const followingClick = () => {
+    setMemberList(following);
+    setIsModalOpen(true);
+  };
   return (
     <div className="feed-profile-all-wrap">
       <div className="feed-profile-wrap">
@@ -173,7 +215,12 @@ const FeedProfile = (props) => {
               </Stack>
             </div>
           )}
-
+          <MyModal
+            isModalOpen={isModalOpen}
+            onModalCancel={onModalCancel}
+            memberList={memberList}
+            isLogin={isLogin}
+          />
           <div className="feed-follow">
             <table>
               <tbody>
@@ -184,8 +231,8 @@ const FeedProfile = (props) => {
                 </tr>
                 <tr>
                   <th>{feedCount}</th>
-                  <th>{followerCount}</th>
-                  <th>{followingCount}</th>
+                  <th onClick={followerClick}>{followerCount}</th>
+                  <th onClick={followingClick}>{followingCount}</th>
                 </tr>
               </tbody>
             </table>
@@ -240,8 +287,12 @@ const FeedProfile = (props) => {
         <ProfileMenu menus={menus} setMenus={setMenus} />
         <div className="feed-current-content">
           <Routes>
-            <Route path="groupList" element={<GroupList />} />
-            <Route path="*" element={<FeedList feedList={feedList} />} />
+            <Route
+              path="groupList"
+              element={
+                <GroupList groupList={groupList} setGroupList={setGroupList} />
+              }
+            />
             <Route
               path="*"
               element={

@@ -1,6 +1,8 @@
 package kr.or.semo.member.model.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -95,7 +97,7 @@ public class MemberService {
 		f.setFollowingNo(memberNo);
 		return memberDao.insertFollow(f);
 	}
-
+	@Transactional
 	public int deleteFollow(int memberNo, String memberId) {
 		Member member = memberDao.selectOneMember(memberId);
 		int followerNo = member.getMemberNo();
@@ -112,6 +114,24 @@ public class MemberService {
 		f.setFollowerNo(followerNo);
 		f.setFollowingNo(memberNo);
 		return memberDao.getIsFollow(f);
+	}
+
+	public Map getFollower(int memberNo) {
+		int followerCount = memberDao.followerCount(memberNo);
+		List followerList = memberDao.getFollower(memberNo);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("followerCount",followerCount);
+		map.put("followerList", followerList);
+		return map;
+	}
+
+	public Map getFollowing(int memberNo) {
+		int followingCount = memberDao.followingCount(memberNo);
+		List followingList = memberDao.getFollowing(memberNo);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("followingCount", followingCount);
+		map.put("followingList", followingList);
+		return map;
 	}
 
 }

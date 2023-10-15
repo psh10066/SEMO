@@ -155,5 +155,10 @@ public class FeedController {
 	public int feedCount(@PathVariable int feedWriter) {
 		return feedService.feedCount(feedWriter);
 	}
-
+	
+	//피드 프로필 그룹 리스트 조회
+	@GetMapping(value="/groupList/{memberNo}")
+	public List groupList(@PathVariable int memberNo) {
+		return feedService.selectGroupList(memberNo);
+	}
 }

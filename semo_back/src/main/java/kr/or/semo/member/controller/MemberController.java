@@ -2,6 +2,7 @@ package kr.or.semo.member.controller;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -152,6 +153,16 @@ public class MemberController {
 	public int isFollow(@RequestBody Member m, @RequestAttribute String memberId) {
 		int memberNo = m.getMemberNo();
 		return memberService.getIsFollow(memberNo, memberId);
+	}
+	//팔로워 리스트 가져오기
+	@GetMapping(value="/getFollower/{memberNo}")
+	public Map getFollower(@PathVariable int memberNo) {
+		return memberService.getFollower(memberNo);
+	}
+	//팔로잉 리스트 가져오기
+	@GetMapping(value="/getFollowing/{memberNo}")
+	public Map getFollowing(@PathVariable int memberNo) {
+		return memberService.getFollowing(memberNo);
 	}
 
 }

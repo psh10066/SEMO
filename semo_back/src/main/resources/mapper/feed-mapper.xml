@@ -72,5 +72,12 @@
   <select id="getCommentCount" resultType="int">
   	select count(*) from feed_comment where feed_no=#{feedNo}
   </select>
+  <select id="selectGroupList" resultType="group">
+  	SELECT group_tbl.*
+	FROM group_tbl
+	JOIN gr_join
+	ON group_tbl.group_no = gr_join.group_no
+	WHERE gr_join.member_no = #{memberNo}
+  </select>
 
 </mapper>

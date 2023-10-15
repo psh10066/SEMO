@@ -123,6 +123,9 @@ public class FeedService {
 	public int feedCount(int feedWriter) {
 		return feedDao.feedCount(feedWriter);
 	}
+	public List selectGroupList(int memberNo) {
+		return feedDao.selectGroupList(memberNo);
+	}
 	
 
 }

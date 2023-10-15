@@ -36,6 +36,14 @@ public interface MemberDao {
 
 	int getIsFollow(Follow f);
 
+	int followerCount(int memberNo);
+
+	List getFollower(int memberNo);
+
+	int followingCount(int memberNo);
+
+	List getFollowing(int memberNo);
+
 
 
 }

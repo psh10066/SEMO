@@ -44,6 +44,8 @@ public interface FeedDao {
 
 	int feedCount(int feedWriter);
 
+	List selectGroupList(int memberNo);
+
 
 
 }
