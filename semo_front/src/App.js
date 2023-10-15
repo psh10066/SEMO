@@ -20,6 +20,7 @@ import Chat from "./component/chat/Chat";
 import GrPhotoMain from "./component/photo/GrPhotoMain";
 import MeetingMain from "./component/meeting/MeetingMain";
 import KakaoCallBack from "./component/member/KakaoCallback";
+import SearchResult from "./component/searchresult/SearchResult";
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
@@ -85,7 +86,10 @@ function App() {
             path="/chat/*"
             element={<Chat isLogin={isLogin} setIsLogin={setIsLogin} />}
           />
-
+          <Route
+            path="/searchresult/*"
+            element={<SearchResult isLogin={isLogin} setIsLogin={setIsLogin} />}
+          />
           <Route path="/" element={<Mainpage />} />
         </Routes>
       </div>

@@ -3,24 +3,40 @@ import "./mainSearch.css";
 import Input from "../../util/InputFrm";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 Modal.setAppElement("#root");
 
 const MainSearchModal = (props) => {
   const [searchContent, setSearchContent] = useState("");
+  const [searchResult, setSearchResult] = useState({});
+  const navigate = useNavigate();
 
   const search = () => {
     const groupName = { groupName: searchContent };
     console.log(groupName);
+
+    //useEffect(() => {
     axios
       .post("/page/search", groupName)
       .then((res) => {
         console.log(res.data);
+        //setSearchResult(res.data);
+        //console.log(searchResult);
+        navigate("/searchresult", {
+          state: { searchResult: res.data },
+        });
+        {
+          /*<Modal onRequestClose={() => props.setModalState(false)}></Modal>;
+          검색 페이지 넘어갈때 모달창 닫히도록 해야함*/
+        }
       })
       .catch((res) => {
         console.log(res.data);
         console.log(res.response.status);
       });
+    //}, []);
   };
 
   return (

@@ -33,7 +33,9 @@ public class PageController {
 	public List search(@RequestBody Group g) {
 		//return pageService.search(searchContent);
 		System.out.println("searchContent는 "+g.getGroupName());
-		
-		return pageService.search(g.getGroupName());
+		List list = pageService.search(g.getGroupName());
+		System.out.println("list는 "+list);
+		//return pageService.search(g.getGroupName());
+		return list;
 	}
 }
