@@ -1,10 +1,10 @@
 import { Avatar, PopoverPaper, Stack } from "@mui/material";
-import ".comment.css";
-import { Button1 } from "./Buttons";
+import "./grComment.css";
+import { Button1 } from "../util/Buttons";
 import Swal from "sweetalert2";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import ReComment from "./ReComment";
+import GrReComment from "./GrReComment";
 
 const grBoardCommentRegist = (
   grBoardNo,
@@ -12,7 +12,9 @@ const grBoardCommentRegist = (
   grBoardCommentNo2,
   isLogin,
   changeGrBoardComment,
-  setChangeGrBoardComment
+  setChangeGrBoardComment,
+  setGrBoardCommentContent,
+  setRecommentState
 ) => {
   const groupBoardCommentInsert = {
     grBoardNo,
@@ -23,7 +25,7 @@ const grBoardCommentRegist = (
     if (grBoardCommentContent !== "") {
       const token = window.localStorage.getItem("token");
       axios
-        .post("/group/insertComment", groupBoardCommentInsert, {
+        .post("/groupBoard/insertComment", groupBoardCommentInsert, {
           headers: {
             Authorization: "Bearer " + token,
           },
@@ -31,6 +33,10 @@ const grBoardCommentRegist = (
         .then((res) => {
           if (res.data === 1) {
             setChangeGrBoardComment(!changeGrBoardComment);
+            setGrBoardCommentContent("");
+            if (setRecommentState) {
+              setRecommentState(true);
+            }
           }
         })
         .catch((res) => {
@@ -48,14 +54,13 @@ const grBoardCommentRegist = (
 const Comment = (props) => {
   const member = props.member;
   const isLogin = props.isLogin;
-  const grBoard = props.grBoard;
   const [grBoardCommentContent, setGrBoardCommentContent] = useState("");
   const [grBoardCommentNo2, setGrBoardCommentNo2] = useState(0);
   const [commentList, setCommentList] = useState([]);
   const [reCommentList, setReCommentList] = useState([]);
-  const [grBoardReCommentContent, setGrBoardRecommentContent] = useState("");
+  const [grBoardRecommentContent, setGrBoardRecommentContent] = useState("");
   const [changeGrBoardComment, setChangeGrBoardComment] = useState([true]); //모임게시판 댓글 새로고침
-  const grBoardNo = grBoard.grBoardNo;
+  const grBoardNo = props.grBoardNo;
 
   //댓글 작성하기
   const grBoardCommentSubmit = () => {
@@ -65,7 +70,9 @@ const Comment = (props) => {
       grBoardCommentNo2,
       isLogin,
       changeGrBoardComment,
-      setChangeGrBoardComment
+      setChangeGrBoardComment,
+      setGrBoardCommentContent,
+      null
     );
   };
   //댓글 리스트 불러오기
@@ -101,7 +108,7 @@ const Comment = (props) => {
               changeGrBoardComment={changeGrBoardComment}
               setChangeGrBoardComment={setChangeGrBoardComment}
               grBoardCommentSubmit={grBoardCommentSubmit}
-              grBoardReCommentContent={grBoardReCommentContent}
+              grBoardRecommentContent={grBoardRecommentContent}
               setGrBoardRecommentContent={setGrBoardRecommentContent}
               reCommentList={reCommentList}
               setReCommentList={setReCommentList}
@@ -119,7 +126,7 @@ const CommentItem = (props) => {
   const member = props.member; //로그인된 회원정보
   const changeGrBoardComment = props.changeGrBoardComment;
   const setChangeGrBoardComment = props.setChangeGrBoardComment;
-  const grBoardReCommentContent = props.grBoardReCommentContent;
+  const grBoardRecommentContent = props.grBoardRecommentContent;
   const setGrBoardRecommentContent = props.setGrBoardRecommentContent;
   const reCommentList = props.reCommentList;
   const setReCommentList = props.setReCommentList;
@@ -179,7 +186,7 @@ const CommentItem = (props) => {
   const deleteComment = () => {
     Swal.fire({
       icon: "warning",
-      text: "게시글을 삭제하시겠습니까?",
+      text: "댓글을 삭제하시겠습니까?",
       showCancelButton: true,
       confirmButtonText: "확인",
       cancelButtonText: "취소",
@@ -216,7 +223,7 @@ const CommentItem = (props) => {
         })
         .then((res) => {
           if (res.data === 1) {
-            setChangeGrBoardComment(!changeGrBoardCommentComment);
+            setChangeGrBoardComment(!changeGrBoardComment);
           }
           setModifyState(true);
         })
@@ -230,11 +237,13 @@ const CommentItem = (props) => {
   const grBoardCommentSubmit = () => {
     grBoardCommentRegist(
       comment.grBoardNo,
-      grBoardReCommentContent,
+      grBoardRecommentContent,
       comment.grBoardCommentNo,
       isLogin,
       changeGrBoardComment,
-      setChangeGrBoardComment
+      setChangeGrBoardComment,
+      setGrBoardRecommentContent,
+      setRecommentState
     );
   };
   return (
@@ -280,7 +289,7 @@ const CommentItem = (props) => {
             placeholder="댓글 추가..."
             ref={textRef}
             onInput={resizeHeight}
-            defaultValue={grBoardCommentContent}
+            value={grBoardCommentContent}
             id={grBoardCommentContent}
             onChange={(e) => {
               setGrBoardCommentContent(e.target.value);
@@ -334,13 +343,13 @@ const CommentItem = (props) => {
           <InputCommentBox
             member={member}
             isLogin={isLogin}
-            commentContent={grBoardCommentContent}
-            setCommentContent={setGrBoardCommentContent}
+            commentContent={grBoardRecommentContent}
+            setCommentContent={setGrBoardRecommentContent}
             grBoardCommentSubmit={grBoardCommentSubmit}
           />
         )}
       </div>
-      <ReComment
+      <GrReComment
         isLogin={isLogin}
         member={member}
         grBoardNo={grBoardNo}
@@ -446,7 +455,7 @@ const CommentContent = (props) => {
         placeholder="댓글 추가..."
         ref={textRef}
         onInput={resizeHeight}
-        defaultValue={commentContent}
+        value={commentContent}
         id={commentContent}
         onChange={(e) => {
           setCommentContent(e.target.value);
