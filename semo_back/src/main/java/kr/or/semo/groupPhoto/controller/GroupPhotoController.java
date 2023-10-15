@@ -56,10 +56,10 @@ public class GroupPhotoController {
 		if(gp.getGrPhotoImg().equals("null")) {
 			gp.setGrPhotoImg(null);
 		}
-		String savepath = root+"groupPhoto/";
-		File delFile = new File(savepath + gp.getGrPhotoImg());
-		delFile.delete();
 		if(thumbnail != null) {
+			String savepath = root+"groupPhoto/";
+			File delFile = new File(savepath + gp.getGrPhotoImg());
+			delFile.delete();
 			String filepath = fileUtil.getfilepath(savepath, thumbnail.getOriginalFilename(), thumbnail);
 			gp.setGrPhotoImg(filepath);
 		}
