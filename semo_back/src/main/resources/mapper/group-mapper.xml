@@ -78,13 +78,12 @@
     )
 	</select>
 	
-	<select id = "groupAllMember" resultType ="Member">
-		SELECT m.member_no,m.member_name
-		FROM gr_join gj
-		JOIN member m ON gj.member_no = m.member_no
-		WHERE gj.group_no = #{groupNo}
-	</select>
-	
+<select id="groupAllMember" resultType="Member">
+	SELECT m.member_name, gj.GR_JOIN_TYPE
+	FROM gr_join gj
+	JOIN member m ON gj.member_no = m.member_no
+	WHERE gj.group_no = #{groupNo}
+</select>
 	
 	<select id="selectOneGroupSave" resultType="GroupSave">
 		select * from group_save
