@@ -330,7 +330,7 @@ const FeedView = (props) => {
         <Comment
           isLogin={isLogin}
           member={member}
-          feed={feed}
+          feedNo={feedNo}
           changeFeedComment={changeFeedComment}
           setChangeFeedComment={setChangeFeedComment}
         />

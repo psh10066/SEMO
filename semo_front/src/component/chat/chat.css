@@ -12,10 +12,11 @@
 }
 .chat-list {
   width: 25%;
-  background-color: rgba(34, 8, 149, 0.8);
+  background-color: #5457e9;
 }
 .chat-room {
   width: 75%;
+  background-color: #8bb4ff;
 }
 .chat-myname {
   text-align: center;

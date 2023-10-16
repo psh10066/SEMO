@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import ChatRoom from "./ChatRoom";
+import ChatInfo from "./ChatInfo";
 
 const Chat = (props) => {
   const navigate = useNavigate();
@@ -53,6 +54,7 @@ const Chat = (props) => {
       .then((res) => {
         setRoomName(res.data.map((item) => item.groupName));
         setChatHostAddress(res.data.map((item) => item.groupNo));
+        setSelectedGroupNumber(res.data.map((item) => item.groupNo)[0]);
       })
       .catch((res) => {
         console.log(res.response.status);
@@ -62,17 +64,17 @@ const Chat = (props) => {
   //그룹에 있는 모든 멤버들 불러오기
   const [groupAllMemberNo, setGroupAllMemberNo] = useState([]); //모든 멤버 번호
   const [groupAllMemberName, setGroupAllMemberName] = useState([]); //모든 멤버 이름
-  const [selectedGroupNumber, setSelectedGroupNumber] = useState(-1); //탭 클릭시 전달받은 그룹번호
+  const [selectedGroupNumber, setSelectedGroupNumber] = useState(0); //탭 클릭시 전달받은 그룹번호
 
   const groupNumber = (number) => {
     setSelectedGroupNumber(number);
   };
-  console.log(selectedGroupNumber);
+
   useEffect(() => {
     axios
       .post(
-        "/group/groupAllMember", 
-        {groupNo:selectedGroupNumber},
+        "/group/groupAllMember",
+        { groupNo: selectedGroupNumber },
         {
           headers: {
             Authorization: "Bearer " + token,
@@ -88,12 +90,8 @@ const Chat = (props) => {
       });
   }, [selectedGroupNumber]); //탭한 그룹이 바뀔때마다
   const chatTap = () => {
-    navigate("/chat/rooms")
-  }
-
-
-  console.log(groupAllMemberNo);
-  console.log(groupAllMemberName);
+    navigate("/chat/rooms");
+  };
 
   return (
     <div className="chat-wrap">
@@ -107,8 +105,10 @@ const Chat = (props) => {
             <div
               className="chatEnter"
               key={index}
-              onClick={(e) => {groupNumber(chatHostAddress[index]);
-              chatTap(e)}}
+              onClick={(e) => {
+                groupNumber(chatHostAddress[index]);
+                chatTap(e);
+              }}
             >
               {name}
             </div>
@@ -116,8 +116,9 @@ const Chat = (props) => {
         </div>
         <div className="chat-room">
           <Routes>
+            <Route path="chatInfo" element={<ChatInfo />} />
             <Route
-            path="rooms/*"
+              path="rooms/*"
               element={
                 <ChatRoom
                   groupAllMemberNo={groupAllMemberNo}
