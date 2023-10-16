@@ -36,9 +36,9 @@ const Chat = (props) => {
       });
   }, []);
 
-  //채팅방이름 불러오기 == 그룹이름
+  //채팅방이름 불러오기 == 그룹이름 : 내가 속해있는 모임
   const [roomName, setRoomName] = useState([]);
-  //채팅방 주소(랩핑) == 그룹넘버
+  //채팅방 주소(랩핑) == 그룹넘버 : 내가 속해있는 모임
   const [chatHostAddress, setChatHostAddress] = useState([]);
   useEffect(() => {
     axios
@@ -54,7 +54,6 @@ const Chat = (props) => {
       .then((res) => {
         setRoomName(res.data.map((item) => item.groupName));
         setChatHostAddress(res.data.map((item) => item.groupNo));
-        setSelectedGroupNumber(res.data.map((item) => item.groupNo)[0]);
       })
       .catch((res) => {
         console.log(res.response.status);
@@ -64,8 +63,15 @@ const Chat = (props) => {
   //그룹에 있는 모든 멤버들 불러오기
   const [groupAllMemberNo, setGroupAllMemberNo] = useState([]); //모든 멤버 번호
   const [groupAllMemberName, setGroupAllMemberName] = useState([]); //모든 멤버 이름
-  const [selectedGroupNumber, setSelectedGroupNumber] = useState(0); //탭 클릭시 전달받은 그룹번호
+  const [selectedGroupNumber, setSelectedGroupNumber] = useState(0);
 
+  useEffect(() => {
+    if (selectedGroupNumber === 0) {
+      navigate("/chat/chatInfo", { replace: true });
+    }
+  }, []);
+
+  //탭 클릭이벤트
   const groupNumber = (number) => {
     setSelectedGroupNumber(number);
   };
@@ -88,7 +94,9 @@ const Chat = (props) => {
       .catch((res) => {
         console.log(res.response.status);
       });
-  }, [selectedGroupNumber]); //탭한 그룹이 바뀔때마다
+  }, [selectedGroupNumber]);
+
+  //탭한 그룹이 바뀔때마다
   const chatTap = () => {
     navigate("/chat/rooms");
   };
@@ -117,17 +125,20 @@ const Chat = (props) => {
         <div className="chat-room">
           <Routes>
             <Route path="chatInfo" element={<ChatInfo />} />
-            <Route
-              path="rooms/*"
-              element={
-                <ChatRoom
-                  groupAllMemberNo={groupAllMemberNo}
-                  groupAllMemberName={groupAllMemberName}
-                  senderName={member.memberName}
-                  roomId={selectedGroupNumber}
-                />
-              }
-            />
+            {selectedGroupNumber !== 0 && (
+              <Route
+                path="rooms/*"
+                element={
+                  <ChatRoom
+                    groupAllMemberNo={groupAllMemberNo}
+                    groupAllMemberName={groupAllMemberName}
+                    senderName={member.memberName}
+                    roomId={selectedGroupNumber}
+                    memberNo={member.memberNo}
+                  />
+                }
+              />
+            )}
           </Routes>
         </div>
       </div>
