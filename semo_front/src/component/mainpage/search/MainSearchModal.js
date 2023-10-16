@@ -14,7 +14,7 @@ const MainSearchModal = (props) => {
   const navigate = useNavigate();
   const modalState = props.modalState;
   const setModalState = props.setModalState;
-  console.log(modalState);
+  //console.log(modalState);
   const search = (e) => {
     const groupName = { groupName: searchContent };
     console.log(groupName);

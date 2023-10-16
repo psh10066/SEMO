@@ -18,7 +18,8 @@ const SearchResult = (props) => {
   const [groupName, setGroupName] = useState("");
   //const searchKeyword = location.state.searchContent;
 
-  const [socialingSearchAll, setSocialingSearchAll] = useState("all");
+  const [socialingSearch, setSocialingSearch] = useState("all"); //소셜링-전체 / 소셜링-모임명 / 소셜링-모임설명 / 라운지(피드)
+
   useEffect(() => {
     setSearchList(location.state.searchResult);
     setSearchKeyword(location.state.searchKeyword);
