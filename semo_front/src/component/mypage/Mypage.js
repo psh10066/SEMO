@@ -72,7 +72,7 @@ const Mypage = (props) => {
     navigate("/feed/profile", { state: { memberNo: member.memberNo } });
   };
   const mychat = () => {
-    navigate("/chat");
+    navigate("/chat/chatInfo");
   };
 
   return (

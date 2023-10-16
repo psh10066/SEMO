@@ -111,11 +111,15 @@ public class GroupService {
 		Member member = memberDao.selectOneMember(memberId);
 		GroupSave groupSave = groupDao.selectOneGroupSave(groupNo,member.getMemberNo());
 		if(groupSave != null) {
-			return groupDao.deleteGroupSave(groupNo, member.getMemberNo());
-			
+			groupDao.deleteGroupSave(groupNo, member.getMemberNo());
+			return 0;
 		}else {
-			return groupDao.insertGroupSave(groupNo, member.getMemberNo());
-			
+			groupDao.insertGroupSave(groupNo, member.getMemberNo());
+			return 1;
 		}		
+	}
+
+	public List groupAllMember( int groupNo) {
+		return groupDao.groupAllMember(groupNo);
 	}
 }

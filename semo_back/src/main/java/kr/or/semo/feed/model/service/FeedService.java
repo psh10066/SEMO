@@ -92,9 +92,7 @@ public class FeedService {
 	public int insertComment(FeedComment fc, String memberId) {
 		Member member = memberDao.selectOneMember(memberId);
 		fc.setFeedCommentWriter(member.getMemberNo());
-		System.out.println("서비스"+fc);
 		String feedCommentRef = fc.getFeedCommentNo2()==0?null:String.valueOf(fc.getFeedCommentNo2());
-		System.out.println(feedCommentRef);
 		fc.setFeedCommentRef(feedCommentRef);
 		return feedDao.insertComment(fc);
 	}
@@ -121,6 +119,12 @@ public class FeedService {
 	public int getCommentCount(int feedNo) {
 		// TODO Auto-generated method stub
 		return feedDao.getCommentCount(feedNo);
+	}
+	public int feedCount(int feedWriter) {
+		return feedDao.feedCount(feedWriter);
+	}
+	public List selectGroupList(int memberNo) {
+		return feedDao.selectGroupList(memberNo);
 	}
 	
 

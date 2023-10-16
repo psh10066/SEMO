@@ -24,4 +24,8 @@ public interface PageDao {
 
 	List selectPageList3(HashMap<String, Object> mapCat);
 
+	List search(String searchContent);
+
+	//String search(String searchContent);
+
 }

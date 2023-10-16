@@ -79,5 +79,15 @@ public class PageService {
 		return map;
 	}
 
+	public List search(String searchContent) {
+		System.out.println("searchContent는 "+searchContent);
+		return pageDao.search(searchContent);
+	}
+
+	/*
+	public String search(String searchContent) {
+		return pageDao.search(searchContent);
+	}
+*/
 
 }

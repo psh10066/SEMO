@@ -55,7 +55,6 @@ public class FeedController {
 	//피드리스트 가져오기
 	@GetMapping(value="/list/{feedWriter}")
 	public List feedList(@PathVariable int feedWriter) {
-		System.out.println("feedWriter : "+feedWriter);
 		return feedService.selectFeedList(feedWriter);
 	}
 	
@@ -109,7 +108,7 @@ public class FeedController {
 		return feedService.getIsLike(feedNo, memberId);
 	}
 	//피드 좋아요 
-	@PostMapping(value="addLike")
+	@PostMapping(value="/addLike")
 	public int addLike(@RequestBody Feed f, @RequestAttribute String memberId) {
 		int feedNo = f.getFeedNo();
 		return feedService.insertFeedLike(feedNo,memberId);
@@ -151,5 +150,15 @@ public class FeedController {
 	public int getCommentCount(@PathVariable int feedNo) {
 		return feedService.getCommentCount(feedNo);
 	}
-
+	//피드 수
+	@GetMapping(value="/feedCount/{feedWriter}")
+	public int feedCount(@PathVariable int feedWriter) {
+		return feedService.feedCount(feedWriter);
+	}
+	
+	//피드 프로필 그룹 리스트 조회
+	@GetMapping(value="/groupList/{memberNo}")
+	public List groupList(@PathVariable int memberNo) {
+		return feedService.selectGroupList(memberNo);
+	}
 }

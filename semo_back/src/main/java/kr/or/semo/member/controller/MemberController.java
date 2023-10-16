@@ -1,6 +1,8 @@
 package kr.or.semo.member.controller;
 
 import java.io.File;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -134,6 +136,7 @@ public class MemberController {
 		return memberService.updateMyLike(member);
 	}
 	
+
 	
 	@PostMapping("/oauth/kakao")
 	public ResponseEntity<String> handleKakaoLogin(@RequestBody KakaoParams kakaoParams){
@@ -157,4 +160,41 @@ public class MemberController {
 		return authCode;
 	}
 	
+
+	//팔로우 관련 멤버리스트 가져오기
+	@GetMapping(value="/memberList")
+	public List memberList(String memberNoList) {
+		return memberService.memberList(memberNoList);
+	}
+	
+	//팔로우
+	@PostMapping(value="/follow")
+	public int follow(@RequestBody Member m, @RequestAttribute String memberId) {
+		int memberNo = m.getMemberNo();
+		return memberService.insertFollow(memberNo, memberId);
+	}
+	//언팔로우
+	@PostMapping(value="/unfollow")
+	public int unfollow(@RequestBody Member m, @RequestAttribute String memberId) {
+		int memberNo = m.getMemberNo();
+		return memberService.deleteFollow(memberNo, memberId);
+	}
+	//팔로우 여부 isFollow 조회
+	@PostMapping(value="/isFollow")
+	public int isFollow(@RequestBody Member m, @RequestAttribute String memberId) {
+		int memberNo = m.getMemberNo();
+		return memberService.getIsFollow(memberNo, memberId);
+	}
+	//팔로워 리스트 가져오기
+	@GetMapping(value="/getFollower/{memberNo}")
+	public Map getFollower(@PathVariable int memberNo) {
+		return memberService.getFollower(memberNo);
+	}
+	//팔로잉 리스트 가져오기
+	@GetMapping(value="/getFollowing/{memberNo}")
+	public Map getFollowing(@PathVariable int memberNo) {
+		return memberService.getFollowing(memberNo);
+	}
+
+
 }

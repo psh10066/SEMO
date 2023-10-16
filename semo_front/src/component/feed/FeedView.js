@@ -6,6 +6,7 @@ import { Button1 } from "../util/Buttons";
 import Swal from "sweetalert2";
 import FeedModal from "../util/FeedModal";
 import Comment from "../util/Comment";
+import MyModal from "../util/MyModal";
 
 const FeedView = (props) => {
   const isLogin = props.isLogin;
@@ -14,9 +15,10 @@ const FeedView = (props) => {
   const [feed, setFeed] = useState({});
   const [member, setMember] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [feedLikeCount, setFeedLikeCount] = useState(0);
   const [isLike, setIsLike] = useState(0);
-  const [feedLikeList, setFeedLikeList] = useState([]);
+  const [memberList, setMemberList] = useState([]);
   const [changeFeed, setChangeFeed] = useState(true);
   const navigate = useNavigate();
   const token = window.localStorage.getItem("token");
@@ -70,7 +72,9 @@ const FeedView = (props) => {
       .get("/feed/getFeedLike/" + feedNo)
       .then((res) => {
         setFeedLikeCount(res.data.feedLikeCount);
-        setFeedLikeList(res.data.list);
+        setMemberList(res.data.list);
+        // console.log("멤버리스트" + res.data);
+        // console.log(memberList);
       })
       .catch((res) => {
         console.log(res.response.status);
@@ -94,6 +98,12 @@ const FeedView = (props) => {
   };
   const onCancel = () => {
     setIsOpen(false);
+  };
+  const modalClick = () => {
+    setIsModalOpen(true);
+  };
+  const onModalCancel = () => {
+    setIsModalOpen(false);
   };
   const deleteFeed = () => {
     Swal.fire({
@@ -196,6 +206,12 @@ const FeedView = (props) => {
       return "방금";
     }
   }
+  const naviFeedProfile = () => {
+    navigate("/feed/profile", {
+      state: { memberNo: feed.feedWriter },
+    });
+    console.log(feed);
+  };
   return (
     <div className="feed-view-wrap">
       {isLogin ? (
@@ -221,16 +237,30 @@ const FeedView = (props) => {
         ""
       )}
       <div className="feed-view-top">
-        <div className="feed-view-writerImg">
-          <Stack direction="row" spacing={2}>
-            <Avatar
-              alt="Remy Sharp"
-              src={"/member/" + feed.memberImg}
-              sx={{ width: 40, height: 40 }}
-            />
-          </Stack>
+        {feed.memberImg === null ? (
+          <div className="feed-view-writerImg">
+            <Stack direction="row" spacing={2} onClick={naviFeedProfile}>
+              <Avatar
+                alt="Remy Sharp"
+                src="/image/person.png"
+                sx={{ width: 40, height: 40 }}
+              />
+            </Stack>
+          </div>
+        ) : (
+          <div className="feed-view-writerImg">
+            <Stack direction="row" spacing={2} onClick={naviFeedProfile}>
+              <Avatar
+                alt="Remy Sharp"
+                src={"/member/" + feed.memberImg}
+                sx={{ width: 40, height: 40 }}
+              />
+            </Stack>
+          </div>
+        )}
+        <div className="feed-view-writer" onClick={naviFeedProfile}>
+          {feed.memberName}
         </div>
-        <div className="feed-view-writer">{feed.memberName}</div>
         <div className="feed-view-date">
           {feed.feedDate ? formatTime(feed.feedDate) : ""}
         </div>
@@ -256,7 +286,15 @@ const FeedView = (props) => {
                 favorite_border
               </span>
             )}
-            <span className="feed-count">{feedLikeCount}</span>
+            <span className="feed-count" onClick={modalClick}>
+              {feedLikeCount}
+            </span>
+            <MyModal
+              isModalOpen={isModalOpen}
+              onModalCancel={onModalCancel}
+              memberList={memberList}
+              isLogin={isLogin}
+            />
           </div>
           <div className="feed-view-commentCount">
             <span className="material-icons">chat_bubble_outline</span>

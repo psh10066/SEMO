@@ -60,5 +60,9 @@
 		        ORDER BY 1 DESC)B)
 		WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>
+	
+	<select id="search" resultType="group">
+		select * from group_tbl where group_name like '%'||#{searchContent}||'%' or group_content like '%'||#{searchContent}||'%' 
+	</select>
 
 </mapper>

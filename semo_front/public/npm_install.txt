@@ -20,3 +20,6 @@ npm install react-kakao-maps-sdk
 npm install nodemailer --save
 
 npm i socket.io-client
+npm i sockjs-client --save
+npm install @stomp/stompjs
+npm install react-stomp

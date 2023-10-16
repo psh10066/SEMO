@@ -1,33 +1,42 @@
 import { Avatar, PopoverPaper, Stack } from "@mui/material";
-import "./comment.css";
-import { Button1 } from "./Buttons";
+import "./grComment.css";
+import { Button1 } from "../util/Buttons";
 import Swal from "sweetalert2";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import ReComment from "./ReComment";
-import { useNavigate } from "react-router-dom";
+import GrReComment from "./GrReComment";
 
-const feedCommentRegist = (
-  feedNo,
-  feedCommentContent,
-  feedCommentNo2,
+const grBoardCommentRegist = (
+  grBoardNo,
+  grBoardCommentContent,
+  grBoardCommentNo2,
   isLogin,
-  changeFeedComment,
-  setChangeFeedComment
+  changeGrBoardComment,
+  setChangeGrBoardComment,
+  setGrBoardCommentContent,
+  setRecommentState
 ) => {
-  const feedCommentInesrt = { feedNo, feedCommentContent, feedCommentNo2 };
+  const groupBoardCommentInsert = {
+    grBoardNo,
+    grBoardCommentContent,
+    grBoardCommentNo2,
+  };
   if (isLogin) {
-    if (feedCommentContent !== "") {
+    if (grBoardCommentContent !== "") {
       const token = window.localStorage.getItem("token");
       axios
-        .post("/feed/insertComment", feedCommentInesrt, {
+        .post("/groupBoard/insertComment", groupBoardCommentInsert, {
           headers: {
             Authorization: "Bearer " + token,
           },
         })
         .then((res) => {
           if (res.data === 1) {
-            setChangeFeedComment(!changeFeedComment);
+            setChangeGrBoardComment(!changeGrBoardComment);
+            setGrBoardCommentContent("");
+            if (setRecommentState) {
+              setRecommentState(true);
+            }
           }
         })
         .catch((res) => {
@@ -45,47 +54,47 @@ const feedCommentRegist = (
 const Comment = (props) => {
   const member = props.member;
   const isLogin = props.isLogin;
-  const feed = props.feed;
-  const [feedCommentContent, setFeedCommentContent] = useState("");
-  const [feedCommentNo2, setFeedCommentNo2] = useState(0);
+  const [grBoardCommentContent, setGrBoardCommentContent] = useState("");
+  const [grBoardCommentNo2, setGrBoardCommentNo2] = useState(0);
   const [commentList, setCommentList] = useState([]);
   const [reCommentList, setReCommentList] = useState([]);
-  const [feedReCommentContent, setFeedRecommentContent] = useState("");
-  const changeFeedComment = props.changeFeedComment;
-  const setChangeFeedComment = props.setChangeFeedComment;
-  const feedNo = feed.feedNo;
+  const [grBoardRecommentContent, setGrBoardRecommentContent] = useState("");
+  const [changeGrBoardComment, setChangeGrBoardComment] = useState([true]); //모임게시판 댓글 새로고침
+  const grBoardNo = props.grBoardNo;
 
   //댓글 작성하기
-  const feedCommentSubmit = () => {
-    feedCommentRegist(
-      feedNo,
-      feedCommentContent,
-      feedCommentNo2,
+  const grBoardCommentSubmit = () => {
+    grBoardCommentRegist(
+      grBoardNo,
+      grBoardCommentContent,
+      grBoardCommentNo2,
       isLogin,
-      changeFeedComment,
-      setChangeFeedComment
+      changeGrBoardComment,
+      setChangeGrBoardComment,
+      setGrBoardCommentContent,
+      null
     );
   };
   //댓글 리스트 불러오기
   useEffect(() => {
     axios
-      .get("/feed/feedCommentList/" + feedNo)
+      .get("/groupBoard/groupBoardCommentList/" + grBoardNo)
       .then((res) => {
         setCommentList(res.data);
       })
       .catch((res) => {
         console.log(res.response.status);
       });
-  }, [member, feedNo, changeFeedComment]);
+  }, [member, grBoardNo, changeGrBoardComment]);
 
   return (
     <div className="comment-all-wrap">
       <InputCommentBox
         member={member}
         isLogin={isLogin}
-        commentContent={feedCommentContent}
-        setCommentContent={setFeedCommentContent}
-        feedCommentSubmit={feedCommentSubmit}
+        commentContent={grBoardCommentContent}
+        setCommentContent={setGrBoardCommentContent}
+        grBoardCommentSubmit={grBoardCommentSubmit}
       />
       <div className="commentBox-wrap">
         {commentList.map((comment, index) => {
@@ -95,12 +104,12 @@ const Comment = (props) => {
               comment={comment}
               isLogin={isLogin}
               member={member}
-              feedNo={feedNo}
-              changeFeedComment={changeFeedComment}
-              setChangeFeedComment={setChangeFeedComment}
-              feedCommentSubmit={feedCommentSubmit}
-              feedReCommentContent={feedReCommentContent}
-              setFeedRecommentContent={setFeedRecommentContent}
+              grBoardNo={grBoardNo}
+              changeGrBoardComment={changeGrBoardComment}
+              setChangeGrBoardComment={setChangeGrBoardComment}
+              grBoardCommentSubmit={grBoardCommentSubmit}
+              grBoardRecommentContent={grBoardRecommentContent}
+              setGrBoardRecommentContent={setGrBoardRecommentContent}
               reCommentList={reCommentList}
               setReCommentList={setReCommentList}
             />
@@ -115,17 +124,19 @@ const CommentItem = (props) => {
   const comment = props.comment;
   const isLogin = props.isLogin;
   const member = props.member; //로그인된 회원정보
-  const changeFeedComment = props.changeFeedComment;
-  const setChangeFeedComment = props.setChangeFeedComment;
-  const feedReCommentContent = props.feedReCommentContent;
-  const setFeedRecommentContent = props.setFeedRecommentContent;
+  const changeGrBoardComment = props.changeGrBoardComment;
+  const setChangeGrBoardComment = props.setChangeGrBoardComment;
+  const grBoardRecommentContent = props.grBoardRecommentContent;
+  const setGrBoardRecommentContent = props.setGrBoardRecommentContent;
   const reCommentList = props.reCommentList;
   const setReCommentList = props.setReCommentList;
-  const feedNo = props.feedNo;
-  const [feedCommentContent, setFeedCommentContent] = useState(
-    comment.feedCommentContent
+  const grBoardNo = props.grBoardNo;
+  const [grBoardCommentContent, setGrBoardCommentContent] = useState(
+    comment.grBoardCommentContent
   ); //댓글 내용
-  const [feedCommentNo, setFeedCommentNo] = useState(comment.feedCommentNo);
+  const [grBoardCommentNo, setGrBoardCommentNo] = useState(
+    comment.grBoardCommentNo
+  );
   const [modifyState, setModifyState] = useState(true); //수정 눌렀을 때 확인
   const [recommentState, setRecommentState] = useState(true); //답글 눌렀을 때 확인
   //댓글 textarea 크기 조절
@@ -174,18 +185,18 @@ const CommentItem = (props) => {
   //댓글 삭제
   const deleteComment = () => {
     Swal.fire({
-      icon: "question",
-      text: "피드를 삭제하시겠습니까?",
+      icon: "warning",
+      text: "댓글을 삭제하시겠습니까?",
       showCancelButton: true,
-      confirmButtonText: "삭제",
+      confirmButtonText: "확인",
       cancelButtonText: "취소",
     }).then((res) => {
       if (res.isConfirmed) {
         axios
-          .get("/feed/deleteComment/" + comment.feedCommentNo)
+          .get("/groupBoard/deleteComment/" + comment.grBoardCommentNo)
           .then((res) => {
             if (res.data === 1) {
-              setChangeFeedComment(!changeFeedComment);
+              setChangeGrBoardComment(!changeGrBoardComment);
             }
           })
           .catch((res) => {
@@ -200,19 +211,19 @@ const CommentItem = (props) => {
   };
   //댓글 수정취소 버튼 눌렀을 때
   const modifyCancel = () => {
-    setFeedCommentContent(comment.feedCommentContent);
+    setGrBoardCommentContent(comment.grBoardCommentContent);
     setModifyState(true);
   };
   //댓글 수정
   const modifyComment = () => {
-    if (feedCommentContent !== "") {
+    if (grBoardCommentContent !== "") {
       axios
-        .get("/feed/modifyComment", {
-          params: { feedCommentNo, feedCommentContent },
+        .get("/groupBoard/modifyComment", {
+          params: { grBoardCommentNo, grBoardCommentContent },
         })
         .then((res) => {
           if (res.data === 1) {
-            setChangeFeedComment(!changeFeedComment);
+            setChangeGrBoardComment(!changeGrBoardComment);
           }
           setModifyState(true);
         })
@@ -223,28 +234,24 @@ const CommentItem = (props) => {
       Swal.fire("댓글을 입력해 주세요.");
     }
   };
-  const feedCommentSubmit = () => {
-    feedCommentRegist(
-      comment.feedNo,
-      feedReCommentContent,
-      comment.feedCommentNo,
+  const grBoardCommentSubmit = () => {
+    grBoardCommentRegist(
+      comment.grBoardNo,
+      grBoardRecommentContent,
+      comment.grBoardCommentNo,
       isLogin,
-      changeFeedComment,
-      setChangeFeedComment
+      changeGrBoardComment,
+      setChangeGrBoardComment,
+      setGrBoardRecommentContent,
+      setRecommentState
     );
-  };
-  const navigate = useNavigate();
-  const naviFeedProfile = () => {
-    navigate("/feed/profile", {
-      state: { memberNo: comment.feedCommentWriter },
-    });
   };
   return (
     <div className="comment-wrap">
       <div className="comment-top">
         {comment.memberImg === null ? (
           <div className="commentItem-profile-image">
-            <Stack direction="row" spacing={2} onClick={naviFeedProfile}>
+            <Stack direction="row" spacing={2}>
               <Avatar
                 alt="Remy Sharp"
                 src="/image/person.png"
@@ -254,7 +261,7 @@ const CommentItem = (props) => {
           </div>
         ) : (
           <div className="commentItem-profile-image">
-            <Stack direction="row" spacing={2} onClick={naviFeedProfile}>
+            <Stack direction="row" spacing={2}>
               <Avatar
                 alt="Remy Sharp"
                 src={"/member/" + comment.memberImg}
@@ -263,17 +270,17 @@ const CommentItem = (props) => {
             </Stack>
           </div>
         )}
-        <div className="commentItem-memberName" onClick={naviFeedProfile}>
-          {comment.memberName}
-        </div>
+        <div className="commentItem-memberName">{comment.memberName}</div>
         <div className="commentItem-date">
-          {comment.feedCommentDate ? formatTime(comment.feedCommentDate) : ""}
+          {comment.grBoardCommentDate
+            ? formatTime(comment.grBoardCommentDate)
+            : ""}
         </div>
       </div>
       <div className="comment-mid">
         {modifyState ? (
           <div className="commentItem-content">
-            {comment.feedCommentContent}
+            {comment.grBoardCommentContent}
           </div>
         ) : (
           <textarea
@@ -282,17 +289,17 @@ const CommentItem = (props) => {
             placeholder="댓글 추가..."
             ref={textRef}
             onInput={resizeHeight}
-            defaultValue={feedCommentContent}
-            id={feedCommentContent}
+            value={grBoardCommentContent}
+            id={grBoardCommentContent}
             onChange={(e) => {
-              setFeedCommentContent(e.target.value);
+              setGrBoardCommentContent(e.target.value);
             }}
           />
         )}
       </div>
       <div className="comment-bottom">
         {isLogin ? (
-          member && member.memberNo === comment.feedCommentWriter ? (
+          member && member.memberNo === comment.grBoardCommentWriter ? (
             modifyState ? (
               <div className="comment-bottom-right">
                 <div className="comment-modify" onClick={modifyClick}>
@@ -336,21 +343,21 @@ const CommentItem = (props) => {
           <InputCommentBox
             member={member}
             isLogin={isLogin}
-            commentContent={feedReCommentContent}
-            setCommentContent={setFeedRecommentContent}
-            feedCommentSubmit={feedCommentSubmit}
+            commentContent={grBoardRecommentContent}
+            setCommentContent={setGrBoardRecommentContent}
+            grBoardCommentSubmit={grBoardCommentSubmit}
           />
         )}
       </div>
-      <ReComment
+      <GrReComment
         isLogin={isLogin}
         member={member}
-        feedNo={feedNo}
-        feedCommentNo={comment.feedCommentNo}
+        grBoardNo={grBoardNo}
+        grBoardCommentNo={comment.grBoardCommentNo}
         reCommentList={reCommentList}
         setReCommentList={setReCommentList}
-        changeFeedComment={changeFeedComment}
-        setChangeFeedComment={setChangeFeedComment}
+        changeGrBoardComment={changeGrBoardComment}
+        setChangeGrBoardComment={setChangeGrBoardComment}
       />
     </div>
   );
@@ -385,7 +392,7 @@ const InputCommentBox = (props) => {
   const isLogin = props.isLogin;
   const commentContent = props.commentContent;
   const setCommentContent = props.setCommentContent;
-  const feedCommentSubmit = props.feedCommentSubmit;
+  const grBoardCommentSubmit = props.grBoardCommentSubmit;
   return (
     <div className="inputCommentBox-wrap">
       {isLogin ? (
@@ -426,7 +433,7 @@ const InputCommentBox = (props) => {
         setCommentContent={setCommentContent}
       />
       <div className="comment-submit-btn">
-        <Button1 text="등록" clickEvent={feedCommentSubmit} />
+        <Button1 text="등록" clickEvent={grBoardCommentSubmit} />
       </div>
     </div>
   );
@@ -448,7 +455,7 @@ const CommentContent = (props) => {
         placeholder="댓글 추가..."
         ref={textRef}
         onInput={resizeHeight}
-        defaultValue={commentContent}
+        value={commentContent}
         id={commentContent}
         onChange={(e) => {
           setCommentContent(e.target.value);

@@ -50,6 +50,9 @@ const Header = (props) => {
   if (location.pathname.includes("/chat")) {
     headerStyle = { color: "#220895" };
   }
+  if (location.pathname.includes("/searchresult")) {
+    headerStyle = { color: "#220895" };
+  }
 
   return (
     <header>
@@ -64,7 +67,7 @@ const Header = (props) => {
           <div className="chatTotal">
             <div className="chat">
               {isLogin ? (
-                <Link to="/chat" title="채팅">
+                <Link to="/chat/chatInfo" title="채팅">
                   <span className="material-icons" style={headerStyle}>
                     chat_bubble
                   </span>
@@ -132,6 +135,9 @@ const Navi = (props) => {
     naviStyle = { color: "#220895" };
   }
   if (location.pathname.includes("/chat")) {
+    naviStyle = { color: "#220895" };
+  }
+  if (location.pathname.includes("/searchresult")) {
     naviStyle = { color: "#220895" };
   }
 

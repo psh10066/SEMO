@@ -3,20 +3,40 @@ import "./mainSearch.css";
 import Input from "../../util/InputFrm";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 Modal.setAppElement("#root");
 
 const MainSearchModal = (props) => {
   const [searchContent, setSearchContent] = useState("");
+  const [searchResult, setSearchResult] = useState({});
+  const navigate = useNavigate();
 
   const search = () => {
-    const searchContent = { searchContent };
+    const groupName = { groupName: searchContent };
+    console.log(groupName);
+
+    //useEffect(() => {
     axios
-      .post("#", searchContent)
-      .then((res) => {})
+      .post("/page/search", groupName)
+      .then((res) => {
+        console.log(res.data);
+        //setSearchResult(res.data);
+        //console.log(searchResult);
+        navigate("/searchresult", {
+          state: { searchResult: res.data },
+        });
+        {
+          /*<Modal onRequestClose={() => props.setModalState(false)}></Modal>;
+          검색 페이지 넘어갈때 모달창 닫히도록 해야함*/
+        }
+      })
       .catch((res) => {
-        console.log(res);
+        console.log(res.data);
+        console.log(res.response.status);
       });
+    //}, []);
   };
 
   return (
@@ -50,7 +70,7 @@ const MainSearchModal = (props) => {
               placeholder="관심사 , 지역명을 검색해보세요"
             />
             <div>
-              <span className="material-icons" clickEvent={search}>
+              <span className="material-icons" onClick={search}>
                 search
               </span>
             </div>
