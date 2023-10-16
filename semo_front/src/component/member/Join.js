@@ -3,9 +3,15 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Input from "../util/InputFrm";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@mui/material";
 import "./member.css";
-import { Button1 } from "../util/Buttons";
+import { Button1, Button2, Button3 } from "../util/Buttons";
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 
@@ -125,9 +131,13 @@ const Join = () => {
     "@kakao.com",
   ];
   //이메일
+  const [timeZone, setTimeZone] = useState("");
+  const [authMsg, setAuthMsg] = useState("");
+  const [authCode, setAuthCode] = useState("");
   const [emailList, setEmailList] = useState(Emails);
   const [selected, setSelected] = useState(-1);
   const [isDrobBox, setIsDropbox] = useState(false);
+
   const inputRef = useRef();
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -184,7 +194,18 @@ const Join = () => {
       setMemberImg(null);
     }
   };
-  //소셜로그인
+  const emailJoin = (props) => {
+    const a = document.querySelector("#memberMail");
+    a.addEventListener("change", function (e) {
+      setMemberMail(e.target.value);
+    });
+    console.log(memberMail);
+    const auth = document.querySelector("#auth");
+    axios.post("/member/sendMail", { memberMail }).then((res) => {
+      setAuthCode(res.data);
+      auth.style.display = "block";
+    });
+  };
 
   return (
     <div className="join-wrap">
@@ -255,6 +276,17 @@ const Join = () => {
             ))}
           </div>
         )}
+        <div className="email-btn">
+          <Button1 text="이메일인증" clickEvent={emailJoin} />
+          <div id="auth">
+            <input type="text" id="authCode" placeholder="인증번호입력" />
+            <button class="btn bc1" id="authBtn">
+              인증하기
+            </button>
+            <span id="timeZone"></span>
+            <span id="authMsg"></span>
+          </div>
+        </div>
       </div>
       <div className="join-category-title">피드 설정</div>
       <div className="member-thumbnail">

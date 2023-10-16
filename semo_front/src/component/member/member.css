@@ -84,6 +84,17 @@
   font-size: 16px;
   resize: none;
 }
+.join-mail-wrap {
+}
+.join-mail-wrap > .email-btn > button {
+  background-color: #5457e9;
+  border: none;
+  color: #fff;
+  border-radius: 10px;
+  width: 100%;
+  margin-top: 20px;
+  justify-content: center;
+}
 .check-msg {
   color: red;
 }
@@ -149,4 +160,8 @@ input[type="file"]::file-selector-button:hover {
 }
 .comment-bottom-right > div:hover {
   font-family: ns-b;
+}
+
+#auth {
+  display: none;
 }

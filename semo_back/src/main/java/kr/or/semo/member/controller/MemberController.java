@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.semo.EmailSender;
 import kr.or.semo.FileUtil;
-
+import kr.or.semo.kakao.service.OAuthService;
+import kr.or.semo.kakao.vo.KakaoParams;
 import kr.or.semo.member.model.service.MemberService;
 import kr.or.semo.member.model.vo.Member;
 
@@ -28,10 +30,14 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	@Autowired
+	private EmailSender emailSender;
+	@Autowired
 	private FileUtil fileUtil;
 	@Value("${file.root}")
 	private String root;
-
+	@Autowired
+	private OAuthService oauthService;
+	
 
 	
 
@@ -127,4 +133,28 @@ public class MemberController {
 		member.setMemberId(memberId);
 		return memberService.updateMyLike(member);
 	}
+	
+	
+	@PostMapping("/oauth/kakao")
+	public ResponseEntity<String> handleKakaoLogin(@RequestBody KakaoParams kakaoParams){
+		System.out.println("넘겨받은 Kakao 인증키 :: " + kakaoParams.getAuthorizationCode());
+		
+		String accessToken = oauthService.getMemberByOauthLogin(kakaoParams);
+		//응답 헤더 생성
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("accessToken", accessToken);
+		
+		return ResponseEntity.ok().headers(headers).body("Response with header using ResponseEntity");
+	}
+	
+	@PostMapping("/sendMail")
+	public String sendMail(@RequestBody Member member) {
+		String email=member.getMemberMail();
+		System.out.println(member.getMemberMail());
+		
+		String authCode = emailSender.authMail(email);
+		System.out.println("잘돌아가나 1");
+		return authCode;
+	}
+	
 }
