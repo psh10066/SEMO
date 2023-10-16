@@ -1,5 +1,6 @@
 package kr.or.semo.group.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -121,5 +122,14 @@ public class GroupService {
 
 	public List groupAllMember( int groupNo) {
 		return groupDao.groupAllMember(groupNo);
+	}
+
+	public Map groupPeopleList(int groupNo) {
+		int peopleCount = groupDao.peopleCount(groupNo);
+		List peopleList = groupDao.peopleList(groupNo);
+		HashMap<String, Object> map = new  HashMap<String, Object>();
+		map.put("peopleList", peopleList);
+		map.put("peopleCount", peopleCount);
+		return map;
 	}
 }
