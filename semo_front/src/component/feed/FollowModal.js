@@ -1,13 +1,13 @@
 import ReactModal from "react-modal";
-import "./modal.css";
+import "../util/modal.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Avatar, Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-const MyModal = ({
-  isModalOpen,
-  onModalCancel,
+const FollowModal = ({
+  isFolllowModalOpen,
+  onFollowModalCancel,
   memberList,
   isLogin,
   changeFeed,
@@ -43,10 +43,10 @@ const MyModal = ({
     }
   }, [memberList]);
   const handleCancelClick = () => {
-    onModalCancel();
+    onFollowModalCancel();
   };
   return (
-    <ReactModal isOpen={isModalOpen}>
+    <ReactModal isOpen={isFolllowModalOpen}>
       <div className="modal-cancel">
         <span
           className="material-icons cancel-icon"
@@ -66,7 +66,7 @@ const MyModal = ({
                 loginMember={loginMember}
                 changeFeed={changeFeed}
                 setChangeFeed={setChangeFeed}
-                onModalCancel={onModalCancel}
+                onFollowModalCancel={onFollowModalCancel}
               />
             );
           })}
@@ -80,85 +80,38 @@ const FollowMember = (props) => {
   const member = props.member;
   const changeFeed = props.changeFeed;
   const setChangeFeed = props.setChangeFeed;
-  const onModalCancel = props.onModalCancel;
+  const onFollowModalCancel = props.onFollowModalCancel;
   // console.log(member);
-  const isLogin = props.isLogin;
-  const loginMember = props.loginMember;
-  const [isFollow, setIsFollow] = useState(0);
   const memberNo = member.memberNo;
   // console.log(loginMember);
   const navigate = useNavigate();
   const token = window.localStorage.getItem("token");
-  useEffect(() => {
-    if (isLogin) {
-      axios
-        .post(
-          "/member/isFollow",
-          { memberNo },
-          {
-            headers: {
-              Authorization: "Bearer " + token,
-            },
-          }
-        )
-        .then((res) => {
-          // console.log(res.data);
-          setIsFollow(res.data);
-        })
-        .catch((res) => {
-          console.log(res.response.status);
-        });
-    }
-  }, []);
   const naviFeedProfile = () => {
     navigate("/feed/profile", {
       state: { memberNo: member.memberNo },
     });
     setChangeFeed(!changeFeed);
-    onModalCancel();
+    onFollowModalCancel();
   };
-  const loginMsg = () => {
-    Swal.fire("로그인 후 이용해 주세요.");
-  };
-  const follow = () => {
-    axios
-      .post(
-        "/member/follow",
-        { memberNo },
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
-      )
-      .then((res) => {
-        // console.log(res.data);
-        setIsFollow(1);
-        setChangeFeed(!changeFeed);
-      })
-      .catch((res) => {
-        console.log(res.response.status);
-      });
-  };
-  const unfollow = () => {
-    axios
-      .post(
-        "/member/unfollow",
-        { memberNo },
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
-      )
-      .then((res) => {
-        // console.log(res.data);
-        setIsFollow(0);
-        setChangeFeed(!changeFeed);
-      })
-      .catch((res) => {
-        console.log(res.response.status);
-      });
+
+  const deleteFollower = () => {
+    alert("삭제");
+    // axios
+    //   .post(
+    //     "/member/deleteFollower",
+    //     { memberNo },
+    //     {
+    //       headers: {
+    //         Authorization: "Bearer " + token,
+    //       },
+    //     }
+    //   )
+    //   .then((res) => {
+    //     setChangeFeed(!changeFeed);
+    //   })
+    //   .catch((res) => {
+    //     console.log(res.response.status);
+    //   });
   };
   return (
     <div className="follow-member-wrap">
@@ -202,31 +155,13 @@ const FollowMember = (props) => {
         </div>
         <div className="follow-member-content">{member.memberContent}</div>
       </div>
-      {isLogin ? (
-        loginMember && loginMember.memberNo === member.memberNo ? (
-          <div className="follow-btn-wrap"></div>
-        ) : isFollow === 1 ? (
-          <div className="follow-btn-wrap">
-            <button type="button" onClick={unfollow} className="followingBtn">
-              팔로잉
-            </button>
-          </div>
-        ) : (
-          <div className="follow-btn-wrap">
-            <button type="button" onClick={follow} className="followBtn">
-              팔로우
-            </button>
-          </div>
-        )
-      ) : (
-        <div className="follow-btn-wrap">
-          <button type="button" onClick={loginMsg} className="followBtn">
-            팔로우
-          </button>
-        </div>
-      )}
+      <div className="follow-btn-wrap">
+        <button type="button" onClick={deleteFollower} className="followingBtn">
+          삭제
+        </button>
+      </div>
     </div>
   );
 };
 
-export default MyModal;
+export default FollowModal;

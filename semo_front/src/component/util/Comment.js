@@ -56,7 +56,8 @@ const Comment = (props) => {
   const [commentList, setCommentList] = useState([]);
   const [reCommentList, setReCommentList] = useState([]);
   const [feedReCommentContent, setFeedRecommentContent] = useState("");
-  const [changeFeedComment, setChangeFeedComment] = useState([true]); //댓글 새로고침
+  const changeFeedComment = props.changeFeedComment;
+  const setChangeFeedComment = props.setChangeFeedComment;
   const feedNo = props.feedNo;
 
   //댓글 작성하기
@@ -181,7 +182,7 @@ const CommentItem = (props) => {
   const deleteComment = () => {
     Swal.fire({
       icon: "question",
-      text: "피드를 삭제하시겠습니까?",
+      text: "댓글을 삭제하시겠습니까?",
       showCancelButton: true,
       confirmButtonText: "삭제",
       cancelButtonText: "취소",
@@ -326,7 +327,10 @@ const CommentItem = (props) => {
             )
           ) : (
             <div className="comment-bottom-right">
-              <ReCommentWrite />
+              <ReCommentWrite
+                recommentState={recommentState}
+                setRecommentState={setRecommentState}
+              />
             </div>
           )
         ) : (
