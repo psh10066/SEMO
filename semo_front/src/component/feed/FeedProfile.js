@@ -23,6 +23,7 @@ const FeedProfile = (props) => {
   const [feedCount, setFeedCount] = useState(0);
   const location = useLocation();
   const memberNo = location.state ? location.state.memberNo : null;
+  // const memberNo = location.state.memberNo;
   const feedWriter = memberNo;
   const [followerCount, setFollowerCount] = useState(0);
   const [followingCount, setFollowingCount] = useState(0);

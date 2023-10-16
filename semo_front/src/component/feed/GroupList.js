@@ -37,7 +37,7 @@ const GroupItem = (props) => {
         </div>
         <div className="feed-group-name">{group.groupName}</div>
         <div className="feed-group-local">
-          <span class="material-icons">location_on</span>
+          <span className="material-icons">location_on</span>
           {group.groupLocal === 1
             ? "서울"
             : group.groupLocal === 2
@@ -45,7 +45,7 @@ const GroupItem = (props) => {
             : "부산"}
         </div>
         <div className="feed-group-maxNum">
-          <span class="material-icons">groups</span>
+          <span className="material-icons">groups</span>
           {group.groupMaxnum}
         </div>
       </div>
