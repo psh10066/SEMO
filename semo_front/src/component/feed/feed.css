@@ -57,10 +57,18 @@
   height: 50px;
   border-radius: 5px;
   margin-right: 15px;
+  font-size: 16px;
 }
 .profile-button > button:hover {
-  background-color: #5457e9;
+  /* background-color: #5457e9; */
   border: none;
+}
+.profile-button > .followBtn {
+  background-color: #5457e9;
+  color: #fff;
+}
+.profile-button > .followingBtn {
+  background-color: #ccc;
 }
 .profile-category > a {
   display: inline-block;
@@ -187,18 +195,24 @@
 .likeicon {
   color: #f00;
 }
-
+.feed-current-content {
+  width: 100%;
+  overflow: hidden;
+}
 /* 피드 모임 디자인 */
 .groupList-wrap {
+  width: 100%;
   margin-top: 5px;
-  background-color: #f8f8ff;
-  padding: 15px 0;
+  background-color: #eee;
+  /* padding: 15px 0; */
+}
+.group-item-wrap {
+  width: 100%;
 }
 .feed-group-item {
   margin: 30px 140px;
   padding: 15px;
   background-color: #fff;
-  border: 2px solid #f0f0ff;
   border-radius: 7px;
   display: flex;
   cursor: pointer;
@@ -228,6 +242,7 @@
 }
 .feed-group-name {
   width: 100%;
+  margin-bottom: 3px;
   font-size: 18px;
   font-family: ns-b;
   text-overflow: ellipsis;
@@ -244,9 +259,19 @@
   display: flex;
   align-items: center;
 }
-.feed-group-local > span,
-.feed-group-maxNum > span {
-  padding-right: 7px;
+.feed-group-local > span {
+  padding-right: 2px;
   font-size: 18px;
   color: #616161;
+}
+.feed-group-member {
+  margin-top: 2px;
+}
+.feed-group-maxNum > span {
+  padding-right: 5px;
+  font-size: 18px;
+  color: #616161;
+}
+.feed-like-person-wrap {
+  padding-right: 10px;
 }
