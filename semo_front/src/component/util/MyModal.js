@@ -5,11 +5,17 @@ import axios from "axios";
 import { Avatar, Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-const MyModal = ({ isModalOpen, onModalCancel, memberList, isLogin }) => {
+const MyModal = ({
+  isModalOpen,
+  onModalCancel,
+  memberList,
+  isLogin,
+  changeFeed,
+  setChangeFeed,
+}) => {
   const [listMember, setListMember] = useState([]);
   const memberNoList = memberList.join(",");
   const [loginMember, setLoginMember] = useState(null);
-
   useEffect(() => {
     axios
       .get("/member/memberList", { params: { memberNoList: memberNoList } })
@@ -58,6 +64,8 @@ const MyModal = ({ isModalOpen, onModalCancel, memberList, isLogin }) => {
                 member={member}
                 isLogin={isLogin}
                 loginMember={loginMember}
+                changeFeed={changeFeed}
+                setChangeFeed={setChangeFeed}
               />
             );
           })}
@@ -69,7 +77,9 @@ const MyModal = ({ isModalOpen, onModalCancel, memberList, isLogin }) => {
 
 const FollowMember = (props) => {
   const member = props.member;
-  console.log(member);
+  const changeFeed = props.changeFeed;
+  const setChangeFeed = props.setChangeFeed;
+  // console.log(member);
   const isLogin = props.isLogin;
   const loginMember = props.loginMember;
   const [isFollow, setIsFollow] = useState(0);
@@ -118,8 +128,9 @@ const FollowMember = (props) => {
         }
       )
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setIsFollow(1);
+        setChangeFeed(!changeFeed);
       })
       .catch((res) => {
         console.log(res.response.status);
@@ -137,8 +148,9 @@ const FollowMember = (props) => {
         }
       )
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setIsFollow(0);
+        setChangeFeed(!changeFeed);
       })
       .catch((res) => {
         console.log(res.response.status);
@@ -178,20 +190,20 @@ const FollowMember = (props) => {
           <div className="follow-btn-wrap"></div>
         ) : isFollow === 1 ? (
           <div className="follow-btn-wrap">
-            <button type="button" onClick={unfollow}>
+            <button type="button" onClick={unfollow} className="followingBtn">
               팔로잉
             </button>
           </div>
         ) : (
           <div className="follow-btn-wrap">
-            <button type="button" onClick={follow}>
+            <button type="button" onClick={follow} className="followBtn">
               팔로우
             </button>
           </div>
         )
       ) : (
         <div className="follow-btn-wrap">
-          <button type="button" onClick={loginMsg}>
+          <button type="button" onClick={loginMsg} className="followBtn">
             팔로우
           </button>
         </div>

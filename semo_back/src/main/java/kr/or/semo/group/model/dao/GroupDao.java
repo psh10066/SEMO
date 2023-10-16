@@ -47,4 +47,8 @@ public interface GroupDao {
 
 	List groupAllMember(int groupNo);
 
+	int peopleCount(int groupNo);
+
+	List peopleList(int groupNo);
+
 }

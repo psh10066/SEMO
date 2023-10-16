@@ -161,4 +161,5 @@ public class FeedController {
 	public List groupList(@PathVariable int memberNo) {
 		return feedService.selectGroupList(memberNo);
 	}
+	
 }
