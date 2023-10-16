@@ -19,13 +19,10 @@ const MainSearchModal = (props) => {
     const groupName = { groupName: searchContent };
     console.log(groupName);
 
-    //useEffect(() => {
     axios
       .post("/page/search", groupName)
       .then((res) => {
         console.log(res.data);
-        //setSearchResult(res.data);
-        //console.log(searchResult);
         setModalState(false);
         e.stopPropagation();
 
@@ -35,16 +32,11 @@ const MainSearchModal = (props) => {
         if (setSearchContent != null) {
           setSearchContent("");
         }
-        if (res.data != null) {
-          console.log("남아있음");
-          //res.data("");
-        }
       })
       .catch((res) => {
         console.log(res.data);
         console.log(res.response.status);
       });
-    //}, []);
   };
 
   return (

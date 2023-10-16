@@ -17,7 +17,6 @@ const SearchResult = (props) => {
   const [searchKeyword, setSearchKeyword] = useState("");
   const [groupName, setGroupName] = useState("");
   const [searchResult, setSearchResult] = useState([]);
-  //const searchKeyword = location.state.searchContent;
 
   const [socialingSearch, setSocialingSearch] = useState("all");
   //소셜링-전체(all) / 소셜링-모임명(groupName) / 소셜링-모임설명(groupContent) / 라운지(피드)(feed)
@@ -25,11 +24,8 @@ const SearchResult = (props) => {
   useEffect(() => {
     setSearchList(location.state.searchResult);
     setSearchKeyword(location.state.searchKeyword);
-    //setGroupName(location.state.groupName);
-    //setSearchResult([]);
-    //setSearchList([]);
   }, []);
-  console.log(searchKeyword);
+  //console.log(searchKeyword);
 
   return (
     <div className="searchresult-all-wrap">
