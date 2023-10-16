@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 public class ChatServerController {
     
     @Autowired
-    private SimpMessagingTemplate simpMessagingTemplate;
+    private SimpMessagingTemplate simpMessagingTemplate; ////클라이언트에게 메시지를 보내는데 사용
     
     @MessageMapping("/chat/{roomId}")
     public void receiveGroupMessage(@Payload Message message,@DestinationVariable String roomId) {

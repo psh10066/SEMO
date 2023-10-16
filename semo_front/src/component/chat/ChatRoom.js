@@ -3,7 +3,7 @@ import { Client } from "@stomp/stompjs";
 
 const ChatRoom = (props) => {
   const { roomId, senderName } = props;
-  const [messages, setMessages] = useState({}); 
+  const [messages, setMessages] = useState({});
   const [newMessage, setNewMessage] = useState("");
   const clientRef = useRef(null);
 
@@ -14,7 +14,7 @@ const ChatRoom = (props) => {
         console.log("WebSocket connected");
         client.subscribe(`/chat/rooms/${roomId}`, (message) => {
           const receivedMsg = JSON.parse(message.body);
-          console.log("Received message:", receivedMsg);  
+          console.log("Received message:", receivedMsg);
           onMessageReceive(receivedMsg, `/chat/rooms/${roomId}`);
         });
       },
@@ -24,18 +24,18 @@ const ChatRoom = (props) => {
     });
 
     client.onStompError = (frame) => {
-      console.error('STOMP error', frame);
+      console.error("STOMP error", frame);
     };
 
     client.activate();
-    clientRef.current = client;  
+    clientRef.current = client;
 
     return () => {
       client.deactivate();
     };
   }, [roomId]);
 
-  const onMessageReceive = (msg, topic) => {
+  const onMessageReceive = (msg, index) => {
     setMessages((prevMessages) => {
       const currentRoomMessages = prevMessages[roomId] || [];
       return {
@@ -52,7 +52,10 @@ const ChatRoom = (props) => {
         senderName: senderName,
         roomId: roomId,
       };
-      clientRef.current.publish({destination: "/app/chat/" + roomId, body: JSON.stringify(messagePayload)});
+      clientRef.current.publish({
+        destination: "/app/chat/" + roomId,
+        body: JSON.stringify(messagePayload),
+      });
       setNewMessage("");
     }
   };
@@ -63,7 +66,9 @@ const ChatRoom = (props) => {
         <h2>Room: {roomId}</h2>
         <div>
           {messages[roomId]?.map((msg, idx) => (
-            <div key={idx}>{msg.senderName}: {msg.message}</div>
+            <div key={idx}>
+              {msg.senderName}: {msg.message}
+            </div>
           ))}
         </div>
         <input
@@ -78,4 +83,3 @@ const ChatRoom = (props) => {
 };
 
 export default ChatRoom;
-
