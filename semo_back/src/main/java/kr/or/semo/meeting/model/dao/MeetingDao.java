@@ -16,7 +16,9 @@ public interface MeetingDao {
 
 	int joinMeeting(MeetingJoin meetingJoin);
 
-	List selectMember(int meetingNo);
+	int countMember(int meetingNo);
+
+//	List selectJoinMember(int meetingNo);
 
 	
 

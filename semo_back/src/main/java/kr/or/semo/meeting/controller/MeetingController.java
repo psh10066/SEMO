@@ -35,11 +35,10 @@ public class MeetingController {
 	public List view(@PathVariable int groupNo) {
 		return meetingService.selectMeetingList(groupNo);
 	}
-	// 약속 참가자 조회
-	@GetMapping(value = "/selectMember/{meetingNo}")
-	public List selectMember(@PathVariable int meetingNo) {
-		System.out.println(meetingNo);
-		return meetingService.selectMember(meetingNo);
+	// 약속 참가자 인원수 조회
+	@GetMapping(value = "/countMember/{meetingNo}")
+	public int countMember(@PathVariable int meetingNo) {
+		return meetingService.countMember(meetingNo);
 	}
 	// 약속 참가
 	@PostMapping(value = "/join")
@@ -52,6 +51,12 @@ public class MeetingController {
 //	public int cancel(@RequestBody MeetingJoin meetingJoin, @RequestAttribute String memberId) {
 //		meetingJoin.setMemberId(memberId);
 //		return meetingService.cancel(meetingJoin);
+//	}
+	//약속 참가하는 맴버 조회
+//	@GetMapping(value = "/meetingMember/{meetingNo}")
+//	public List selectJoinMember(@PathVariable int meetingNo) {
+//		List list = meetingService.selectJoinMember(meetingNo);
+//		return list;
 //	}
 
 	

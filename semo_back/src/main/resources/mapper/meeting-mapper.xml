@@ -21,7 +21,20 @@
 			#{meetingNo},
 			1)
 	</insert>
-	<select id="selectMember" resultType="meetingJoin">
-		select * from meeting_join where meeting_no=#{meetingNo}
+	<select id="countMember" resultType="int">
+		select count(mt_join) 
+		from meeting JOIN meeting_join USING (meeting_no) 
+		where meeting_no=#{meetingNo}
 	</select>
+	
+	<!-- 
+	<select id="selectJoinMember" resultType="list">
+		select member_no from meeting_join 
+		where meeting_no=#{meetingNo} and MT_JOIN_STATUS=1
+	</select>
+	
+	 -->
+	
+	
+	 
 </mapper>

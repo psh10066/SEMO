@@ -4,7 +4,7 @@ import Kakao from "../util/Kakao";
 import { Button1, Button2, Button3 } from "../util/Buttons";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
-import MeetingJoinList from "./MeetingJoinList";
+import MeetingList from "./MeetingList";
 
 const MeetingView = (props) => {
   const group = props.group;
@@ -39,6 +39,10 @@ const MeetingView = (props) => {
     }).then((res) => {
       if (member.memberNo != null) {
         if (res.isConfirmed) {
+          Swal.fire({
+            icon: "success",
+            text: "완료되었습니다!",
+          });
           const token = window.localStorage.getItem("token");
           const memberNo = member.memberNo;
           axios
@@ -87,8 +91,6 @@ const MeetingView = (props) => {
     });
   };
 
-  console.log(meetingJoin);
-
   // 모임 보이기
   useEffect(() => {
     axios
@@ -101,108 +103,23 @@ const MeetingView = (props) => {
       .catch((res) => {
         console.log(res.response.error);
       });
-    // axios
-    //   .get("/meeting/meetingMember/" + meetingList.meetingNo)
-    //   .then((res) => {
-    //     setMeetingMember(res.data);
-    //   })
-    //   .catch((res) => {
-    //     console.log(res.response.error);
-    //   });
   }, [isAddMeet]);
-  useEffect(() => {
-    axios
-      .get("/meeting/meetingMember" + meetingList)
-      .then((res) => {
-        setMeetingJoin(res.data);
-      })
-      .catch((res) => {
-        console.log(res.response.error);
-      });
-  });
-
-  // D-Day설정 함수
-  const calculateDDay = (targetDate) => {
-    const currentDate = new Date();
-    currentDate.setHours(0, 0, 0, 0); // 현재 날짜의 시간을 00:00:00으로 설정
-    targetDate.setHours(0, 0, 0, 0); // 대상 날짜의 시간을 00:00:00으로 설정
-    const timeDiff = targetDate - currentDate;
-    return Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-  };
-
-  //UTC 시간정보를 현지시간으로 변환하는 함수
-  const formatUtcDate = (targetDate) => {
-    const localDate = new Date(targetDate);
-    const year = localDate.getFullYear() % 100;
-    const month = localDate.getMonth() + 1;
-    const day = localDate.getDate();
-    const hours = localDate.getHours();
-    const minutes = localDate.getMinutes();
-    const ampm = hours >= 12 ? "오후" : "오전";
-    const formattedHours = hours % 12 || 12;
-    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
-    return `${year}년 ${month}월 ${day}일 ${ampm} ${formattedHours}:${formattedMinutes}`;
-  };
-
-  //날짜만 보이게(형식: xx월 xx일)
-  const justDate = (targetDate) => {
-    const localDate = new Date(targetDate);
-    const month = localDate.getMonth() + 1;
-    const day = localDate.getDate();
-    return `${month}월 ${day}일`;
-  };
 
   return (
     <div className="meetingView-wrap">
       <h2 className="meetingView-title">정기 모임</h2>
       {meetingList.length > 0
         ? meetingList.map((meeting, index) => (
-            <div className="meetingView-frm" key={index}>
-              <div className="meetingView-content">
-                <div>
-                  <h3 className="meeting-Dday">
-                    날짜 : {justDate(new Date(meeting.meetingDate))}
-                    <span>
-                      D - {calculateDDay(new Date(meeting.meetingDate))}
-                    </span>
-                  </h3>
-                  <div className="meeting-content">
-                    모임내용 : {meeting.meetingName}
-                  </div>
-                </div>
-                <div className="meeting-date">
-                  일시 : {formatUtcDate(new Date(meeting.meetingDate))}{" "}
-                </div>
-                <div className="meeting-price">
-                  금액 :{meeting.meetingPrice}{" "}
-                </div>
-                <div className="meeting-memberNum">
-                  참여수 : {meeting.meetingMember} / {meeting.meetingMaxnum}
-                </div>
-                <div className="meeting-place">
-                  장소 : {meeting.meetingPlace}
-                  <Kakao data={meeting.meetingPlace} index={index} />
-                </div>
-                <div className="meeting-join-list">
-                  <MeetingJoinList meeting={meeting} member={member} />
-                </div>
-                {isLogin && isJoin ? (
-                  <Button1
-                    text="모임참가"
-                    clickEvent={() => {
-                      join(meeting.meetingNo);
-                    }}
-                  />
-                ) : (
-                  <Button2
-                    text="취소"
-                    clickEvent={() => {
-                      cancelJoin(meeting.meetingNo);
-                    }}
-                  />
-                )}
-              </div>
-            </div>
+            <MeetingList
+              key={"meeting" + index}
+              meeting={meeting}
+              member={member}
+              index={index}
+              isLogin={isLogin}
+              isJoin={isJoin}
+              join={join}
+              cancelJoin={cancelJoin}
+            />
           ))
         : ""}
       {groupLevel == 1 ? (

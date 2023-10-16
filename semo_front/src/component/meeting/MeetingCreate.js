@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
 import "./meeting.css";
 import axios from "axios";
-import { Button1, Button2, Button3 } from "../util/Buttons";
+import { Button1 } from "../util/Buttons";
 import Input from "../util/InputFrm";
 import Postcode from "../util/PostCode";
 import { useLocation, useNavigate } from "react-router-dom";

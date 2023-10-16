@@ -33,10 +33,15 @@ public class MeetingService {
 		return meetingDao.joinMeeting(meetingJoin);
 	}
 
-	public List selectMember(int meetingNo) {
+	public int countMember(int meetingNo) {
 		// TODO Auto-generated method stub
-		return meetingDao.selectMember(meetingNo);
+		return meetingDao.countMember(meetingNo);
 	}
+
+//	public List selectJoinMember(int meetingNo) {
+//		// TODO Auto-generated method stub
+//		return meetingDao.selectJoinMember(meetingNo);
+//	}
 
 	
 	
