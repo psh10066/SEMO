@@ -69,7 +69,7 @@ const ModifyMyFeed = (props) => {
             icon: "success",
             title: "내 피드 수정되었습니다.",
           }).then(() => {
-            window.location.reload(); // 여기에 원하는 경로를 넣어주세요.
+            window.location.reload(); // 여기에 원하는 경로를 넣어주기
           });
         }
       })

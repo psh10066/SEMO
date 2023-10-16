@@ -232,7 +232,7 @@ const FeedInsertContent = (props) => {
   const feedContent = props.feedContent;
   const setFeedConTent = props.setFeedConTent;
   return (
-    <div className="feed-write-content">
+    <div className="feed-write-textarea">
       <textarea
         defaultValue={feedContent}
         id={feedContent}

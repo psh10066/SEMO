@@ -11,6 +11,7 @@ import axios from "axios";
 import FeedModal from "../util/FeedModal";
 import Swal from "sweetalert2";
 import MyModal from "../util/MyModal";
+import FollowModal from "./FollowModal";
 
 const FeedProfile = (props) => {
   const isLogin = props.isLogin;
@@ -33,6 +34,7 @@ const FeedProfile = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [memberList, setMemberList] = useState([]);
   const token = window.localStorage.getItem("token");
+  const [isFolllowModalOpen, setIsFolllowModalOpen] = useState(false);
 
   useEffect(() => {
     axios
@@ -192,6 +194,12 @@ const FeedProfile = (props) => {
     setMemberList(following);
     setIsModalOpen(true);
   };
+  const onFollowModalCancel = () => {
+    setIsFolllowModalOpen(false);
+  };
+  const myfollowerClick = () => {
+    setIsFolllowModalOpen(true);
+  };
   return (
     <div className="feed-profile-all-wrap">
       <div className="feed-profile-wrap">
@@ -225,6 +233,14 @@ const FeedProfile = (props) => {
             changeFeed={changeFeed}
             setChangeFeed={setChangeFeed}
           />
+          <FollowModal
+            isFolllowModalOpen={isFolllowModalOpen}
+            onFollowModalCancel={onFollowModalCancel}
+            memberList={follower}
+            isLogin={isLogin}
+            changeFeed={changeFeed}
+            setChangeFeed={setChangeFeed}
+          />
           <div className="feed-follow">
             <table>
               <tbody>
@@ -235,8 +251,20 @@ const FeedProfile = (props) => {
                 </tr>
                 <tr>
                   <th>{feedCount}</th>
-                  <th onClick={followerClick}>{followerCount}</th>
-                  <th onClick={followingClick}>{followingCount}</th>
+                  {isLogin &&
+                  loginMember &&
+                  loginMember.memberNo === member.memberNo ? (
+                    <th onClick={myfollowerClick} className="followClick">
+                      {followerCount}
+                    </th>
+                  ) : (
+                    <th onClick={followerClick} className="followClick">
+                      {followerCount}
+                    </th>
+                  )}
+                  <th onClick={followingClick} className="followClick">
+                    {followingCount}
+                  </th>
                 </tr>
               </tbody>
             </table>

@@ -23,4 +23,6 @@ public class Member {
 	private int memberCategory2;
 	private int memberLocal;
 	private String memberImg;
+	
+	private int grJoinType;
 }

@@ -12,20 +12,37 @@
 }
 .chat-list {
   width: 25%;
-  background-color: #5457e9;
+  height: 70vh;
+  background-color: #f9d8ff;
+  border-top-left-radius: 80px;
+  border-bottom-left-radius: 80px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .chat-room {
   width: 75%;
+  height: 70vh;
   background-color: #8bb4ff;
+  border-top-right-radius: 80px;
+  border-bottom-right-radius: 80px;
+  box-sizing: border-box;
+  padding: 1%;
 }
 .chat-myname {
-  text-align: center;
+  width: 85%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .chat-myname-text {
-  color: #fff;
+  color: rgb(253, 255, 148);
   font-weight: bold;
-  font-size: 20px;
+  font-size: 30px;
 }
+
 .chat-room-info {
   text-align: center;
   height: 100%;
@@ -34,16 +51,83 @@
   display: flex;
 }
 .chat-room-info-text {
-  color: #fff;
   font-weight: bold;
   font-size: 40px;
 }
+.chat-room-info-text h4 {
+  color: #ffffff;
+}
 .chatEnter {
   cursor: pointer;
+  width: 85%;
+  height: 10%;
+  background-color: rgba(253, 255, 148, 0.795);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top-left-radius: 60px;
+  border-bottom-left-radius: 60px;
+  margin-bottom: 20px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .chatEnter div {
   color: #fff;
 }
-.chatting-wrap {
+
+/*
+*/
+/*채팅 룸*/
+.chat-header {
+  height: 8%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chat-header h2 {
   color: #fff;
+}
+.chat-Member {
+  cursor: pointer;
+  margin-right: 30px;
+  font-size: 40px;
+  color: #f9d8ff;
+}
+.chat-content {
+  height: 82.5%;
+}
+.chat-input {
+  height: 45px;
+  width: 100%;
+  display: flex;
+}
+.chat-input > input {
+  width: 78%;
+  border: none;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  padding-left: 20px;
+  font-size: 15px;
+}
+.chat-input > button {
+  width: 15%;
+  border: none;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: rgb(253, 255, 148);
+}
+
+/*토글메뉴*/
+.toggle-chatMember-box {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px; /* 원하는 너비로 조정하세요 */
+  height: 300px; /* 원하는 높이로 조정하세요 */
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
 }

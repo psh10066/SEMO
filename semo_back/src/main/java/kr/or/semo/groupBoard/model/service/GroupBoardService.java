@@ -13,6 +13,7 @@ import kr.or.semo.Pagination;
 import kr.or.semo.groupBoard.model.dao.GroupBoardDao;
 import kr.or.semo.groupBoard.model.vo.GroupBoard;
 import kr.or.semo.groupBoard.model.vo.GroupBoardComment;
+import kr.or.semo.groupBoard.model.vo.GroupBoardCommentLike;
 import kr.or.semo.member.model.dao.MemberDao;
 import kr.or.semo.member.model.vo.Member;
 @Service
@@ -84,6 +85,32 @@ public class GroupBoardService {
 	}
 	public List groupBoardReCommentList(int grBoardNo) {
 		return groupBoardDao.groupBoardReCommentList(grBoardNo);
+	}
+//	@Transactional
+//	public int groupBoardCommentLike(int grBoardCommentNo, String memberId) {
+//		Member member = memberDao.selectOneMember(memberId);
+//		GroupBoardCommentLike groupBoardCommentLike = groupBoardDao.selectOneGroupBoardCommentLike(grBoardCommentNo, member.getMemberNo());
+//		if(groupBoardCommentLike != null) {
+//			groupBoardDao.deleteGroupBoardCommentLike(grBoardCommentNo, member.getMemberNo());
+//			return 0;
+//		}else { 
+//			groupBoardDao.insertGroupBoardCommentLike(grBoardCommentNo, member.getMemberNo());
+//			return 1;
+//		}
+//	}
+	@Transactional
+	public int insertGroupBoardCommentLike(int grBoardCommentNo, String memberId) {
+		Member member = memberDao.selectOneMember(memberId);
+		int memberNo = member.getMemberNo();
+		int result = groupBoardDao.insertGroupBoardCommentLike(grBoardCommentNo, memberNo);
+		return result;
+	}
+	@Transactional
+	public int deleteGroupBoardCommentLike(int grBoardCommentNo, String memberId) {
+		Member member = memberDao.selectOneMember(memberId);
+		int memberNo = member.getMemberNo();
+		int result = groupBoardDao.deleteGroupBoardCommentLike(grBoardCommentNo, memberNo);
+		return result;
 	}
 }
 

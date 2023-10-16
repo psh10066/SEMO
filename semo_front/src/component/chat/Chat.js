@@ -5,6 +5,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import ChatRoom from "./ChatRoom";
 import ChatInfo from "./ChatInfo";
+import ChatToggle from "./ChatToggle";
 
 const Chat = (props) => {
   const navigate = useNavigate();
@@ -36,9 +37,9 @@ const Chat = (props) => {
       });
   }, []);
 
-  //채팅방이름 불러오기 == 그룹이름
+  //모든 채팅방이름 불러오기 == 그룹이름 : 내가 속해있는 모임
   const [roomName, setRoomName] = useState([]);
-  //채팅방 주소(랩핑) == 그룹넘버
+  //모든 채팅방 넘버 == 그룹넘버 : 내가 속해있는 모임
   const [chatHostAddress, setChatHostAddress] = useState([]);
   useEffect(() => {
     axios
@@ -54,23 +55,21 @@ const Chat = (props) => {
       .then((res) => {
         setRoomName(res.data.map((item) => item.groupName));
         setChatHostAddress(res.data.map((item) => item.groupNo));
-        setSelectedGroupNumber(res.data.map((item) => item.groupNo)[0]);
       })
       .catch((res) => {
         console.log(res.response.status);
       });
   }, []);
 
-  //그룹에 있는 모든 멤버들 불러오기
-  const [groupAllMemberNo, setGroupAllMemberNo] = useState([]); //모든 멤버 번호
+  ///////////////////////////////////////////////////
   const [groupAllMemberName, setGroupAllMemberName] = useState([]); //모든 멤버 이름
-  const [selectedGroupNumber, setSelectedGroupNumber] = useState(0); //탭 클릭시 전달받은 그룹번호
+  const [groupAllMemberType, setGroupAllMemberType] = useState([]); //모든 멤버 등급
 
-  const groupNumber = (number) => {
-    setSelectedGroupNumber(number);
-  };
+  const [selectedGroupNumber, setSelectedGroupNumber] = useState(0); //내가 탭한 그룹 번호
+  const [selectedgroupName, selectedGroupName] = useState(""); //내가 탭한 그룹 이름
 
   useEffect(() => {
+    //그룹에 있는 모든 멤버들 불러오기
     axios
       .post(
         "/group/groupAllMember",
@@ -82,13 +81,30 @@ const Chat = (props) => {
         }
       )
       .then((res) => {
-        setGroupAllMemberNo(res.data.map((item) => item.memberNo));
         setGroupAllMemberName(res.data.map((item) => item.memberName));
+        setGroupAllMemberType(res.data.map((item) => item.grJoinType));
       })
       .catch((res) => {
         console.log(res.response.status);
       });
-  }, [selectedGroupNumber]); //탭한 그룹이 바뀔때마다
+  }, [selectedGroupNumber]);
+
+  //탭 안했으면 채팅 메인으로 이동
+  useEffect(() => {
+    if (selectedGroupNumber === 0) {
+      navigate("/chat/chatInfo", { replace: true });
+    }
+  }, []);
+
+  //탭 클릭이벤트
+  const groupNumber = (number) => {
+    setSelectedGroupNumber(number);
+  };
+  const groupName = (name) => {
+    selectedGroupName(name);
+  };
+
+  //탭한 그룹이 바뀔때마다
   const chatTap = () => {
     navigate("/chat/rooms");
   };
@@ -98,7 +114,7 @@ const Chat = (props) => {
       <div className="chat-wrap2">
         <div className="chat-list">
           <div className="chat-myname">
-            <span className="chat-myname-text">{member.memberName}</span>
+            <div className="chat-myname-text">{member.memberName}</div>
           </div>
           {/*채팅방 주소 연결*/}
           {roomName.map((name, index) => (
@@ -107,6 +123,7 @@ const Chat = (props) => {
               key={index}
               onClick={(e) => {
                 groupNumber(chatHostAddress[index]);
+                groupName(roomName[index]);
                 chatTap(e);
               }}
             >
@@ -117,17 +134,21 @@ const Chat = (props) => {
         <div className="chat-room">
           <Routes>
             <Route path="chatInfo" element={<ChatInfo />} />
-            <Route
-              path="rooms/*"
-              element={
-                <ChatRoom
-                  groupAllMemberNo={groupAllMemberNo}
-                  groupAllMemberName={groupAllMemberName}
-                  senderName={member.memberName}
-                  roomId={selectedGroupNumber}
-                />
-              }
-            />
+            {selectedGroupNumber !== 0 && (
+              <Route
+                path="rooms/*"
+                element={
+                  <ChatRoom
+                    groupAllMemberName={groupAllMemberName}
+                    groupAllMemberType={groupAllMemberType}
+                    senderName={member.memberName}
+                    roomId={selectedGroupNumber}
+                    memberNo={member.memberNo}
+                    groupName={selectedgroupName}
+                  />
+                }
+              />
+            )}
           </Routes>
         </div>
       </div>
