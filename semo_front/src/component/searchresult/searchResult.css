@@ -13,15 +13,69 @@
   margin: 30px auto;
 }
 .searchKeyword {
-  font-size: 24px;
+  font-size: 20px;
   float: left;
   color: #220895;
   font-family: ns-eb;
   margin-right: 10px;
 }
 .searchresult-title-result {
-  font-size: 24px;
+  font-size: 20px;
   float: left;
   color: black;
   font-family: ns-r;
+}
+.searchresult-group-name {
+  font-size: 24px;
+  font-weight: bold;
+}
+.searchresult-category {
+  color: #220895;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/*페이지 내부 배치*/
+.searchresult-list-wrap {
+  width: 1200px;
+  overflow: hidden;
+  margin: 0 auto;
+  padding-top: 30px;
+  padding-bottom: 50px;
+}
+.searchresult-item-wrap {
+  height: 500px;
+  float: left;
+  width: calc(100% / 3);
+  border: 1px solid black;
+  cursor: pointer;
+  box-sizing: border-box;
+  padding: 30px;
+}
+.searchresult-item-img {
+  width: 330px;
+  height: 300px;
+  box-sizing: border-box;
+  text-align: center;
+  line-height: 200px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.searchresult-item-img > img {
+  width: 70%;
+  height: 100%;
+  object-fit: contain;
+}
+.searchresult-icons > span {
+  font-size: 18px;
+  padding-right: 5px;
+  line-height: 26px;
+}
+.searchresult-infos {
+  padding-left: 10px;
+}
+.searchresult-group-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

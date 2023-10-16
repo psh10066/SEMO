@@ -16,14 +16,18 @@ const SearchResult = (props) => {
   //const [modalState, setModalState] = useState("");
   const [searchKeyword, setSearchKeyword] = useState("");
   const [groupName, setGroupName] = useState("");
+  const [searchResult, setSearchResult] = useState([]);
   //const searchKeyword = location.state.searchContent;
 
-  const [socialingSearch, setSocialingSearch] = useState("all"); //소셜링-전체 / 소셜링-모임명 / 소셜링-모임설명 / 라운지(피드)
+  const [socialingSearch, setSocialingSearch] = useState("all");
+  //소셜링-전체(all) / 소셜링-모임명(groupName) / 소셜링-모임설명(groupContent) / 라운지(피드)(feed)
 
   useEffect(() => {
     setSearchList(location.state.searchResult);
     setSearchKeyword(location.state.searchKeyword);
     //setGroupName(location.state.groupName);
+    //setSearchResult([]);
+    //setSearchList([]);
   }, []);
   console.log(searchKeyword);
 
@@ -71,18 +75,20 @@ const SearchItem = (props) => {
       </div>
       <div className="searchresult-item-info">
         <div className="searchresult-infos">
-          <div>모임명 : {search.groupName}</div>
-          <div>최대 모임 인원 : {search.groupMaxnum}</div>
-          <div>
-            카테고리 :
+          <div className="searchresult-group-name">{search.groupName}</div>
+          <div className="searchresult-icons">
+            <span className="material-icons">groups</span>
+            {search.totalCount}/{search.groupMaxnum}
+          </div>
+          <div className="searchresult-category">
             {search.groupCategory === 1
               ? " 문화·예술"
               : search.groupCategory === 2
               ? " 운동·액티비티"
               : " 푸드·드링크"}
           </div>
-          <div>
-            지역 카테고리 :{" "}
+          <div className="searchresult-icons">
+            <span className="material-icons">location_on</span>
             {search.groupLocal === 1
               ? "서울"
               : search.groupLocal === 2

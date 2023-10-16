@@ -15,7 +15,7 @@ const MainSearchModal = (props) => {
   const modalState = props.modalState;
   const setModalState = props.setModalState;
   //console.log(modalState);
-  const search = (e) => {
+  const Search = (e) => {
     const groupName = { groupName: searchContent };
     console.log(groupName);
 
@@ -32,6 +32,13 @@ const MainSearchModal = (props) => {
         navigate("/searchresult", {
           state: { searchResult: res.data, searchKeyword: searchContent },
         });
+        if (setSearchContent != null) {
+          setSearchContent("");
+        }
+        if (res.data != null) {
+          console.log("남아있음");
+          //res.data("");
+        }
       })
       .catch((res) => {
         console.log(res.data);
@@ -71,7 +78,7 @@ const MainSearchModal = (props) => {
               placeholder="관심사 , 지역명을 검색해보세요"
             />
             <div>
-              <span className="material-icons" onClick={search}>
+              <span className="material-icons" onClick={Search}>
                 search
               </span>
             </div>

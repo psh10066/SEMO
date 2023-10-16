@@ -20,4 +20,5 @@ public class Group {
 	private int groupLocal;
 	private String memberId;
 	private boolean groupSave;
+	private int totalCount;
 }

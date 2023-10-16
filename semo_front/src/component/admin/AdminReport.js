@@ -12,7 +12,7 @@ const AdminReport = () => {
     axios
       .get("/report/reportList/" + reqPage)
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
         setReportList(res.data.list);
         setPageInfo(res.data.pi);
       })
