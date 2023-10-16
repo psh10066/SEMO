@@ -123,6 +123,11 @@ public class GroupController {
 	    return groupService.groupAllMember(groupNo);
 	}
 	
+	//모임 회원 수, 회원 이름,이미지 조회
+	@GetMapping(value="/groupPeopleList/{groupNo}")
+	public Map groupPeopleList(@PathVariable int groupNo) {
+		return groupService.groupPeopleList(groupNo);
+	}
 	
 	
 }

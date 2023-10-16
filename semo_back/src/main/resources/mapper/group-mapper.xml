@@ -98,7 +98,12 @@
 		insert into group_save values(group_save_seq.nextval, #{groupNo}, #{memberNo})
 	</insert>
 	
-	
+	<select id="peopleCount" resultType="int">
+		select count(*) from gr_join where group_no=#{groupNo}
+	</select>
+	<select id="peopleList" resultType="member">
+		select member_no,member_img from gr_join join member using (member_no) where group_no=#{groupNo} order by gr_join desc
+	</select>
 	
 	
 	

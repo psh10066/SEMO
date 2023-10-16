@@ -294,6 +294,8 @@ const FeedView = (props) => {
               onModalCancel={onModalCancel}
               memberList={memberList}
               isLogin={isLogin}
+              changeFeed={changeFeed}
+              setChangeFeed={setChangeFeed}
             />
           </div>
           <div className="feed-view-commentCount">

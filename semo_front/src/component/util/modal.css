@@ -130,3 +130,14 @@
   border-radius: 7px;
   /* css 나중에 수정하기 */
 }
+.follow-btn-wrap > .followBtn {
+  background-color: #5457e9;
+  color: #fff;
+}
+.follow-btn-wrap > .followingBtn {
+  background-color: #ccc;
+}
+.feed-group-member {
+  display: flex;
+  align-items: center;
+}

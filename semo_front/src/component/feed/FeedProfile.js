@@ -23,6 +23,7 @@ const FeedProfile = (props) => {
   const [feedCount, setFeedCount] = useState(0);
   const location = useLocation();
   const memberNo = location.state ? location.state.memberNo : null;
+  // const memberNo = location.state.memberNo;
   const feedWriter = memberNo;
   const [followerCount, setFollowerCount] = useState(0);
   const [followingCount, setFollowingCount] = useState(0);
@@ -94,24 +95,6 @@ const FeedProfile = (props) => {
           console.log(res.response.status);
         });
     }
-  }, [isLogin]);
-  const [menus, setMenus] = useState([
-    { url: "feedList", text: "피드", active: true },
-    { url: "groupList", text: "모임", active: false },
-  ]);
-  const handelClick = () => {
-    //모달오픈
-    setIsOpen(true);
-  };
-  const onSubmit = () => {
-    // 특정 로직
-    setIsOpen(false);
-  };
-  const onCancel = () => {
-    setIsOpen(false);
-  };
-
-  useEffect(() => {
     axios
       .get("/feed/list/" + feedWriter)
       .then((res) => {
@@ -137,7 +120,23 @@ const FeedProfile = (props) => {
       .catch((res) => {
         console.log(res.response.status);
       });
-  }, [changeFeed]);
+  }, [isLogin, changeFeed]);
+  const [menus, setMenus] = useState([
+    { url: "feedList", text: "피드", active: true },
+    { url: "groupList", text: "모임", active: false },
+  ]);
+  const handelClick = () => {
+    //모달오픈
+    setIsOpen(true);
+  };
+  const onSubmit = () => {
+    // 특정 로직
+    setIsOpen(false);
+  };
+  const onCancel = () => {
+    setIsOpen(false);
+  };
+
   const loginMsg = () => {
     Swal.fire("로그인 후 이용해 주세요.");
   };
@@ -153,8 +152,9 @@ const FeedProfile = (props) => {
         }
       )
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setIsFollow(1);
+        setChangeFeed(!changeFeed);
       })
       .catch((res) => {
         console.log(res.response.status);
@@ -172,14 +172,16 @@ const FeedProfile = (props) => {
         }
       )
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setIsFollow(0);
+        setChangeFeed(!changeFeed);
       })
       .catch((res) => {
         console.log(res.response.status);
       });
   };
   const onModalCancel = () => {
+    setMemberList([]);
     setIsModalOpen(false);
   };
   const followerClick = () => {
@@ -220,6 +222,8 @@ const FeedProfile = (props) => {
             onModalCancel={onModalCancel}
             memberList={memberList}
             isLogin={isLogin}
+            changeFeed={changeFeed}
+            setChangeFeed={setChangeFeed}
           />
           <div className="feed-follow">
             <table>
@@ -273,12 +277,22 @@ const FeedProfile = (props) => {
               loginMember && loginMember.memberNo === member.memberNo ? (
                 <Button1 text="피드 작성" clickEvent={handelClick} />
               ) : isFollow === 1 ? (
-                <Button1 text="팔로잉" clickEvent={unfollow} />
+                <button
+                  type="button"
+                  onClick={unfollow}
+                  className="followingBtn"
+                >
+                  팔로잉
+                </button>
               ) : (
-                <Button1 text="팔로우" clickEvent={follow} />
+                <button type="button" onClick={follow} className="followBtn">
+                  팔로우
+                </button>
               )
             ) : (
-              <Button1 text="팔로우" clickEvent={loginMsg} />
+              <button type="button" onClick={loginMsg} className="followBtn">
+                팔로우
+              </button>
             )}
           </div>
         </div>
