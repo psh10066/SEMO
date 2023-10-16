@@ -95,24 +95,6 @@ const FeedProfile = (props) => {
           console.log(res.response.status);
         });
     }
-  }, [isLogin]);
-  const [menus, setMenus] = useState([
-    { url: "feedList", text: "피드", active: true },
-    { url: "groupList", text: "모임", active: false },
-  ]);
-  const handelClick = () => {
-    //모달오픈
-    setIsOpen(true);
-  };
-  const onSubmit = () => {
-    // 특정 로직
-    setIsOpen(false);
-  };
-  const onCancel = () => {
-    setIsOpen(false);
-  };
-
-  useEffect(() => {
     axios
       .get("/feed/list/" + feedWriter)
       .then((res) => {
@@ -138,7 +120,23 @@ const FeedProfile = (props) => {
       .catch((res) => {
         console.log(res.response.status);
       });
-  }, [changeFeed]);
+  }, [isLogin, changeFeed]);
+  const [menus, setMenus] = useState([
+    { url: "feedList", text: "피드", active: true },
+    { url: "groupList", text: "모임", active: false },
+  ]);
+  const handelClick = () => {
+    //모달오픈
+    setIsOpen(true);
+  };
+  const onSubmit = () => {
+    // 특정 로직
+    setIsOpen(false);
+  };
+  const onCancel = () => {
+    setIsOpen(false);
+  };
+
   const loginMsg = () => {
     Swal.fire("로그인 후 이용해 주세요.");
   };
@@ -181,6 +179,7 @@ const FeedProfile = (props) => {
       });
   };
   const onModalCancel = () => {
+    setMemberList([]);
     setIsModalOpen(false);
   };
   const followerClick = () => {

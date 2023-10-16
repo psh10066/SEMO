@@ -69,6 +69,7 @@ const MyModal = ({ isModalOpen, onModalCancel, memberList, isLogin }) => {
 
 const FollowMember = (props) => {
   const member = props.member;
+  console.log(member);
   const isLogin = props.isLogin;
   const loginMember = props.loginMember;
   const [isFollow, setIsFollow] = useState(0);
