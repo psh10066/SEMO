@@ -2,10 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 import { Client } from "@stomp/stompjs";
 import { format } from "date-fns";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import ChatToggle from "./ChatToggle";
 
 const ChatRoom = (props) => {
-  const { roomId, senderName, memberNo } = props;
+  const { roomId, senderName, memberNo, groupName } = props;
+  const groupAllMemberName = props.groupAllMemberName;
+  const groupAllMemberType = props.groupAllMemberType;
   const [messages, setMessages] = useState({});
   const [newMessage, setNewMessage] = useState("");
   const clientRef = useRef(null);
@@ -115,17 +117,33 @@ const ChatRoom = (props) => {
     }
   };
 
+  //토글메뉴
+  const [isMemberVisible, setIsMemberVisible] = useState(false);
+
+  const toggleChatMember = () => {
+    setIsMemberVisible(!isMemberVisible);
+  };
+
   return (
-    <div>
-      <div>
-        <h2>Room: {roomId}</h2>
-        <div>
-          {messages[roomId]?.map((msg, idx) => (
-            <div key={idx}>
-              {msg.senderName}: {msg.message}
-            </div>
-          ))}
-        </div>
+    <>
+      <div className="chat-header">
+        <h2>{groupName}</h2>
+        <ChatToggle
+          groupAllMemberName={groupAllMemberName}
+          groupAllMemberType={groupAllMemberType}
+          isMemberVisible={isMemberVisible}
+          toggleChatMember={toggleChatMember}
+        />
+      </div>
+      {/* 메세지 출력 */}
+      <div className="chat-content">
+        {messages[roomId]?.map((msg, idx) => (
+          <div key={idx}>
+            {msg.senderName}: {msg.message}
+          </div>
+        ))}
+      </div>
+      <div className="chat-input">
         <input
           type="text"
           value={newMessage}
@@ -133,7 +151,7 @@ const ChatRoom = (props) => {
         />
         <button onClick={sendMessage}>Send</button>
       </div>
-    </div>
+    </>
   );
 };
 
