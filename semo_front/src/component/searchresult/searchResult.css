@@ -5,9 +5,23 @@
 .searchresult-title {
   /*text-align: center;*/
   font-size: 16px;
-  padding: 30px 0px;
+  padding: 20px 0px;
+  overflow: hidden;
 }
 .searchresult-all-wrap {
   width: 1200px;
-  margin: 50px auto;
+  margin: 30px auto;
+}
+.searchKeyword {
+  font-size: 24px;
+  float: left;
+  color: #220895;
+  font-family: ns-eb;
+  margin-right: 10px;
+}
+.searchresult-title-result {
+  font-size: 24px;
+  float: left;
+  color: black;
+  font-family: ns-r;
 }

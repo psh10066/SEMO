@@ -12,19 +12,38 @@
 }
 .chat-list {
   width: 25%;
-  background-color: rgba(34, 8, 149, 0.8);
+  background-color: #f9d8ff;
+  border-top-left-radius: 80px;
+  border-bottom-left-radius: 80px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .chat-room {
   width: 75%;
+  background-color: #8bb4ff;
+  border-top-right-radius: 80px;
+  border-bottom-right-radius: 80px;
 }
 .chat-myname {
   text-align: center;
+  width: 85%;
+  height: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .chat-myname-text {
   color: #fff;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 30px;
 }
+
 .chat-room-info {
   text-align: center;
   height: 100%;
@@ -33,16 +52,28 @@
   display: flex;
 }
 .chat-room-info-text {
-  color: #fff;
   font-weight: bold;
   font-size: 40px;
 }
+.chat-room-info-text h4 {
+  color: #ffffff;
+}
 .chatEnter {
   cursor: pointer;
+  width: 85%;
+  height: 10%;
+  background-color: rgba(253, 255, 148, 0.795);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top-left-radius: 60px;
+  border-bottom-left-radius: 60px;
+  margin-bottom: 20px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .chatEnter div {
-  color: #fff;
-}
-.chatting-wrap {
   color: #fff;
 }

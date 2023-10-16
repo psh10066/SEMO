@@ -103,7 +103,7 @@ const ReCommentItem = (props) => {
   const deleteComment = () => {
     Swal.fire({
       icon: "question",
-      text: "피드를 삭제하시겠습니까?",
+      text: "댓글을 삭제하시겠습니까?",
       showCancelButton: true,
       confirmButtonText: "삭제",
       cancelButtonText: "취소",
