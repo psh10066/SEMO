@@ -216,6 +216,7 @@ const GroupView = (props) => {
             isLogin={isLogin}
             isJoin={isJoin}
             member={member}
+            // memberNo={member.memberNo}
             groupLevel={groupLevel}
           />
           <div className="group-view-category">

@@ -27,10 +27,15 @@ public class MeetingService {
 		List meetingList = meetingDao.selectMeetingList(groupNo);
 		return meetingList;
 	}
-
+	@Transactional
 	public int joinMeeting(MeetingJoin meetingJoin) {
 		// TODO Auto-generated method stub
 		return meetingDao.joinMeeting(meetingJoin);
+	}
+
+	public List selectMember(int meetingNo) {
+		// TODO Auto-generated method stub
+		return meetingDao.selectMember(meetingNo);
 	}
 
 	

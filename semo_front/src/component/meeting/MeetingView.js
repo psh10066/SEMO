@@ -4,6 +4,7 @@ import Kakao from "../util/Kakao";
 import { Button1, Button2, Button3 } from "../util/Buttons";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
+import MeetingJoinList from "./MeetingJoinList";
 
 const MeetingView = (props) => {
   const group = props.group;
@@ -11,48 +12,82 @@ const MeetingView = (props) => {
   const isLogin = props.isLogin;
   const isJoin = props.isJoin;
   const member = props.member;
+  // 클릭시 자동으로 함수를 변경해줄 함수
+  const [isAddMeet, setIsAddMeet] = useState(false);
   const groupLevel = props.groupLevel;
-
-  // const memberNo = member.memberNo;
   const [meetingList, setMeetingList] = useState([]);
   const [meetingJoin, setMeetingJoin] = useState([]);
+  const [meetingMember, setMeetingMember] = useState(0);
+
   const navigate = useNavigate();
 
   // 모임 생성
   const meetingCreate = () => {
-    navigate("/meeting/create", { state: { groupNo: group.groupNo } });
+    navigate("/meeting/create", {
+      state: { memberNo: member.memberNo, groupNo: group.groupNo },
+    });
   };
 
-  // const join = (meetingNo) => {
-  //   console.log(meetingNo);
-  //   Swal.fire({
-  //     icon: "question",
-  //     text: "모임에 가입하시겠습니까?",
-  //     showCancelButton: true,
-  //     confirmButtonText: "확인",
-  //     cancelButtonText: "취소",
-  //   }).then((res) => {
-  //     if (res.isConfirmed) {
-  //       const token = window.localStorage.getItem("token");
-  //       axios
-  //         .post(
-  //           `/meeting/join`,
-  //           { meetingNo, memberNo },
-  //           {
-  //             headers: {
-  //               Authorization: "Bearer " + token,
-  //             },
-  //           }
-  //         )
-  //         .then((res) => {
-  //           console.log(res.data);
-  //         })
-  //         .catch((error) => {
-  //           console.log(error.response.status);
-  //         });
-  //     }
-  //   });
-  // };
+  // 약속 참여하기
+  const join = (meetingNo) => {
+    Swal.fire({
+      icon: "question",
+      text: "모임에 참여 하시겠습니까?",
+      showCancelButton: true,
+      confirmButtonText: "확인",
+      cancelButtonText: "취소",
+    }).then((res) => {
+      if (member.memberNo != null) {
+        if (res.isConfirmed) {
+          const token = window.localStorage.getItem("token");
+          const memberNo = member.memberNo;
+          axios
+            .post(
+              `/meeting/join`,
+              { meetingNo, memberNo },
+              {
+                headers: {
+                  Authorization: "Bearer " + token,
+                },
+              }
+            )
+            .then((res) => {
+              setMeetingJoin(res.data);
+              setIsAddMeet(!isAddMeet);
+            })
+            .catch((error) => {
+              console.log(error.response.status);
+            });
+        }
+      }
+    });
+  };
+  //약속 참여 취소하기
+  const cancelJoin = (meetingNo) => {
+    Swal.fire({
+      icon: "question",
+      text: "모임 참석을 취소 하시겠습니까?",
+      showCancelButton: true,
+      confirmButtonText: "확인",
+      cancelButtonText: "취소",
+    }).then((res) => {
+      if (member.memberNo != null) {
+        if (res.confirmed) {
+          axios
+            .get("/meeting/cancel/" + meetingNo)
+            .then((res) => {
+              if (res.data === 1) {
+              }
+            })
+            .catch((res) => {
+              console.log(res.response.status);
+            });
+        }
+      }
+    });
+  };
+
+  console.log(meetingJoin);
 
   // 모임 보이기
   useEffect(() => {
@@ -60,20 +95,31 @@ const MeetingView = (props) => {
       .get("/meeting/view/" + groupNo)
       .then((res) => {
         setMeetingList(res.data);
+        if (res.data != null) {
+        }
       })
       .catch((res) => {
-        // 오류 처리
         console.log(res.response.error);
       });
     // axios
-    //   .get("/meeting/select/")
+    //   .get("/meeting/meetingMember/" + meetingList.meetingNo)
     //   .then((res) => {
-    //     setMeetingJoin(res.data);
+    //     setMeetingMember(res.data);
     //   })
     //   .catch((res) => {
     //     console.log(res.response.error);
     //   });
-  }, [groupNo]);
+  }, [isAddMeet]);
+  useEffect(() => {
+    axios
+      .get("/meeting/meetingMember" + meetingList)
+      .then((res) => {
+        setMeetingJoin(res.data);
+      })
+      .catch((res) => {
+        console.log(res.response.error);
+      });
+  });
 
   // D-Day설정 함수
   const calculateDDay = (targetDate) => {
@@ -137,16 +183,24 @@ const MeetingView = (props) => {
                   장소 : {meeting.meetingPlace}
                   <Kakao data={meeting.meetingPlace} index={index} />
                 </div>
-                {/* {memberNo != null ? (
+                <div className="meeting-join-list">
+                  <MeetingJoinList meeting={meeting} member={member} />
+                </div>
+                {isLogin && isJoin ? (
                   <Button1
                     text="모임참가"
                     clickEvent={() => {
-                      // join(meeting.meetingNo);
+                      join(meeting.meetingNo);
                     }}
                   />
                 ) : (
-                  ""
-                )} */}
+                  <Button2
+                    text="취소"
+                    clickEvent={() => {
+                      cancelJoin(meeting.meetingNo);
+                    }}
+                  />
+                )}
               </div>
             </div>
           ))

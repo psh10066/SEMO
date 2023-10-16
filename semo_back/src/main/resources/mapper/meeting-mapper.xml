@@ -12,7 +12,7 @@
     		#{meetingMaxnum})
 	</insert>
 	<select id="selectMeetingList" resultType="meeting">
-		select * from meeting where group_no = #{groupNo}
+		select * from meeting where group_no = #{groupNo} order by meeting_date
 	</select>
 	<insert id="joinMeeting">
 		insert into meeting_join values(
@@ -21,4 +21,7 @@
 			#{meetingNo},
 			1)
 	</insert>
+	<select id="selectMember" resultType="meetingJoin">
+		select * from meeting_join where meeting_no=#{meetingNo}
+	</select>
 </mapper>
