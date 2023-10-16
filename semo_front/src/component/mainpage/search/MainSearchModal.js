@@ -12,8 +12,10 @@ const MainSearchModal = (props) => {
   const [searchContent, setSearchContent] = useState("");
   const [searchResult, setSearchResult] = useState({});
   const navigate = useNavigate();
-
-  const search = () => {
+  const modalState = props.modalState;
+  const setModalState = props.setModalState;
+  console.log(modalState);
+  const search = (e) => {
     const groupName = { groupName: searchContent };
     console.log(groupName);
 
@@ -24,13 +26,12 @@ const MainSearchModal = (props) => {
         console.log(res.data);
         //setSearchResult(res.data);
         //console.log(searchResult);
+        setModalState(false);
+        e.stopPropagation();
+
         navigate("/searchresult", {
-          state: { searchResult: res.data },
+          state: { searchResult: res.data, searchKeyword: searchContent },
         });
-        {
-          /*<Modal onRequestClose={() => props.setModalState(false)}></Modal>;
-          검색 페이지 넘어갈때 모달창 닫히도록 해야함*/
-        }
       })
       .catch((res) => {
         console.log(res.data);

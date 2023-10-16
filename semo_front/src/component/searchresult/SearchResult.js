@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Pagination from "../common/Pagination";
+import { Modal } from "@mui/material";
 
 const SearchResult = (props) => {
   const isLogin = props.isLogin;
@@ -12,17 +13,24 @@ const SearchResult = (props) => {
   const [reqPage, setReqPage] = useState(1);
   const [pageInfo, setPageInfo] = useState({});
   const [searchList, setSearchList] = useState([]);
+  //const [modalState, setModalState] = useState("");
+  const [searchKeyword, setSearchKeyword] = useState("");
+  const [groupName, setGroupName] = useState("");
+  //const searchKeyword = location.state.searchContent;
 
   const [socialingSearchAll, setSocialingSearchAll] = useState("all");
   useEffect(() => {
     setSearchList(location.state.searchResult);
-    console.log(searchList);
+    setSearchKeyword(location.state.searchKeyword);
+    //setGroupName(location.state.groupName);
   }, []);
+  console.log(searchKeyword);
 
   return (
     <div className="searchresult-all-wrap">
       <div className="searchresult-title">
-        <h2>검색 결과</h2>
+        <div className="searchKeyword">'{searchKeyword}'</div>
+        <div className="searchresult-title-result"> 검색 결과</div>
       </div>
       <div className="searchresult-category-wrap">
         <div>카테고리 라인</div>
