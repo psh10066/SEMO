@@ -154,9 +154,8 @@ public class MemberController {
 	@PostMapping("/sendMail")
 	public String sendMail(@RequestBody Member member) {
 		String email=member.getMemberMail();
-		System.out.println(member.getMemberMail());
-		
 		String authCode = emailSender.authMail(email);
+		System.out.println(authCode);
 		return authCode;
 	}
 	

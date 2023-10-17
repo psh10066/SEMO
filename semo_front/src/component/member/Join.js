@@ -229,7 +229,7 @@ const Join = () => {
     }
   };
   const auth = document.querySelector("#auth");
-  const emailJoin = (props) => {
+  const emailJoin = () => {
     const a = document.querySelector("#memberMail");
     a.addEventListener("change", function (e) {
       setMemberMail(e.target.value);
@@ -238,20 +238,19 @@ const Join = () => {
       setAuthCode(res.data);
       auth.style.display = "block";
       setIsCodeShow(true);
-    });
-  };
-  const authButton = () => {
-    console.log(authCode);
-    if (authCode != null) {
       const b = document.querySelector("#authCode");
       b.addEventListener("change", function (e) {
         setInputMail(e.target.value);
       });
-      if (authCode == inputMail) {
+    });
+  };
+  const authButton = () => {
+    if (authCode != null) {
+      if (authCode === inputMail) {
         setMailChkMsg("인증 완료");
         setMailChk(true);
       } else {
-        setMailChkMsg("집에가고싶다");
+        setMailChkMsg("인증이잘못되었습니다");
       }
     }
   };
