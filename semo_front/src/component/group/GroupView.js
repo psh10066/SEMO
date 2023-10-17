@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import MeetingView from "../meeting/MeetingView";
 import GroupSave from "./GroupSave";
+import { Avatar, AvatarGroup } from "@mui/material";
 
 const GroupView = (props) => {
   const isLogin = props.isLogin;
@@ -21,6 +22,8 @@ const GroupView = (props) => {
   const navigate = useNavigate();
   const [joinNum, setJoinNum] = useState(0);
   const [groupSave, setGroupSave] = useState(false);
+  const [peopleCount, setPeopleCount] = useState(0);
+  const [peopleList, setPeopleList] = useState([]);
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -33,11 +36,20 @@ const GroupView = (props) => {
       .then((res) => {
         setGroup(res.data);
         setGroupSave(res.data.groupSave);
+        axios
+          .get("/group/groupPeopleList/" + groupNo)
+          .then((res) => {
+            console.log(res.data);
+            setPeopleList(res.data.peopleList);
+            setPeopleCount(res.data.peopleCount);
+          })
+          .catch((res) => {
+            console.log(res.response.status);
+          });
       })
       .catch((error) => {
         console.log(error.response.status);
       });
-
     if (isLogin) {
       const token = window.localStorage.getItem("token");
       axios
@@ -93,7 +105,9 @@ const GroupView = (props) => {
         });
     }
   }, [changeLevel, isLogin]);
-
+  const clickAvatarHandler = (memberNo) => {
+    navigate("/feed/profile/", { state: { memberNo: memberNo } });
+  };
   const groupExit = () => {
     const token = window.localStorage.getItem("token");
     const groupNo = group.groupNo;
@@ -177,6 +191,7 @@ const GroupView = (props) => {
       }
     });
   };
+
   const groupJoin = () => {
     const token = window.localStorage.getItem("token");
     const groupNo = group.groupNo;
@@ -271,7 +286,34 @@ const GroupView = (props) => {
             className="group-view-content"
             dangerouslySetInnerHTML={{ __html: group.groupContent }}
           ></div>
-          <div className="group-view-member"></div>
+          <div className="group-view-member">
+            <div className="feed-like-person-wrap">
+              <AvatarGroup max={7} total={peopleCount}>
+                {peopleList.map((people, index) => {
+                  let memberNo = people.memberNo;
+                  return people.peopelImg === null ? (
+                    <Avatar
+                      onClick={() => {
+                        clickAvatarHandler(memberNo);
+                      }}
+                      sx={{ width: 44, height: 44 }}
+                      alt="논"
+                      src="/image/person.png"
+                    ></Avatar>
+                  ) : (
+                    <Avatar
+                      onClick={() => {
+                        clickAvatarHandler(memberNo);
+                      }}
+                      sx={{ width: 44, height: 44 }}
+                      alt="멤"
+                      src={"/member/" + people.memberImg}
+                    ></Avatar>
+                  );
+                })}
+              </AvatarGroup>
+            </div>
+          </div>
           <MeetingView
             group={group}
             groupNo={groupNo}
