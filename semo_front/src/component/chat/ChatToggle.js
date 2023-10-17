@@ -1,27 +1,28 @@
-const ChatToggle = ({
-  groupAllMemberName,
-  groupAllMemberType,
-  isMemberVisible,
-  toggleChatMember,
-}) => {
+import { useState } from "react";
+import ChatToggleModal from "./ChatToggleModal";
+
+const ChatToggle = (props) => {
+  const groupAllMemberName = props.groupAllMemberName;
+  const groupAllMemberType = props.groupAllMemberType;
+
+  const [modalState, setModalState] = useState(false); //모달창의 상태를 보관해 둘 useState입니다.
+
+  function OnOffModal() {
+    setModalState(!modalState);
+  }
+
   return (
-    <>
-      <span className="material-icons chat-Member" onClick={toggleChatMember}>
+    <div>
+      <span className="material-icons chat-Member" onClick={OnOffModal}>
         groups
       </span>
-      {isMemberVisible && (
-        <div
-          className={`toggle-chatMember-box ${isMemberVisible ? "show" : ""}`}
-        >
-          {groupAllMemberName.map((name, index) => (
-            <div key={index}>{name}</div>
-          ))}
-          {groupAllMemberType.map((type, index) => (
-            <div key={index}>{type}</div>
-          ))}
-        </div>
-      )}
-    </>
+      <ChatToggleModal
+        modalState={modalState}
+        setModalState={setModalState}
+        groupAllMemberName={groupAllMemberName}
+        groupAllMemberType={groupAllMemberType}
+      />
+    </div>
   );
 };
 
