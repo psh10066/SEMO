@@ -14,6 +14,7 @@ import "./member.css";
 import { Button1, Button2, Button3 } from "../util/Buttons";
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
+import Timer from "./Timer";
 
 const Join = () => {
   const [memberId, setMemberId] = useState("");
@@ -30,12 +31,19 @@ const Join = () => {
   const [memberThumbnail, setMemberThumbnail] = useState("");
   const [checkIdMsg, setCheckIdMsg] = useState("");
   const [checkPwMsg, setCheckPwMsg] = useState("");
-
+  const [checkPwOmsg, setCheckPwOmsg] = useState("");
+  const [checkNameMsg, setCheckNameMsg] = useState("");
+  const [isCodeShow, setIsCodeShow] = useState(false);
+  const [inputMail, setInputMail] = useState("");
+  const [mailChk, setMailChk] = useState(false);
+  const [checkPhoneMsg, setCheckPhoneMsg] = useState("");
   const navigate = useNavigate();
   const idCheck = () => {
-    const idReg = /^[a-zA-Z0-9]{1,8}$/;
+    const idReg = /^[a-zA-Z0-9]{4,8}$/;
     if (!idReg.test(memberId)) {
-      setCheckIdMsg("아이디는 영어 대/소문자/숫자로 &&글자 입니다.");
+      setCheckIdMsg(
+        "아이디는 영어 대/소문자/숫자로 4글자이상 8글자 이하 입니다."
+      );
     } else {
       axios
         .get("/member/checkId/" + memberId)
@@ -52,6 +60,16 @@ const Join = () => {
       setCheckIdMsg("사용가능한 아이디 입니다.");
     }
   };
+  const pwOCheck = () => {
+    const pwReg = /^(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]|.*[0-9]).{8,12}$/;
+    if (!pwReg.test(memberPw)) {
+      setCheckPwOmsg(
+        "비밀번호는 영어 대소문자,숫자,특수문자 혼합사용가능 8~12글자입니다."
+      );
+    } else {
+      setCheckPwOmsg("");
+    }
+  };
   const pwCheck = () => {
     if (memberPw !== memberPwRe) {
       setCheckPwMsg("비밀번호가 일치하지 않습니다.");
@@ -59,23 +77,30 @@ const Join = () => {
       setCheckPwMsg("");
     }
   };
+  const nameCheck = () => {
+    const nameReg = /^[가-힣]+$/;
+    if (!nameReg.test(memberName)) {
+      setCheckNameMsg("한글이름만 입력해 주세요");
+    } else {
+      setCheckNameMsg("");
+    }
+  };
+  const phoneCheck = () => {
+    const phoneReg = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+    if (!phoneReg.test(memberPhone)) {
+      setCheckPhoneMsg("전화번호 양식대로 입력해주세요");
+    } else {
+      setCheckPhoneMsg("");
+    }
+  };
   const join = () => {
-    if (checkIdMsg === "" && checkPwMsg === "") {
-      /*
-      const member = {
-        memberId,
-        memberPw,
-        memberName,
-        memberPhone,
-        memberMail,
-        memberContent,
-        memberCategory1,
-        memberCategory2,
-        memberLocal,
-        memberImg,
-        memberThumbnail,
-      };
-      */
+    if (
+      checkIdMsg === "" &&
+      checkPwMsg === "" &&
+      mailChk === "true" &&
+      checkPwOmsg === "" &&
+      checkNameMsg === ""
+    ) {
       const form = new FormData();
       form.append("memberId", memberId);
       form.append("memberPw", memberPw);
@@ -120,6 +145,15 @@ const Join = () => {
   const handleChange3 = (event) => {
     setMemberCategory2(event.target.value);
   };
+  const catState = () => {
+    if (memberCategory2 == memberCategory1) {
+      Swal.fire({
+        icon: "error",
+        text: "같은 카테고리는 선택할수 없습니다!",
+      });
+      setMemberCategory2(0);
+    }
+  };
   const Emails = [
     "@naver.com",
     "@gmail.com",
@@ -131,12 +165,12 @@ const Join = () => {
     "@kakao.com",
   ];
   //이메일
-  const [timeZone, setTimeZone] = useState("");
   const [authMsg, setAuthMsg] = useState("");
   const [authCode, setAuthCode] = useState("");
   const [emailList, setEmailList] = useState(Emails);
   const [selected, setSelected] = useState(-1);
   const [isDrobBox, setIsDropbox] = useState(false);
+  const [mailChkMsg, setMailChkMsg] = useState("");
 
   const inputRef = useRef();
   useEffect(() => {
@@ -194,17 +228,32 @@ const Join = () => {
       setMemberImg(null);
     }
   };
+  const auth = document.querySelector("#auth");
   const emailJoin = (props) => {
     const a = document.querySelector("#memberMail");
     a.addEventListener("change", function (e) {
       setMemberMail(e.target.value);
     });
-    console.log(memberMail);
-    const auth = document.querySelector("#auth");
     axios.post("/member/sendMail", { memberMail }).then((res) => {
       setAuthCode(res.data);
       auth.style.display = "block";
+      setIsCodeShow(true);
     });
+  };
+  const authButton = () => {
+    console.log(authCode);
+    if (authCode != null) {
+      const b = document.querySelector("#authCode");
+      b.addEventListener("change", function (e) {
+        setInputMail(e.target.value);
+      });
+      if (authCode == inputMail) {
+        setMailChkMsg("인증 완료");
+        setMailChk(true);
+      } else {
+        setMailChkMsg("집에가고싶다");
+      }
+    }
   };
 
   return (
@@ -225,6 +274,8 @@ const Join = () => {
         type="password"
         content="memberPw"
         placeholder="비밀번호"
+        checkMsg={checkPwOmsg}
+        blurEvent={pwOCheck}
       />
       <JoinInputWrap
         data={memberPwRe}
@@ -241,6 +292,8 @@ const Join = () => {
         type="text"
         content="memberName"
         placeholder="이름"
+        checkMsg={checkNameMsg}
+        blurEvent={nameCheck}
       />
       <JoinInputWrap
         data={memberPhone}
@@ -248,6 +301,8 @@ const Join = () => {
         type="text"
         content="memberPhone"
         placeholder="010-1234-1234"
+        checkMsg={checkPhoneMsg}
+        blurEvent={phoneCheck}
       />
       <div ref={inputRef} className="join-mail-wrap">
         <input
@@ -280,10 +335,21 @@ const Join = () => {
           <Button1 text="이메일인증" clickEvent={emailJoin} />
           <div id="auth">
             <input type="text" id="authCode" placeholder="인증번호입력" />
-            <button class="btn bc1" id="authBtn">
+            <button className="btn bc1" id="authBtn" onClick={authButton}>
               인증하기
             </button>
-            <span id="timeZone"></span>
+            <span id="timeZone">
+              {isCodeShow && (
+                <Timer
+                  setAuthCode={setAuthCode}
+                  authCode={authCode}
+                  mailChkMsg={mailChkMsg}
+                  setMailChkMsg={setMailChkMsg}
+                  setMailChk={setMailChk}
+                  mailChk={mailChk}
+                />
+              )}
+            </span>
             <span id="authMsg"></span>
           </div>
         </div>
@@ -316,7 +382,11 @@ const Join = () => {
         <div className="join-category-title">관심 카테고리</div>
         <div>
           <FormControl sx={{ m: 0.5, width: 400 }}>
-            <Select value={memberCategory1} onChange={handleChange2}>
+            <Select
+              value={memberCategory1}
+              onChange={handleChange2}
+              onBlur={catState}
+            >
               <MenuItem value={1}>문화·예술</MenuItem>
               <MenuItem value={2}>운동·액티비티</MenuItem>
               <MenuItem value={3}>푸드·드링크</MenuItem>
@@ -324,8 +394,12 @@ const Join = () => {
           </FormControl>
         </div>
         <div>
-          <FormControl sx={{ m: 0.5, width: 400 }}>
-            <Select value={memberCategory2} onChange={handleChange3}>
+          <FormControl sx={{ m: 0.5, width: 400 }} id="selectDiv">
+            <Select
+              value={memberCategory2}
+              onChange={handleChange3}
+              onBlur={catState}
+            >
               <MenuItem value={1}>문화·예술</MenuItem>
               <MenuItem value={2}>운동·액티비티</MenuItem>
               <MenuItem value={3}>푸드·드링크</MenuItem>

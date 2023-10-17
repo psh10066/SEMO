@@ -44,6 +44,8 @@ public interface MemberDao {
 
 	List getFollowing(int memberNo);
 
+	String mailCheck(String memberMail);
+
 
 
 }

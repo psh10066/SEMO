@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -156,7 +157,6 @@ public class MemberController {
 		System.out.println(member.getMemberMail());
 		
 		String authCode = emailSender.authMail(email);
-		System.out.println("잘돌아가나 1");
 		return authCode;
 	}
 	
@@ -195,6 +195,10 @@ public class MemberController {
 	public Map getFollowing(@PathVariable int memberNo) {
 		return memberService.getFollowing(memberNo);
 	}
-
-
+	
+	@PostMapping(value="/mailCheck")
+	public String mailCheck(@RequestBody Member m) {
+		String memberMail = m.getMemberMail();
+		return memberService.mailCheck(memberMail);	
+	}
 }
