@@ -48,5 +48,11 @@ public interface MemberDao {
 
 	String mailCheck(String memberMail);
 
+	Member pwChk(Member member);
+
+
+
+	int findChangePwMember(Member member);
+
 
 }
