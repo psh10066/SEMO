@@ -26,6 +26,8 @@ public interface PageDao {
 
 	List search(String searchContent);
 
+	//int peopleCount(int groupNo);
+
 	//String search(String searchContent);
 
 }

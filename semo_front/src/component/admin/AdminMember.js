@@ -18,7 +18,7 @@ const AdminMember = () => {
     axios
       .get("/admin/list/" + reqPage)
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
         setMemberList(res.data.list);
         setPageInfo(res.data.pi);
       })
@@ -44,7 +44,7 @@ const AdminMember = () => {
           </thead>
           <tbody>
             {memberList.map((member, index) => {
-              console.log(member);
+              //console.log(member);
               return <MemberItem key={"member" + index} member={member} />;
             })}
           </tbody>
@@ -63,9 +63,9 @@ const AdminMember = () => {
 };
 const MemberItem = (props) => {
   const member = props.member;
-  console.log(member);
+  //console.log(member);
   const [memberType, setMemberType] = useState(member.memberType);
-  console.log(member);
+  //console.log(member);
   const handleChange = (event) => {
     const obj = { memberNo: member.memberNo, memberType: event.target.value };
     const token = window.localStorage.getItem("token");

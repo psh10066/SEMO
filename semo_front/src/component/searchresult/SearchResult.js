@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Pagination from "../common/Pagination";
+import { Modal } from "@mui/material";
 
 const SearchResult = (props) => {
   const isLogin = props.isLogin;
@@ -12,17 +13,25 @@ const SearchResult = (props) => {
   const [reqPage, setReqPage] = useState(1);
   const [pageInfo, setPageInfo] = useState({});
   const [searchList, setSearchList] = useState([]);
+  //const [modalState, setModalState] = useState("");
+  const [searchKeyword, setSearchKeyword] = useState("");
+  const [groupName, setGroupName] = useState("");
+  const [searchResult, setSearchResult] = useState([]);
 
-  const [socialingSearchAll, setSocialingSearchAll] = useState("all");
+  const [socialingSearch, setSocialingSearch] = useState("all");
+  //소셜링-전체(all) / 소셜링-모임명(groupName) / 소셜링-모임설명(groupContent) / 라운지(피드)(feed)
+
   useEffect(() => {
     setSearchList(location.state.searchResult);
-    console.log(searchList);
+    setSearchKeyword(location.state.searchKeyword);
   }, []);
+  //console.log(searchKeyword);
 
   return (
     <div className="searchresult-all-wrap">
       <div className="searchresult-title">
-        <h2>검색 결과</h2>
+        <div className="searchKeyword">'{searchKeyword}'</div>
+        <div className="searchresult-title-result"> 검색 결과</div>
       </div>
       <div className="searchresult-category-wrap">
         <div>카테고리 라인</div>
@@ -62,18 +71,20 @@ const SearchItem = (props) => {
       </div>
       <div className="searchresult-item-info">
         <div className="searchresult-infos">
-          <div>모임명 : {search.groupName}</div>
-          <div>최대 모임 인원 : {search.groupMaxnum}</div>
-          <div>
-            카테고리 :
+          <div className="searchresult-group-name">{search.groupName}</div>
+          <div className="searchresult-icons">
+            <span className="material-icons">groups</span>
+            {search.totalCount}/{search.groupMaxnum}
+          </div>
+          <div className="searchresult-category">
             {search.groupCategory === 1
               ? " 문화·예술"
               : search.groupCategory === 2
               ? " 운동·액티비티"
               : " 푸드·드링크"}
           </div>
-          <div>
-            지역 카테고리 :{" "}
+          <div className="searchresult-icons">
+            <span className="material-icons">location_on</span>
             {search.groupLocal === 1
               ? "서울"
               : search.groupLocal === 2

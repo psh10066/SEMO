@@ -23,8 +23,9 @@
 		            GROUP_IMG,
 	                GROUP_MAXNUM,
 		            GROUP_CATEGORY,
-		            GROUP_LOCAL
-		        FROM GROUP_TBL
+		            GROUP_LOCAL,
+		            (select count(*) from gr_join where group_no=g.group_no and GR_JOIN_TYPE in (1,2)) total_count
+		        FROM GROUP_TBL g
 		        ORDER BY 1 DESC)B)
 		WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>
@@ -38,8 +39,9 @@
 		            GROUP_IMG,
 	                GROUP_MAXNUM,
 		            GROUP_CATEGORY,
-		            GROUP_LOCAL
-		        FROM GROUP_TBL
+		            GROUP_LOCAL,
+		            (select count(*) from gr_join where group_no=g.group_no and GR_JOIN_TYPE in (1,2)) total_count
+		        FROM GROUP_TBL g
 		        WHERE GROUP_CATEGORY = #{categoryValue}
 		        ORDER BY 1 DESC)B)
 		WHERE RNUM BETWEEN #{start} AND #{end}
@@ -54,15 +56,29 @@
 		            GROUP_IMG,
 	                GROUP_MAXNUM,
 		            GROUP_CATEGORY,
-		            GROUP_LOCAL
-		        FROM GROUP_TBL
+		            GROUP_LOCAL,
+		            (select count(*) from gr_join where group_no=g.group_no and GR_JOIN_TYPE in (1,2)) total_count
+		        FROM GROUP_TBL g
 		        WHERE GROUP_LOCAL = #{categoryValue}
 		        ORDER BY 1 DESC)B)
 		WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>
 	
 	<select id="search" resultType="group">
-		select * from group_tbl where group_name like '%'||#{searchContent}||'%' or group_content like '%'||#{searchContent}||'%' 
+		select * from group_tbl where group_name like '%'||#{searchContent}||'%' or group_content like '%'||#{searchContent}||'%'
+	</select>
+	
+	<select id="peopleCount" resultType="int">
+		select count(*) from gr_join where group_no=#{groupNo}
+		
+		SELECT count(*) FROM    
+		    (SELECT ROWNUM AS RNUM, B.* FROM
+		        (SELECT
+		            GROUP_NO
+		        FROM GR_JOIN
+		        WHERE GROUP_LOCAL = #{categoryValue}
+		        ORDER BY 1 DESC)B)
+		WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>
 
 </mapper>

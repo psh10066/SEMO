@@ -13,7 +13,9 @@ const feedCommentRegist = (
   feedCommentNo2,
   isLogin,
   changeFeedComment,
-  setChangeFeedComment
+  setChangeFeedComment,
+  setFeedCommentContent,
+  setRecommentState
 ) => {
   const feedCommentInesrt = { feedNo, feedCommentContent, feedCommentNo2 };
   if (isLogin) {
@@ -28,6 +30,10 @@ const feedCommentRegist = (
         .then((res) => {
           if (res.data === 1) {
             setChangeFeedComment(!changeFeedComment);
+            setFeedCommentContent("");
+            if (setRecommentState) {
+              setRecommentState(true);
+            }
           }
         })
         .catch((res) => {
@@ -45,7 +51,6 @@ const feedCommentRegist = (
 const Comment = (props) => {
   const member = props.member;
   const isLogin = props.isLogin;
-  const feed = props.feed;
   const [feedCommentContent, setFeedCommentContent] = useState("");
   const [feedCommentNo2, setFeedCommentNo2] = useState(0);
   const [commentList, setCommentList] = useState([]);
@@ -53,7 +58,7 @@ const Comment = (props) => {
   const [feedReCommentContent, setFeedRecommentContent] = useState("");
   const changeFeedComment = props.changeFeedComment;
   const setChangeFeedComment = props.setChangeFeedComment;
-  const feedNo = feed.feedNo;
+  const feedNo = props.feedNo;
 
   //댓글 작성하기
   const feedCommentSubmit = () => {
@@ -63,7 +68,9 @@ const Comment = (props) => {
       feedCommentNo2,
       isLogin,
       changeFeedComment,
-      setChangeFeedComment
+      setChangeFeedComment,
+      setFeedCommentContent,
+      null
     );
   };
   //댓글 리스트 불러오기
@@ -175,7 +182,7 @@ const CommentItem = (props) => {
   const deleteComment = () => {
     Swal.fire({
       icon: "question",
-      text: "피드를 삭제하시겠습니까?",
+      text: "댓글을 삭제하시겠습니까?",
       showCancelButton: true,
       confirmButtonText: "삭제",
       cancelButtonText: "취소",
@@ -230,7 +237,9 @@ const CommentItem = (props) => {
       comment.feedCommentNo,
       isLogin,
       changeFeedComment,
-      setChangeFeedComment
+      setChangeFeedComment,
+      setFeedRecommentContent,
+      setRecommentState
     );
   };
   const navigate = useNavigate();
@@ -282,7 +291,7 @@ const CommentItem = (props) => {
             placeholder="댓글 추가..."
             ref={textRef}
             onInput={resizeHeight}
-            defaultValue={feedCommentContent}
+            value={feedCommentContent}
             id={feedCommentContent}
             onChange={(e) => {
               setFeedCommentContent(e.target.value);
@@ -318,7 +327,10 @@ const CommentItem = (props) => {
             )
           ) : (
             <div className="comment-bottom-right">
-              <ReCommentWrite />
+              <ReCommentWrite
+                recommentState={recommentState}
+                setRecommentState={setRecommentState}
+              />
             </div>
           )
         ) : (
@@ -448,7 +460,7 @@ const CommentContent = (props) => {
         placeholder="댓글 추가..."
         ref={textRef}
         onInput={resizeHeight}
-        defaultValue={commentContent}
+        value={commentContent}
         id={commentContent}
         onChange={(e) => {
           setCommentContent(e.target.value);

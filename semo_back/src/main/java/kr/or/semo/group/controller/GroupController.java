@@ -116,13 +116,18 @@ public class GroupController {
 		g.setMemberId(memberId);
 		return groupService.groupChatRoomName(g,memberId);
 	}
-	//그룹에 있는 모든 회원번호, 회원이름 불러오기
+	//그룹에 있는 모든 회원 이름  , 회원 등급 불러오기
 	@PostMapping(value="/groupAllMember")
 	public List groupAllMember(@RequestBody Map<String, Integer> request) {
-	    int groupNo = request.get("groupNo"); //객체로 보낸거 키(groupNo) , 값 가지고옴 
+	    int groupNo = request.get("groupNo"); //객체로 보낸거 키(String = groupNo) , 값(Integer) 가지고옴 
 	    return groupService.groupAllMember(groupNo);
 	}
 	
+	//모임 회원 수, 회원 이름,이미지 조회
+	@GetMapping(value="/groupPeopleList/{groupNo}")
+	public Map groupPeopleList(@PathVariable int groupNo) {
+		return groupService.groupPeopleList(groupNo);
+	}
 	
 	
 }

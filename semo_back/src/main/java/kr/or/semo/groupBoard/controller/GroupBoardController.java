@@ -93,5 +93,15 @@ public class GroupBoardController {
 	public List groupBoardReCommentList(@PathVariable int grBoardNo) {
 		return groupBoardService.groupBoardReCommentList(grBoardNo);
 	}
-
+	@PostMapping(value="/commentAddLike")
+	public int commentAddLike(@RequestBody GroupBoardComment gbc, String memberId) {
+		int grBoardCommentNo = gbc.getGrBoardCommentNo();
+		return groupBoardService.insertGroupBoardCommentLike(grBoardCommentNo, memberId);
+	}
+	@PostMapping(value="/commentRemoveLike")
+	public int commentRemoveLike(@RequestBody GroupBoardComment gbc, String memberId) {
+		int grBoardCommentNo = gbc.getGrBoardCommentNo();
+		return groupBoardService.deleteGroupBoardCommentLike(grBoardCommentNo, memberId);
+	}
+	
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import kr.or.semo.PageInfo;
 import kr.or.semo.Pagination;
+import kr.or.semo.group.model.vo.Group;
 import kr.or.semo.page.model.dao.PageDao;
 
 @Service
@@ -21,9 +22,11 @@ public class PageService {
 	public Map pageList(int reqPage, String categoryLocal, String categoryValue) {
 		int numPerPage = 6;
 		int pageNaviSize = 5;
+		//int peopleCount = pageDao.peopleCount(groupNo);
 
 		List pageList = null;
 		PageInfo pi = null;
+		int peopleCount = 0;
 		
 		if(categoryLocal.equals("all")) {
 			int totalCount = pageDao.totalCount1();
@@ -33,6 +36,7 @@ public class PageService {
 			HashMap<String, Object> mapCat = new HashMap<String, Object>();
 			mapCat.put("start",pi.getStart());
 			mapCat.put("end",pi.getEnd());
+			//mapCat.put("peopleCount", peopleCount);
 			
 			pageList = pageDao.selectPageList1(mapCat);
 			System.out.println("pageList는 "+pageList);
@@ -42,12 +46,13 @@ public class PageService {
 			int totalCount = pageDao.totalCount2(categoryValue);
 			pi = pagination.getPageInfo(reqPage, numPerPage, pageNaviSize, totalCount);
 			System.out.println("pi는 "+pi);
+			//int peopleCount = pageDao.peopleCount(groupNo);
 			
 			HashMap<String, Object> mapCat = new HashMap<String, Object>();
 			mapCat.put("start",pi.getStart());
 			mapCat.put("end",pi.getEnd());
+			//mapCat.put("peopleCount", peopleCount);
 			
-			//mapCat.put("categoryLocal", categoryLocal);
 			mapCat.put("categoryValue", categoryValue);
 			System.out.println("mapCat은 "+mapCat);
 			
@@ -59,10 +64,12 @@ public class PageService {
 			int totalCount = pageDao.totalCount3(categoryValue);
 			pi = pagination.getPageInfo(reqPage, numPerPage, pageNaviSize, totalCount);
 			System.out.println("pi는 "+pi);
+			//int peopleCount = pageDao.peopleCount(groupNo);
 			
 			HashMap<String, Object> mapCat = new HashMap<String, Object>();
 			mapCat.put("start",pi.getStart());
 			mapCat.put("end",pi.getEnd());
+			//mapCat.put("peopleCount", peopleCount);
 			
 			//mapCat.put("categoryLocal", categoryLocal);
 			mapCat.put("categoryValue", categoryValue);
@@ -73,9 +80,17 @@ public class PageService {
 		}
 			//System.out.println(mapCat);
 			System.out.println(pageList);
+			//System.out.println("peopleCount 찾는중 "+pageList.getGroupNo);
+			
+			Object obj = pageList.get(0);
+			Group g = (Group)obj;
+			g.getGroupNo();
+
+			//peopleCount = pageDao.peopleCount(pageList.groupNo);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("pageList", pageList);
 		map.put("pi", pi);
+		//map.put("peopleCount",peopleCount); 
 		return map;
 	}
 

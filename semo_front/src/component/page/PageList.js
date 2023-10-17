@@ -13,7 +13,11 @@ const PageList = (props) => {
   const [categoryLocal, setCategoryLocal] = useState("all"); //관심category 혹은 관심지역 선택(all, groupCategory, groupLocal)
   const [categoryValue, setCategoryValue] = useState(); //선택했을 경우의 값(0/1,2,3/1,2,3)
 
+  const [peopleCount, setPeopleCount] = useState(0);
+
   useEffect(() => {
+    console.log(pageList);
+    // "/" +   pageList.groupNo
     axios
       .get("/page/list/" + reqPage + "/" + categoryLocal + "/" + categoryValue)
       .then((res) => {
@@ -21,11 +25,21 @@ const PageList = (props) => {
         console.log(res.data);
         setPageList(res.data.pageList);
         setPageInfo(res.data.pi);
+        //axios.get("")
+        setPeopleCount(res.data.peopleCount);
       })
       .catch((res) => {
         console.log(res.response.status);
       });
   }, [reqPage, categoryLocal, categoryValue]);
+
+  {
+    /* 
+  useEffect(() => {
+    axios.get("/group/groupPeopleList" + group.groupNo);
+  });
+  */
+  }
 
   const [categories, setCategories] = useState([
     { text: "전체", categoryLocal: "all", categoryValue: 0, active: true },
@@ -118,7 +132,13 @@ const PageList = (props) => {
       </div>
       <div className="page-list-wrap">
         {pageList.map((page, index) => {
-          return <PageItem key={"page" + index} page={page} />;
+          return (
+            <PageItem
+              key={"page" + index}
+              page={page}
+              peopleCount={peopleCount}
+            />
+          );
         })}
       </div>
       <div className="page-page">
@@ -134,12 +154,15 @@ const PageList = (props) => {
 
 const PageItem = (props) => {
   const page = props.page;
-  //console.log(page);
+  const peopleCount = props.peopleCount;
+  console.log(page);
+  //console.log(peopleCount);
   const navigate = useNavigate();
   const groupView = () => {
     navigate("/group/view", { state: { groupNo: page.groupNo } });
     //console.log(page.groupNo);
   };
+  //const [peopleCount, setPeopleCount] = useState(0);
   return (
     <div className="page-item-wrap" onClick={groupView}>
       <div className="page-item-img">
@@ -151,10 +174,12 @@ const PageItem = (props) => {
       </div>
       <div className="page-item-info">
         <div className="page-infos">
-          <div>모임명 : {page.groupName}</div>
-          <div>최대 모임 인원 : {page.groupMaxnum}</div>
-          <div>
-            카테고리 :
+          <div className="page-group-name">{page.groupName}</div>
+          <div className="page-icons">
+            <span className="material-icons">groups</span>
+            {page.totalCount}/{page.groupMaxnum}
+          </div>
+          <div className="page-groupCategory">
             {page.groupCategory === 1
               ? " 문화·예술"
               : page.groupCategory === 2
@@ -162,7 +187,8 @@ const PageItem = (props) => {
               : " 푸드·드링크"}
           </div>
           <div>
-            지역 카테고리 :{" "}
+            <span className="material-icons">location_on</span>
+            {/*{" "}*/}
             {page.groupLocal === 1
               ? "서울"
               : page.groupLocal === 2

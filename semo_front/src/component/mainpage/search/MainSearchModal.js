@@ -12,31 +12,31 @@ const MainSearchModal = (props) => {
   const [searchContent, setSearchContent] = useState("");
   const [searchResult, setSearchResult] = useState({});
   const navigate = useNavigate();
-
-  const search = () => {
+  const modalState = props.modalState;
+  const setModalState = props.setModalState;
+  //console.log(modalState);
+  const Search = (e) => {
     const groupName = { groupName: searchContent };
     console.log(groupName);
 
-    //useEffect(() => {
     axios
       .post("/page/search", groupName)
       .then((res) => {
         console.log(res.data);
-        //setSearchResult(res.data);
-        //console.log(searchResult);
+        setModalState(false);
+        e.stopPropagation();
+
         navigate("/searchresult", {
-          state: { searchResult: res.data },
+          state: { searchResult: res.data, searchKeyword: searchContent },
         });
-        {
-          /*<Modal onRequestClose={() => props.setModalState(false)}></Modal>;
-          검색 페이지 넘어갈때 모달창 닫히도록 해야함*/
+        if (setSearchContent != null) {
+          setSearchContent("");
         }
       })
       .catch((res) => {
         console.log(res.data);
         console.log(res.response.status);
       });
-    //}, []);
   };
 
   return (
@@ -70,7 +70,7 @@ const MainSearchModal = (props) => {
               placeholder="관심사 , 지역명을 검색해보세요"
             />
             <div>
-              <span className="material-icons" onClick={search}>
+              <span className="material-icons" onClick={Search}>
                 search
               </span>
             </div>

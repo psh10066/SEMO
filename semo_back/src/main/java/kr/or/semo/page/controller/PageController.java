@@ -25,7 +25,9 @@ public class PageController {
 		System.out.println("reqPage는 "+reqPage);
 		System.out.println("categoryLocal은 "+categoryLocal);
 		System.out.println("categoryValue는 "+categoryValue);
+		//System.out.println("groupNo는 "+groupNo);
 		Map map = pageService.pageList(reqPage,categoryLocal,categoryValue);
+		//System.out.println("map은 "+map);
 		return map;
 	}
 	
