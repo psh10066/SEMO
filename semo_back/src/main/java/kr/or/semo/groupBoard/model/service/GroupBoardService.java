@@ -98,6 +98,13 @@ public class GroupBoardService {
 			return 1;
 		}
 	}
+	public int groupBoardCommentLikeCount(int grBoardCommentNo) {
+		return groupBoardDao.groupBoardCommentLikeCount(grBoardCommentNo);
+	}
+	public int groupBoardCommentLikeState(int grBoardCommentNo, String memberId) {
+		Member member = memberDao.selectOneMember(memberId);
+		return groupBoardDao.groupBoardCommentLikeState(grBoardCommentNo, member.getMemberNo());
+	}
 }
 
 
