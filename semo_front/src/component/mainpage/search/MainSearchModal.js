@@ -15,10 +15,16 @@ const MainSearchModal = (props) => {
   const modalState = props.modalState;
   const setModalState = props.setModalState;
   //console.log(modalState);
-  const Search = (e) => {
-    const groupName = { groupName: searchContent };
-    console.log(groupName);
-
+  const Search = () => {
+    //const searchKeyword = searchContent;
+    //console.log(searchKeyword);
+    //console.log(searchContent);
+    navigate("searchresult", { state: { searchContent: searchContent } });
+    if (setSearchContent != null) {
+      setSearchContent("");
+    }
+    setModalState(false);
+    /*
     axios
       .post("/page/search", groupName)
       .then((res) => {
@@ -37,6 +43,7 @@ const MainSearchModal = (props) => {
         console.log(res.data);
         console.log(res.response.status);
       });
+      */
   };
 
   return (

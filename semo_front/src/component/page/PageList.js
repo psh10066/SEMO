@@ -16,7 +16,7 @@ const PageList = (props) => {
   const [peopleCount, setPeopleCount] = useState(0);
 
   useEffect(() => {
-    console.log(pageList);
+    //console.log(pageList);
     // "/" +   pageList.groupNo
     axios
       .get("/page/list/" + reqPage + "/" + categoryLocal + "/" + categoryValue)
@@ -136,7 +136,7 @@ const PageList = (props) => {
             <PageItem
               key={"page" + index}
               page={page}
-              peopleCount={peopleCount}
+              //peopleCount={peopleCount}
             />
           );
         })}
@@ -146,6 +146,7 @@ const PageList = (props) => {
           reqPage={reqPage}
           setReqPage={setReqPage}
           pageInfo={pageInfo}
+          //setList={setPageList}
         />
       </div>
     </div>
@@ -154,7 +155,7 @@ const PageList = (props) => {
 
 const PageItem = (props) => {
   const page = props.page;
-  const peopleCount = props.peopleCount;
+  //const peopleCount = props.peopleCount;
   console.log(page);
   //console.log(peopleCount);
   const navigate = useNavigate();

@@ -8,7 +8,7 @@ public class Pagination {
 		int end = reqPage*numPerPage;
 		int start = end-numPerPage+1;
 		int totalPage  = (int)Math.ceil(totalCount/(double)numPerPage);
-		System.out.println("totalPage는 "+totalPage);
+		System.out.println("pagination에서 조회 : totalPage는 "+totalPage);
 		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize + 1;
 		PageInfo pi = new PageInfo(start, end, pageNo, pageNaviSize, totalPage);
 		return pi;

@@ -53,6 +53,9 @@ const MainSearch = () => {
   if (location.pathname.includes("/searchresult")) {
     searchStyle = { color: "#220895" };
   }
+  if (location.pathname.includes("/listall")) {
+    searchStyle = { color: "#220895" };
+  }
 
   return (
     <div className="mainSearchBtn">
