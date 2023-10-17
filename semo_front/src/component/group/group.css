@@ -136,7 +136,7 @@ input[type="file"]::file-selector-button {
   display: flex;
 }
 .group-view-tap > div > div {
-  width: calc(100% / 3);
+  width: calc(100% / 2);
 }
 .group-view-tap > div > div > a {
   display: block;

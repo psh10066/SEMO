@@ -13,21 +13,24 @@
   width: 100%;
   margin: 0;
   overflow: hidden;
+  border-radius: 5px;
 }
 .comment-submit-btn {
   width: 12%;
 }
 .comment-submit-btn > button {
   width: 100%;
-  height: 40px;
+  height: 55px;
   font-size: 14px;
   padding: 10px;
   border-radius: 3px;
 }
 .comment-wrap {
   width: 100%;
-  padding: 5px;
+  padding: 10px 5px;
   box-sizing: border-box;
+  background-color: #eee;
+  border-radius: 10px;
 }
 .comment-top {
   width: 100%;
@@ -45,10 +48,13 @@
 }
 .comment-mid {
   padding: 5px 20px;
+  width: 80%;
+  margin: auto;
 }
 .recomment-input-all-wrap {
   width: 95%;
   padding-left: 5%;
+  margin: 15px;
 }
 .reCommentBox-wrap {
   padding-left: 5%;
@@ -83,4 +89,9 @@
   border: 1px solid #ccc;
   padding: 8px;
   box-sizing: border-box;
+  border-radius: 5px;
+}
+.board-view-bottom {
+  margin: auto;
+  width: 80%;
 }

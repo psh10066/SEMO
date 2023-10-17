@@ -121,6 +121,7 @@ header {
   font-weight: 600;
   display: none;
 }
+
 /*로그인 버튼*/
 .header-leftside button {
   float: right;

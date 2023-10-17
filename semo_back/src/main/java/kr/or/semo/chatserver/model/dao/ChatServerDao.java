@@ -14,6 +14,8 @@ public interface ChatServerDao {
 
 	int chatAccessTimeInsert(LastAccessChatTime lastAccessChatTime);
 
+	List chatPreviousMessage(int roomId);
+
 
 
 }

@@ -25,5 +25,9 @@ public class ChatServerService {
 		return chatServerDao.chatAccessTimeInsert(lastAccessChatTime);
 	}
 
+	public List chatPreviousMessage(int roomId) {
+		return chatServerDao.chatPreviousMessage(roomId);
+	}
+
 
 }
