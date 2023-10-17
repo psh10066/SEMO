@@ -195,12 +195,22 @@ public class MemberController {
 	public Map getFollowing(@PathVariable int memberNo) {
 		return memberService.getFollowing(memberNo);
 	}
+
+	//팔로워 삭제하기
+	@PostMapping(value="/deleteFollower")
+	public int deleteFollower(@RequestBody Member m, @RequestAttribute String memberId) {
+		int memberNo = m.getMemberNo();
+		return memberService.deleteMyFollwer(memberNo, memberId);
+	}
+
+
 	
 	@PostMapping(value="/mailCheck")
 	public String mailCheck(@RequestBody Member m) {
 		String memberMail = m.getMemberMail();
 		return memberService.mailCheck(memberMail);	
 	}
+
 	
 	@PostMapping(value="/findPw")
 	public int pwChk(@RequestBody Member member) {		
@@ -215,4 +225,5 @@ public class MemberController {
 	
 	
 	
+
 }

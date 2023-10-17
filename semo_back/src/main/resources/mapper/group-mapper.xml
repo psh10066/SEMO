@@ -98,10 +98,10 @@
 	</insert>
 	
 	<select id="peopleCount" resultType="int">
-		select count(*) from gr_join where group_no=#{groupNo}
+		select count(*) from gr_join where group_no=#{groupNo} and GR_JOIN_TYPE in (1,2)
 	</select>
 	<select id="peopleList" resultType="member">
-		select member_no,member_img from gr_join join member using (member_no) where group_no=#{groupNo} order by gr_join desc
+		select member_no,member_img from gr_join join member using (member_no) where group_no=#{groupNo} and GR_JOIN_TYPE in (1,2) order by gr_join desc
 	</select>
 	
 	
