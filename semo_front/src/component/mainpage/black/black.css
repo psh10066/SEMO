@@ -1,4 +1,40 @@
-.mainpart2 {
+.mask-container {
+  position: relative;
+  background-color: black;
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
+}
+
+.masked-text {
+  font-size: 36px;
+  position: relative;
+  z-index: 0;
+  color: white;
+}
+
+.masked-text > .overlay {
+  color: black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.masked-text > .overlay.hovered {
+  visibility: hidden;
+}
+
+.mask-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background-color: white;
+  transform: translate(-50%, -50%) translate(var(--maskX), var(--maskY));
+  pointer-events: none;
+  z-index: 2;
 }
