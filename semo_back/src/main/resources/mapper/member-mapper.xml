@@ -82,5 +82,4 @@
   		select member_id from member where member_mail=#{memberMail} 
   	</select>
   	
-  	
 </mapper>

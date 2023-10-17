@@ -300,6 +300,7 @@ const CommentItem = (props) => {
         )}
       </div>
       <div className="comment-bottom">
+        <div className="comment-like"></div>
         {isLogin ? (
           member && member.memberNo === comment.feedCommentWriter ? (
             modifyState ? (
