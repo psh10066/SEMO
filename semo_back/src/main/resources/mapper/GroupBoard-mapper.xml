@@ -62,4 +62,15 @@
 		join member on (gr_board_comment_writer = member_no)
 		where gr_board_no=#{grBoardNo} and gr_board_comment_no2 is not null order by 1 desc
 	</select>
+	<select id="selectOneGroupBoardCommentLike" resultType="groupBoardCommentLike">
+		select * from gr_board_comment_like
+		where gr_board_comment_no = #{grBoardCommentNo} and member_no = #{memberNo}
+	</select>
+	<insert id="insertGroupBoardCommentLike">
+		insert into gr_board_comment_like values(#{grBoardCommentNo}, #{memberNo})
+	</insert>
+	<delete id="deleteGroupBoardCommentLike">
+		delete from gr_board_comment_like
+		where gr_board_comment_no = #{grBoardCommentNo} and member_no = #{memberNo}
+	</delete>
 </mapper>

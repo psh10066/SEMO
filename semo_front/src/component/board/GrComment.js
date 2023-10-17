@@ -5,6 +5,8 @@ import Swal from "sweetalert2";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import GrReComment from "./GrReComment";
+import GrBoardCommentLike from "./GrCommentLike";
+import { useLocation } from "react-router-dom";
 
 const grBoardCommentRegist = (
   grBoardNo,
@@ -139,6 +141,7 @@ const CommentItem = (props) => {
   );
   const [modifyState, setModifyState] = useState(true); //수정 눌렀을 때 확인
   const [recommentState, setRecommentState] = useState(true); //답글 눌렀을 때 확인
+  const [groupBoardCommentLike, setGroupBoardCommentLike] = useState(false); //댓글 좋아요
   //댓글 textarea 크기 조절
   const textRef = useRef();
   const resizeHeight = () => {
@@ -298,6 +301,13 @@ const CommentItem = (props) => {
         )}
       </div>
       <div className="comment-bottom">
+        <div className="comment-like">
+          <GrBoardCommentLike
+            grBoardCommentNo={grBoardCommentNo}
+            groupBoardCommentLike={groupBoardCommentLike}
+            setGroupBoardCommentLike={setGroupBoardCommentLike}
+          />
+        </div>
         {isLogin ? (
           member && member.memberNo === comment.grBoardCommentWriter ? (
             modifyState ? (
@@ -325,7 +335,10 @@ const CommentItem = (props) => {
             )
           ) : (
             <div className="comment-bottom-right">
-              <ReCommentWrite />
+              <ReCommentWrite
+                recommentState={recommentState}
+                setRecommentState={setRecommentState}
+              />
             </div>
           )
         ) : (
