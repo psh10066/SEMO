@@ -261,7 +261,7 @@ const GroupView = (props) => {
           console.log(error);
         });
     }
-  }, [groupNo]);
+  }, [meetingList]);
 
   return (
     <div className="group-view-wrap">
@@ -321,6 +321,7 @@ const GroupView = (props) => {
             isLogin={isLogin}
             isJoin={isJoin}
             member={member}
+            // memberNo={member.memberNo}
             groupLevel={groupLevel}
           />
           <div className="group-view-category">

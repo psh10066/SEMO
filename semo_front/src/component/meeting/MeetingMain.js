@@ -11,7 +11,10 @@ const MeetingMain = (props) => {
         path="create"
         element={<MeetingCreate isLogin={isLogin} setIsLogin={setIsLogin} />}
       />
-      <Route path="view" element={<MeetingView />} />
+      <Route
+        path="view"
+        element={<MeetingView isLogin={isLogin} setIsLogin={setIsLogin} />}
+      />
     </Routes>
   );
 };
