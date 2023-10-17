@@ -1,0 +1,16 @@
+.lounge-title > h2 {
+  color: #8bb4ff;
+}
+.lounge-title {
+  text-align: center;
+  font-size: 20px;
+  padding: 30px 0px;
+}
+.lounge-all-wrap {
+  width: 1200px;
+  margin: 50px auto;
+}
+.lounge-explain {
+  height: 100px;
+  line-height: 100px;
+}

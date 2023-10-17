@@ -53,7 +53,7 @@ const Header = (props) => {
   if (location.pathname.includes("/searchresult")) {
     headerStyle = { color: "#220895" };
   }
-  if (location.pathname.includes("/listall")) {
+  if (location.pathname.includes("/lounge")) {
     headerStyle = { color: "#220895" };
   }
 
@@ -152,7 +152,7 @@ const Navi = (props) => {
   if (location.pathname.includes("/searchresult")) {
     naviStyle = { color: "#220895" };
   }
-  if (location.pathname.includes("/listall")) {
+  if (location.pathname.includes("/lounge")) {
     naviStyle = { color: "#220895" };
   }
 
@@ -165,7 +165,7 @@ const Navi = (props) => {
           </Link>
         </li>
         <li>
-          <Link to="/listall" style={naviStyle}>
+          <Link to="/lounge" style={naviStyle}>
             라운지
           </Link>
         </li>

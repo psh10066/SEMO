@@ -53,7 +53,7 @@ const MainSearch = () => {
   if (location.pathname.includes("/searchresult")) {
     searchStyle = { color: "#220895" };
   }
-  if (location.pathname.includes("/listall")) {
+  if (location.pathname.includes("/lounge")) {
     searchStyle = { color: "#220895" };
   }
 
