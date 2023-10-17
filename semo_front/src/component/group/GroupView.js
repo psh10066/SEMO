@@ -246,7 +246,6 @@ const GroupView = (props) => {
       text: "사진첩",
       active: false,
     },
-    { url: "/", text: "모임 맴버", active: false },
   ]);
 
   useEffect(() => {
