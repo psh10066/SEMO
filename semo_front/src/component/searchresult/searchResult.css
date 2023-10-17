@@ -46,14 +46,14 @@
 .searchresult-item-wrap {
   height: 500px;
   float: left;
-  width: calc(100% / 3);
+  width: calc(100% / 4);
   border: 1px solid black;
   cursor: pointer;
   box-sizing: border-box;
   padding: 30px;
 }
 .searchresult-item-img {
-  width: 330px;
+  width: 200px;
   height: 300px;
   box-sizing: border-box;
   text-align: center;
@@ -78,4 +78,62 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/*검색페이지 css*/
+.searchresult-category-wrap {
+  margin: 0 auto;
+  overflow: hidden;
+  display: block;
+  margin: 0 auto;
+  width: 1200px;
+}
+.searchresult-category {
+  /*display: block;*/
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+  box-sizing: border-box;
+  width: calc(88% / 7);
+  height: 45px;
+  font-size: 20px;
+  line-height: 43px;
+  text-align: center;
+  /*background-color: aquamarine;*/
+}
+.searchresult-category-wrap > ul > li > div {
+  border: 1px solid #ccc;
+  color: black;
+  /*background-color: #ccc;*/
+  border-radius: 10px;
+}
+.searchresult-category-wrap > ul > li > div.searchCategory-active {
+  border: 1px solid #ccc;
+  color: black;
+  background-color: #ccc;
+  border-radius: 10px;
+}
+.searchresult-category-wrap > ul {
+  list-style-type: none;
+  box-sizing: border-box;
+  padding-top: 30px;
+  margin: 0;
+}
+.searchresult-icons > span {
+  font-size: 18px;
+  padding-right: 5px;
+  line-height: 26px;
+}
+.searchresult-group-name {
+  font-size: 24px;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 250px;
+}
+.searchresult-groupCategory {
+  color: #220895;
+  font-size: 16px;
+  font-weight: bold;
 }
