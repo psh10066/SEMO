@@ -129,5 +129,11 @@ public class GroupController {
 		return groupService.groupPeopleList(groupNo);
 	}
 	
+	//그룹 해산
+	@GetMapping(value="/deleteGroup/{groupNo}")
+	public int deleteGroup(@PathVariable int groupNo) {
+		return groupService.deleteGroup(groupNo);
+	}
+	
 	
 }

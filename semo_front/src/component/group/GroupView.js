@@ -31,7 +31,6 @@ const GroupView = (props) => {
         },
       })
       .then((res) => {
-        console.log(res.data);
         setGroup(res.data);
         setGroupSave(res.data.groupSave);
       })
@@ -76,7 +75,6 @@ const GroupView = (props) => {
                 }
               )
               .then((res) => {
-                // console.log(res.data);
                 setGroupLevel(res.data);
               });
             axios
@@ -86,7 +84,6 @@ const GroupView = (props) => {
                 },
               })
               .then((res) => {
-                // console.log(res.data);
                 setJoinNum(res.data);
               });
           }
@@ -123,39 +120,104 @@ const GroupView = (props) => {
         console.log(res);
       });
   };
-
+  const cancelGroup = () => {
+    const token = window.localStorage.getItem("token");
+    Swal.fire({
+      icon: "warning",
+      text: "가입을 취소하시겠습니까?",
+      showCancelButton: true,
+      confirmButtonText: "가입취소",
+      cancelButtonText: "취소",
+    }).then((res) => {
+      if (res.isConfirmed) {
+        axios
+          .post(
+            "/group/groupExit",
+            {
+              groupNo,
+            },
+            {
+              headers: {
+                Authorization: "Bearer " + token,
+              },
+            }
+          )
+          .then((res) => {
+            Swal.fire({
+              icon: "success",
+              text: "가입취소완료!",
+            });
+            setChangeLevel(!changeLevel);
+          })
+          .catch((res) => {
+            console.log(res);
+          });
+      }
+    });
+  };
+  const deleteGroup = () => {
+    const token = window.localStorage.getItem("token");
+    Swal.fire({
+      icon: "warning",
+      text: "모임을 해체하시겠습니까?",
+      showCancelButton: true,
+      confirmButtonText: "해산하기",
+      cancelButtonText: "취소",
+    }).then((res) => {
+      if (res.isConfirmed) {
+        axios.get("/group/deleteGroup/" + group.groupNo).then((res) => {
+          if (res.data === 1) {
+            Swal.fire({
+              icon: "success",
+              title: "모임이 사라졌습니다 ㅠㅠ",
+            });
+            navigate("/page");
+          }
+        });
+      }
+    });
+  };
   const groupJoin = () => {
     const token = window.localStorage.getItem("token");
     const groupNo = group.groupNo;
-    if (joinNum === 3) {
-      Swal.fire({
-        icon: "error",
-        text: "최대 모임 가입 가능 수는 3개입니다",
-      });
-    } else {
-      axios
-        .post(
-          "/group/groupJoin",
-          {
-            groupNo,
-          },
-          {
-            headers: {
-              Authorization: "Bearer " + token,
-            },
-          }
-        )
-        .then((res) => {
-          Swal.fire({
-            icon: "success",
-            text: "가입완료!",
-          });
-          setChangeLevel(!changeLevel);
-        })
-        .catch((error) => {
-          console.log(error);
+    Swal.fire({
+      icon: "warning",
+      text: "모임에 가입하시겠습니까?",
+      showCancelButton: true,
+      confirmButtonText: "가입하기",
+      cancelButtonText: "취소",
+    }).then((res) => {
+      if (joinNum === 3) {
+        Swal.fire({
+          icon: "error",
+          text: "최대 모임 가입 가능 수는 3개입니다",
         });
-    }
+      } else {
+        axios
+          .post(
+            "/group/groupJoin",
+            {
+              groupNo,
+            },
+            {
+              headers: {
+                Authorization: "Bearer " + token,
+              },
+            }
+          )
+          .then((res) => {
+            Swal.fire({
+              icon: "success",
+              text: "가입완료!",
+            });
+            setChangeLevel(!changeLevel);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    });
+    console.log(groupLevel);
   };
 
   const [menus, setMenus] = useState([
@@ -245,11 +307,11 @@ const GroupView = (props) => {
           </div>
         ) : groupLevel === 3 ? (
           <div className="group-join-btn">
-            <Button2 text="가입대기" />
+            <Button2 text="가입대기" clickEvent={cancelGroup} />
           </div>
         ) : groupLevel === 1 ? (
           <div className="group-join-btn">
-            <Button2 text="모임해산" />
+            <Button2 text="모임해산" clickEvent={deleteGroup} />
           </div>
         ) : (
           " "
