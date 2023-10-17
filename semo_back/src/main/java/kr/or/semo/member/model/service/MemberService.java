@@ -143,4 +143,10 @@ public class MemberService {
 		return memberDao.deleteMyFollower(f);
 	}
 
+	public String mailCheck(String memberMail) {
+		String m = memberDao.mailCheck(memberMail);
+		System.out.println(m);
+		return m;
+	}
+
 }

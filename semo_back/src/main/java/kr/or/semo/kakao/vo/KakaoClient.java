@@ -23,12 +23,10 @@ public class KakaoClient implements OauthClient{
 	
 	@Value("${spring.security.oauth2.client.provider.kakao.token-uri}")
 	private String token_url;
-	
 	@Value("${spring.security.oauth2.client.provider.kakao.user-info-uri}")
 	private String user_url;
 	@Value("${spring.security.oauth2.client.registration.kakao.client-id}")
 	private String client_id;
-	
 	@Value("${spring.security.oauth2.client.registration.kakao.redirect-uri}")
 	private String redirect_uri;
 	
@@ -36,7 +34,7 @@ public class KakaoClient implements OauthClient{
 	public OauthProvider oauthProvider() {
 		return OauthProvider.KAKAO;
 	}
-
+	
 	@Override
 	public String getOauthLoginToken(OauthParams oauthParams) {
 		String url = token_url;

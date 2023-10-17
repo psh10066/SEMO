@@ -46,6 +46,7 @@ public interface MemberDao {
 
 	int deleteMyFollower(Follow f);
 
+	String mailCheck(String memberMail);
 
 
 }
