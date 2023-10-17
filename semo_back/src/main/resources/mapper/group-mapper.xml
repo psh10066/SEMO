@@ -78,12 +78,13 @@
     )
      ORDER BY g.group_no DESC
 	</select>
-	
+	<!-- 채팅방 모든 멤버 불러오기 -->
 	<select id="groupAllMember" resultType="Member">
 		SELECT m.member_name, gj.GR_JOIN_TYPE
 		FROM gr_join gj
 		JOIN member m ON gj.member_no = m.member_no
 		WHERE gj.group_no = #{groupNo}
+		order by gj.GR_JOIN_TYPE
 	</select>
 	
 	<select id="selectOneGroupSave" resultType="GroupSave">

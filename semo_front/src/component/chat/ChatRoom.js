@@ -5,6 +5,7 @@ import axios from "axios";
 import ChatToggle from "./ChatToggle";
 import ChatPrevious from "./ChatPrevious";
 import ChatInput from "./ChatInput";
+import ChatNewNotice from "./chatNewNotice";
 
 const ChatRoom = (props) => {
   const { roomId, senderName, memberNo, groupName } = props;
@@ -151,6 +152,10 @@ const ChatRoom = (props) => {
     setShowPreviousChat(true); // showPreviousChat 상태를 true로 변경
   };
   //////////////////////////
+  //초 빼고 출력
+  const formatDate = (timeString) => {
+    return timeString.substr(0, 16);
+  };
 
   return (
     <>
@@ -169,6 +174,7 @@ const ChatRoom = (props) => {
           ref={chatSpanRef}
         >
           <strong>지난대화불러오기</strong>
+          <ChatNewNotice roomId={roomId} memberNo={memberNo} />
         </span>
         {/* showPreviousChat 값이 true일 때만 ChatPrevious 컴포넌트 렌더링 */}
         {showPreviousChat && (
@@ -184,9 +190,13 @@ const ChatRoom = (props) => {
               msg.memberNo === memberNo ? "message-left" : "message-right"
             }
           >
-            <div>{msg.senderName}</div>
-            <div>{msg.message}</div>
-            <span>({msg.chatTime})</span>
+            <div className="chat-message-name">
+              <strong>{msg.senderName}</strong>
+            </div>
+            <div className="chat-message-box">{msg.message}</div>
+            <span className="chat-message-time">
+              {formatDate(msg.chatTime)}
+            </span>
           </div>
         ))}
       </div>

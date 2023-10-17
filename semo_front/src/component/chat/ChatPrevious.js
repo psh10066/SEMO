@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const ChatPrevious = (props) => {
-  const roomId = props.roomId; //채팅방 넘버 불러오기
   const navigate = useNavigate();
+  const roomId = props.roomId; //채팅방 넘버 불러오기
   const memberNo = props.memberNo; //로그인한 회원번호
 
   //채팅 메세지 불러오기

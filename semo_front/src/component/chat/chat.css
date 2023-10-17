@@ -168,7 +168,11 @@
   justify-content: center;
   align-items: center;
 }
-
+.chatAlarm {
+  color: yellow;
+  font-weight: bold;
+  margin-left: 3px;
+}
 /*채팅 모달*/
 .chat-modal-wrap {
   position: relative;

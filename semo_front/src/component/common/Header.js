@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import MainSearch from "../mainpage/search/MainSearch";
+import ChatNewNotice from "../chat/chatNewNotice";
 
 const Header = (props) => {
   const isLogin = props.isLogin;
@@ -84,14 +85,8 @@ const Header = (props) => {
               ) : null}
             </div>
             <div className="chatNew">
-              {isLogin ? (
-                <Link to="/chat" title="채팅">
-                  <span className="chatNew" style={headerStyle}>
-                    N
-                  </span>
-                  {/* 새로운 채팅 있을때, N 뜨게하기*/}
-                </Link>
-              ) : null}
+              {/* 새로운 채팅 있을때, N 뜨게하기*/}
+              {isLogin ? <Link to="/chat" title="채팅"></Link> : null}
             </div>
           </div>
           <MainSearch />
