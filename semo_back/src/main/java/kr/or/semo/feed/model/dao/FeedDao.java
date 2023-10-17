@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import kr.or.semo.feed.model.vo.Feed;
 import kr.or.semo.feed.model.vo.FeedComment;
+import kr.or.semo.feed.model.vo.FeedCommentLike;
 
 @Mapper
 public interface FeedDao {
@@ -45,6 +46,16 @@ public interface FeedDao {
 	int feedCount(int feedWriter);
 
 	List selectGroupList(int memberNo);
+
+	FeedCommentLike selectOneCommentLike(int feedCommentNo, int memberNo);
+
+	int deleteCommentLike(int feedCommentNo, int memberNo);
+
+	int insertCommentLike(int feedCommentNo, int memberNo);
+
+	int commentLikeCount(int feedCommentNo);
+
+	int commentLikeState(int feedCommentNo, int memberNo);
 
 
 

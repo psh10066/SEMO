@@ -76,14 +76,15 @@
         JOIN gr_join gj ON cr.group_no = gj.group_no
         WHERE gj.member_no = #{memberNo}
     )
+     ORDER BY g.group_no DESC
 	</select>
 	
-<select id="groupAllMember" resultType="Member">
-	SELECT m.member_name, gj.GR_JOIN_TYPE
-	FROM gr_join gj
-	JOIN member m ON gj.member_no = m.member_no
-	WHERE gj.group_no = #{groupNo}
-</select>
+	<select id="groupAllMember" resultType="Member">
+		SELECT m.member_name, gj.GR_JOIN_TYPE
+		FROM gr_join gj
+		JOIN member m ON gj.member_no = m.member_no
+		WHERE gj.group_no = #{groupNo}
+	</select>
 	
 	<select id="selectOneGroupSave" resultType="GroupSave">
 		select * from group_save
@@ -98,12 +99,15 @@
 	</insert>
 	
 	<select id="peopleCount" resultType="int">
-		select count(*) from gr_join where group_no=#{groupNo}
+		select count(*) from gr_join where group_no=#{groupNo} and GR_JOIN_TYPE in (1,2)
 	</select>
 	<select id="peopleList" resultType="member">
-		select member_no,member_img from gr_join join member using (member_no) where group_no=#{groupNo} order by gr_join desc
+		select member_no,member_img from gr_join join member using (member_no) where group_no=#{groupNo} and GR_JOIN_TYPE in (1,2) order by gr_join desc
 	</select>
 	
+	<delete id="deleteGroup">
+		delete from group_tbl where group_no=#{groupNo}
+	</delete>
 	
 	
 	

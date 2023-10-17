@@ -68,6 +68,15 @@ const Header = (props) => {
         <Navi isLogin={isLogin} />
         <div className="header-leftside">
           <div className="chatTotal">
+            <div className="chat groupCreate">
+              {isLogin ? (
+                <Link to="/group/create" title="모임 만들기">
+                  <span class="material-icons" style={headerStyle}>
+                    group_add
+                  </span>
+                </Link>
+              ) : null}
+            </div>
             <div className="chat">
               {isLogin ? (
                 <Link to="/chat" title="채팅">

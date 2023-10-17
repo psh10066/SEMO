@@ -13,21 +13,24 @@
   width: 100%;
   margin: 0;
   overflow: hidden;
+  border-radius: 5px;
 }
 .comment-submit-btn {
   width: 12%;
 }
 .comment-submit-btn > button {
   width: 100%;
-  height: 40px;
+  height: 55px;
   font-size: 14px;
   padding: 10px;
   border-radius: 3px;
 }
 .comment-wrap {
   width: 100%;
-  padding: 5px;
+  padding: 10px 5px;
   box-sizing: border-box;
+  background-color: #eee;
+  border-radius: 10px;
 }
 .comment-top {
   width: 100%;
@@ -45,12 +48,50 @@
 }
 .comment-mid {
   padding: 5px 20px;
+  width: 80%;
+  margin: auto;
 }
 .recomment-input-all-wrap {
   width: 95%;
   padding-left: 5%;
+  margin: 15px;
 }
 .reCommentBox-wrap {
   padding-left: 5%;
   width: 95%;
+}
+.comment-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.comment-like {
+  display: flex;
+  /* border: 1px solid #ccc;
+  padding: 3px 10px;
+  border-radius: 5px; */
+}
+.comment-like > span {
+  font-size: 19px;
+}
+.comment-like > .commentLikeCount {
+  padding-left: 5px;
+  font-size: 13px;
+}
+.commentItem-content {
+  white-space: pre-line;
+  overflow-wrap: break-word;
+}
+.comment-input-form {
+  resize: none;
+  width: 100%;
+  outline: none;
+  border: 1px solid #ccc;
+  padding: 8px;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+.board-view-bottom {
+  margin: auto;
+  width: 80%;
 }

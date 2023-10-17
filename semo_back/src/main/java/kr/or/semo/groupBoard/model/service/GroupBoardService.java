@@ -27,7 +27,7 @@ public class GroupBoardService {
 	
 	public Map groupBoardList(int groupNo, int reqPage) {
 		//게시물 조회, 페이징에 필요한 데이터를 취합
-		int numPerPage = 10;	//한페이지당 게시물 수
+		int numPerPage = 8;	//한페이지당 게시물 수
 		int pageNaviSize = 5; 	//페이지 네비게이션 길이
 		int totalCount = groupBoardDao.totalCount(); // 전체게시물 수
 		//페이징조회 및 페이지네비 제작에 필요한 데이터를 객체로 받아옴
@@ -86,31 +86,25 @@ public class GroupBoardService {
 	public List groupBoardReCommentList(int grBoardNo) {
 		return groupBoardDao.groupBoardReCommentList(grBoardNo);
 	}
-//	@Transactional
-//	public int groupBoardCommentLike(int grBoardCommentNo, String memberId) {
-//		Member member = memberDao.selectOneMember(memberId);
-//		GroupBoardCommentLike groupBoardCommentLike = groupBoardDao.selectOneGroupBoardCommentLike(grBoardCommentNo, member.getMemberNo());
-//		if(groupBoardCommentLike != null) {
-//			groupBoardDao.deleteGroupBoardCommentLike(grBoardCommentNo, member.getMemberNo());
-//			return 0;
-//		}else { 
-//			groupBoardDao.insertGroupBoardCommentLike(grBoardCommentNo, member.getMemberNo());
-//			return 1;
-//		}
-//	}
 	@Transactional
-	public int insertGroupBoardCommentLike(int grBoardCommentNo, String memberId) {
+	public int groupBoardCommentLike(int grBoardCommentNo, String memberId) {
 		Member member = memberDao.selectOneMember(memberId);
-		int memberNo = member.getMemberNo();
-		int result = groupBoardDao.insertGroupBoardCommentLike(grBoardCommentNo, memberNo);
-		return result;
+		GroupBoardCommentLike groupBoardCommentLike = groupBoardDao.selectOneGroupBoardCommentLike(grBoardCommentNo, member.getMemberNo());
+		if(groupBoardCommentLike != null) {
+			groupBoardDao.deleteGroupBoardCommentLike(grBoardCommentNo, member.getMemberNo());
+			return 0;
+		}else { 
+			groupBoardDao.insertGroupBoardCommentLike(grBoardCommentNo, member.getMemberNo());
+			return 1;
+		}
 	}
-	@Transactional
-	public int deleteGroupBoardCommentLike(int grBoardCommentNo, String memberId) {
+	public int groupBoardCommentLikeCount(int grBoardCommentNo) {
+		return groupBoardDao.groupBoardCommentLikeCount(grBoardCommentNo);
+	}
+	public int groupBoardCommentLikeState(int grBoardCommentNo, String memberId) {
 		Member member = memberDao.selectOneMember(memberId);
-		int memberNo = member.getMemberNo();
-		int result = groupBoardDao.deleteGroupBoardCommentLike(grBoardCommentNo, memberNo);
-		return result;
+		return groupBoardDao.groupBoardCommentLikeState(grBoardCommentNo, member.getMemberNo());
 	}
 }
+
 

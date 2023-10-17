@@ -38,6 +38,9 @@ public interface GroupBoardDao {
 
 	int deleteGroupBoardCommentLike(int grBoardCommentNo, int memberNo);
 
-	
+	GroupBoardCommentLike selectOneGroupBoardCommentLike(int grBoardCommentNo, int memberNo);
 
+	int groupBoardCommentLikeCount(int grBoardCommentNo);
+
+	int groupBoardCommentLikeState(int grBoardCommentNo, int memberNo);
 }

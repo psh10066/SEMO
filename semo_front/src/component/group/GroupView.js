@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import MeetingView from "../meeting/MeetingView";
 import GroupSave from "./GroupSave";
+import { Avatar, AvatarGroup } from "@mui/material";
 
 const GroupView = (props) => {
   const isLogin = props.isLogin;
@@ -21,9 +22,22 @@ const GroupView = (props) => {
   const navigate = useNavigate();
   const [joinNum, setJoinNum] = useState(0);
   const [groupSave, setGroupSave] = useState(false);
+  const [peopleCount, setPeopleCount] = useState(0);
+  const [peopleList, setPeopleList] = useState([]);
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
+    axios
+      .get("/group/groupPeopleList/" + groupNo)
+      .then((res) => {
+        console.log(res.data);
+        setPeopleList(res.data.peopleList);
+        setPeopleCount(res.data.peopleCount);
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+
     axios
       .get("/group/view/" + groupNo, {
         headers: {
@@ -31,7 +45,6 @@ const GroupView = (props) => {
         },
       })
       .then((res) => {
-        console.log(res.data);
         setGroup(res.data);
         setGroupSave(res.data.groupSave);
       })
@@ -76,7 +89,6 @@ const GroupView = (props) => {
                 }
               )
               .then((res) => {
-                // console.log(res.data);
                 setGroupLevel(res.data);
               });
             axios
@@ -86,7 +98,6 @@ const GroupView = (props) => {
                 },
               })
               .then((res) => {
-                // console.log(res.data);
                 setJoinNum(res.data);
               });
           }
@@ -96,7 +107,9 @@ const GroupView = (props) => {
         });
     }
   }, [changeLevel, isLogin]);
-
+  const clickAvatarHandler = (memberNo) => {
+    navigate("/feed/profile/", { state: { memberNo: memberNo } });
+  };
   const groupExit = () => {
     const token = window.localStorage.getItem("token");
     const groupNo = group.groupNo;
@@ -123,39 +136,105 @@ const GroupView = (props) => {
         console.log(res);
       });
   };
+  const cancelGroup = () => {
+    const token = window.localStorage.getItem("token");
+    Swal.fire({
+      icon: "warning",
+      text: "가입을 취소하시겠습니까?",
+      showCancelButton: true,
+      confirmButtonText: "가입취소",
+      cancelButtonText: "취소",
+    }).then((res) => {
+      if (res.isConfirmed) {
+        axios
+          .post(
+            "/group/groupExit",
+            {
+              groupNo,
+            },
+            {
+              headers: {
+                Authorization: "Bearer " + token,
+              },
+            }
+          )
+          .then((res) => {
+            Swal.fire({
+              icon: "success",
+              text: "가입취소완료!",
+            });
+            setChangeLevel(!changeLevel);
+          })
+          .catch((res) => {
+            console.log(res);
+          });
+      }
+    });
+  };
+  const deleteGroup = () => {
+    const token = window.localStorage.getItem("token");
+    Swal.fire({
+      icon: "warning",
+      text: "모임을 해체하시겠습니까?",
+      showCancelButton: true,
+      confirmButtonText: "해산하기",
+      cancelButtonText: "취소",
+    }).then((res) => {
+      if (res.isConfirmed) {
+        axios.get("/group/deleteGroup/" + group.groupNo).then((res) => {
+          if (res.data === 1) {
+            Swal.fire({
+              icon: "success",
+              title: "모임이 사라졌습니다 ㅠㅠ",
+            });
+            navigate("/page");
+          }
+        });
+      }
+    });
+  };
 
   const groupJoin = () => {
     const token = window.localStorage.getItem("token");
     const groupNo = group.groupNo;
-    if (joinNum === 3) {
-      Swal.fire({
-        icon: "error",
-        text: "최대 모임 가입 가능 수는 3개입니다",
-      });
-    } else {
-      axios
-        .post(
-          "/group/groupJoin",
-          {
-            groupNo,
-          },
-          {
-            headers: {
-              Authorization: "Bearer " + token,
-            },
-          }
-        )
-        .then((res) => {
-          Swal.fire({
-            icon: "success",
-            text: "가입완료!",
-          });
-          setChangeLevel(!changeLevel);
-        })
-        .catch((error) => {
-          console.log(error);
+    Swal.fire({
+      icon: "warning",
+      text: "모임에 가입하시겠습니까?",
+      showCancelButton: true,
+      confirmButtonText: "가입하기",
+      cancelButtonText: "취소",
+    }).then((res) => {
+      if (joinNum === 3) {
+        Swal.fire({
+          icon: "error",
+          text: "최대 모임 가입 가능 수는 3개입니다",
         });
-    }
+      } else {
+        axios
+          .post(
+            "/group/groupJoin",
+            {
+              groupNo,
+            },
+            {
+              headers: {
+                Authorization: "Bearer " + token,
+              },
+            }
+          )
+          .then((res) => {
+            Swal.fire({
+              icon: "success",
+              text: "가입완료!",
+            });
+            setChangeLevel(!changeLevel);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    });
+    console.log(groupLevel);
   };
 
   const [menus, setMenus] = useState([
@@ -169,7 +248,6 @@ const GroupView = (props) => {
       text: "사진첩",
       active: false,
     },
-    { url: "/", text: "모임 맴버", active: false },
   ]);
 
   useEffect(() => {
@@ -183,12 +261,12 @@ const GroupView = (props) => {
           console.log(error);
         });
     }
-  }, [groupNo]);
+  }, [meetingList]);
 
   return (
     <div className="group-view-wrap">
       <div>
-        <MySideMenu menus={menus} setMenus={setMenus} />
+        <MySideMenu menus={menus} setMenus={setMenus} groupLevel={groupLevel} />
       </div>
       <div className="group-view-div-content">
         <div>
@@ -209,7 +287,34 @@ const GroupView = (props) => {
             className="group-view-content"
             dangerouslySetInnerHTML={{ __html: group.groupContent }}
           ></div>
-          <div className="group-view-member"></div>
+          <div className="group-view-member">
+            <div className="feed-like-person-wrap">
+              <AvatarGroup max={7} total={peopleCount}>
+                {peopleList.map((people, index) => {
+                  let memberNo = people.memberNo;
+                  return people.peopelImg === null ? (
+                    <Avatar
+                      onClick={() => {
+                        clickAvatarHandler(memberNo);
+                      }}
+                      sx={{ width: 44, height: 44 }}
+                      alt="논"
+                      src="/image/person.png"
+                    ></Avatar>
+                  ) : (
+                    <Avatar
+                      onClick={() => {
+                        clickAvatarHandler(memberNo);
+                      }}
+                      sx={{ width: 44, height: 44 }}
+                      alt="멤"
+                      src={"/member/" + people.memberImg}
+                    ></Avatar>
+                  );
+                })}
+              </AvatarGroup>
+            </div>
+          </div>
           <MeetingView
             group={group}
             groupNo={groupNo}
@@ -245,11 +350,11 @@ const GroupView = (props) => {
           </div>
         ) : groupLevel === 3 ? (
           <div className="group-join-btn">
-            <Button2 text="가입대기" />
+            <Button2 text="가입대기" clickEvent={cancelGroup} />
           </div>
         ) : groupLevel === 1 ? (
           <div className="group-join-btn">
-            <Button2 text="모임해산" />
+            <Button2 text="모임해산" clickEvent={deleteGroup} />
           </div>
         ) : (
           " "
@@ -262,6 +367,8 @@ const GroupView = (props) => {
 const MySideMenu = (props) => {
   const menus = props.menus;
   const setMenus = props.setMenus;
+  const groupLevel = props.groupLevel;
+  const navigate = useNavigate();
 
   const activeTab = (index) => {
     const updatedMenus = menus.map((menu, i) => ({
@@ -271,8 +378,27 @@ const MySideMenu = (props) => {
     setMenus(updatedMenus);
   };
 
+  const settingGroup = () => {
+    navigate("/group/modify/");
+  };
+
   return (
     <div className="group-view-tap">
+      {/* {groupLevel == 1 ? ( */}
+      <div id="group-setting-area">
+        <span
+          className="material-icons"
+          id="group-setting"
+          onClick={() => {
+            settingGroup();
+          }}
+        >
+          settings
+        </span>
+      </div>
+      {/* ) : ( */}
+      {/* "" */}
+      {/* )} */}
       <div>
         {menus.map((menu, index) => (
           <div key={"menu" + index}>

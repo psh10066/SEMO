@@ -136,7 +136,7 @@ input[type="file"]::file-selector-button {
   display: flex;
 }
 .group-view-tap > div > div {
-  width: calc(100% / 3);
+  width: calc(100% / 2);
 }
 .group-view-tap > div > div > a {
   display: block;
@@ -165,4 +165,18 @@ input[type="file"]::file-selector-button {
   padding: 20px 0;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 255, 0.4);
+}
+
+#group-setting-area {
+  display: block;
+  text-align: right;
+}
+#group-setting {
+  font-size: 28px;
+  color: #220895;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+#group-setting:hover {
+  color: #5457e9;
 }

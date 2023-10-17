@@ -2,17 +2,18 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
-const GrBoardCommentLike = (props) => {
+const CommentLike = (props) => {
+  const commentNo = props.commentNo;
   const isLogin = props.isLogin;
-  const grBoardCommentNo = props.grBoardCommentNo;
-  const [grBoardCommentLike, setGrBoardCommentLike] = useState(false);
-  const [grBoardcommentLikeCount, setGrBoardCommentLikeCount] = useState(0);
+  //   console.log(isLogin);
+  const [commentLike, setCommentLike] = useState(false); //댓글 좋아요
+  const [commentLikeCount, setCommentLikeCount] = useState(0);
   useEffect(() => {
     axios
-      .get("/groupBoard/commentLikeCount/" + grBoardCommentNo)
+      .get("/feed/commentLikeCount/" + commentNo)
       .then((res) => {
         // console.log(res.data);
-        setGrBoardCommentLikeCount(res.data);
+        setCommentLikeCount(res.data);
       })
       .catch((res) => {
         console.log(res.response.status);
@@ -20,7 +21,7 @@ const GrBoardCommentLike = (props) => {
     if (isLogin) {
       const token = window.localStorage.getItem("token");
       axios
-        .post("/groupBoard/commentLikeState/" + grBoardCommentNo, null, {
+        .post("/feed/commentLikeState/" + commentNo, null, {
           headers: {
             Authorization: "Bearer " + token,
           },
@@ -28,57 +29,54 @@ const GrBoardCommentLike = (props) => {
         .then((res) => {
           //   console.log(res.data);
           if (res.data === 1) {
-            setGrBoardCommentLike(true);
+            setCommentLike(true);
           } else {
-            setGrBoardCommentLike(false);
+            setCommentLike(false);
           }
         })
         .catch((res) => {
           console.log(res.response.status);
         });
     }
-  }, [grBoardCommentLike]);
-
+  }, [commentLike]);
   const loginMsg = () => {
     Swal.fire("로그인 후 이용해 주세요.");
   };
-
-  const grBoardCommentLikeClick = (e) => {
-    e.stopPropagation(); // 부모 컴포넌트의 onClick 막기
-
+  const commentLikeClick = (e) => {
+    // console.log(commentNo);
+    // e.stopPropagation(); // 부모 컴포넌트의 onClick 막기
     const token = window.localStorage.getItem("token");
     axios
-      .post("/groupBoard/commentLike/" + grBoardCommentNo, null, {
+      .post("/feed/commentLike/" + commentNo, null, {
         headers: {
           Authorization: "Bearer " + token,
         },
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data) {
-          setGrBoardCommentLike(true);
+          setCommentLike(true);
         } else {
-          setGrBoardCommentLike(false);
+          setCommentLike(false);
         }
       })
       .catch((res) => {
         console.log(res.response.status);
       });
   };
-
   return (
     <>
       {isLogin ? (
-        grBoardCommentLike ? (
+        commentLike ? (
           <span
             className="material-icons"
             style={{ color: "red" }}
-            onClick={grBoardCommentLikeClick}
+            onClick={commentLikeClick}
           >
             favorite
           </span>
         ) : (
-          <span className="material-icons" onClick={grBoardCommentLikeClick}>
+          <span className="material-icons" onClick={commentLikeClick}>
             favorite_border
           </span>
         )
@@ -87,8 +85,9 @@ const GrBoardCommentLike = (props) => {
           favorite_border
         </span>
       )}
-      <span className="commentLikeCount">{grBoardcommentLikeCount}</span>
+      <span className="commentLikeCount">{commentLikeCount}</span>
     </>
   );
 };
-export default GrBoardCommentLike;
+
+export default CommentLike;

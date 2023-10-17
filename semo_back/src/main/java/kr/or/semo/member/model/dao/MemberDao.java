@@ -44,6 +44,15 @@ public interface MemberDao {
 
 	List getFollowing(int memberNo);
 
+	int deleteMyFollower(Follow f);
+
+	String mailCheck(String memberMail);
+
+	Member pwChk(Member member);
+
+
+
+	int findChangePwMember(Member member);
 
 
 }

@@ -93,15 +93,19 @@ public class GroupBoardController {
 	public List groupBoardReCommentList(@PathVariable int grBoardNo) {
 		return groupBoardService.groupBoardReCommentList(grBoardNo);
 	}
-	@PostMapping(value="/commentAddLike")
-	public int commentAddLike(@RequestBody GroupBoardComment gbc, String memberId) {
-		int grBoardCommentNo = gbc.getGrBoardCommentNo();
-		return groupBoardService.insertGroupBoardCommentLike(grBoardCommentNo, memberId);
+	//댓글 좋아요
+	@PostMapping(value="/commentLike/{grBoardCommentNo}")
+	public int groupBoardCommentLike(@PathVariable int grBoardCommentNo, @RequestAttribute String memberId) {
+		return groupBoardService.groupBoardCommentLike(grBoardCommentNo, memberId);
 	}
-	@PostMapping(value="/commentRemoveLike")
-	public int commentRemoveLike(@RequestBody GroupBoardComment gbc, String memberId) {
-		int grBoardCommentNo = gbc.getGrBoardCommentNo();
-		return groupBoardService.deleteGroupBoardCommentLike(grBoardCommentNo, memberId);
+	//댓글 좋아요 수
+	@GetMapping(value="/commentLikeCount/{grBoardCommentNo}")
+	public int groupBoardCommentLikeCount(@PathVariable int grBoardCommentNo) {
+		return groupBoardService.groupBoardCommentLikeCount(grBoardCommentNo);
 	}
-	
+	//댓글 좋아요 상태
+	@PostMapping(value="/commentLikeState/{grBoardCommentNo}")
+	public int groupBoardCommentLikeState(@PathVariable int grBoardCommentNo, @RequestAttribute String memberId) {
+		return groupBoardService.groupBoardCommentLikeState(grBoardCommentNo, memberId);
+	}
 }

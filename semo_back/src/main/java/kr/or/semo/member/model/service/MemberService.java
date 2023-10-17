@@ -47,7 +47,6 @@ public class MemberService {
 	}
 	@Transactional
 	public int insertMember(Member member) {
-		System.out.println(member.getMemberImg());
 		// TODO Auto-generated method stub
 		return memberDao.insertMember(member);
 	}
@@ -133,5 +132,37 @@ public class MemberService {
 		map.put("followingList", followingList);
 		return map;
 	}
+	@Transactional
+	public int deleteMyFollwer(int memberNo, String memberId) {
+		Member member = memberDao.selectOneMember(memberId);
+		int followingNo = member.getMemberNo();
+		Follow f = new Follow();
+		f.setFollowerNo(memberNo);
+		f.setFollowingNo(followingNo);
+		return memberDao.deleteMyFollower(f);
+	}
 
+	public String mailCheck(String memberMail) {
+		String m = memberDao.mailCheck(memberMail);
+		return m;
+	}
+
+	public int pwChk(Member member) {
+		Member m = memberDao.pwChk(member);
+		if(m != null ) {
+			return 1;
+		}else {
+			return 0;
+		}
+	}
+	
+	@Transactional
+	public int findChangePwMember(Member member) {
+		// TODO Auto-generated method stub
+		return memberDao.findChangePwMember(member);
+	}
+
+	
+	
+	
 }

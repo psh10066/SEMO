@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.or.semo.feed.model.dao.FeedDao;
 import kr.or.semo.feed.model.vo.Feed;
 import kr.or.semo.feed.model.vo.FeedComment;
+import kr.or.semo.feed.model.vo.FeedCommentLike;
 import kr.or.semo.member.model.dao.MemberDao;
 import kr.or.semo.member.model.vo.Member;
 
@@ -125,6 +126,25 @@ public class FeedService {
 	}
 	public List selectGroupList(int memberNo) {
 		return feedDao.selectGroupList(memberNo);
+	}
+	@Transactional
+	public int commentLike(int feedCommentNo, String memberId) {
+		Member member = memberDao.selectOneMember(memberId);
+		FeedCommentLike feedCommentLike = feedDao.selectOneCommentLike(feedCommentNo, member.getMemberNo());
+		if(feedCommentLike != null) {
+			feedDao.deleteCommentLike(feedCommentNo, member.getMemberNo());
+			return 0;
+		}else {
+			feedDao.insertCommentLike(feedCommentNo, member.getMemberNo());
+			return 1;
+		}
+	}
+	public int commentLikeCount(int feedCommentNo) {
+		return feedDao.commentLikeCount(feedCommentNo);
+	}
+	public int commentLikeState(int feedCommentNo, String memberId) {
+		Member member = memberDao.selectOneMember(memberId);
+		return feedDao.commentLikeState(feedCommentNo, member.getMemberNo());
 	}
 	
 

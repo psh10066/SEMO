@@ -40,7 +40,7 @@ public class OAuthService {
 
 		// 획득된 회원정보 DB 조회
 		Member result = memberDAO.selectByOauthLogin(accessMember);
-
+		System.out.println(result);
 		// 반환할 JWT
 		String accessJwt = null;
 

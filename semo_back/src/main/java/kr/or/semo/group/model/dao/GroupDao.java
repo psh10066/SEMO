@@ -51,4 +51,6 @@ public interface GroupDao {
 
 	List peopleList(int groupNo);
 
+	int deleteGroup(int groupNo);
+
 }

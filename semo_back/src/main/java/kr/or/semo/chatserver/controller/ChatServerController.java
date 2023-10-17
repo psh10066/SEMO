@@ -20,6 +20,7 @@ import kr.or.semo.chatserver.service.ChatServerService;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class ChatServerController {
@@ -28,10 +29,6 @@ public class ChatServerController {
     private SimpMessagingTemplate simpMessagingTemplate; ////클라이언트에게 메시지를 보내는데 사용
     @Autowired
     private ChatServerService chatServerService;
-    
-    
-    
-    
     
 
     //클라이언트 메세지 매핑 (: publish)
@@ -52,6 +49,12 @@ public class ChatServerController {
     	return chatServerService.chatAccessTimeInsert(lastAccessChatTime);
     }
 
+    //지난 대화 불러오기
+    @PostMapping("/chat/chatMessage")
+    public List chatPreviousMessage (@RequestBody Map<String, Integer> request) {
+    	int roomId = request.get("roomId"); //객체로 보낸거 키(String = groupNo) , 값(Integer) 가지고옴 
+    	return chatServerService.chatPreviousMessage(roomId);
+    }
     
     
    

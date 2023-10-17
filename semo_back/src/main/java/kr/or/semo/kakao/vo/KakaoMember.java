@@ -5,9 +5,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import kr.or.semo.kakao.oauth.OauthMember;
 import kr.or.semo.kakao.oauth.OauthProvider;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@Getter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class KakaoMember implements OauthMember{
 	

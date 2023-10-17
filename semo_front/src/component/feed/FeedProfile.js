@@ -254,17 +254,27 @@ const FeedProfile = (props) => {
                   {isLogin &&
                   loginMember &&
                   loginMember.memberNo === member.memberNo ? (
-                    <th onClick={myfollowerClick} className="followClick">
-                      {followerCount}
-                    </th>
+                    followerCount === 0 ? (
+                      <th>{followerCount}</th>
+                    ) : (
+                      <th onClick={myfollowerClick} className="followClick">
+                        {followerCount}
+                      </th>
+                    )
+                  ) : followerCount === 0 ? (
+                    <th>{followerCount}</th>
                   ) : (
                     <th onClick={followerClick} className="followClick">
                       {followerCount}
                     </th>
                   )}
-                  <th onClick={followingClick} className="followClick">
-                    {followingCount}
-                  </th>
+                  {followingCount === 0 ? (
+                    <th>{followingCount}</th>
+                  ) : (
+                    <th onClick={followingClick} className="followClick">
+                      {followingCount}
+                    </th>
+                  )}
                 </tr>
               </tbody>
             </table>

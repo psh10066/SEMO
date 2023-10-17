@@ -132,4 +132,9 @@ public class GroupService {
 		map.put("peopleCount", peopleCount);
 		return map;
 	}
+	
+	@Transactional
+	public int deleteGroup(int groupNo) {
+		return groupDao.deleteGroup(groupNo);
+	}
 }
