@@ -217,7 +217,6 @@ public class MemberController {
 	}
 	@PostMapping(value="/findChangePw")
 	public int findChangePwMember(@RequestBody Member member) {
-		System.out.println(member);
 		return memberService.findChangePwMember(member);
 	}
 	
