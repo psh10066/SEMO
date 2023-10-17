@@ -44,7 +44,6 @@ const AdminMember = () => {
           </thead>
           <tbody>
             {memberList.map((member, index) => {
-              //console.log(member);
               return <MemberItem key={"member" + index} member={member} />;
             })}
           </tbody>
@@ -63,9 +62,7 @@ const AdminMember = () => {
 };
 const MemberItem = (props) => {
   const member = props.member;
-  //console.log(member);
   const [memberType, setMemberType] = useState(member.memberType);
-  //console.log(member);
   const handleChange = (event) => {
     const obj = { memberNo: member.memberNo, memberType: event.target.value };
     const token = window.localStorage.getItem("token");

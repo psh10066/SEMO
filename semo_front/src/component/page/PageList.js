@@ -6,7 +6,6 @@ import Pagination from "../common/Pagination";
 const PageList = (props) => {
   const isLogin = props.isLogin;
   const [pageList, setPageList] = useState([]);
-  //const [pageCategoryList, setPageCategoryList] = useState([]);
   const [reqPage, setReqPage] = useState(1);
   const [pageInfo, setPageInfo] = useState({});
 
@@ -16,30 +15,19 @@ const PageList = (props) => {
   const [peopleCount, setPeopleCount] = useState(0);
 
   useEffect(() => {
-    //console.log(pageList);
-    // "/" +   pageList.groupNo
     axios
       .get("/page/list/" + reqPage + "/" + categoryLocal + "/" + categoryValue)
       .then((res) => {
         //document.querySelectorAll(".page-category-wrap div")[0].click();
-        console.log(res.data);
+        //console.log(res.data);
         setPageList(res.data.pageList);
         setPageInfo(res.data.pi);
-        //axios.get("")
         setPeopleCount(res.data.peopleCount);
       })
       .catch((res) => {
         console.log(res.response.status);
       });
   }, [reqPage, categoryLocal, categoryValue]);
-
-  {
-    /* 
-  useEffect(() => {
-    axios.get("/group/groupPeopleList" + group.groupNo);
-  });
-  */
-  }
 
   const [categories, setCategories] = useState([
     { text: "전체", categoryLocal: "all", categoryValue: 0, active: true },
@@ -104,8 +92,8 @@ const PageList = (props) => {
                       setReqPage(1);
                       setCategoryLocal(category.categoryLocal);
                       setCategoryValue(category.categoryValue);
-                      console.log(category.categoryLocal);
-                      console.log(category.categoryValue);
+                      //console.log(category.categoryLocal);
+                      //console.log(category.categoryValue);
                     }}
                   >
                     {category.text}
@@ -118,8 +106,8 @@ const PageList = (props) => {
                       setReqPage(1);
                       setCategoryLocal(category.categoryLocal);
                       setCategoryValue(category.categoryValue);
-                      console.log(categoryLocal);
-                      console.log(categoryValue);
+                      //console.log(categoryLocal);
+                      //console.log(categoryValue);
                     }}
                   >
                     {category.text}
@@ -156,12 +144,11 @@ const PageList = (props) => {
 const PageItem = (props) => {
   const page = props.page;
   //const peopleCount = props.peopleCount;
-  console.log(page);
+  //console.log(page);
   //console.log(peopleCount);
   const navigate = useNavigate();
   const groupView = () => {
     navigate("/group/view", { state: { groupNo: page.groupNo } });
-    //console.log(page.groupNo);
   };
   //const [peopleCount, setPeopleCount] = useState(0);
   return (

@@ -22,11 +22,9 @@ public class PageService {
 	public Map pageList(int reqPage, String categoryLocal, String categoryValue) {
 		int numPerPage = 6;
 		int pageNaviSize = 5;
-		//int peopleCount = pageDao.peopleCount(groupNo);
 
 		List pageList = null;
 		PageInfo pi = null;
-		//int peopleCount = 0;
 		
 		if(categoryLocal.equals("all")) {
 			int totalCount = pageDao.totalCount1();
@@ -72,7 +70,6 @@ public class PageService {
 			pageList = pageDao.selectPageList3(mapCat);
 			System.out.println("pageList는 "+pageList);
 		}
-			//System.out.println(pageList);
 			
 //			Object obj = pageList.get(0);
 //			Group g = (Group)obj;
@@ -118,7 +115,6 @@ public class PageService {
 		PageInfo pi = null;
 		
 		int totalCount = pageDao.searchTotalCountFeed(searchKeyword);
-		//if(totalCount=0)
 		pi = pagination.getPageInfo(reqPage, numPerPage, pageNaviSize, totalCount);
 		System.out.println("Feed pi는 "+pi);
 		
@@ -137,10 +133,4 @@ public class PageService {
 		return map;
 	}
 
-	/*
-	public List search(String searchContent) {
-		System.out.println("searchContent는 "+searchContent);
-		return pageDao.search(searchContent);
-	}
-	*/	
 }

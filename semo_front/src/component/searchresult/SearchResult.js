@@ -9,15 +9,11 @@ import axios from "axios";
 const SearchResult = (props) => {
   const isLogin = props.isLogin;
   const location = useLocation();
-  //const searchResult = location.state.searchResult;
-  //console.log(searchResult);
   const [reqPage, setReqPage] = useState(1);
   //const [feedReqPage, setFeedReqPage] = useState(1);
   const [socialPageInfo, setSocialPageInfo] = useState({});
   const [feedPageInfo, setFeedPageInfo] = useState({});
   const [searchResultList, setSearchResultList] = useState([]);
-  //const [modalState, setModalState] = useState("");
-  //const [searchKeyword, setSearchKeyword] = useState("");
   const [groupName, setGroupName] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const [searchSocialingList, setSearchSocialingList] = useState([]);
@@ -33,7 +29,7 @@ const SearchResult = (props) => {
     axios
       .get("/page/searchSocialing/" + searchKeyword + "/" + reqPage)
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
         setSearchSocialingList(res.data.searchSocialingList);
         setSocialPageInfo(res.data.pi);
       })
@@ -43,7 +39,7 @@ const SearchResult = (props) => {
     axios
       .get("/page/searchFeed/" + searchKeyword + "/" + reqPage)
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
         setSearchFeedList(res.data.searchFeedList);
         setFeedPageInfo(res.data.pi);
       })
@@ -105,7 +101,6 @@ const SearchResult = (props) => {
                       setCategoryType(
                         searchResultCategories[index].categoryType
                       );
-                      //console.log(socialingSearch);
                     }}
                   >
                     {searchResult.text}
@@ -171,15 +166,6 @@ const SearchResult = (props) => {
           </div>
         )}
       </div>
-      {/* 
-      <div className="searchresult-page">
-        <Pagination
-          reqPage={reqPage}
-          setReqPage={setReqPage}
-          pageInfo={pageInfo}
-        />
-      </div>
-      */}
     </div>
   );
 };
