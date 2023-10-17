@@ -26,7 +26,7 @@ public class PageService {
 
 		List pageList = null;
 		PageInfo pi = null;
-		int peopleCount = 0;
+		//int peopleCount = 0;
 		
 		if(categoryLocal.equals("all")) {
 			int totalCount = pageDao.totalCount1();
@@ -36,7 +36,6 @@ public class PageService {
 			HashMap<String, Object> mapCat = new HashMap<String, Object>();
 			mapCat.put("start",pi.getStart());
 			mapCat.put("end",pi.getEnd());
-			//mapCat.put("peopleCount", peopleCount);
 			
 			pageList = pageDao.selectPageList1(mapCat);
 			System.out.println("pageList는 "+pageList);
@@ -46,12 +45,10 @@ public class PageService {
 			int totalCount = pageDao.totalCount2(categoryValue);
 			pi = pagination.getPageInfo(reqPage, numPerPage, pageNaviSize, totalCount);
 			System.out.println("pi는 "+pi);
-			//int peopleCount = pageDao.peopleCount(groupNo);
 			
 			HashMap<String, Object> mapCat = new HashMap<String, Object>();
 			mapCat.put("start",pi.getStart());
 			mapCat.put("end",pi.getEnd());
-			//mapCat.put("peopleCount", peopleCount);
 			
 			mapCat.put("categoryValue", categoryValue);
 			System.out.println("mapCat은 "+mapCat);
@@ -64,45 +61,86 @@ public class PageService {
 			int totalCount = pageDao.totalCount3(categoryValue);
 			pi = pagination.getPageInfo(reqPage, numPerPage, pageNaviSize, totalCount);
 			System.out.println("pi는 "+pi);
-			//int peopleCount = pageDao.peopleCount(groupNo);
 			
 			HashMap<String, Object> mapCat = new HashMap<String, Object>();
 			mapCat.put("start",pi.getStart());
 			mapCat.put("end",pi.getEnd());
-			//mapCat.put("peopleCount", peopleCount);
-			
-			//mapCat.put("categoryLocal", categoryLocal);
+
 			mapCat.put("categoryValue", categoryValue);
 			System.out.println("mapCat은 "+mapCat);
 			
 			pageList = pageDao.selectPageList3(mapCat);
 			System.out.println("pageList는 "+pageList);
 		}
-			//System.out.println(mapCat);
-			System.out.println(pageList);
-			//System.out.println("peopleCount 찾는중 "+pageList.getGroupNo);
+			//System.out.println(pageList);
 			
-			Object obj = pageList.get(0);
-			Group g = (Group)obj;
-			g.getGroupNo();
+//			Object obj = pageList.get(0);
+//			Group g = (Group)obj;
+//			g.getGroupNo();
 
-			//peopleCount = pageDao.peopleCount(pageList.groupNo);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("pageList", pageList);
 		map.put("pi", pi);
-		//map.put("peopleCount",peopleCount); 
 		return map;
 	}
 
+	public Map searchSocialing(String searchKeyword, int reqPage) {
+		int numPerPage = 8;
+		int pageNaviSize = 5;
+		
+		List searchSocialingList = null;
+		PageInfo pi = null;
+		
+		int totalCount = pageDao.searchTotalCount(searchKeyword);
+		pi = pagination.getPageInfo(reqPage, numPerPage, pageNaviSize, totalCount);
+		System.out.println("socialing pi는 "+pi);
+		
+		HashMap<String, Object> mapSearch = new HashMap<String, Object>();
+		mapSearch.put("start", pi.getStart());
+		mapSearch.put("end", pi.getEnd());
+		mapSearch.put("searchKeyword", searchKeyword);
+		
+		searchSocialingList = pageDao.socialingSearchList(mapSearch);
+		System.out.println("searchSocialingList는 "+searchSocialingList);
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("searchSocialingList", searchSocialingList);
+		map.put("pi", pi);
+		
+		return map;
+	}
+
+	public Map searchFeed(String searchKeyword, int reqPage) {
+		int numPerPage = 8;
+		int pageNaviSize = 5;
+		
+		List searchFeedList = null;
+		PageInfo pi = null;
+		
+		int totalCount = pageDao.searchTotalCountFeed(searchKeyword);
+		//if(totalCount=0)
+		pi = pagination.getPageInfo(reqPage, numPerPage, pageNaviSize, totalCount);
+		System.out.println("Feed pi는 "+pi);
+		
+		HashMap<String, Object> mapSearch = new HashMap<String, Object>();
+		mapSearch.put("start", pi.getStart());
+		mapSearch.put("end", pi.getEnd());
+		mapSearch.put("searchKeyword", searchKeyword);
+		
+		searchFeedList = pageDao.feedSearchList(mapSearch);
+		System.out.println("searchFeedList는 "+searchFeedList);
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("searchFeedList", searchFeedList);
+		map.put("pi", pi);
+		
+		return map;
+	}
+
+	/*
 	public List search(String searchContent) {
 		System.out.println("searchContent는 "+searchContent);
 		return pageDao.search(searchContent);
 	}
-
-	/*
-	public String search(String searchContent) {
-		return pageDao.search(searchContent);
-	}
-*/
-
+	*/	
 }
