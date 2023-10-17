@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 
 const GroupSave = (props) => {
   const groupNo = props.groupNo;
+  const isLogin = props.isLogin;
   const groupSave = props.groupSave;
   const setGroupSave = props.setGroupSave;
   const groupSaveClick = (e) => {
@@ -30,7 +31,6 @@ const GroupSave = (props) => {
         console.log(res.response.status);
       });
   };
-
   return (
     <>
       {groupSave ? (
