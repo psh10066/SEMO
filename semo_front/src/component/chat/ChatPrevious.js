@@ -8,7 +8,7 @@ const ChatPrevious = (props) => {
   const navigate = useNavigate();
 
   //채팅 메세지 불러오기
-  const [message, setMessage] = useState([]);
+  const [previousMessage, setPreviousMessage] = useState([]);
   const token = window.localStorage.getItem("token");
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const ChatPrevious = (props) => {
         }
       )
       .then((res) => {
-        setMessage(res.data);
+        setPreviousMessage(res.data);
       })
       .catch((res) => {
         if (res.response.status === 403) {
@@ -36,17 +36,16 @@ const ChatPrevious = (props) => {
           });
         }
       });
-  }, []);
+  }, [roomId]);
 
-  console.log(message);
+  console.log(previousMessage);
 
   return (
     <div>
-      {message.map((msg, idx) => (
+      {previousMessage.map((msg, idx) => (
         <div key={idx}>
-          {msg.senderName}
-          {msg.message}
-          {msg.chatTime}
+          <strong>{msg.senderName}</strong>: {msg.message}{" "}
+          <span>({msg.chatTime})</span>
         </div>
       ))}
     </div>

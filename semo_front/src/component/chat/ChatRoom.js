@@ -122,27 +122,26 @@ const ChatRoom = (props) => {
   const chatSpanRef = useRef(null);
   const [showPreviousChat, setShowPreviousChat] = useState(false); //이전대화 보여주기
 
+  // roomId가 변경될 때마다 showPreviousChat를 초기화
+  useEffect(() => {
+    setShowPreviousChat(false);
+    if (chatSpanRef.current) {
+      //버튼
+      chatSpanRef.current.style.display = "flex";
+    }
+  }, [roomId]);
+
   const previousChatClick = () => {
     if (chatPreviousWrapRef.current) {
       chatPreviousWrapRef.current.style.display = "block";
     }
+
     if (chatSpanRef.current) {
+      //버튼
       chatSpanRef.current.style.display = "none";
     }
     setShowPreviousChat(true); // showPreviousChat 상태를 true로 변경
   };
-  // roomId가 변경될 때마다 showPreviousChat를 초기화
-  useEffect(() => {
-    setShowPreviousChat(false);
-    // 이전 채팅 내역을 담고 있는 컨테이너를 다시 숨기기
-    if (chatPreviousWrapRef.current) {
-      chatPreviousWrapRef.current.style.display = "none";
-    }
-    // "지난 대화 불러오기" 버튼을 다시 보여주기.
-    if (chatSpanRef.current) {
-      chatSpanRef.current.style.display = "flex";
-    }
-  }, [roomId]);
 
   return (
     <>
@@ -168,7 +167,7 @@ const ChatRoom = (props) => {
             <ChatPrevious roomId={roomId} />
           </div>
         )}
-
+        {/* 메세지 출력 */}
         {messages[roomId]?.map((msg, idx) => (
           <div key={idx}>
             {msg.senderName}: {msg.message}
