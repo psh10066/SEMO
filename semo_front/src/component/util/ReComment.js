@@ -161,94 +161,99 @@ const ReCommentItem = (props) => {
   return (
     <>
       {feedCommentRef === recomment.feedCommentNo2 ? (
-        <div className="comment-wrap">
-          <div className="comment-top">
-            {recomment.memberImg === null ? (
-              <div className="commentItem-profile-image">
-                <Stack direction="row" spacing={2} onClick={naviFeedProfile}>
-                  <Avatar
-                    alt="Remy Sharp"
-                    src="/image/person.png"
-                    sx={{ width: 22, height: 22 }}
-                  />
-                </Stack>
+        <>
+          <span className="material-icons arrowReComment">
+            subdirectory_arrow_right
+          </span>
+          <div className="comment-wrap">
+            <div className="comment-top">
+              {recomment.memberImg === null ? (
+                <div className="commentItem-profile-image">
+                  <Stack direction="row" spacing={2} onClick={naviFeedProfile}>
+                    <Avatar
+                      alt="Remy Sharp"
+                      src="/image/person.png"
+                      sx={{ width: 22, height: 22 }}
+                    />
+                  </Stack>
+                </div>
+              ) : (
+                <div className="commentItem-profile-image">
+                  <Stack direction="row" spacing={2} onClick={naviFeedProfile}>
+                    <Avatar
+                      alt="Remy Sharp"
+                      src={"/member/" + recomment.memberImg}
+                      sx={{ width: 22, height: 22 }}
+                    />
+                  </Stack>
+                </div>
+              )}
+              <div className="commentItem-memberName" onClick={naviFeedProfile}>
+                {recomment.memberName}
               </div>
-            ) : (
-              <div className="commentItem-profile-image">
-                <Stack direction="row" spacing={2} onClick={naviFeedProfile}>
-                  <Avatar
-                    alt="Remy Sharp"
-                    src={"/member/" + recomment.memberImg}
-                    sx={{ width: 22, height: 22 }}
-                  />
-                </Stack>
+              <div className="commentItem-date">
+                {recomment.feedCommentDate
+                  ? formatTime(recomment.feedCommentDate)
+                  : ""}
               </div>
-            )}
-            <div className="commentItem-memberName" onClick={naviFeedProfile}>
-              {recomment.memberName}
             </div>
-            <div className="commentItem-date">
-              {recomment.feedCommentDate
-                ? formatTime(recomment.feedCommentDate)
-                : ""}
+            <div className="comment-mid">
+              {modifyState ? (
+                <div className="commentItem-content">
+                  {recomment.feedCommentContent}
+                </div>
+              ) : (
+                <textarea
+                  name="commentContent"
+                  className="comment-modify-form comment-input-form"
+                  placeholder="댓글 추가..."
+                  ref={textRef}
+                  onInput={resizeHeight}
+                  defaultValue={feedCommentContent}
+                  id={feedCommentContent}
+                  onChange={(e) => {
+                    setFeedCommentContent(e.target.value);
+                  }}
+                />
+              )}
             </div>
-          </div>
-          <div className="comment-mid">
-            {modifyState ? (
-              <div className="commentItem-content">
-                {recomment.feedCommentContent}
+            <div className="comment-bottom">
+              <div className="comment-like">
+                <CommentLike
+                  commentNo={recomment.feedCommentNo}
+                  isLogin={isLogin}
+                />
               </div>
-            ) : (
-              <textarea
-                name="commentContent"
-                className="comment-modify-form comment-input-form"
-                placeholder="댓글 추가..."
-                ref={textRef}
-                onInput={resizeHeight}
-                defaultValue={feedCommentContent}
-                id={feedCommentContent}
-                onChange={(e) => {
-                  setFeedCommentContent(e.target.value);
-                }}
-              />
-            )}
-          </div>
-          <div className="comment-bottom">
-            <div className="comment-like">
-              <CommentLike
-                commentNo={recomment.feedCommentNo}
-                isLogin={isLogin}
-              />
-            </div>
-            {isLogin ? (
-              member && member.memberNo === recomment.feedCommentWriter ? (
-                modifyState ? (
-                  <div className="comment-bottom-right">
-                    <div className="comment-modify" onClick={modifyClick}>
-                      수정
+              {isLogin ? (
+                member && member.memberNo === recomment.feedCommentWriter ? (
+                  modifyState ? (
+                    <div className="comment-bottom-right">
+                      <div className="comment-modify" onClick={modifyClick}>
+                        수정
+                      </div>
+                      <div className="comment-delete" onClick={deleteComment}>
+                        삭제
+                      </div>
                     </div>
-                    <div className="comment-delete" onClick={deleteComment}>
-                      삭제
+                  ) : (
+                    <div className="comment-bottom-right">
+                      <div className="comment-modify" onClick={modifyComment}>
+                        수정
+                      </div>
+                      <div className="comment-delete" onClick={modifyCancel}>
+                        취소
+                      </div>
                     </div>
-                  </div>
+                  )
                 ) : (
-                  <div className="comment-bottom-right">
-                    <div className="comment-modify" onClick={modifyComment}>
-                      수정
-                    </div>
-                    <div className="comment-delete" onClick={modifyCancel}>
-                      취소
-                    </div>
-                  </div>
+                  <div className="comment-bottom-right"></div>
                 )
               ) : (
                 <div className="comment-bottom-right"></div>
-              )
-            ) : (
-              <div className="comment-bottom-right"></div>
-            )}
+              )}
+            </div>
           </div>
-        </div>
+        </>
       ) : (
         ""
       )}
