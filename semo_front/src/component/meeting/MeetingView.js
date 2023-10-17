@@ -12,13 +12,9 @@ const MeetingView = (props) => {
   const isLogin = props.isLogin;
   const isJoin = props.isJoin;
   const member = props.member;
-  // 클릭시 자동으로 함수를 변경해줄 함수
-  const [isAddMeet, setIsAddMeet] = useState(false);
   const groupLevel = props.groupLevel;
+  const [isAddMeet, setIsAddMeet] = useState(false); // 클릭시 자동으로 함수를 변경해줄 함수
   const [meetingList, setMeetingList] = useState([]);
-  const [meetingJoin, setMeetingJoin] = useState([]);
-  const [meetingMember, setMeetingMember] = useState(0);
-
   const navigate = useNavigate();
 
   // 모임 생성
@@ -56,7 +52,6 @@ const MeetingView = (props) => {
               }
             )
             .then((res) => {
-              setMeetingJoin(res.data);
               setIsAddMeet(!isAddMeet);
             })
             .catch((error) => {
@@ -75,18 +70,25 @@ const MeetingView = (props) => {
       confirmButtonText: "확인",
       cancelButtonText: "취소",
     }).then((res) => {
-      if (member.memberNo != null) {
-        if (res.confirmed) {
-          axios
-            .get("/meeting/cancel/" + meetingNo)
-            .then((res) => {
-              if (res.data === 1) {
-              }
-            })
-            .catch((res) => {
-              console.log(res.response.status);
-            });
-        }
+      if (res.isConfirmed) {
+        const token = window.localStorage.getItem("token");
+        axios
+          .post(
+            "/meeting/cancelJoin/",
+            { meetingNo },
+            {
+              headers: {
+                Authorization: "Bearer " + token,
+              },
+            }
+          )
+          .then((res) => {
+            setIsAddMeet(!isAddMeet);
+            console.log(res.data);
+          })
+          .catch((error) => {
+            console.log(error.response.status);
+          });
       }
     });
   };
@@ -119,6 +121,9 @@ const MeetingView = (props) => {
               isJoin={isJoin}
               join={join}
               cancelJoin={cancelJoin}
+              isAddMeet={isAddMeet}
+              setIsAddMeet={setIsAddMeet}
+              groupLevel={groupLevel}
             />
           ))
         : ""}

@@ -27,13 +27,18 @@
 		where meeting_no=#{meetingNo}
 	</select>
 	
-	<!-- 
-	<select id="selectJoinMember" resultType="list">
+	<delete id="cancelJoin">
+		delete meeting_join where meeting_no=#{meetingNo} and member_no=
+		(select member_no from member where member_id=#{memberId})
+	</delete>
+	
+	
+	<select id="selectJoinMember" resultType="int">
 		select member_no from meeting_join 
 		where meeting_no=#{meetingNo} and MT_JOIN_STATUS=1
 	</select>
 	
-	 -->
+	 
 	
 	
 	 

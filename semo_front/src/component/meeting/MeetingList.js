@@ -9,16 +9,43 @@ const MeetingList = (props) => {
   const meeting = props.meeting;
   const index = props.index;
   const join = props.join;
+  const cancelJoin = props.cancelJoin;
   const member = props.member;
   const isLogin = props.isLogin;
   const isJoin = props.isJoin;
-  const meetingJoin = props.meetingJoin;
-
-  const [joinMember, setJoinMember] = useState(0);
-  // const [meetingJoin, setMeetingJoin] = useState([]);
-
+  const isAddMeet = props.isAddMeet;
+  const setIsAddMeet = props.setIsAddMeet;
+  const groupLevel = props.groupLevel;
+  const [joinMember, setJoinMember] = useState(0); //참여자 숫자
+  const [joinStatus, setJoinStatus] = useState(-1); //참여 현황
+  const [joinMemberNo, setJoinMemberNo] = useState([]); //참여한 맴버 번호
   const navigate = useNavigate();
 
+  //약속에 참여하는 memberNo[] 조회
+  useEffect(() => {
+    const token = window.localStorage.getItem("token");
+    if (isLogin) {
+      axios
+        .post("/meeting/meetingMember", meeting, {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then((res) => {
+          setJoinMemberNo(res.data);
+          if (res.data.length > 0) {
+            const indexOf = res.data.indexOf(member.memberNo);
+            setJoinStatus(indexOf);
+            // console.log(indexOf);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [isAddMeet]);
+
+  //참여수 보이기
   useEffect(() => {
     axios
       .get("/meeting/countMember/" + meeting.meetingNo)
@@ -28,55 +55,7 @@ const MeetingList = (props) => {
       .catch((error) => {
         console.log(error.response.status);
       });
-    // if (meetingJoin != null) {
-    //   axios
-    //     .get("/meeting/meetingMember/" + meeting.meetingNo)
-    //     .then((res) => {
-    //       setMeetingJoin(res.data);
-    //       console.log(res.data);
-    //     })
-    //     .catch((error) => {
-    //       console.log(error.response.status);
-    //     });
-    // }
-  }, []);
-
-  // useEffect(() => {
-  //   axios
-  //     .get("/meeting/meetingJoin/" + meeting.meetingNo)
-  //     .then((res) => {
-  //       setMeetingJoin(res.data);
-  //       // console.log(res.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.response.status);
-  //     });
-  // }, []);
-
-  //약속 참여 취소하기
-  const cancelJoin = (meetingNo) => {
-    Swal.fire({
-      icon: "question",
-      text: "모임 참석을 취소 하시겠습니까?",
-      showCancelButton: true,
-      confirmButtonText: "확인",
-      cancelButtonText: "취소",
-    }).then((res) => {
-      if (member.memberNo != null) {
-        if (res.confirmed) {
-          axios
-            .get("/meeting/cancel/" + meetingNo)
-            .then((res) => {
-              if (res.data === 1) {
-              }
-            })
-            .catch((res) => {
-              console.log(res.response.status);
-            });
-        }
-      }
-    });
-  };
+  }, [isAddMeet]);
 
   // D-Day설정 함수
   const calculateDDay = (targetDate) => {
@@ -108,6 +87,9 @@ const MeetingList = (props) => {
     const day = localDate.getDate();
     return `${month}월 ${day}일`;
   };
+
+  // console.log(isLogin, isJoin, groupLevel, joinStatus);
+
   return (
     <div className="meetingView-frm">
       <div className="meetingView-content">
@@ -131,20 +113,25 @@ const MeetingList = (props) => {
           장소 : {meeting.meetingPlace}
           <Kakao data={meeting.meetingPlace} index={index} />
         </div>
-        {isLogin && isJoin ? (
+        {isLogin &&
+        isJoin &&
+        (groupLevel === 1 || groupLevel === 2) &&
+        joinStatus === -1 ? (
           <Button1
             text="모임참가"
             clickEvent={() => {
               join(meeting.meetingNo);
             }}
           />
-        ) : (
+        ) : isLogin && isJoin && (groupLevel === 1 || groupLevel === 2) ? (
           <Button2
             text="취소"
             clickEvent={() => {
               cancelJoin(meeting.meetingNo);
             }}
           />
+        ) : (
+          ""
         )}
       </div>
     </div>

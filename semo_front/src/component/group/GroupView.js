@@ -184,7 +184,7 @@ const GroupView = (props) => {
           console.log(error);
         });
     }
-  }, [groupNo]);
+  }, [meetingList]);
 
   return (
     <div className="group-view-wrap">

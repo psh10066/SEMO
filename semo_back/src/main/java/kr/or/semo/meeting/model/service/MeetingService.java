@@ -38,10 +38,17 @@ public class MeetingService {
 		return meetingDao.countMember(meetingNo);
 	}
 
-//	public List selectJoinMember(int meetingNo) {
-//		// TODO Auto-generated method stub
-//		return meetingDao.selectJoinMember(meetingNo);
-//	}
+	@Transactional
+	public int cancelJoin(int meetingNo, String memberId) {
+		// TODO Auto-generated method stub
+		return meetingDao.cancelJoin(meetingNo,memberId);
+	}
+
+	public List selectJoinMember(int meetingNo) {
+		// TODO Auto-generated method stub
+		return meetingDao.selectJoinMember(meetingNo);
+	}
+
 
 	
 	

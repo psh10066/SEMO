@@ -47,17 +47,20 @@ public class MeetingController {
 		return meetingService.joinMeeting(meetingJoin);
 	}
 	//약속 참가 취소
-//	@GetMapping(value = "/cancle")
-//	public int cancel(@RequestBody MeetingJoin meetingJoin, @RequestAttribute String memberId) {
-//		meetingJoin.setMemberId(memberId);
-//		return meetingService.cancel(meetingJoin);
-//	}
+	@PostMapping(value = "/cancelJoin/")
+	public int cancelJoin(@RequestBody MeetingJoin m, @RequestAttribute String memberId) {
+		System.out.println("멤버 아이디는? " +memberId);
+		int meetingNo = m.getMeetingNo();
+		System.out.println("미팅 넘버는?" +meetingNo);
+		return meetingService.cancelJoin(meetingNo,memberId);
+	}
 	//약속 참가하는 맴버 조회
-//	@GetMapping(value = "/meetingMember/{meetingNo}")
-//	public List selectJoinMember(@PathVariable int meetingNo) {
-//		List list = meetingService.selectJoinMember(meetingNo);
-//		return list;
-//	}
+	@PostMapping(value = "/meetingMember")
+	public List selectJoinMember(@RequestBody Meeting m) {
+		int meetingNo = m.getMeetingNo();
+		List list = meetingService.selectJoinMember(meetingNo);
+		return list;
+	}
 
 	
 
