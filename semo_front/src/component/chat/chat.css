@@ -135,6 +135,9 @@
   top: 0;
   left: 0;
   width: 90%;
+  display: grid;
+  justify-content: center;
+  justify-items: center;
 }
 .chat-modal-member > h3 {
   width: fit-content;
@@ -143,8 +146,9 @@
   cursor: pointer;
 }
 .chat-modal-member-detail {
-  margin-top: 10px;
+  margin-top: 18px;
   display: flex;
+  margin-left: 56px;
 }
 .chat-modal-member-detail > div > div {
   width: 100px;
