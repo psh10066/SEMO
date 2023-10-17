@@ -129,9 +129,6 @@
   justify-content: center;
   cursor: pointer;
 }
-.chatPrevious-wrap {
-  display: none;
-}
 
 /*채팅 모달*/
 .chat-modal-wrap {
