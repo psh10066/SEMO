@@ -6,11 +6,18 @@ import { Link, useNavigate } from "react-router-dom";
 const GroupList = (props) => {
   const groupList = props.groupList;
   // console.log(groupList);
-  return (
+  return groupList.length === 0 ? (
+    <div className="none-groupList-wrap">
+      <div className="none-msg">
+        <span className="material-icons">extension</span>
+        <div className="none-msg-content">진행하는 모임이 없어요.</div>
+      </div>
+    </div>
+  ) : (
     <div className="groupList-wrap">
       <div className="group-item-wrap">
         {groupList.map((group, index) => {
-          return <GroupItem key={"feedGroup" + index} group={group} />;
+          return <GroupItem key={"feedGroupItem" + index} group={group} />;
         })}
       </div>
     </div>
@@ -29,7 +36,7 @@ const GroupItem = (props) => {
     axios
       .get("/group/groupPeopleList/" + group.groupNo)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setPeopleList(res.data.peopleList);
         setPeopleCount(res.data.peopleCount);
       })
