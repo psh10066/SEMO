@@ -18,7 +18,7 @@ const GrBoardCommentLike = (props) => {
       .then((res) => {
         console.log(res.data);
         if (res.data) {
-          groupBoardCommentLike(true);
+          setGroupBoardCommentLike(true);
         } else {
           setGroupBoardCommentLike(false);
         }

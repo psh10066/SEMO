@@ -86,31 +86,18 @@ public class GroupBoardService {
 	public List groupBoardReCommentList(int grBoardNo) {
 		return groupBoardDao.groupBoardReCommentList(grBoardNo);
 	}
-//	@Transactional
-//	public int groupBoardCommentLike(int grBoardCommentNo, String memberId) {
-//		Member member = memberDao.selectOneMember(memberId);
-//		GroupBoardCommentLike groupBoardCommentLike = groupBoardDao.selectOneGroupBoardCommentLike(grBoardCommentNo, member.getMemberNo());
-//		if(groupBoardCommentLike != null) {
-//			groupBoardDao.deleteGroupBoardCommentLike(grBoardCommentNo, member.getMemberNo());
-//			return 0;
-//		}else { 
-//			groupBoardDao.insertGroupBoardCommentLike(grBoardCommentNo, member.getMemberNo());
-//			return 1;
-//		}
-//	}
 	@Transactional
-	public int insertGroupBoardCommentLike(int grBoardCommentNo, String memberId) {
+	public int groupBoardCommentLike(int grBoardCommentNo, String memberId) {
 		Member member = memberDao.selectOneMember(memberId);
-		int memberNo = member.getMemberNo();
-		int result = groupBoardDao.insertGroupBoardCommentLike(grBoardCommentNo, memberNo);
-		return result;
-	}
-	@Transactional
-	public int deleteGroupBoardCommentLike(int grBoardCommentNo, String memberId) {
-		Member member = memberDao.selectOneMember(memberId);
-		int memberNo = member.getMemberNo();
-		int result = groupBoardDao.deleteGroupBoardCommentLike(grBoardCommentNo, memberNo);
-		return result;
+		GroupBoardCommentLike groupBoardCommentLike = groupBoardDao.selectOneGroupBoardCommentLike(grBoardCommentNo, member.getMemberNo());
+		if(groupBoardCommentLike != null) {
+			groupBoardDao.deleteGroupBoardCommentLike(grBoardCommentNo, member.getMemberNo());
+			return 0;
+		}else { 
+			groupBoardDao.insertGroupBoardCommentLike(grBoardCommentNo, member.getMemberNo());
+			return 1;
+		}
 	}
 }
+
 
