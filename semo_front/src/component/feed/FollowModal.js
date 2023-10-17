@@ -95,23 +95,32 @@ const FollowMember = (props) => {
   };
 
   const deleteFollower = () => {
-    alert("삭제");
-    // axios
-    //   .post(
-    //     "/member/deleteFollower",
-    //     { memberNo },
-    //     {
-    //       headers: {
-    //         Authorization: "Bearer " + token,
-    //       },
-    //     }
-    //   )
-    //   .then((res) => {
-    //     setChangeFeed(!changeFeed);
-    //   })
-    //   .catch((res) => {
-    //     console.log(res.response.status);
-    //   });
+    Swal.fire({
+      icon: "question",
+      text: "팔로워를 삭제하시겠습니까?",
+      showCancelButton: true,
+      confirmButtonText: "삭제",
+      cancelButtonText: "취소",
+    }).then((res) => {
+      if (res.isConfirmed) {
+        axios
+          .post(
+            "/member/deleteFollower",
+            { memberNo },
+            {
+              headers: {
+                Authorization: "Bearer " + token,
+              },
+            }
+          )
+          .then((res) => {
+            setChangeFeed(!changeFeed);
+          })
+          .catch((res) => {
+            console.log(res.response.status);
+          });
+      }
+    });
   };
   return (
     <div className="follow-member-wrap">

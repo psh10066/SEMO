@@ -133,5 +133,14 @@ public class MemberService {
 		map.put("followingList", followingList);
 		return map;
 	}
+	@Transactional
+	public int deleteMyFollwer(int memberNo, String memberId) {
+		Member member = memberDao.selectOneMember(memberId);
+		int followingNo = member.getMemberNo();
+		Follow f = new Follow();
+		f.setFollowerNo(memberNo);
+		f.setFollowingNo(followingNo);
+		return memberDao.deleteMyFollower(f);
+	}
 
 }

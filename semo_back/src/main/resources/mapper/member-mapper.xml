@@ -73,4 +73,7 @@
   	<select id="getFollowing" resultType="int">
   		select following_no from follow where follower_no = #{memberNo} order by follow_no desc
   	</select>
+  	<delete id="deleteMyFollower">
+  		delete from follow where follower_no=#{followerNo} and following_no=#{followingNo}
+  	</delete>
 </mapper>
