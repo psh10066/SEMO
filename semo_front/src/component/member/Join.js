@@ -97,7 +97,7 @@ const Join = () => {
     if (
       checkIdMsg === "" &&
       checkPwMsg === "" &&
-      mailChk === "true" &&
+      mailChk === true &&
       checkPwOmsg === "" &&
       checkNameMsg === ""
     ) {
@@ -121,6 +121,10 @@ const Join = () => {
         })
         .then((res) => {
           if (res.data === 1) {
+            Swal.fire({
+              icon: "success",
+              text: "가입완료!",
+            });
             navigate("/login");
           } else {
             console.log("에러");
