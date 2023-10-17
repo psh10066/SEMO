@@ -12,7 +12,7 @@ const ChatToggleModal = (props) => {
         onRequestClose={() => props.setModalState(false)} // 모달의 오버레이나 Esc 키를 클릭하면 이 함수가 호출
         shouldCloseOnOverlayClick={true}
         style={{
-          content: { width: "200px", height: "200px", margin: "25vh auto" },
+          content: { width: "230px", height: "200px", margin: "25vh auto" },
           overlay: { zIndex: 1000 }, // zIndex를 추가하여 오버레이가 확실히 상단에 위치하도록 하기
         }}
       >
