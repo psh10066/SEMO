@@ -117,13 +117,6 @@ const ChatRoom = (props) => {
     }
   };
 
-  //토글메뉴
-  const [isMemberVisible, setIsMemberVisible] = useState(false);
-
-  const toggleChatMember = () => {
-    setIsMemberVisible(!isMemberVisible);
-  };
-
   return (
     <>
       <div className="chat-header">
@@ -131,8 +124,6 @@ const ChatRoom = (props) => {
         <ChatToggle
           groupAllMemberName={groupAllMemberName}
           groupAllMemberType={groupAllMemberType}
-          isMemberVisible={isMemberVisible}
-          toggleChatMember={toggleChatMember}
         />
       </div>
       {/* 메세지 출력 */}

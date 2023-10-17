@@ -303,9 +303,8 @@ const CommentItem = (props) => {
       <div className="comment-bottom">
         <div className="comment-like">
           <GrBoardCommentLike
-            grBoardCommentNo={grBoardCommentNo}
-            groupBoardCommentLike={groupBoardCommentLike}
-            setGroupBoardCommentLike={setGroupBoardCommentLike}
+            grBoardCommentNo={comment.grBoardCommentNo}
+            isLogin={isLogin}
           />
         </div>
         {isLogin ? (

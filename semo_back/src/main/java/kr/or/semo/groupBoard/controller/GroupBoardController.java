@@ -98,4 +98,14 @@ public class GroupBoardController {
 	public int groupBoardCommentLike(@PathVariable int grBoardCommentNo, @RequestAttribute String memberId) {
 		return groupBoardService.groupBoardCommentLike(grBoardCommentNo, memberId);
 	}
+	//댓글 좋아요 수
+	@GetMapping(value="/commentLikeCount/{grBoardCommentNo}")
+	public int groupBoardCommentLikeCount(@PathVariable int grBoardCommentNo) {
+		return groupBoardService.groupBoardCommentLikeCount(grBoardCommentNo);
+	}
+	//댓글 좋아요 상태
+	@PostMapping(value="/commentLikeState/{grBoardCommentNo}")
+	public int groupBoardCommentLikeState(@PathVariable int grBoardCommentNo, @RequestAttribute String memberId) {
+		return groupBoardService.groupBoardCommentLikeState(grBoardCommentNo, memberId);
+	}
 }

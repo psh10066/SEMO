@@ -67,6 +67,8 @@
   align-items: center;
   border-top-left-radius: 60px;
   border-bottom-left-radius: 60px;
+  border-top-right-radius: 60px;
+  border-bottom-right-radius: 60px;
   margin-bottom: 20px;
 
   white-space: nowrap;
@@ -79,7 +81,7 @@
 
 /*
 */
-/*채팅 룸*/
+/*채팅*/
 .chat-header {
   height: 8%;
   display: flex;
@@ -120,14 +122,38 @@
   background-color: rgb(253, 255, 148);
 }
 
-/*토글메뉴*/
-.toggle-chatMember-box {
+/*채팅 모달*/
+.chat-modal-wrap {
+  position: relative;
+}
+.chat-modal-close {
+  display: flex;
+  justify-content: end;
+}
+.chat-modal-member {
   position: absolute;
   top: 0;
-  right: 0;
-  width: 200px; /* 원하는 너비로 조정하세요 */
-  height: 300px; /* 원하는 높이로 조정하세요 */
-  background-color: #ffffff;
-  border: 1px solid #ccc;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  left: 0;
+  width: 90%;
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+}
+.chat-modal-member > h3 {
+  width: fit-content;
+}
+.chat-modal-close > span {
+  cursor: pointer;
+}
+.chat-modal-member-detail {
+  margin-top: 18px;
+  display: flex;
+  margin-left: 56px;
+}
+.chat-modal-member-detail > div > div {
+  width: 100px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

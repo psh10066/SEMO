@@ -81,15 +81,34 @@ const Chat = (props) => {
         }
       )
       .then((res) => {
-        setGroupAllMemberName(res.data.map((item) => item.memberName));
-        setGroupAllMemberType(res.data.map((item) => item.grJoinType));
+        // grJoinType이 3인 회원은 모임승인대기상태
+        // grJoinType이 3이 아닌 회원만 필터링
+        const filteredMembers = res.data.filter(
+          (item) => item.grJoinType !== 3
+        );
+        setGroupAllMemberName(filteredMembers.map((item) => item.memberName));
+        setGroupAllMemberType(filteredMembers.map((item) => item.grJoinType));
+
+        // 로그인한 사용자의 grJoinType 값이 3인지 확인
+        const loggedInUserType = res.data.find(
+          (item) => item.memberName === member.memberName
+        )?.grJoinType;
+        if (loggedInUserType === 3) {
+          Swal.fire({
+            title: "모임 가입 대기 상태입니다.",
+            text: "메인 페이지로 이동합니다.",
+            icon: "info",
+          }).then(() => {
+            navigate("/");
+          });
+        }
       })
       .catch((res) => {
         console.log(res.response.status);
       });
   }, [selectedGroupNumber]);
 
-  //탭 안했으면 채팅 메인으로 이동
+  //탭 안했으면 채팅-메인으로 이동
   useEffect(() => {
     if (selectedGroupNumber === 0) {
       navigate("/chat/chatInfo", { replace: true });

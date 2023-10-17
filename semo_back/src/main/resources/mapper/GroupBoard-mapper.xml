@@ -73,4 +73,10 @@
 		delete from gr_board_comment_like
 		where gr_board_comment_no = #{grBoardCommentNo} and member_no = #{memberNo}
 	</delete>
+	<select id="groupBoardCommentLikeCount" resultType="int">
+  		select count(*) from gr_board_comment_like where gr_board_comment_no=#{grBoardCommentNo}
+ 	</select>
+ 	<select id="groupBoardCommentLikeState" resultType="int">
+  		select count(*) from gr_board_comment_like where gr_board_comment_no=#{grBoardCommentNo} and member_no=#{memberNo}
+  	</select>
 </mapper>
