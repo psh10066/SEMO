@@ -12,7 +12,7 @@
     		#{meetingMaxnum})
 	</insert>
 	<select id="selectMeetingList" resultType="meeting">
-		select * from meeting where group_no = #{groupNo}
+		select * from meeting where group_no = #{groupNo} order by meeting_date
 	</select>
 	<insert id="joinMeeting">
 		insert into meeting_join values(
@@ -21,4 +21,25 @@
 			#{meetingNo},
 			1)
 	</insert>
+	<select id="countMember" resultType="int">
+		select count(mt_join) 
+		from meeting JOIN meeting_join USING (meeting_no) 
+		where meeting_no=#{meetingNo}
+	</select>
+	
+	<delete id="cancelJoin">
+		delete meeting_join where meeting_no=#{meetingNo} and member_no=
+		(select member_no from member where member_id=#{memberId})
+	</delete>
+	
+	
+	<select id="selectJoinMember" resultType="int">
+		select member_no from meeting_join 
+		where meeting_no=#{meetingNo} and MT_JOIN_STATUS=1
+	</select>
+	
+	 
+	
+	
+	 
 </mapper>

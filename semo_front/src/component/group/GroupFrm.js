@@ -6,6 +6,8 @@ import TextEditor from "../util/TextEditor";
 import { Button1 } from "../util/Buttons";
 
 const GroupFrm = (props) => {
+  const chkGroupNameMsg = props.chkGroupNameMsg;
+  const setChkGroupNameMsg = props.setChkGroupNameMsg;
   const groupName = props.groupName;
   const setGroupName = props.setGroupName;
   const thumbnail = props.thumbnail;
@@ -45,6 +47,14 @@ const GroupFrm = (props) => {
   const handleChange3 = (event) => {
     setGroupLocal(event.target.value);
   };
+  const groupNameCheck = () => {
+    const groupNameReg = /^.{4,20}$/;
+    if (!groupNameReg.test(groupName)) {
+      setChkGroupNameMsg("그룹이름은 4글자 이상 20글자이하로 가능합니다");
+    } else {
+      setChkGroupNameMsg("");
+    }
+  };
   return (
     <div className="group-frm-wrap">
       <div className="group-frm-top">
@@ -61,7 +71,9 @@ const GroupFrm = (props) => {
                     data={groupName}
                     setData={setGroupName}
                     content="groupName"
+                    blurEvent={groupNameCheck}
                   />
+                  <div className="check-msg">{chkGroupNameMsg}</div>
                 </td>
               </tr>
               <tr>

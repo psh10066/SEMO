@@ -13,6 +13,7 @@ const GroupCreate = (props) => {
   const [groupCategory, setGroupCategory] = useState(0);
   const [groupLocal, setGroupLocal] = useState(0);
   const [joinNum, setJoinNum] = useState(0);
+  const [chkGroupNameMsg, setChkGroupNameMsg] = useState("");
   const navigate = useNavigate();
   const token = window.localStorage.getItem("token");
   useEffect(() => {
@@ -34,7 +35,8 @@ const GroupCreate = (props) => {
       groupContent != "" &&
       groupMaxnum !== 0 &&
       groupCategory !== 0 &&
-      groupLocal !== 0
+      groupLocal !== 0 &&
+      chkGroupNameMsg == ""
     ) {
       const form = new FormData();
       form.append("groupName", groupName);
@@ -92,6 +94,8 @@ const GroupCreate = (props) => {
         groupLocal={groupLocal}
         setGroupLocal={setGroupLocal}
         buttonEvent={create}
+        chkGroupNameMsg={chkGroupNameMsg}
+        setChkGroupNameMsg={setChkGroupNameMsg}
         type="write"
       />
     </div>

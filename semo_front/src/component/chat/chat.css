@@ -100,6 +100,9 @@
 }
 .chat-content {
   height: 82.5%;
+  width: 100%;
+
+  overflow-y: auto;
 }
 .chat-input {
   height: 45px;
@@ -120,6 +123,14 @@
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   background-color: rgb(253, 255, 148);
+}
+.previous-chat-btn {
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+.chatPrevious-wrap {
+  display: none;
 }
 
 /*채팅 모달*/
