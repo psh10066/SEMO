@@ -28,6 +28,17 @@ const GroupView = (props) => {
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     axios
+      .get("/group/groupPeopleList/" + groupNo)
+      .then((res) => {
+        console.log(res.data);
+        setPeopleList(res.data.peopleList);
+        setPeopleCount(res.data.peopleCount);
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+
+    axios
       .get("/group/view/" + groupNo, {
         headers: {
           Authorization: "Bearer " + token,
@@ -36,20 +47,11 @@ const GroupView = (props) => {
       .then((res) => {
         setGroup(res.data);
         setGroupSave(res.data.groupSave);
-        axios
-          .get("/group/groupPeopleList/" + groupNo)
-          .then((res) => {
-            console.log(res.data);
-            setPeopleList(res.data.peopleList);
-            setPeopleCount(res.data.peopleCount);
-          })
-          .catch((res) => {
-            console.log(res.response.status);
-          });
       })
       .catch((error) => {
         console.log(error.response.status);
       });
+
     if (isLogin) {
       const token = window.localStorage.getItem("token");
       axios
