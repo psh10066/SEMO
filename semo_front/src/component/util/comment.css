@@ -27,10 +27,13 @@
 }
 .comment-wrap {
   width: 100%;
-  padding: 10px 5px;
+  padding: 15px;
+  /* padding-bottom: 2px; */
   box-sizing: border-box;
   background-color: #eee;
+  /* border: 1px solid #ccc; */
   border-radius: 10px;
+  margin: 15px 0;
 }
 .comment-top {
   width: 100%;
@@ -48,17 +51,21 @@
 }
 .comment-mid {
   padding: 5px 20px;
-  width: 80%;
-  margin: auto;
+  /* width: 80%; */
+  /* margin: 0 auto; */
 }
 .recomment-input-all-wrap {
-  width: 95%;
-  padding-left: 5%;
+  /* width: 95%;
+  padding-left: 5%; */
   margin: 15px;
 }
 .reCommentBox-wrap {
-  padding-left: 5%;
-  width: 95%;
+  /* padding-left: 8%;
+  width: 92%; */
+  /* display: flex;
+  align-items: center;
+  flex 대신 float: left로 처리하기 내일 무조건 해!!!!!!!!
+  */
 }
 .comment-bottom {
   display: flex;
@@ -94,4 +101,9 @@
 .board-view-bottom {
   margin: auto;
   width: 80%;
+}
+.arrowReComment {
+  font-size: 35px;
+  padding-right: 15px;
+  color: #ccc;
 }

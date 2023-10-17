@@ -250,113 +250,115 @@ const CommentItem = (props) => {
     });
   };
   return (
-    <div className="comment-wrap">
-      <div className="comment-top">
-        {comment.memberImg === null ? (
-          <div className="commentItem-profile-image">
-            <Stack direction="row" spacing={2} onClick={naviFeedProfile}>
-              <Avatar
-                alt="Remy Sharp"
-                src="/image/person.png"
-                sx={{ width: 22, height: 22 }}
-              />
-            </Stack>
+    <>
+      <div className="comment-wrap">
+        <div className="comment-top">
+          {comment.memberImg === null ? (
+            <div className="commentItem-profile-image">
+              <Stack direction="row" spacing={2} onClick={naviFeedProfile}>
+                <Avatar
+                  alt="Remy Sharp"
+                  src="/image/person.png"
+                  sx={{ width: 22, height: 22 }}
+                />
+              </Stack>
+            </div>
+          ) : (
+            <div className="commentItem-profile-image">
+              <Stack direction="row" spacing={2} onClick={naviFeedProfile}>
+                <Avatar
+                  alt="Remy Sharp"
+                  src={"/member/" + comment.memberImg}
+                  sx={{ width: 22, height: 22 }}
+                />
+              </Stack>
+            </div>
+          )}
+          <div className="commentItem-memberName" onClick={naviFeedProfile}>
+            {comment.memberName}
           </div>
-        ) : (
-          <div className="commentItem-profile-image">
-            <Stack direction="row" spacing={2} onClick={naviFeedProfile}>
-              <Avatar
-                alt="Remy Sharp"
-                src={"/member/" + comment.memberImg}
-                sx={{ width: 22, height: 22 }}
-              />
-            </Stack>
+          <div className="commentItem-date">
+            {comment.feedCommentDate ? formatTime(comment.feedCommentDate) : ""}
           </div>
-        )}
-        <div className="commentItem-memberName" onClick={naviFeedProfile}>
-          {comment.memberName}
         </div>
-        <div className="commentItem-date">
-          {comment.feedCommentDate ? formatTime(comment.feedCommentDate) : ""}
+        <div className="comment-mid">
+          {modifyState ? (
+            <div className="commentItem-content">
+              {comment.feedCommentContent}
+            </div>
+          ) : (
+            <textarea
+              name="commentContent"
+              className="comment-modify-form comment-input-form"
+              placeholder="댓글 추가..."
+              ref={textRef}
+              onInput={resizeHeight}
+              value={feedCommentContent}
+              id={feedCommentContent}
+              onChange={(e) => {
+                setFeedCommentContent(e.target.value);
+              }}
+            />
+          )}
         </div>
-      </div>
-      <div className="comment-mid">
-        {modifyState ? (
-          <div className="commentItem-content">
-            {comment.feedCommentContent}
+        <div className="comment-bottom">
+          <div className="comment-like">
+            <CommentLike commentNo={comment.feedCommentNo} isLogin={isLogin} />
           </div>
-        ) : (
-          <textarea
-            name="commentContent"
-            className="comment-modify-form comment-input-form"
-            placeholder="댓글 추가..."
-            ref={textRef}
-            onInput={resizeHeight}
-            value={feedCommentContent}
-            id={feedCommentContent}
-            onChange={(e) => {
-              setFeedCommentContent(e.target.value);
-            }}
-          />
-        )}
-      </div>
-      <div className="comment-bottom">
-        <div className="comment-like">
-          <CommentLike commentNo={comment.feedCommentNo} isLogin={isLogin} />
-        </div>
-        {isLogin ? (
-          member && member.memberNo === comment.feedCommentWriter ? (
-            modifyState ? (
+          {isLogin ? (
+            member && member.memberNo === comment.feedCommentWriter ? (
+              modifyState ? (
+                <div className="comment-bottom-right">
+                  <div className="comment-modify" onClick={modifyClick}>
+                    수정
+                  </div>
+                  <div className="comment-delete" onClick={deleteComment}>
+                    삭제
+                  </div>
+                  <ReCommentWrite
+                    recommentState={recommentState}
+                    setRecommentState={setRecommentState}
+                  />
+                </div>
+              ) : (
+                <div className="comment-bottom-right">
+                  <div className="comment-modify" onClick={modifyComment}>
+                    수정
+                  </div>
+                  <div className="comment-delete" onClick={modifyCancel}>
+                    취소
+                  </div>
+                </div>
+              )
+            ) : (
               <div className="comment-bottom-right">
-                <div className="comment-modify" onClick={modifyClick}>
-                  수정
-                </div>
-                <div className="comment-delete" onClick={deleteComment}>
-                  삭제
-                </div>
                 <ReCommentWrite
                   recommentState={recommentState}
                   setRecommentState={setRecommentState}
                 />
               </div>
-            ) : (
-              <div className="comment-bottom-right">
-                <div className="comment-modify" onClick={modifyComment}>
-                  수정
-                </div>
-                <div className="comment-delete" onClick={modifyCancel}>
-                  취소
-                </div>
-              </div>
             )
           ) : (
             <div className="comment-bottom-right">
-              <ReCommentWrite
-                recommentState={recommentState}
-                setRecommentState={setRecommentState}
-              />
+              <div className="comment-recommentWrite" onClick={loginMsg}>
+                답글달기
+              </div>
             </div>
-          )
-        ) : (
-          <div className="comment-bottom-right">
-            <div className="comment-recommentWrite" onClick={loginMsg}>
-              답글달기
-            </div>
-          </div>
-        )}
-      </div>
-      <div className="recomment-input-all-wrap">
-        {recommentState ? (
-          ""
-        ) : (
-          <InputCommentBox
-            member={member}
-            isLogin={isLogin}
-            commentContent={feedReCommentContent}
-            setCommentContent={setFeedRecommentContent}
-            feedCommentSubmit={feedCommentSubmit}
-          />
-        )}
+          )}
+        </div>
+        <div className="recomment-input-all-wrap">
+          {recommentState ? (
+            ""
+          ) : (
+            <InputCommentBox
+              member={member}
+              isLogin={isLogin}
+              commentContent={feedReCommentContent}
+              setCommentContent={setFeedRecommentContent}
+              feedCommentSubmit={feedCommentSubmit}
+            />
+          )}
+        </div>
       </div>
       <ReComment
         isLogin={isLogin}
@@ -368,7 +370,7 @@ const CommentItem = (props) => {
         changeFeedComment={changeFeedComment}
         setChangeFeedComment={setChangeFeedComment}
       />
-    </div>
+    </>
   );
 };
 //답글달기 버튼 변경
