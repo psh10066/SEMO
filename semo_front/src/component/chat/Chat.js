@@ -82,7 +82,20 @@ const Chat = (props) => {
       )
       .then((res) => {
         setGroupAllMemberName(res.data.map((item) => item.memberName));
-        setGroupAllMemberType(res.data.map((item) => item.grJoinType));
+        const hasTypeThree = res.data.some((item) => item.grJoinType === 3);
+        if (hasTypeThree) {
+          Swal.fire({
+            title: "모임 가입 대기 상태입니다.",
+            text: "메인 페이지로 이동합니다.",
+            icon: "info",
+          }).then(() => {
+            navigate("/");
+          });
+        }
+        const filteredMemberType = res.data
+          .filter((item) => item.grJoinType === 3)
+          .map((item) => item.grJoinType);
+        setGroupAllMemberType(filteredMemberType);
       })
       .catch((res) => {
         console.log(res.response.status);
