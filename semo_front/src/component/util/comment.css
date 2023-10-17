@@ -54,3 +54,33 @@
   padding-left: 5%;
   width: 95%;
 }
+.comment-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.comment-like {
+  display: flex;
+  /* border: 1px solid #ccc;
+  padding: 3px 10px;
+  border-radius: 5px; */
+}
+.comment-like > span {
+  font-size: 19px;
+}
+.comment-like > .commentLikeCount {
+  padding-left: 5px;
+  font-size: 13px;
+}
+.commentItem-content {
+  white-space: pre-line;
+  overflow-wrap: break-word;
+}
+.comment-input-form {
+  resize: none;
+  width: 100%;
+  outline: none;
+  border: 1px solid #ccc;
+  padding: 8px;
+  box-sizing: border-box;
+}
