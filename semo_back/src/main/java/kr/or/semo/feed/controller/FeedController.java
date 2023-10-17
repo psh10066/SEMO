@@ -162,4 +162,16 @@ public class FeedController {
 		return feedService.selectGroupList(memberNo);
 	}
 	
+	//피드 댓글 좋아요
+	@PostMapping(value="/commentLike/{commentNo}")
+	public int commentLike(@PathVariable int commentNo, @RequestAttribute String memberId) {
+		return feedService.commentLike(commentNo, memberId);
+	}
+	
+	//피드 댓글 좋아요 수
+	@GetMapping(value="/commentLikeCount/{commentNo}")
+	public int commentLikeCount(@PathVariable int commentNo) {
+		return feedService.commentLikeCount(commentNo);
+	}
+	
 }

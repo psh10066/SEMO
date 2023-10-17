@@ -79,5 +79,18 @@
 	ON group_tbl.group_no = gr_join.group_no
 	WHERE gr_join.member_no = #{memberNo}
   </select>
-
+  <select id="selectOneCommentLike" resultType="feedCommentLike">
+  	select * from feed_comment_like
+	where feed_comment_no = #{feedCommentNo} and member_no = #{memberNo}
+  </select>
+  <delete id="deleteCommentLike">
+  	delete from feed_comment_like
+	where feed_comment_no = #{feedCommentNo} and member_no = #{memberNo}
+  </delete>
+  <insert id="insertCommentLike">
+  	insert into feed_comment_like values(#{feedCommentNo}, #{memberNo})
+  </insert>
+  <select id="commentLikeCount" resultType="int">
+  	select count(*) from feed_comment_like where feed_comment_no=#{feedCommentNo}
+  </select>
 </mapper>

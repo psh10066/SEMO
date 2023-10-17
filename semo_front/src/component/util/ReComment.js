@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import CommentLike from "./CommentLIke";
 
 const ReComment = (props) => {
   const isLogin = props.isLogin;
@@ -213,6 +214,12 @@ const ReCommentItem = (props) => {
             )}
           </div>
           <div className="comment-bottom">
+            <div className="comment-like">
+              <CommentLike
+                commentNo={recomment.feedCommentNo}
+                isLogin={isLogin}
+              />
+            </div>
             {isLogin ? (
               member && member.memberNo === recomment.feedCommentWriter ? (
                 modifyState ? (

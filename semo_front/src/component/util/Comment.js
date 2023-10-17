@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import ReComment from "./ReComment";
 import { useNavigate } from "react-router-dom";
+import CommentLike from "./CommentLIke";
 
 const feedCommentRegist = (
   feedNo,
@@ -300,7 +301,9 @@ const CommentItem = (props) => {
         )}
       </div>
       <div className="comment-bottom">
-        <div className="comment-like"></div>
+        <div className="comment-like">
+          <CommentLike commentNo={comment.feedCommentNo} isLogin={isLogin} />
+        </div>
         {isLogin ? (
           member && member.memberNo === comment.feedCommentWriter ? (
             modifyState ? (
