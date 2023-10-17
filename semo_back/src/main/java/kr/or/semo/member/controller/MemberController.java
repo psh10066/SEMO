@@ -201,4 +201,18 @@ public class MemberController {
 		String memberMail = m.getMemberMail();
 		return memberService.mailCheck(memberMail);	
 	}
+	
+	@PostMapping(value="/findPw")
+	public int pwChk(@RequestBody Member member) {		
+		return memberService.pwChk(member);
+	}
+	@PostMapping(value="/findChangePw")
+	public int findChangePwMember(@RequestBody Member member) {
+		System.out.println(member);
+		return memberService.findChangePwMember(member);
+	}
+	
+	
+	
+	
 }

@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import KakaoLogin from "../member/KakaoLogin";
 import FindIdOpen from "./FindIdOpen";
+import FindPwOpen from "./FindPwOpen";
 
 const Login = (props) => {
   const setIsLogin = props.setIsLogin;
@@ -68,7 +69,9 @@ const Login = (props) => {
           <div>아이디 찾기</div>
         </FindIdOpen>
         <span className="material-icons">horizontal_rule</span>
-        <Link to="#">비밀번호 찾기</Link>
+        <FindPwOpen>
+          <div>비밀번호 찾기</div>
+        </FindPwOpen>
         <span className="material-icons">horizontal_rule</span>
         <Link to="/join">회원가입</Link>
       </div>

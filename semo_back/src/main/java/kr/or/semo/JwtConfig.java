@@ -28,7 +28,7 @@ public class JwtConfig {
 				.authorizeRequests()		//요청에 대한 권한 설정
 				//post요청중에 /member/login, /member/join은 그냥 허용
 
-				.antMatchers(HttpMethod.POST,"/member/sendMail","/member/oauth/kakao","/member/login","/member/join","/groupBoard/write","/groupPhoto/write","/member/mailCheck").permitAll()
+				.antMatchers(HttpMethod.POST,"/member/sendMail","/member/oauth/kakao","/member/login","/member/join","/groupBoard/write","/groupPhoto/write","/member/mailCheck","/member/findPw","/member/findChangePw").permitAll()
 
 				.antMatchers(HttpMethod.POST,"/member/login","/member/join","/groupBoard/write","/groupPhoto/write","/page/search").permitAll()
 

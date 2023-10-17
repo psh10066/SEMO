@@ -47,7 +47,6 @@ public class MemberService {
 	}
 	@Transactional
 	public int insertMember(Member member) {
-		System.out.println(member.getMemberImg());
 		// TODO Auto-generated method stub
 		return memberDao.insertMember(member);
 	}
@@ -136,8 +135,25 @@ public class MemberService {
 
 	public String mailCheck(String memberMail) {
 		String m = memberDao.mailCheck(memberMail);
-		System.out.println(m);
 		return m;
 	}
 
+	public int pwChk(Member member) {
+		Member m = memberDao.pwChk(member);
+		if(m != null ) {
+			return 1;
+		}else {
+			return 0;
+		}
+	}
+	
+	@Transactional
+	public int findChangePwMember(Member member) {
+		// TODO Auto-generated method stub
+		return memberDao.findChangePwMember(member);
+	}
+
+	
+	
+	
 }
