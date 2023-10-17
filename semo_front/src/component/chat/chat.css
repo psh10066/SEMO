@@ -99,9 +99,9 @@
   color: #f9d8ff;
 }
 .chat-content {
-  height: 82.5%;
+  height: 82%;
   width: 100%;
-
+  padding-bottom: 10px;
   overflow-y: auto;
 }
 .chat-input {
@@ -128,6 +128,45 @@
   display: flex;
   justify-content: center;
   cursor: pointer;
+}
+/*메세지*/
+.message-left {
+  display: grid;
+  justify-content: end;
+  justify-items: end;
+  margin-bottom: 10px;
+  margin-right: 25px;
+}
+.message-right {
+  display: grid;
+  justify-content: start;
+  margin-left: 15px;
+}
+.chat-message-box {
+  width: fit-content;
+  height: fit-content;
+  background-color: #fff;
+  padding: 5px;
+  border-radius: 10px;
+  margin-top: 5px;
+  font-size: 18px;
+}
+.chat-message-name {
+  font-size: 14px;
+}
+.chat-message-time {
+  font-size: 13px;
+}
+.noMessage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loadingMessage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /*채팅 모달*/

@@ -44,6 +44,7 @@ public class ChatServerController {
     	return chatServerService.messageInsert(messagePayload);
     }
     
+    //접속 시간
     @PostMapping("/chat/insertAccessTime")
     public int chatAccessTimeInsert(@RequestBody LastAccessChatTime lastAccessChatTime) {
     	return chatServerService.chatAccessTimeInsert(lastAccessChatTime);
