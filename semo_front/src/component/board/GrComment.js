@@ -1,5 +1,5 @@
 import { Avatar, PopoverPaper, Stack } from "@mui/material";
-import "./grComment.css";
+import "../util/comment.css";
 import { Button1 } from "../util/Buttons";
 import Swal from "sweetalert2";
 import { useEffect, useRef, useState } from "react";
@@ -288,7 +288,7 @@ const CommentItem = (props) => {
         ) : (
           <textarea
             name="commentContent"
-            className="comment-modify-form"
+            className="comment-modify-form comment-input-form"
             placeholder="댓글 추가..."
             ref={textRef}
             onInput={resizeHeight}

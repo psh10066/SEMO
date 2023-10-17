@@ -203,7 +203,7 @@ const ReCommentItem = (props) => {
             ) : (
               <textarea
                 name="commentContent"
-                className="comment-modify-form"
+                className="comment-modify-form comment-input-form"
                 placeholder="댓글 추가..."
                 ref={textRef}
                 onInput={resizeHeight}
