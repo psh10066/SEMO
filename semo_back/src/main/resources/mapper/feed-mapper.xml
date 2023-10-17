@@ -93,4 +93,7 @@
   <select id="commentLikeCount" resultType="int">
   	select count(*) from feed_comment_like where feed_comment_no=#{feedCommentNo}
   </select>
+  <select id="commentLikeState" resultType="int">
+  	select count(*) from feed_comment_like where feed_comment_no=#{feedCommentNo} and member_no=#{memberNo}
+  </select>
 </mapper>

@@ -55,6 +55,8 @@ public interface FeedDao {
 
 	int commentLikeCount(int feedCommentNo);
 
+	int commentLikeState(int feedCommentNo, int memberNo);
+
 
 
 }

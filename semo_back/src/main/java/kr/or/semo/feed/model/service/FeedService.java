@@ -142,6 +142,10 @@ public class FeedService {
 	public int commentLikeCount(int feedCommentNo) {
 		return feedDao.commentLikeCount(feedCommentNo);
 	}
+	public int commentLikeState(int feedCommentNo, String memberId) {
+		Member member = memberDao.selectOneMember(memberId);
+		return feedDao.commentLikeState(feedCommentNo, member.getMemberNo());
+	}
 	
 
 }

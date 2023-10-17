@@ -18,6 +18,26 @@ const CommentLike = (props) => {
       .catch((res) => {
         console.log(res.response.status);
       });
+    if (isLogin) {
+      const token = window.localStorage.getItem("token");
+      axios
+        .post("/feed/commentLikeState/" + commentNo, null, {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then((res) => {
+          //   console.log(res.data);
+          if (res.data === 1) {
+            setCommentLike(true);
+          } else {
+            setCommentLike(false);
+          }
+        })
+        .catch((res) => {
+          console.log(res.response.status);
+        });
+    }
   }, [commentLike]);
   const loginMsg = () => {
     Swal.fire("로그인 후 이용해 주세요.");

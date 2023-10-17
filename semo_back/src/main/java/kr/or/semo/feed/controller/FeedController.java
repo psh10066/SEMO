@@ -20,6 +20,7 @@ import kr.or.semo.FileUtil;
 import kr.or.semo.feed.model.service.FeedService;
 import kr.or.semo.feed.model.vo.Feed;
 import kr.or.semo.feed.model.vo.FeedComment;
+import kr.or.semo.feed.model.vo.FeedCommentLike;
 import kr.or.semo.member.model.vo.Member;
 
 @RestController
@@ -172,6 +173,12 @@ public class FeedController {
 	@GetMapping(value="/commentLikeCount/{commentNo}")
 	public int commentLikeCount(@PathVariable int commentNo) {
 		return feedService.commentLikeCount(commentNo);
+	}
+	
+	//피드 댓글 좋아요 상태
+	@PostMapping(value="/commentLikeState/{commentNo}")
+	public int commentLikeState(@PathVariable int commentNo, @RequestAttribute String memberId) {
+		return feedService.commentLikeState(commentNo, memberId);
 	}
 	
 }
