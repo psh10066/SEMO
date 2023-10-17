@@ -104,6 +104,9 @@
 		select member_no,member_img from gr_join join member using (member_no) where group_no=#{groupNo} and GR_JOIN_TYPE in (1,2) order by gr_join desc
 	</select>
 	
+	<delete id="deleteGroup">
+		delete from group_tbl where group_no=#{groupNo}
+	</delete>
 	
 	
 	
