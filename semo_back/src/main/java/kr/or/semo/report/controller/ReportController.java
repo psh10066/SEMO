@@ -38,7 +38,7 @@ public class ReportController {
 	}
 	*/
 	
-	@GetMapping(value="/myGroup/{memberNo}")
+	@GetMapping(value="/mygroup/{memberNo}")
 	public List myGroupList(@PathVariable int memberNo) {
 		return reportService.myGroupList(memberNo);
 	}

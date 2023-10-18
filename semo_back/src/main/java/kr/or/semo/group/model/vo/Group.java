@@ -21,4 +21,6 @@ public class Group {
 	private String memberId;
 	private boolean groupSave;
 	private int totalCount;
+	
+	private int grJoinType; //그룹 대기상태 조회용
 }

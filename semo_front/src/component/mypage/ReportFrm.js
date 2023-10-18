@@ -15,16 +15,12 @@ const ReportFrm = (props) => {
       <table className="report-tbl">
         <tbody>
           <tr>
-            {/* 
             <td>신고 모임명 : </td>
             <td>{group.groupName}</td>
-            */}
           </tr>
           <tr>
-            {/* 
             <td>신고 회원명 : </td>
             <td>{member.memberName}</td>
-            */}
           </tr>
           <tr>
             <td colSpan="2" className="report-content-box">

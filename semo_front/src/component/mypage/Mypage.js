@@ -145,16 +145,7 @@ const Mypage = (props) => {
               path="adminMain/*"
               element={<AdminMain isLogin={isLogin} setIsLogin={setIsLogin} />}
             />
-            <Route
-              path="mygroup/mypageReport"
-              element={
-                <MypageReport
-                  member={member}
-                  setMember={setMember}
-                  isLogin={isLogin}
-                />
-              }
-            />
+            <Route path="mygroup/mypageReport" element={<MypageReport />} />
           </Routes>
         </div>
       </div>

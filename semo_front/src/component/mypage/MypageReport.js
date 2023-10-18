@@ -4,17 +4,14 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import ReportFrm from "./ReportFrm";
 
-const MypageReport = (props) => {
+const MypageReport = () => {
   const location = useLocation();
-  //const group = location.state.group;
-  //const member = location.state.member;
-  const member = props.member;
-  const [group, setGroup] = useState([]);
+  const group = location.state.group;
+  const member = location.state.member;
+  console.log(group);
+  console.log(member);
 
   const [reportContent, setReportContent] = useState("");
-  const groupNo = group.groupNo;
-  const memberName = member.memberName;
-  //const memberName = "ㅁㄴㅇㄹ"
 
   const navigate = useNavigate();
   const report = () => {
@@ -22,8 +19,8 @@ const MypageReport = (props) => {
     if (reportContent !== "") {
       const form = new FormData();
       form.append("reportContent", reportContent);
-      form.append("groupNo", groupNo);
-      form.append("memberName", memberName);
+      form.append("groupNo", group.groupNo);
+      form.append("memberName", member.memberNo);
       const token = window.localStorage.getItem("token");
       axios
         .post("/report/insert", form, {

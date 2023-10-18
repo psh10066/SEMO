@@ -77,9 +77,7 @@ function App() {
           />
           <Route
             path="/page/*"
-            element={<PageMain />}
-            isLogin={isLogin}
-            setIsLogin={setIsLogin}
+            element={<PageMain isLogin={isLogin} setIsLogin={setIsLogin} />}
           />
           <Route
             path="/mypage/*"
@@ -95,9 +93,7 @@ function App() {
           />
           <Route
             path="/lounge/*"
-            element={<LoungeMain />}
-            isLogin={isLogin}
-            setIsLogin={setIsLogin}
+            element={<LoungeMain isLogin={isLogin} setIsLogin={setIsLogin} />}
           />
           <Route path="/" element={<Mainpage />} />
         </Routes>
