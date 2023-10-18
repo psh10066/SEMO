@@ -16,103 +16,120 @@ const Header = (props) => {
 
   let headerStyle = {};
   let headerBackgroundColor = {};
+  let headerWrapHeight = {};
 
   if (location.pathname.includes("/login")) {
     headerStyle = { color: "#220895" };
     headerBackgroundColor = { backgroundColor: "#fff" };
+    headerWrapHeight = { height: "60px" };
   }
   if (location.pathname.includes("/admin")) {
     headerStyle = { color: "#220895" };
     headerBackgroundColor = { backgroundColor: "#fff" };
+    headerWrapHeight = { height: "60px" };
   }
   if (location.pathname.includes("/login")) {
     headerStyle = { color: "#220895" };
     headerBackgroundColor = { backgroundColor: "#fff" };
+    headerWrapHeight = { height: "60px" };
   }
   if (location.pathname.includes("/join")) {
     headerStyle = { color: "#220895" };
     headerBackgroundColor = { backgroundColor: "#fff" };
+    headerWrapHeight = { height: "60px" };
   }
   if (location.pathname.includes("/group")) {
     headerStyle = { color: "#220895" };
     headerBackgroundColor = { backgroundColor: "#fff" };
+    headerWrapHeight = { height: "60px" };
   }
   if (location.pathname.includes("/groupBoard")) {
     headerStyle = { color: "#220895" };
     headerBackgroundColor = { backgroundColor: "#fff" };
+    headerWrapHeight = { height: "60px" };
   }
   if (location.pathname.includes("/notice")) {
     headerStyle = { color: "#220895" };
     headerBackgroundColor = { backgroundColor: "#fff" };
+    headerWrapHeight = { height: "60px" };
   }
   if (location.pathname.includes("/meeting")) {
     headerStyle = { color: "#220895" };
     headerBackgroundColor = { backgroundColor: "#fff" };
+    headerWrapHeight = { height: "60px" };
   }
   if (location.pathname.includes("/feed")) {
     headerStyle = { color: "#220895" };
     headerBackgroundColor = { backgroundColor: "#fff" };
+    headerWrapHeight = { height: "60px" };
   }
   if (location.pathname.includes("/page")) {
     headerStyle = { color: "#220895" };
     headerBackgroundColor = { backgroundColor: "#fff" };
+    headerWrapHeight = { height: "60px" };
   }
   if (location.pathname.includes("/mypage")) {
     headerStyle = { color: "#220895" };
     headerBackgroundColor = { backgroundColor: "#fff" };
+    headerWrapHeight = { height: "60px" };
   }
   if (location.pathname.includes("/chat")) {
     headerStyle = { color: "#220895" };
     headerBackgroundColor = { backgroundColor: "#fff" };
+    headerWrapHeight = { height: "60px" };
   }
   if (location.pathname.includes("/searchresult")) {
     headerStyle = { color: "#220895" };
     headerBackgroundColor = { backgroundColor: "#fff" };
+    headerWrapHeight = { height: "60px" };
   }
   if (location.pathname.includes("/lounge")) {
     headerStyle = { color: "#220895" };
     headerBackgroundColor = { backgroundColor: "#fff" };
+    headerWrapHeight = { height: "60px" };
   }
 
   return (
-    <div className="header" style={headerBackgroundColor}>
-      <div className="main-logo">
-        <Link to="/" style={headerStyle}>
-          SEMOMO
-        </Link>
-      </div>
-      <Navi isLogin={isLogin} />
-      <div className="header-leftside">
-        <div className="chatTotal">
-          <div className="chat groupCreate">
-            {isLogin ? (
-              <Link to="/group/create" title="모임 만들기">
-                <span className="material-icons" style={headerStyle}>
-                  group_add
-                </span>
-              </Link>
-            ) : null}
-          </div>
-          <div className="chat">
-            {isLogin ? (
-              <Link to="/chat" title="채팅">
-                <span className="material-icons" style={headerStyle}>
-                  chat_bubble
-                </span>
-              </Link>
-            ) : null}
-          </div>
-          <div className="chatNew">
-            {/* 새로운 채팅 있을때, N 뜨게하기*/}
-            {isLogin ? <Link to="/chat" title="채팅"></Link> : null}
-          </div>
+    <header style={headerWrapHeight}>
+      <div className="header" style={headerBackgroundColor}>
+        <div className="main-logo">
+          <Link to="/" style={headerStyle}>
+            SEMOMO
+          </Link>
         </div>
-        <MainSearch />
-        <button>
-          <HeaderLink isLogin={isLogin} setIsLogin={setIsLogin} />
-        </button>
+        <Navi isLogin={isLogin} />
+        <div className="header-leftside">
+          <div className="chatTotal">
+            <div className="chat groupCreate">
+              {isLogin ? (
+                <Link to="/group/create" title="모임 만들기">
+                  <span className="material-icons" style={headerStyle}>
+                    group_add
+                  </span>
+                </Link>
+              ) : null}
+            </div>
+            <div className="chat">
+              {isLogin ? (
+                <Link to="/chat" title="채팅">
+                  <span className="material-icons" style={headerStyle}>
+                    chat_bubble
+                  </span>
+                </Link>
+              ) : null}
+            </div>
+            <div className="chatNew">
+              {/* 새로운 채팅 있을때, N 뜨게하기*/}
+              {isLogin ? <Link to="/chat" title="채팅"></Link> : null}
+            </div>
+          </div>
+          <MainSearch />
+          <button>
+            <HeaderLink isLogin={isLogin} setIsLogin={setIsLogin} />
+          </button>
+        </div>
       </div>
-    </div>
+    </header>
   );
 };
 
