@@ -43,6 +43,11 @@
 .admin-member-tbl-box {
   padding: 30px;
 }
+.admin-member-tbl-box > table {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 20px;
+}
 .admin-member-tbl-box td {
   text-align: center;
   border-bottom: 1px solid #ccc;
@@ -55,4 +60,9 @@
   text-align: center;
   border-bottom: 1px solid #ccc;
   height: 70px;
+}
+.admin-report-board > table {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 20px;
 }
