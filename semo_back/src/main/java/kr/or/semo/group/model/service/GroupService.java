@@ -1,5 +1,6 @@
 package kr.or.semo.group.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -136,5 +137,15 @@ public class GroupService {
 	@Transactional
 	public int deleteGroup(int groupNo) {
 		return groupDao.deleteGroup(groupNo);
+	}
+
+	public List myLikeGroup(Member m) {
+		// TODO Auto-generated method stub
+		
+		int memberNo = m.getMemberNo();
+		System.out.println(memberNo);
+		 List<Integer> groupNo= groupDao.LikeGroupNo(m);
+		List<Group> g = groupDao.myLikeGroup(groupNo);
+		return g;
 	}
 }

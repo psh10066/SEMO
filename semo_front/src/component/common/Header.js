@@ -71,7 +71,7 @@ const Header = (props) => {
             <div className="chat groupCreate">
               {isLogin ? (
                 <Link to="/group/create" title="모임 만들기">
-                  <span class="material-icons" style={headerStyle}>
+                  <span className="material-icons" style={headerStyle}>
                     group_add
                   </span>
                 </Link>
