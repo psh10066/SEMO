@@ -111,7 +111,7 @@ const Header = (props) => {
             </div>
             <div className="chat">
               {isLogin ? (
-                <Link to="/chat" title="채팅">
+                <Link to="/chat/chatInfo" title="채팅">
                   <span className="material-icons" style={headerStyle}>
                     chat_bubble
                   </span>
