@@ -220,7 +220,7 @@ const SearchSocialingItem = (props) => {
 };
 const SearchFeedItem = (props) => {
   const feedList = props.feedList;
-  console.log(feedList);
+  //console.log(feedList);
   const navigate = useNavigate();
   const feedView = () => {
     navigate("/feed/view", {

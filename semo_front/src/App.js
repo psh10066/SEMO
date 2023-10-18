@@ -22,6 +22,7 @@ import MeetingMain from "./component/meeting/MeetingMain";
 import KakaoCallBack from "./component/member/KakaoCallback";
 import SearchResult from "./component/searchresult/SearchResult";
 import LoungeMain from "./component/lounge/LoungeMain";
+import MypageReport from "./component/mypage/MypageReport";
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);

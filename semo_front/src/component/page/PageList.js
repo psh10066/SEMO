@@ -14,6 +14,8 @@ const PageList = (props) => {
 
   const [peopleCount, setPeopleCount] = useState(0);
 
+  //const token = window.localStorage.getItem("token");
+
   useEffect(() => {
     axios
       .get("/page/list/" + reqPage + "/" + categoryLocal + "/" + categoryValue)
@@ -27,6 +29,7 @@ const PageList = (props) => {
       .catch((res) => {
         console.log(res.response.status);
       });
+    //axios.get("/page/listMe/" + reqPage + "/" + )
   }, [reqPage, categoryLocal, categoryValue]);
 
   const [categories, setCategories] = useState([
@@ -49,6 +52,7 @@ const PageList = (props) => {
       categoryValue: 3,
       active: false,
     },
+    /*
     {
       text: "서울",
       categoryLocal: "groupLocal",
@@ -67,6 +71,7 @@ const PageList = (props) => {
       categoryValue: 3,
       active: false,
     },
+    */
   ]);
 
   const activeCategory = (index) => {

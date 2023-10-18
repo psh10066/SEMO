@@ -18,9 +18,9 @@ public interface PageDao {
 
 	List selectPageList1(HashMap<String, Object> mapCat);
 
-	List selectPageList2(HashMap<String, Object> mapCat);
+	List selectPageList2(HashMap<String, Object> mapCat); //관심사
 
-	List selectPageList3(HashMap<String, Object> mapCat);
+	List selectPageList3(HashMap<String, Object> mapCat); //관심지역
 
 	List search(String searchContent);
 

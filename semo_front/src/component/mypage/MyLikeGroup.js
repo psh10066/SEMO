@@ -5,10 +5,12 @@ import { Link, useNavigate } from "react-router-dom";
 
 const MyLikeGroup = (props) => {
   const member = props.member;
+  console.log(member);
   const [group, setGroup] = useState([]);
   useEffect(() => {
     axios.post("/group/myLikeGroup", member).then((res) => {
       setGroup(res.data);
+      console.log(res.data);
     });
     console.log(group);
   }, []);
