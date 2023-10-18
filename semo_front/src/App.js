@@ -35,6 +35,7 @@ function App() {
       setIsLogin(true);
     }
   }, []);
+
   return (
     <div className="wrap">
       <Header isLogin={isLogin} setIsLogin={setIsLogin} />
