@@ -76,29 +76,33 @@ const GroupCreate = (props) => {
   };
 
   return (
-    <div>
-      <div className="group-frm-title">모임 생성</div>
-      <GroupFrm
-        groupName={groupName}
-        setGroupName={setGroupName}
-        thumbnail={thumbnail}
-        setThumbnail={setThumbnail}
-        groupImg={groupImg}
-        setGroupImg={setGroupImg}
-        groupMaxnum={groupMaxnum}
-        setGroupMaxnum={setGroupMaxnum}
-        groupContent={groupContent}
-        setGroupContent={setGroupContent}
-        groupCategory={groupCategory}
-        setGroupCategory={setGroupCategory}
-        groupLocal={groupLocal}
-        setGroupLocal={setGroupLocal}
-        buttonEvent={create}
-        chkGroupNameMsg={chkGroupNameMsg}
-        setChkGroupNameMsg={setChkGroupNameMsg}
-        type="write"
-      />
-    </div>
+    <>
+      <div className="groupcreate-all-wrap">
+        <div className="page-title">
+          <h2>모임 생성</h2>
+        </div>
+        <GroupFrm
+          groupName={groupName}
+          setGroupName={setGroupName}
+          thumbnail={thumbnail}
+          setThumbnail={setThumbnail}
+          groupImg={groupImg}
+          setGroupImg={setGroupImg}
+          groupMaxnum={groupMaxnum}
+          setGroupMaxnum={setGroupMaxnum}
+          groupContent={groupContent}
+          setGroupContent={setGroupContent}
+          groupCategory={groupCategory}
+          setGroupCategory={setGroupCategory}
+          groupLocal={groupLocal}
+          setGroupLocal={setGroupLocal}
+          buttonEvent={create}
+          chkGroupNameMsg={chkGroupNameMsg}
+          setChkGroupNameMsg={setChkGroupNameMsg}
+          type="write"
+        />
+      </div>
+    </>
   );
 };
 export default GroupCreate;

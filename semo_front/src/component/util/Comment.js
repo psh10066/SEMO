@@ -41,10 +41,10 @@ const feedCommentRegist = (
           console.log(res.response.status);
         });
     } else {
-      Swal.fire("댓글을 입력해 주세요.");
+      Swal.fire({ icon: "warning", text: "댓글을 입력해 주세요." });
     }
   } else {
-    Swal.fire("로그인 후 이용해 주세요.");
+    Swal.fire({ icon: "info", text: "로그인 후 이용해 주세요." });
   }
 };
 
@@ -177,7 +177,7 @@ const CommentItem = (props) => {
   }
   //로그인 안되었을 때 메세지
   const loginMsg = () => {
-    Swal.fire("로그인 후 이용해 주세요.");
+    Swal.fire({ icon: "info", text: "로그인 후 이용해 주세요." });
   };
   //댓글 삭제
   const deleteComment = () => {
@@ -228,7 +228,7 @@ const CommentItem = (props) => {
           console.log(res.response.status);
         });
     } else {
-      Swal.fire("댓글을 입력해 주세요.");
+      Swal.fire({ icon: "warning", text: "댓글을 입력해 주세요." });
     }
   };
   const feedCommentSubmit = () => {
