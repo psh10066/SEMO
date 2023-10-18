@@ -237,6 +237,7 @@ const FeedProfile = (props) => {
             isFolllowModalOpen={isFolllowModalOpen}
             onFollowModalCancel={onFollowModalCancel}
             memberList={follower}
+            loginMember={loginMember}
             isLogin={isLogin}
             changeFeed={changeFeed}
             setChangeFeed={setChangeFeed}

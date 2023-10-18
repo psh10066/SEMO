@@ -12,36 +12,27 @@ const FollowModal = ({
   isLogin,
   changeFeed,
   setChangeFeed,
+  loginMember,
 }) => {
   const [listMember, setListMember] = useState([]);
-  const memberNoList = memberList.join(",");
-  const [loginMember, setLoginMember] = useState(null);
+  const [memberNoList, setMemberNoList] = useState("");
+
+  useEffect(() => {
+    setMemberNoList(memberList.join(","));
+  }, [memberList]);
   useEffect(() => {
     axios
       .get("/member/memberList", { params: { memberNoList: memberNoList } })
       .then((res) => {
         // console.log(res.data);
-        setListMember(res.data);
+        if (res.data.length != 0) {
+          setListMember(res.data);
+        }
       })
       .catch((res) => {
         console.log(res.response.status);
       });
-    if (isLogin) {
-      const token = window.localStorage.getItem("token");
-      axios
-        .post("/member/getMember", null, {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        })
-        .then((res) => {
-          setLoginMember(res.data);
-        })
-        .catch((res) => {
-          console.log(res.response.status);
-        });
-    }
-  }, [memberList]);
+  }, [memberNoList]);
   const handleCancelClick = () => {
     onFollowModalCancel();
   };
