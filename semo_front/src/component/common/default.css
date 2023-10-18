@@ -56,12 +56,14 @@ a {
 }
 .content {
   flex: 1;
+  background-color: rgba(248, 249, 250);
 }
 
 /*헤더 푸터 */
 header {
   background-color: transparent;
   z-index: 1;
+  box-sizing: border-box;
 }
 .header {
   position: inherit;
