@@ -48,7 +48,7 @@ const MeetingCreate = (props) => {
           // console.log(res);
           //console.log(res.config.data);
           if (res.data > 0) {
-            navigate("/group/view" + groupNo);
+            navigate("/group/view", { state: { groupNo } });
           }
         })
         .catch((res) => {
