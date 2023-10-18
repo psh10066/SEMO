@@ -1,47 +1,100 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, Route, Routes, useLocation } from "react-router-dom";
+import GroupMember from "./GroupMember";
 
 const GroupSetting = () => {
-  const [group, setGroup] = useState({});
-  const [grJoin, setGrJoin] = useState({});
+  // const [group, setGroup] = useState({});
+  // const group = props.group;
+  // console.log(group);
+  // const groupNo = group.groupNo;
+  const [grJoinList, setGrJoinList] = useState(null);
+  const [memberList, setMemberList] = useState(null);
   const location = useLocation();
-  const groupNo = location.state.groupNo;
+  // const group = location.state.group;
+  // console.log(group);
 
-  console.log(group);
+  // const groupNo = group.groupNo;
+  const groupNo = location.state ? location.state.groupNo : null;
+
   useEffect(() => {
     const token = window.localStorage.getItem("token");
+    //group 불러오기
+    // axios
+    //   .get("/group/view/" + groupNo, {
+    //     headers: {
+    //       Authorization: "Bearer " + token,
+    //     },
+    //   })
+    //   .then((res) => {
+    //     setGroup(res.data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error.response.status);
+    //   });
+    //gr_join 불러오기
     axios
-      .get("/group/view/" + groupNo, {
+      .get("/group/grJoinList/" + groupNo, {
         headers: {
           Authorization: "Bearer " + token,
         },
       })
       .then((res) => {
-        setGroup(res.data);
+        setGrJoinList(res.data);
       })
-      .catch((error) => {
-        console.log(error.response.status);
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+    //그룹에 가입된 회원리스트
+    axios
+      .get("/group/memberList/" + groupNo, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => {
+        setMemberList(res.data);
+      })
+      .catch((res) => {
+        console.log(res.response.status);
       });
   }, []);
 
   const [menus, setMenus] = useState([
     {
-      url: "/",
-      text: "회원관리",
-      active: false,
+      url: "groupMember",
+      text: "모임 회원 관리",
+      active: true,
     },
     {
       url: "/",
-      text: "모임정보 수정",
+      text: "모임 정보 수정",
       active: false,
     },
   ]);
 
   return (
-    <div className="mypage-title">
-      <h2 className="">모임 수정</h2>
-      <MySideMenu menus={menus} setMenus={setMenus} />
+    <div className="mypage-content">
+      <div className="mypage-title">
+        <h2 className="">모임 수정</h2>
+        <MySideMenu menus={menus} setMenus={setMenus} />
+        <div className="current-content">
+          <Routes>
+            <Route
+              path="groupMember"
+              element={
+                <GroupMember
+                  memberList={memberList}
+                  setMemberList={setMemberList}
+                  grJoinList={grJoinList}
+                  setGrJoinList={setGrJoinList}
+                  groupNo={groupNo}
+                />
+              }
+            />
+          </Routes>
+        </div>
+      </div>
     </div>
   );
 };

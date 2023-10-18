@@ -14,7 +14,7 @@ const GroupMain = (props) => {
       <Routes>
         <Route path="create" element={<GroupCreate />} />
         <Route path="view" element={<GroupView isLogin={isLogin} />} />
-        <Route path="setting" element={<GroupSetting />} />
+        <Route path="setting/*" element={<GroupSetting />} />
       </Routes>
     </div>
   );
