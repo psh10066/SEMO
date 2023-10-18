@@ -38,6 +38,12 @@
 		where meeting_no=#{meetingNo} and MT_JOIN_STATUS=1
 	</select>
 	
+	<update id="modify">
+		update meeting set 
+		meeting_name=#{meetingName}, meeting_place=#{meetingPlace},
+		meeting_price=#{meetingPrice}, meeting_maxnum=#{meetingMaxnum}
+		where meeting_no=#{meetingNo}
+	</update>
 	 
 	
 	

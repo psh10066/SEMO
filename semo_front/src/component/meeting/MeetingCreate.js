@@ -23,7 +23,6 @@ const MeetingCreate = (props) => {
   const groupNo = location.state.groupNo;
   const memberNo = location.state.memberNo;
   const navigate = useNavigate();
-  console.log(memberNo);
   const createMeeting = () => {
     const meeting = {
       meetingName,
@@ -84,7 +83,7 @@ const MeetingCreate = (props) => {
           showTimeSelect
           locale={ko}
           dateFormat="yyyy년 MM월 dd일 aa hh:mm "
-          showPopperArrow={false} // 화살표 변경
+          // showPopperArrow={false} // 화살표 변경
           selected={meetingDate}
           minDate={new Date()}
           placeholderText="날짜를 선택해주세요"

@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import MeetingCreate from "./MeetingCreate";
 import MeetingView from "./MeetingView";
+import MeetingModify from "./MeetingModify";
 
 const MeetingMain = (props) => {
   const isLogin = props.isLogin;
@@ -14,6 +15,10 @@ const MeetingMain = (props) => {
       <Route
         path="view"
         element={<MeetingView isLogin={isLogin} setIsLogin={setIsLogin} />}
+      />
+      <Route
+        path="modify"
+        element={<MeetingModify isLogin={isLogin} setIsLogin={setIsLogin} />}
       />
     </Routes>
   );

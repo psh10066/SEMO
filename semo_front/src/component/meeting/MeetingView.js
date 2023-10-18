@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Kakao from "../util/Kakao";
-import { Button1, Button2, Button3 } from "../util/Buttons";
+import { Button3 } from "../util/Buttons";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import MeetingList from "./MeetingList";
@@ -17,14 +16,14 @@ const MeetingView = (props) => {
   const [meetingList, setMeetingList] = useState([]);
   const navigate = useNavigate();
 
-  // 모임 생성
+  // 모임의 약속 생성
   const meetingCreate = () => {
     navigate("/meeting/create", {
       state: { memberNo: member.memberNo, groupNo: group.groupNo },
     });
   };
 
-  // 약속 참여하기
+  // 모임의 약속 참여하기
   const join = (meetingNo) => {
     Swal.fire({
       icon: "question",
@@ -61,39 +60,8 @@ const MeetingView = (props) => {
       }
     });
   };
-  //약속 참여 취소하기
-  const cancelJoin = (meetingNo) => {
-    Swal.fire({
-      icon: "question",
-      text: "모임 참석을 취소 하시겠습니까?",
-      showCancelButton: true,
-      confirmButtonText: "확인",
-      cancelButtonText: "취소",
-    }).then((res) => {
-      if (res.isConfirmed) {
-        const token = window.localStorage.getItem("token");
-        axios
-          .post(
-            "/meeting/cancelJoin/",
-            { meetingNo },
-            {
-              headers: {
-                Authorization: "Bearer " + token,
-              },
-            }
-          )
-          .then((res) => {
-            setIsAddMeet(!isAddMeet);
-            console.log(res.data);
-          })
-          .catch((error) => {
-            console.log(error.response.status);
-          });
-      }
-    });
-  };
 
-  // 모임 보이기
+  // 모임의 약속 보이기
   useEffect(() => {
     axios
       .get("/meeting/view/" + groupNo)
@@ -109,7 +77,11 @@ const MeetingView = (props) => {
 
   return (
     <div className="meetingView-wrap">
-      <h2 className="meetingView-title">정기 모임</h2>
+      {meetingList.length > 0 ? (
+        <h2 className="meetingView-title">정기 모임</h2>
+      ) : (
+        ""
+      )}
       {meetingList.length > 0
         ? meetingList.map((meeting, index) => (
             <MeetingList
@@ -120,10 +92,10 @@ const MeetingView = (props) => {
               isLogin={isLogin}
               isJoin={isJoin}
               join={join}
-              cancelJoin={cancelJoin}
               isAddMeet={isAddMeet}
               setIsAddMeet={setIsAddMeet}
               groupLevel={groupLevel}
+              groupNo={groupNo}
             />
           ))
         : ""}
