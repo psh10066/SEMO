@@ -35,7 +35,7 @@ const GrPhotoWrite = () => {
           console.log(res.data);
           if (res.data > 0) {
             Swal.fire("등록이 완료되었습니다.");
-            navigate("/groupPhoto");
+            navigate("/group/groupPhoto");
           }
         })
         .catch((res) => {

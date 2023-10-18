@@ -44,7 +44,7 @@ const GrBoardView = (props) => {
   }, []);
   //게시판 상세정보 수정
   const modify = () => {
-    navigate("/groupBoard/modify", { state: { grBoard: grBoard } });
+    navigate("/group/groupBoard/modify", { state: { grBoard: grBoard } });
   };
   //게시판 상세정보 삭제
   const deleteBoard = () => {
@@ -62,7 +62,7 @@ const GrBoardView = (props) => {
             console.log(res.data);
             if (res.data === 1) {
               Swal.fire("삭제가 완료되었습니다.");
-              navigate("/groupBoard");
+              navigate("/group/groupBoard");
             }
           })
           .catch((res) => {

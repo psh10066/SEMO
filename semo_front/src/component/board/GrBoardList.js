@@ -73,7 +73,7 @@ const BoardItem = (props) => {
   const grBoard = props.grBoard;
   const navigate = useNavigate();
   const boardView = () => {
-    navigate("/groupBoard/view", {
+    navigate("/group/groupBoard/view", {
       state: { grBoardNo: grBoard.grBoardNo },
     });
   };

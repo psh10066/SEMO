@@ -33,7 +33,7 @@ const GrBoardWrite = () => {
         .then((res) => {
           if (res.data > 0) {
             Swal.fire("등록이 완료되었습니다.");
-            navigate("/groupBoard");
+            navigate("/group/groupBoard");
           }
         })
         .catch((res) => {

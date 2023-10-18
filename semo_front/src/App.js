@@ -8,7 +8,6 @@ import { Route, Routes } from "react-router";
 import AdminMain from "./component/admin/AdminMain";
 import Join from "./component/member/Join";
 import Login from "./component/member/Login";
-import GrBoardMain from "./component/board/GrBoardMain";
 import GroupMain from "./component/group/GroupMain";
 import Mainpage from "./component/mainpage/MainPage";
 import NoticeMain from "./component/notice/NoticeMain";
@@ -17,7 +16,6 @@ import FeedMain from "./component/feed/FeedMain";
 import PageMain from "./component/page/PageMain";
 import { Mypage } from "./component/mypage/Mypage";
 import Chat from "./component/chat/Chat";
-import GrPhotoMain from "./component/photo/GrPhotoMain";
 import MeetingMain from "./component/meeting/MeetingMain";
 import KakaoCallBack from "./component/member/KakaoCallback";
 import SearchResult from "./component/searchresult/SearchResult";
@@ -51,14 +49,6 @@ function App() {
           <Route
             path="/group/*"
             element={<GroupMain isLogin={isLogin} setIsLogin={setIsLogin} />}
-          />
-          <Route
-            path="/groupBoard/*"
-            element={<GrBoardMain isLogin={isLogin} setIsLogin={setIsLogin} />}
-          />
-          <Route
-            path="/groupPhoto/*"
-            element={<GrPhotoMain isLogin={isLogin} setIsLogin={setIsLogin} />}
           />
           <Route
             path="/notice/*"

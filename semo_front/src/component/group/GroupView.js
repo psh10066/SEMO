@@ -249,12 +249,12 @@ const GroupView = (props) => {
 
   const [menus, setMenus] = useState([
     {
-      url: "/groupBoard",
+      url: "/group/groupBoard",
       text: "게시판",
       active: false,
     },
     {
-      url: "/groupPhoto",
+      url: "/group/groupPhoto",
       text: "사진첩",
       active: false,
     },

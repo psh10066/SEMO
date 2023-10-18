@@ -57,7 +57,9 @@ const PhotoItem = (props) => {
   const grPhoto = props.grPhoto;
   const navigate = useNavigate();
   const photoView = () => {
-    navigate("/groupPhoto/view", { state: { grPhotoNo: grPhoto.grPhotoNo } });
+    navigate("/group/groupPhoto/view", {
+      state: { grPhotoNo: grPhoto.grPhotoNo },
+    });
   };
   return (
     <div className="photo-item" onClick={photoView}>
