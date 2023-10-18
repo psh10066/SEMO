@@ -6,6 +6,7 @@ import { useRef } from "react";
 import * as THREE from "three";
 import { ContactShadows } from "@react-three/drei";
 
+
 const BG_SPEED = 0.3;
 
 const Background = () => {
