@@ -22,6 +22,8 @@ public interface MeetingDao {
 	
 	List selectJoinMember(int meetingNo);
 
+	int modify(Meeting m);
+
 
 	
 
