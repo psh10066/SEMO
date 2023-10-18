@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -135,5 +136,11 @@ public class GroupController {
 		return groupService.deleteGroup(groupNo);
 	}
 	
+	
+	//찜하기 조회
+	@PostMapping(value="/myLikeGroup")
+	public List myLikeGroup(@RequestBody Member m) {
+		return groupService.myLikeGroup(m);
+	}
 	
 }

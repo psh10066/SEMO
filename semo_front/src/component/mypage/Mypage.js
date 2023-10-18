@@ -34,7 +34,6 @@ const Mypage = (props) => {
       })
       .then((res) => {
         setMember(res.data);
-
         document.querySelectorAll(".mysidemenu a")[0].click(); // /mypage 열리면 제일 첫번쨰메뉴 클릭
 
         if (res.data && res.data.memberType === 1) {

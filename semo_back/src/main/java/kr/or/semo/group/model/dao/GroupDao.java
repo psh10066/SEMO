@@ -1,5 +1,6 @@
 package kr.or.semo.group.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -52,5 +53,11 @@ public interface GroupDao {
 	List peopleList(int groupNo);
 
 	int deleteGroup(int groupNo);
+
+	List<Integer> LikeGroupNo(Member m);
+
+	List<Group> myLikeGroup(List<Integer> groupNo);
+
+	
 
 }
