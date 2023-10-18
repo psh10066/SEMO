@@ -1,12 +1,9 @@
+.groupcreate-all-wrap {
+  margin: 50px 0;
+}
 .group-all-wrap {
   width: 900px;
   margin: 0 auto;
-}
-.group-frm-title {
-  font-size: 24px;
-  color: #220895;
-  padding: 50px;
-  text-align: center;
 }
 .group-frm-top {
   display: flex;

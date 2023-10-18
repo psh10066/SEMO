@@ -35,7 +35,7 @@ const FeedModal = ({
     if (feedImg !== null) {
       setShowInsertImg(false);
     } else {
-      Swal.fire("피드 사진을 넣어주세요.");
+      Swal.fire({ icon: "warning", text: "피드 사진을 넣어주세요." });
     }
   };
   const handleCancelClick1 = () => {

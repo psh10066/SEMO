@@ -78,7 +78,7 @@ const SearchResult = (props) => {
               <li key={"searchResult" + index}>
                 {searchResult.active ? (
                   <div
-                    className="searchresult-category searchCategory-active"
+                    className="searchresult-tab-category searchCategory-active"
                     onClick={() => {
                       activeSearchResultCategory(index);
                       setReqPage(1);
@@ -93,7 +93,7 @@ const SearchResult = (props) => {
                   </div>
                 ) : (
                   <div
-                    className="searchresult-category"
+                    className="searchresult-tab-category"
                     onClick={() => {
                       activeSearchResultCategory(index);
                       setReqPage(1);
@@ -229,13 +229,18 @@ const SearchFeedItem = (props) => {
     console.log(feedList.feedNo);
   };
   return (
-    <div className="searchresult-item-wrap" onClick={feedView}>
-      <div className="searchresult-item-img">
+    <div className="searchresult-feed-item-wrap" onClick={feedView}>
+      <div className="searchresult-feed-item-img">
         <img src={"/feed/" + feedList.feedImg} />
       </div>
-      <div className="searchresult-item-info">
-        <div className="searchresult-infos">
-          <div className="searchresult-group-name">{feedList.memberName}</div>
+      <div className="searchresult-feed-item-info">
+        <div className="searchresult-feed-infos">
+          <div className="searchresult-feed-writer-name">
+            {feedList.memberName}
+          </div>
+          <div className="searchresult-feed-content">
+            {feedList.feedContent}
+          </div>
         </div>
       </div>
     </div>
