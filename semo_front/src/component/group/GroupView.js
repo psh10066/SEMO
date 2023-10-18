@@ -395,7 +395,7 @@ const MySideMenu = (props) => {
   };
 
   const settingGroup = () => {
-    navigate("/group/setting", { state: { groupNo: groupNo } });
+    navigate("/group/setting/groupMember", { state: { groupNo: groupNo } });
   };
 
   return (
