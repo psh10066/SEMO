@@ -39,8 +39,8 @@ const MeetingList = (props) => {
             // console.log(indexOf);
           }
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((res) => {
+          // console.log(res.response.status);
         });
     }
   }, [isAddMeet]);
@@ -130,7 +130,7 @@ const MeetingList = (props) => {
     return `${month}월 ${day}일`;
   };
 
-  console.log(isLogin, isJoin, groupLevel, joinStatus);
+  // console.log(isLogin, isJoin, groupLevel, joinStatus);
 
   if (calculateDDay(new Date(meeting.meetingDate)) > -1) {
     return (
