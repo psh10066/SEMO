@@ -26,7 +26,7 @@ public class OAuthService {
 
 	// 받아온 유저정보로 로그인 시도
 	public String getMemberByOauthLogin(OauthParams oauthParams) {
-		expiredMs = 1000 * 60 * 60l;
+		expiredMs = 1000 * 1 * 60l;
 		
 		System.out.println("------ Oauth 로그인 시도 ------");
 		// 인증 파라미터 객체를 이용하여 해당 enum클래스에 해당하는 메소드 수행

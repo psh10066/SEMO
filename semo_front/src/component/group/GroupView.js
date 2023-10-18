@@ -276,7 +276,12 @@ const GroupView = (props) => {
   return (
     <div className="group-view-wrap">
       <div>
-        <MySideMenu menus={menus} setMenus={setMenus} groupLevel={groupLevel} />
+        <MySideMenu
+          menus={menus}
+          setMenus={setMenus}
+          groupLevel={groupLevel}
+          groupNo={groupNo}
+        />
       </div>
       <div className="group-view-div-content">
         <div>
@@ -378,6 +383,7 @@ const MySideMenu = (props) => {
   const menus = props.menus;
   const setMenus = props.setMenus;
   const groupLevel = props.groupLevel;
+  const groupNo = props.groupNo;
   const navigate = useNavigate();
 
   const activeTab = (index) => {
@@ -389,7 +395,7 @@ const MySideMenu = (props) => {
   };
 
   const settingGroup = () => {
-    navigate("/group/modify/");
+    navigate("/group/setting/groupMember", { state: { groupNo: groupNo } });
   };
 
   return (

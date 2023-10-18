@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import "./group.css";
 import GroupCreate from "./GroupCreate";
 import GroupView from "./GroupView";
+import GroupSetting from "./GroupSetting";
 
 const GroupMain = (props) => {
   const groupName = props.groupName;
@@ -13,6 +14,7 @@ const GroupMain = (props) => {
       <Routes>
         <Route path="create" element={<GroupCreate />} />
         <Route path="view" element={<GroupView isLogin={isLogin} />} />
+        <Route path="setting/*" element={<GroupSetting />} />
       </Routes>
     </div>
   );

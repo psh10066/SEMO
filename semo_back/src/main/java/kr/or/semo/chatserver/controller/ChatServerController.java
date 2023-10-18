@@ -44,12 +44,26 @@ public class ChatServerController {
     	return chatServerService.messageInsert(messagePayload);
     }
     
+    // 채팅시간관련
+    @PostMapping("/chat/chatTimeList")
+    public List chatTimeList (@RequestBody Map<String, Integer> request) {
+    	int roomId = request.get("roomId"); //객체로 보낸거 키(String = groupNo) , 값(Integer) 가지고옴 
+    	int memberNo = request.get("memberNo");
+    	return chatServerService.chatTimeList(roomId,memberNo);
+    }
+    
     //접속 시간 저장
     @PostMapping("/chat/insertAccessTime")
     public int chatAccessTimeInsert(@RequestBody LastAccessChatTime lastAccessChatTime) {
     	return chatServerService.chatAccessTimeInsert(lastAccessChatTime);
     }
+    //접속 시간 업데이트
+    @PostMapping("/chat/updateAccessTime")
+    public int updateAccessTime(@RequestBody LastAccessChatTime lastAccessChatTime) {
+    	return chatServerService.updateAccessTime(lastAccessChatTime);
+    }
 
+    
     //지난 대화 불러오기
     @PostMapping("/chat/chatMessage")
     public List chatPreviousMessage (@RequestBody Map<String, Integer> request) {
@@ -58,6 +72,7 @@ public class ChatServerController {
     }
     
     //
+
     @PostMapping("/chat/mychatTime")
     public String myChatTime (@RequestBody Map<String, Integer> request) {
     	int roomId = request.get("roomId"); //객체로 보낸거 키(String = groupNo) , 값(Integer) 가지고옴 

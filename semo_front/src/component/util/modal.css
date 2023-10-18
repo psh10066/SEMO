@@ -1,7 +1,10 @@
 .ReactModal__Content {
   width: 600px;
-  /* height: 800px; */
+  /* height: 600px; */
   margin: 0 auto;
+}
+.ReactModal__Overlay {
+  z-index: 1000;
 }
 .modal-cancel {
   text-align: right;

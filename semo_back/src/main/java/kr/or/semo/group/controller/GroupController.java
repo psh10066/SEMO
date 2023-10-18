@@ -143,4 +143,15 @@ public class GroupController {
 		return groupService.myLikeGroup(m);
 	}
 	
+	//그룹 가입 현황 조회
+	@GetMapping(value = "/grJoinList/{groupNo}")
+	public List selectGrJoinMember(@PathVariable int groupNo) {
+		return groupService.selectGrJoinMember(groupNo);
+	}
+	//그룹에 가입된 회원 리스트
+	@GetMapping(value = "/memberList/{groupNo}")
+	public List groupMemberList(@PathVariable int groupNo) {
+		return groupService.groupMemberList(groupNo);
+	}
+	
 }

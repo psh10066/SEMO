@@ -6,6 +6,7 @@ import ChatNewNotice from "../chat/chatNewNotice";
 const Header = (props) => {
   const isLogin = props.isLogin;
   const setIsLogin = props.setIsLogin;
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const modalOpen = () => {
     setIsModalOpen(true);
@@ -14,53 +15,83 @@ const Header = (props) => {
   const location = useLocation();
 
   let headerStyle = {};
+  let headerBackgroundColor = {};
+  let headerWrapHeight = {};
 
   if (location.pathname.includes("/login")) {
     headerStyle = { color: "#220895" };
+    headerBackgroundColor = { backgroundColor: "#fff" };
+    headerWrapHeight = { height: "60px" };
   }
   if (location.pathname.includes("/admin")) {
     headerStyle = { color: "#220895" };
+    headerBackgroundColor = { backgroundColor: "#fff" };
+    headerWrapHeight = { height: "60px" };
   }
   if (location.pathname.includes("/login")) {
     headerStyle = { color: "#220895" };
+    headerBackgroundColor = { backgroundColor: "#fff" };
+    headerWrapHeight = { height: "60px" };
   }
   if (location.pathname.includes("/join")) {
     headerStyle = { color: "#220895" };
+    headerBackgroundColor = { backgroundColor: "#fff" };
+    headerWrapHeight = { height: "60px" };
   }
   if (location.pathname.includes("/group")) {
     headerStyle = { color: "#220895" };
+    headerBackgroundColor = { backgroundColor: "#fff" };
+    headerWrapHeight = { height: "60px" };
   }
   if (location.pathname.includes("/groupBoard")) {
     headerStyle = { color: "#220895" };
+    headerBackgroundColor = { backgroundColor: "#fff" };
+    headerWrapHeight = { height: "60px" };
   }
   if (location.pathname.includes("/notice")) {
     headerStyle = { color: "#220895" };
+    headerBackgroundColor = { backgroundColor: "#fff" };
+    headerWrapHeight = { height: "60px" };
   }
   if (location.pathname.includes("/meeting")) {
     headerStyle = { color: "#220895" };
+    headerBackgroundColor = { backgroundColor: "#fff" };
+    headerWrapHeight = { height: "60px" };
   }
   if (location.pathname.includes("/feed")) {
     headerStyle = { color: "#220895" };
+    headerBackgroundColor = { backgroundColor: "#fff" };
+    headerWrapHeight = { height: "60px" };
   }
   if (location.pathname.includes("/page")) {
     headerStyle = { color: "#220895" };
+    headerBackgroundColor = { backgroundColor: "#fff" };
+    headerWrapHeight = { height: "60px" };
   }
   if (location.pathname.includes("/mypage")) {
     headerStyle = { color: "#220895" };
+    headerBackgroundColor = { backgroundColor: "#fff" };
+    headerWrapHeight = { height: "60px" };
   }
   if (location.pathname.includes("/chat")) {
     headerStyle = { color: "#220895" };
+    headerBackgroundColor = { backgroundColor: "#fff" };
+    headerWrapHeight = { height: "60px" };
   }
   if (location.pathname.includes("/searchresult")) {
     headerStyle = { color: "#220895" };
+    headerBackgroundColor = { backgroundColor: "#fff" };
+    headerWrapHeight = { height: "60px" };
   }
   if (location.pathname.includes("/lounge")) {
     headerStyle = { color: "#220895" };
+    headerBackgroundColor = { backgroundColor: "#fff" };
+    headerWrapHeight = { height: "60px" };
   }
 
   return (
-    <header>
-      <div className="header">
+    <header style={headerWrapHeight}>
+      <div className="header" style={headerBackgroundColor}>
         <div className="main-logo">
           <Link to="/" style={headerStyle}>
             SEMOMO
@@ -80,7 +111,7 @@ const Header = (props) => {
             </div>
             <div className="chat">
               {isLogin ? (
-                <Link to="/chat" title="채팅">
+                <Link to="/chat/chatInfo" title="채팅">
                   <span className="material-icons" style={headerStyle}>
                     chat_bubble
                   </span>

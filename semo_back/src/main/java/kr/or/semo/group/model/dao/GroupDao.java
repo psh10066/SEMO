@@ -58,6 +58,10 @@ public interface GroupDao {
 
 	List<Group> myLikeGroup(List<Integer> groupNo);
 
+	List selectGrJoinMember(int groupNo);
+
+	List groupMemberList(int groupNo);
+
 	
 
 }
