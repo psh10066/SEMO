@@ -19,10 +19,18 @@ public class ChatServerService {
 	public int messageInsert(Message messagePayload) {
 		return chatServerDao.messageInsert(messagePayload);
 	}
+
+	public List chatTimeList(int roomId,int memberNo) {
+		return chatServerDao.chatTimeList(roomId,memberNo);
+	}
 	
 	@Transactional
 	public int chatAccessTimeInsert(LastAccessChatTime lastAccessChatTime) {
 		return chatServerDao.chatAccessTimeInsert(lastAccessChatTime);
+	}
+	@Transactional
+	public int updateAccessTime(LastAccessChatTime lastAccessChatTime) {
+		return chatServerDao.updateAccessTime(lastAccessChatTime);
 	}
 
 	public List chatPreviousMessage(int roomId) {
@@ -36,6 +44,9 @@ public class ChatServerService {
 	public String totalChatTime(int roomId) {
 		return chatServerDao.totalChatTime(roomId);
 	}
+
+
+
 
 
 }

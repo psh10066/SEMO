@@ -6,7 +6,8 @@ const ChatNewNotice = (props) => {
   const memberNo = props.memberNo; //로그인한 회원번호
   const token = window.localStorage.getItem("token");
 
-  const [mychatTime, setMyChatTime] = useState(""); //내가 읽은 채팅 중에 가장 최근 시간
+  const [mychatTime, setMyChatTime] = useState("");
+  //내가 읽은 채팅 중에 가장 최근 시간
   //mychatTime은 내가 "지난대화보기"를 클릭하고 > 채팅방을 나갔을때 , 자동으로 시간(웹소켓 소실 시간) 세팅 됨
   //지난대화보기를 클릭 안했을경우 New 안사라짐.
   //웹소켓 소실 시간을 세팅해서 (내가 마지막까지 채팅한 경우는 해당 안됨 )
