@@ -184,10 +184,15 @@
   display: flex;
   align-items: center;
   margin: 12px;
+  justify-content: space-between;
 }
 .feed-view-mid-icon > div {
   display: flex;
+}
+.feed-view-like > div {
+  display: flex;
   align-items: center;
+  margin-right: 10px;
 }
 .feed-view-mid-icon > div > span:first-child {
   padding-right: 6px;
@@ -305,4 +310,10 @@
 }
 .feedList-wrap {
   background-color: #fff;
+}
+.feed-view-btn-zone > span {
+  cursor: pointer;
+}
+.feed-view-btn-zone > span:hover {
+  font-weight: 800;
 }

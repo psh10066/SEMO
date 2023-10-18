@@ -29,5 +29,13 @@ public class ChatServerService {
 		return chatServerDao.chatPreviousMessage(roomId);
 	}
 
+	public String myChatTime(int roomId, int memberNo) {
+		return chatServerDao.myChatTime(roomId,memberNo);
+	}
+
+	public String totalChatTime(int roomId) {
+		return chatServerDao.totalChatTime(roomId);
+	}
+
 
 }

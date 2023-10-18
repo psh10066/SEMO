@@ -48,6 +48,7 @@
 .commentItem-date {
   font-size: 13px;
   padding-left: 7px;
+  width: 75%;
 }
 .comment-mid {
   padding: 5px 20px;
@@ -59,27 +60,37 @@
   padding-left: 5%; */
   margin: 15px;
 }
+.recomment-wrap {
+  width: 91%;
+}
 .reCommentBox-wrap {
   /* padding-left: 8%;
   width: 92%; */
-  /* display: flex;
+  display: flex;
   align-items: center;
+  flex-wrap: wrap;
+
+  /*
   flex 대신 float: left로 처리하기 내일 무조건 해!!!!!!!!
   */
 }
+
 .comment-bottom {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 .comment-like {
   display: flex;
+
   /* border: 1px solid #ccc;
   padding: 3px 10px;
   border-radius: 5px; */
 }
+
 .comment-like > span {
   font-size: 19px;
+  cursor: pointer;
 }
 .comment-like > .commentLikeCount {
   padding-left: 5px;

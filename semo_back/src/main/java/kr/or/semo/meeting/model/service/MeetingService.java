@@ -49,6 +49,11 @@ public class MeetingService {
 		return meetingDao.selectJoinMember(meetingNo);
 	}
 
+	public int modify(Meeting m) {
+		// TODO Auto-generated method stub
+		return meetingDao.modify(m);
+	}
+
 
 	
 	

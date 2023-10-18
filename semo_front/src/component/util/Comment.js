@@ -280,6 +280,9 @@ const CommentItem = (props) => {
           <div className="commentItem-date">
             {comment.feedCommentDate ? formatTime(comment.feedCommentDate) : ""}
           </div>
+          <div className="comment-like">
+            <CommentLike commentNo={comment.feedCommentNo} isLogin={isLogin} />
+          </div>
         </div>
         <div className="comment-mid">
           {modifyState ? (
@@ -302,9 +305,6 @@ const CommentItem = (props) => {
           )}
         </div>
         <div className="comment-bottom">
-          <div className="comment-like">
-            <CommentLike commentNo={comment.feedCommentNo} isLogin={isLogin} />
-          </div>
           {isLogin ? (
             member && member.memberNo === comment.feedCommentWriter ? (
               modifyState ? (

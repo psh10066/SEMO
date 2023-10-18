@@ -280,6 +280,12 @@ const CommentItem = (props) => {
               ? formatTime(comment.grBoardCommentDate)
               : ""}
           </div>
+          <div className="comment-like">
+            <GrBoardCommentLike
+              grBoardCommentNo={comment.grBoardCommentNo}
+              isLogin={isLogin}
+            />
+          </div>
         </div>
         <div className="comment-mid">
           {modifyState ? (
@@ -302,12 +308,6 @@ const CommentItem = (props) => {
           )}
         </div>
         <div className="comment-bottom">
-          <div className="comment-like">
-            <GrBoardCommentLike
-              grBoardCommentNo={comment.grBoardCommentNo}
-              isLogin={isLogin}
-            />
-          </div>
           {isLogin ? (
             member && member.memberNo === comment.grBoardCommentWriter ? (
               modifyState ? (

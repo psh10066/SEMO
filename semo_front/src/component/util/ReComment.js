@@ -165,7 +165,7 @@ const ReCommentItem = (props) => {
           <span className="material-icons arrowReComment">
             subdirectory_arrow_right
           </span>
-          <div className="comment-wrap">
+          <div className="comment-wrap recomment-wrap">
             <div className="comment-top">
               {recomment.memberImg === null ? (
                 <div className="commentItem-profile-image">
@@ -196,6 +196,12 @@ const ReCommentItem = (props) => {
                   ? formatTime(recomment.feedCommentDate)
                   : ""}
               </div>
+              <div className="comment-like">
+                <CommentLike
+                  commentNo={recomment.feedCommentNo}
+                  isLogin={isLogin}
+                />
+              </div>
             </div>
             <div className="comment-mid">
               {modifyState ? (
@@ -218,12 +224,6 @@ const ReCommentItem = (props) => {
               )}
             </div>
             <div className="comment-bottom">
-              <div className="comment-like">
-                <CommentLike
-                  commentNo={recomment.feedCommentNo}
-                  isLogin={isLogin}
-                />
-              </div>
               {isLogin ? (
                 member && member.memberNo === recomment.feedCommentWriter ? (
                   modifyState ? (

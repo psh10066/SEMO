@@ -4,6 +4,8 @@ import { format } from "date-fns";
 import axios from "axios";
 import ChatToggle from "./ChatToggle";
 import ChatPrevious from "./ChatPrevious";
+import ChatInput from "./ChatInput";
+import ChatNewNotice from "./chatNewNotice";
 
 const ChatRoom = (props) => {
   const { roomId, senderName, memberNo, groupName } = props;
@@ -12,6 +14,8 @@ const ChatRoom = (props) => {
   const [messages, setMessages] = useState({});
   const [newMessage, setNewMessage] = useState("");
   const clientRef = useRef(null);
+  const [hasPreviousChatBeenClicked, setHasPreviousChatBeenClicked] =
+    useState(false); // 지난대화 불러왔는지 체크
 
   //메세지 받기
   useEffect(() => {
@@ -39,11 +43,14 @@ const ChatRoom = (props) => {
     client.activate();
     clientRef.current = client;
     return () => {
-      sendLastAccessTime(); // 웹소켓 종료 전 마지막 접속 시간 전송
+      if (hasPreviousChatBeenClicked) {
+        sendLastAccessTime(); // 웹소켓 종료 전 마지막 접속 시간 전송
+      }
       client.deactivate();
     };
-  }, [roomId]);
-
+  }, [roomId, hasPreviousChatBeenClicked]);
+  //
+  //
   //마지막 접속 시간 전송 함수
   const sendLastAccessTime = () => {
     const now = new Date();
@@ -117,7 +124,7 @@ const ChatRoom = (props) => {
     }
   };
 
-  //지난대화불러오기
+  ///////////////지난대화불러오기
   const chatPreviousWrapRef = useRef(null);
   const chatSpanRef = useRef(null);
   const [showPreviousChat, setShowPreviousChat] = useState(false); //이전대화 보여주기
@@ -132,6 +139,8 @@ const ChatRoom = (props) => {
   }, [roomId]);
 
   const previousChatClick = () => {
+    setHasPreviousChatBeenClicked(true);
+
     if (chatPreviousWrapRef.current) {
       chatPreviousWrapRef.current.style.display = "block";
     }
@@ -141,6 +150,11 @@ const ChatRoom = (props) => {
       chatSpanRef.current.style.display = "none";
     }
     setShowPreviousChat(true); // showPreviousChat 상태를 true로 변경
+  };
+  //////////////////////////
+  //초 빼고 출력
+  const formatDate = (timeString) => {
+    return timeString.substr(0, 16);
   };
 
   return (
@@ -159,30 +173,39 @@ const ChatRoom = (props) => {
           onClick={previousChatClick}
           ref={chatSpanRef}
         >
-          지난대화불러오기
+          <strong>지난대화불러오기</strong>
+          <ChatNewNotice roomId={roomId} memberNo={memberNo} />
         </span>
         {/* showPreviousChat 값이 true일 때만 ChatPrevious 컴포넌트 렌더링 */}
         {showPreviousChat && (
           <div className="chatPrevious-wrap" ref={chatPreviousWrapRef}>
-            <ChatPrevious roomId={roomId} />
+            <ChatPrevious roomId={roomId} memberNo={memberNo} />
           </div>
         )}
         {/* 메세지 출력 */}
         {messages[roomId]?.map((msg, idx) => (
-          <div key={idx}>
-            {msg.senderName}: {msg.message}
+          <div
+            key={idx}
+            className={
+              msg.memberNo === memberNo ? "message-left" : "message-right"
+            }
+          >
+            <div className="chat-message-name">
+              <strong>{msg.senderName}</strong>
+            </div>
+            <div className="chat-message-box">{msg.message}</div>
+            <span className="chat-message-time">
+              {formatDate(msg.chatTime)}
+            </span>
           </div>
         ))}
       </div>
-
-      <div className="chat-input">
-        <input
-          type="text"
-          value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
-        />
-        <button onClick={sendMessage}>Send</button>
-      </div>
+      {/* 메세지 입력 */}
+      <ChatInput
+        newMessage={newMessage}
+        setNewMessage={setNewMessage}
+        sendMessage={sendMessage}
+      />
     </>
   );
 };
