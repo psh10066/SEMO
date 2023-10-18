@@ -26,11 +26,14 @@
   height: 350px;
   overflow: hidden;
   float: left;
-  width: calc(100% / 4);
-  border: 1px solid black;
+  width: calc(90% / 4);
+  /*border: 1px solid black;*/
   cursor: pointer;
   box-sizing: border-box;
-  padding: 30px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  margin: 10px;
 }
 .lounge-item-img {
   width: 100%;
