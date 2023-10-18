@@ -57,6 +57,11 @@ const MeetingList = (props) => {
       });
   }, [isAddMeet]);
 
+  // 모임 약속 수정하기
+  const modify = () => {
+    navigate("/meeting/modify", { state: { meeting: meeting } });
+  };
+
   // D-Day설정 함수
   const calculateDDay = (targetDate) => {
     const currentDate = new Date();
@@ -113,6 +118,7 @@ const MeetingList = (props) => {
           장소 : {meeting.meetingPlace}
           <Kakao data={meeting.meetingPlace} index={index} />
         </div>
+
         {isLogin &&
         isJoin &&
         (groupLevel === 1 || groupLevel === 2) &&
@@ -128,6 +134,16 @@ const MeetingList = (props) => {
             text="취소"
             clickEvent={() => {
               cancelJoin(meeting.meetingNo);
+            }}
+          />
+        ) : (
+          ""
+        )}
+        {isLogin && isJoin && groupLevel === 1 ? (
+          <Button2
+            text="모임수정"
+            clickEvent={() => {
+              modify(meeting.meetingNo);
             }}
           />
         ) : (
