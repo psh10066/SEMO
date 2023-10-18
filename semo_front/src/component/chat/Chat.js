@@ -146,7 +146,7 @@ const Chat = (props) => {
                 chatTap(e);
               }}
             >
-              {name}
+              <div>{name}</div>
             </div>
           ))}
         </div>
