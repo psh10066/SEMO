@@ -60,13 +60,14 @@ a {
 }
 
 /*헤더 푸터 */
-header {
+
+.header {
   background-color: transparent;
   z-index: 1;
   box-sizing: border-box;
-}
-.header {
-  position: inherit;
+  left: 50%;
+  transform: translateX(-50%);
+  position: fixed;
   width: 1200px;
   height: 50px;
   margin: 0 auto;
