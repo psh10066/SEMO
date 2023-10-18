@@ -30,7 +30,6 @@ const Login = (props) => {
         } else {
           window.localStorage.setItem("token", res.data);
           setIsLogin(true);
-          console.log(res.data);
           navigate("/");
         }
       })
