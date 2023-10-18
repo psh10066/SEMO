@@ -214,28 +214,6 @@ const FeedView = (props) => {
   };
   return (
     <div className="feed-view-wrap">
-      {isLogin ? (
-        member && member.memberNo === feed.feedWriter ? (
-          <div className="feed-view-btn-zone">
-            <FeedModal
-              isOpen={isOpen}
-              onSubmit={onSubmit}
-              onCancel={onCancel}
-              member={member}
-              feed={feed}
-              changeFeed={changeFeed}
-              setChangeFeed={setChangeFeed}
-              type="modify"
-            />
-            <Button1 text="수정" clickEvent={handelClick} />
-            <Button1 text="삭제" clickEvent={deleteFeed} />
-          </div>
-        ) : (
-          ""
-        )
-      ) : (
-        ""
-      )}
       <div className="feed-view-top">
         {feed.memberImg === null ? (
           <div className="feed-view-writerImg">
@@ -286,9 +264,13 @@ const FeedView = (props) => {
                 favorite_border
               </span>
             )}
-            <span className="feed-count" onClick={modalClick}>
-              {feedLikeCount}
-            </span>
+            {feedLikeCount === 0 ? (
+              <span className="feed-count">{feedLikeCount}</span>
+            ) : (
+              <span className="feed-count" onClick={modalClick}>
+                {feedLikeCount}
+              </span>
+            )}
             <MyModal
               isModalOpen={isModalOpen}
               onModalCancel={onModalCancel}
@@ -302,6 +284,32 @@ const FeedView = (props) => {
             <span className="material-icons">chat_bubble_outline</span>
             <span className="feed-count">{commentCount}</span>
           </div>
+          {isLogin ? (
+            member && member.memberNo === feed.feedWriter ? (
+              <div className="feed-view-btn-zone">
+                <FeedModal
+                  isOpen={isOpen}
+                  onSubmit={onSubmit}
+                  onCancel={onCancel}
+                  member={member}
+                  feed={feed}
+                  changeFeed={changeFeed}
+                  setChangeFeed={setChangeFeed}
+                  type="modify"
+                />
+                <span className="material-icons" onClick={handelClick}>
+                  mode_edit_outline
+                </span>
+                <span className="material-icons" onClick={deleteFeed}>
+                  delete
+                </span>
+              </div>
+            ) : (
+              ""
+            )
+          ) : (
+            ""
+          )}
           {/* <div className="feed-like-person-wrap">
             <AvatarGroup max={4} total={feedLikeCount}>
               <Avatar
