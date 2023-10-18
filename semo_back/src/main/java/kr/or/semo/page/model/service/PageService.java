@@ -29,46 +29,46 @@ public class PageService {
 		if(categoryLocal.equals("all")) {
 			int totalCount = pageDao.totalCount1();
 			pi = pagination.getPageInfo(reqPage, numPerPage, pageNaviSize, totalCount);
-			System.out.println("pi는 "+pi);
+			//System.out.println("pi는 "+pi);
 			
 			HashMap<String, Object> mapCat = new HashMap<String, Object>();
 			mapCat.put("start",pi.getStart());
 			mapCat.put("end",pi.getEnd());
 			
 			pageList = pageDao.selectPageList1(mapCat);
-			System.out.println("pageList는 "+pageList);
+			//System.out.println("pageList는 "+pageList);
 			
 		}else if(categoryLocal.equals("groupCategory")) {
 			
 			int totalCount = pageDao.totalCount2(categoryValue);
 			pi = pagination.getPageInfo(reqPage, numPerPage, pageNaviSize, totalCount);
-			System.out.println("pi는 "+pi);
+			//System.out.println("pi는 "+pi);
 			
 			HashMap<String, Object> mapCat = new HashMap<String, Object>();
 			mapCat.put("start",pi.getStart());
 			mapCat.put("end",pi.getEnd());
 			
 			mapCat.put("categoryValue", categoryValue);
-			System.out.println("mapCat은 "+mapCat);
+			//System.out.println("mapCat은 "+mapCat);
 			
 			pageList = pageDao.selectPageList2(mapCat);
-			System.out.println("pageList는 "+pageList);
+			//System.out.println("pageList는 "+pageList);
 			
 		}else if(categoryLocal.equals("groupLocal")) {
 			
 			int totalCount = pageDao.totalCount3(categoryValue);
 			pi = pagination.getPageInfo(reqPage, numPerPage, pageNaviSize, totalCount);
-			System.out.println("pi는 "+pi);
+			//System.out.println("pi는 "+pi);
 			
 			HashMap<String, Object> mapCat = new HashMap<String, Object>();
 			mapCat.put("start",pi.getStart());
 			mapCat.put("end",pi.getEnd());
 
 			mapCat.put("categoryValue", categoryValue);
-			System.out.println("mapCat은 "+mapCat);
+			//System.out.println("mapCat은 "+mapCat);
 			
 			pageList = pageDao.selectPageList3(mapCat);
-			System.out.println("pageList는 "+pageList);
+			//System.out.println("pageList는 "+pageList);
 		}
 			
 //			Object obj = pageList.get(0);
