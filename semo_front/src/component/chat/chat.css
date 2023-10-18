@@ -60,7 +60,7 @@
 .chatEnter {
   cursor: pointer;
   width: 85%;
-  height: 10%;
+  height: 60px;
   background-color: rgba(253, 255, 148, 0.795);
   display: flex;
   justify-content: center;
@@ -69,14 +69,19 @@
   border-bottom-left-radius: 60px;
   border-top-right-radius: 60px;
   border-bottom-right-radius: 60px;
+
   margin-bottom: 20px;
 
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.chatEnter div {
-  color: #fff;
+.chatEnter > div {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
 }
 
 /*
