@@ -110,6 +110,19 @@
 		delete from group_tbl where group_no=#{groupNo}
 	</delete>
 	
+	<select id="LikeGroupNo" resultType="Integer">
+		select group_no from group_save where member_no=#{memberNo}
+	</select>
+	
+	<select id="myLikeGroup">
+    	SELECT * FROM group_tbl
+    		WHERE group_no IN
+    	<foreach collection="groupNo" item="groupNo" open="(" separator="," close=")">
+      		#{groupNo}
+    	</foreach>
+ 	 </select>
+	
+	
 	
 	
 	

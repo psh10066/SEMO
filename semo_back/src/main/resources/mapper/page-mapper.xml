@@ -24,9 +24,10 @@
 	                GROUP_MAXNUM,
 		            GROUP_CATEGORY,
 		            GROUP_LOCAL,
-		            (select count(*) from gr_join where group_no=g.group_no and GR_JOIN_TYPE in (1,2)) total_count
+		            (select count(*) from gr_join where group_no=g.group_no and GR_JOIN_TYPE in (1,2)) total_count,
+                	(select count(*) from group_save where group_no=g.group_no) group_like
 		        FROM GROUP_TBL g
-		        ORDER BY 1 DESC)B)
+		        ORDER BY group_like DESC)B)
 		WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>
 	
@@ -40,10 +41,11 @@
 	                GROUP_MAXNUM,
 		            GROUP_CATEGORY,
 		            GROUP_LOCAL,
-		            (select count(*) from gr_join where group_no=g.group_no and GR_JOIN_TYPE in (1,2)) total_count
+		            (select count(*) from gr_join where group_no=g.group_no and GR_JOIN_TYPE in (1,2)) total_count,
+                	(select count(*) from group_save where group_no=g.group_no) group_like
 		        FROM GROUP_TBL g
 		        WHERE GROUP_CATEGORY = #{categoryValue}
-		        ORDER BY 1 DESC)B)
+		        ORDER BY group_like DESC)B)
 		WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>
 	
@@ -57,10 +59,11 @@
 	                GROUP_MAXNUM,
 		            GROUP_CATEGORY,
 		            GROUP_LOCAL,
-		            (select count(*) from gr_join where group_no=g.group_no and GR_JOIN_TYPE in (1,2)) total_count
+		            (select count(*) from gr_join where group_no=g.group_no and GR_JOIN_TYPE in (1,2)) total_count,
+                	(select count(*) from group_save where group_no=g.group_no) group_like
 		        FROM GROUP_TBL g
 		        WHERE GROUP_LOCAL = #{categoryValue}
-		        ORDER BY 1 DESC)B)
+		        ORDER BY group_like DESC)B)
 		WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>
 	
@@ -82,10 +85,11 @@
 	                GROUP_MAXNUM,
 		            GROUP_CATEGORY,
 		            GROUP_LOCAL,
-                    (select count(*) from gr_join where group_no=g.group_no and GR_JOIN_TYPE in (1,2)) total_count
+                    (select count(*) from gr_join where group_no=g.group_no and GR_JOIN_TYPE in (1,2)) total_count,
+                	(select count(*) from group_save where group_no=g.group_no) group_like
 		        FROM GROUP_TBL g
 		        where group_name like '%'||#{searchKeyword}||'%' or group_content like '%'||#{searchKeyword}||'%'
-		        ORDER BY 1 DESC)B)
+		        ORDER BY group_like DESC)B)
 		WHERE RNUM BETWEEN #{start} AND #{end}		        
 	</select>
 
@@ -103,12 +107,35 @@
 	                FEED_WRITER,
                     MEMBER_ID,
                     MEMBER_NAME,
-		            FEED_DATE
-		        FROM FEED
+		            FEED_DATE,
+		            (select count(*) from feed_like where feed_no=f.feed_no) feed_like
+		        FROM FEED f
                 JOIN MEMBER ON (FEED_WRITER = MEMBER_NO)
 		        where FEED_CONTENT like '%'||#{searchKeyword}||'%'
-		        ORDER BY 1 DESC)B)
+		        ORDER BY feed_like DESC)B)
 		WHERE RNUM BETWEEN #{start} AND #{end}		  
+	</select>
+	
+	<select id="totalCountLounge" resultType="int">
+		select count(*) from feed
+	</select>
+	
+	<select id="selectLoungeList" resultType="feed">
+		SELECT * FROM    
+		    (SELECT ROWNUM AS RNUM, B.* FROM
+		        (SELECT
+		            FEED_NO,
+		            FEED_IMG,
+		            FEED_CONTENT,
+	                FEED_WRITER,
+                    MEMBER_ID,
+                    MEMBER_NAME,
+		            FEED_DATE,
+		            (select count(*) from feed_like where feed_no=f.feed_no) feed_like
+		        FROM FEED f
+                JOIN MEMBER ON (FEED_WRITER = MEMBER_NO)
+		        ORDER BY feed_like DESC)B)
+		 WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>
 
 </mapper>

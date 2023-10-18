@@ -21,6 +21,7 @@ import GrPhotoMain from "./component/photo/GrPhotoMain";
 import MeetingMain from "./component/meeting/MeetingMain";
 import KakaoCallBack from "./component/member/KakaoCallback";
 import SearchResult from "./component/searchresult/SearchResult";
+import LoungeMain from "./component/lounge/LoungeMain";
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
@@ -89,6 +90,12 @@ function App() {
           <Route
             path="/searchresult/*"
             element={<SearchResult isLogin={isLogin} setIsLogin={setIsLogin} />}
+          />
+          <Route
+            path="/lounge/*"
+            element={<LoungeMain />}
+            isLogin={isLogin}
+            setIsLogin={setIsLogin}
           />
           <Route path="/" element={<Mainpage />} />
         </Routes>

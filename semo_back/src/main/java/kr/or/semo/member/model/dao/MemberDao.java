@@ -1,5 +1,6 @@
 package kr.or.semo.member.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -53,6 +54,10 @@ public interface MemberDao {
 
 
 	int findChangePwMember(Member member);
+
+	List myLikeGroup(String groupNoList);
+
+	
 
 
 }

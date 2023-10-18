@@ -23,7 +23,7 @@ const SearchResult = (props) => {
   //소셜링, 피드(feed)는 별개로 분리
 
   const searchKeyword = location.state.searchContent;
-  console.log(searchKeyword);
+  //console.log(searchKeyword);
 
   useEffect(() => {
     axios
@@ -62,7 +62,7 @@ const SearchResult = (props) => {
     searchResultCategories[index].active = true;
     setSearchResultCategories([...searchResultCategories]);
   };
-  console.log("categoryType", categoryType);
+  //console.log("categoryType", categoryType);
   return (
     <div className="searchresult-all-wrap">
       <div className="searchresult-title">
@@ -172,7 +172,7 @@ const SearchResult = (props) => {
 
 const SearchSocialingItem = (props) => {
   const socialingList = props.socialingList;
-  console.log(socialingList);
+  //console.log(socialingList);
   const navigate = useNavigate();
   const groupView = () => {
     navigate("/group/view", {

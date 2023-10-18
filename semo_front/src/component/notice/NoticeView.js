@@ -16,7 +16,7 @@ const NoticeView = (props) => {
     axios
       .get("/notice/view/" + noticeNo)
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
         setNotice(res.data);
       })
       .catch((res) => {
@@ -32,7 +32,7 @@ const NoticeView = (props) => {
         })
         .then((res) => {
           setMember(res.data);
-          console.log(res.data);
+          //console.log(res.data);
         })
         .catch((res) => {
           console.log(res.response.status);

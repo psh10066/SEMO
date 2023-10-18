@@ -30,7 +30,6 @@ const GroupView = (props) => {
     axios
       .get("/group/groupPeopleList/" + groupNo)
       .then((res) => {
-        console.log(res.data);
         setPeopleList(res.data.peopleList);
         setPeopleCount(res.data.peopleCount);
       })
@@ -113,28 +112,39 @@ const GroupView = (props) => {
   const groupExit = () => {
     const token = window.localStorage.getItem("token");
     const groupNo = group.groupNo;
-    axios
-      .post(
-        "/group/groupExit",
-        {
-          groupNo,
-        },
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
-      )
-      .then((res) => {
-        Swal.fire({
-          icon: "error",
-          text: "탈퇴완료!",
-        });
-        setChangeLevel(!changeLevel);
-      })
-      .catch((res) => {
-        console.log(res);
-      });
+    Swal.fire({
+      icon: "warning",
+      text: "모임을 정말 탈퇴하시겠습니까?",
+      showCancelButton: true,
+      confirmButtonText: "탈퇴하기",
+      cancelButtonText: "취소",
+    }).then((res) => {
+      if (res.isConfirmed) {
+        axios
+          .post(
+            "/group/groupExit",
+            {
+              groupNo,
+            },
+            {
+              headers: {
+                Authorization: "Bearer " + token,
+              },
+            }
+          )
+          .then((res) => {
+            Swal.fire({
+              icon: "error",
+              text: "탈퇴완료!",
+            });
+            setChangeLevel(!changeLevel);
+            navigate("/page");
+          })
+          .catch((res) => {
+            console.log(res);
+          });
+      }
+    });
   };
   const cancelGroup = () => {
     const token = window.localStorage.getItem("token");
@@ -164,6 +174,7 @@ const GroupView = (props) => {
               text: "가입취소완료!",
             });
             setChangeLevel(!changeLevel);
+            navigate("/page");
           })
           .catch((res) => {
             console.log(res);
@@ -234,7 +245,6 @@ const GroupView = (props) => {
           });
       }
     });
-    console.log(groupLevel);
   };
 
   const [menus, setMenus] = useState([

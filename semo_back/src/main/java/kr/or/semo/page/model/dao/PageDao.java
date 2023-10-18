@@ -32,4 +32,8 @@ public interface PageDao {
 
 	List feedSearchList(HashMap<String, Object> mapSearch);
 
+	int totalCountLounge();
+
+	List selectLoungeList(HashMap<String, Object> mapLounge);
+
 }

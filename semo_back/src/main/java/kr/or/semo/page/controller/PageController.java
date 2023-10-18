@@ -22,26 +22,33 @@ public class PageController {
 	
 	@GetMapping(value="/list/{reqPage}/{categoryLocal}/{categoryValue}")
 	public Map list(@PathVariable int reqPage, @PathVariable String categoryLocal, @PathVariable String categoryValue) {
-		System.out.println("reqPage는 "+reqPage);
-		System.out.println("categoryLocal은 "+categoryLocal);
-		System.out.println("categoryValue는 "+categoryValue);
+		//System.out.println("reqPage는 "+reqPage);
+		//System.out.println("categoryLocal은 "+categoryLocal);
+		//System.out.println("categoryValue는 "+categoryValue);
 		Map map = pageService.pageList(reqPage,categoryLocal,categoryValue);
 		return map;
 	}
 	
 	@GetMapping(value="/searchSocialing/{searchKeyword}/{reqPage}")
 	public Map searchSocialing(@PathVariable String searchKeyword, @PathVariable int reqPage) {
-		System.out.println("searchKeyword는 "+searchKeyword);
-		System.out.println("reqPage는 "+reqPage);
+		//System.out.println("searchKeyword는 "+searchKeyword);
+		//System.out.println("reqPage는 "+reqPage);
 		Map map = pageService.searchSocialing(searchKeyword,reqPage);
 		return map;
 	}
 	
 	@GetMapping(value="/searchFeed/{searchKeyword}/{reqPage}")
 	public Map searchFeed(@PathVariable String searchKeyword, @PathVariable int reqPage) {
-		System.out.println("searchKeyword는 "+searchKeyword);
-		System.out.println("reqPage는 "+reqPage);
+		//System.out.println("searchKeyword는 "+searchKeyword);
+		//System.out.println("reqPage는 "+reqPage);
 		Map map = pageService.searchFeed(searchKeyword,reqPage);
+		return map;
+	}
+	
+	@GetMapping(value="/loungeList/{reqPage}")
+	public Map loungeList(@PathVariable int reqPage) {
+		System.out.println("reqPage는 ");
+		Map map = pageService.loungeList(reqPage);
 		return map;
 	}
 }
