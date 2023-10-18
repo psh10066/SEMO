@@ -194,9 +194,15 @@ const ReCommentItem = (props) => {
                 {recomment.memberName}
               </div>
               <div className="commentItem-date">
-                {recomment.feedCommentDate
-                  ? formatTime(recomment.feedCommentDate)
+                {recomment.grBoardCommentDate
+                  ? formatTime(recomment.grBoardCommentDate)
                   : ""}
+              </div>
+              <div className="comment-like">
+                <GrBoardCommentLike
+                  grBoardCommentNo={recomment.grBoardCommentNo}
+                  isLogin={isLogin}
+                />
               </div>
             </div>
             <div className="comment-mid">
@@ -220,12 +226,6 @@ const ReCommentItem = (props) => {
               )}
             </div>
             <div className="comment-bottom">
-              <div className="comment-like">
-                <GrBoardCommentLike
-                  grBoardCommentNo={recomment.grBoardCommentNo}
-                  isLogin={isLogin}
-                />
-              </div>
               {isLogin ? (
                 member && member.memberNo === recomment.grBoardCommentWriter ? (
                   modifyState ? (

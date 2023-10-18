@@ -48,6 +48,7 @@
 .commentItem-date {
   font-size: 13px;
   padding-left: 7px;
+  width: 85%;
 }
 .comment-mid {
   padding: 5px 20px;
@@ -77,13 +78,17 @@
 .comment-bottom {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 .comment-like {
   display: flex;
+
   /* border: 1px solid #ccc;
   padding: 3px 10px;
   border-radius: 5px; */
+}
+.comment-like > span {
+  float: right;
 }
 .comment-like > span {
   font-size: 19px;
