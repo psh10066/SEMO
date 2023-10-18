@@ -17,5 +17,13 @@
 	order by chat_time
 </select>
 
+<select id="myChatTime" resultType="String">
+select max(CHAT_MY_LAST_TIME) from CHAT_LAST_ACCESS_TIME where GROUP_NO=#{roomId} and MEMBER_NO=#{memberNo}
+</select>
+
+<select id="totalChatTime" resultType="String">
+select max(CHAT_TIME) from CHAT_MESSAGE where GROUP_NO=#{roomId}
+</select>
+
 
 </mapper>
