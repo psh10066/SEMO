@@ -35,14 +35,14 @@ const GroupSave = (props) => {
     <>
       {groupSave ? (
         <span
-          className="material-icons"
+          className="material-icons likeIcon"
           style={{ color: "red" }}
           onClick={groupSaveClick}
         >
           favorite
         </span>
       ) : (
-        <span className="material-icons" onClick={groupSaveClick}>
+        <span className="material-icons likeIcon" onClick={groupSaveClick}>
           favorite_border
         </span>
       )}

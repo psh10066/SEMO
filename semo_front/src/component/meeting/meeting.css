@@ -108,6 +108,9 @@
 #meeting-btn-area > button:hover {
   background-color: #8bb4ff;
 }
+.meetingView-content > button {
+  margin-right: 10px;
+}
 
 /* PostCode */
 #address-btn > button {
