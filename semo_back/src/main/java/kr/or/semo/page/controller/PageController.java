@@ -45,8 +45,10 @@ public class PageController {
 		return map;
 	}
 	
-	//@GetMapping(value="/loungeList/{reqPage}")
-	//public Map loungeList(@PathVariable int reqPage) {
-		//System.out.println("reqPage는 ");
-	//}
+	@GetMapping(value="/loungeList/{reqPage}")
+	public Map loungeList(@PathVariable int reqPage) {
+		System.out.println("reqPage는 ");
+		Map map = pageService.loungeList(reqPage);
+		return map;
+	}
 }

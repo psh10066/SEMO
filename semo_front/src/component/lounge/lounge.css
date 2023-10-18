@@ -14,3 +14,62 @@
   height: 100px;
   line-height: 100px;
 }
+/* loungeList css */
+.lounge-list-wrap {
+  overflow: hidden;
+  width: 1200px;
+  margin: 0 auto;
+  padding-top: 30px;
+  padding-bottom: 50px;
+}
+.lounge-item-wrap {
+  height: 350px;
+  overflow: hidden;
+  float: left;
+  width: calc(100% / 4);
+  border: 1px solid black;
+  cursor: pointer;
+  box-sizing: border-box;
+  padding: 30px;
+}
+.lounge-item-img {
+  width: 100%;
+  /*height: 200px;*/
+  height: 70%;
+  /*float: left;*/
+  box-sizing: border-box;
+  text-align: center;
+  line-height: 200px;
+  /*padding-top: 20px;*/
+  /*padding-bottom: 20px;*/
+}
+.lounge-item-img > img {
+  width: 90%;
+  height: 100%;
+  object-fit: contain;
+}
+.lounge-item-info {
+  width: 100%;
+  /*height: 200px;*/
+  height: 30%;
+  /*float: left;*/
+  box-sizing: border-box;
+  padding-left: 10px;
+}
+.lounge-infos {
+  line-height: 40px;
+  /*padding-top: 30px;*/
+  width: 100%;
+  height: 100%;
+}
+.lounge-content {
+  width: 100%;
+  height: 50px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.lounge-writer-name {
+  font-weight: bold;
+  height: 40px;
+}

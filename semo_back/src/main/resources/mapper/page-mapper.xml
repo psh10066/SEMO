@@ -115,5 +115,27 @@
 		        ORDER BY feed_like DESC)B)
 		WHERE RNUM BETWEEN #{start} AND #{end}		  
 	</select>
+	
+	<select id="totalCountLounge" resultType="int">
+		select count(*) from feed
+	</select>
+	
+	<select id="selectLoungeList" resultType="feed">
+		SELECT * FROM    
+		    (SELECT ROWNUM AS RNUM, B.* FROM
+		        (SELECT
+		            FEED_NO,
+		            FEED_IMG,
+		            FEED_CONTENT,
+	                FEED_WRITER,
+                    MEMBER_ID,
+                    MEMBER_NAME,
+		            FEED_DATE,
+		            (select count(*) from feed_like where feed_no=f.feed_no) feed_like
+		        FROM FEED f
+                JOIN MEMBER ON (FEED_WRITER = MEMBER_NO)
+		        ORDER BY feed_like DESC)B)
+		 WHERE RNUM BETWEEN #{start} AND #{end}
+	</select>
 
 </mapper>
