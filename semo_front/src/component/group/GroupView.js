@@ -261,12 +261,12 @@ const GroupView = (props) => {
           console.log(error);
         });
     }
-  }, [groupNo]);
+  }, [meetingList]);
 
   return (
     <div className="group-view-wrap">
       <div>
-        <MySideMenu menus={menus} setMenus={setMenus} />
+        <MySideMenu menus={menus} setMenus={setMenus} groupLevel={groupLevel} />
       </div>
       <div className="group-view-div-content">
         <div>
@@ -367,6 +367,8 @@ const GroupView = (props) => {
 const MySideMenu = (props) => {
   const menus = props.menus;
   const setMenus = props.setMenus;
+  const groupLevel = props.groupLevel;
+  const navigate = useNavigate();
 
   const activeTab = (index) => {
     const updatedMenus = menus.map((menu, i) => ({
@@ -376,8 +378,27 @@ const MySideMenu = (props) => {
     setMenus(updatedMenus);
   };
 
+  const settingGroup = () => {
+    navigate("/group/modify/");
+  };
+
   return (
     <div className="group-view-tap">
+      {/* {groupLevel == 1 ? ( */}
+      <div id="group-setting-area">
+        <span
+          className="material-icons"
+          id="group-setting"
+          onClick={() => {
+            settingGroup();
+          }}
+        >
+          settings
+        </span>
+      </div>
+      {/* ) : ( */}
+      {/* "" */}
+      {/* )} */}
       <div>
         {menus.map((menu, index) => (
           <div key={"menu" + index}>

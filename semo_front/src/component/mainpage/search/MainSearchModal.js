@@ -14,29 +14,12 @@ const MainSearchModal = (props) => {
   const navigate = useNavigate();
   const modalState = props.modalState;
   const setModalState = props.setModalState;
-  //console.log(modalState);
-  const Search = (e) => {
-    const groupName = { groupName: searchContent };
-    console.log(groupName);
-
-    axios
-      .post("/page/search", groupName)
-      .then((res) => {
-        console.log(res.data);
-        setModalState(false);
-        e.stopPropagation();
-
-        navigate("/searchresult", {
-          state: { searchResult: res.data, searchKeyword: searchContent },
-        });
-        if (setSearchContent != null) {
-          setSearchContent("");
-        }
-      })
-      .catch((res) => {
-        console.log(res.data);
-        console.log(res.response.status);
-      });
+  const Search = () => {
+    navigate("searchresult", { state: { searchContent: searchContent } });
+    if (setSearchContent != null) {
+      setSearchContent("");
+    }
+    setModalState(false);
   };
 
   return (
@@ -67,7 +50,7 @@ const MainSearchModal = (props) => {
               data={searchContent}
               setData={setSearchContent}
               content="searchContent"
-              placeholder="관심사 , 지역명을 검색해보세요"
+              placeholder="관심사 , 지역명(예: 독서, 북한산)을 검색해보세요"
             />
             <div>
               <span className="material-icons" onClick={Search}>

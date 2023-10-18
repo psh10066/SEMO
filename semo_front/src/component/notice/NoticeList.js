@@ -16,7 +16,7 @@ const NoticeList = (props) => {
     axios
       .get("/notice/list/" + reqPage)
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
         setNoticeList(res.data.noticeList);
         setPageInfo(res.data.pi);
       })

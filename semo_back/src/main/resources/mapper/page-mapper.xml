@@ -24,9 +24,10 @@
 	                GROUP_MAXNUM,
 		            GROUP_CATEGORY,
 		            GROUP_LOCAL,
-		            (select count(*) from gr_join where group_no=g.group_no and GR_JOIN_TYPE in (1,2)) total_count
+		            (select count(*) from gr_join where group_no=g.group_no and GR_JOIN_TYPE in (1,2)) total_count,
+                	(select count(*) from group_save where group_no=g.group_no) group_like
 		        FROM GROUP_TBL g
-		        ORDER BY 1 DESC)B)
+		        ORDER BY group_like DESC)B)
 		WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>
 	
@@ -40,10 +41,11 @@
 	                GROUP_MAXNUM,
 		            GROUP_CATEGORY,
 		            GROUP_LOCAL,
-		            (select count(*) from gr_join where group_no=g.group_no and GR_JOIN_TYPE in (1,2)) total_count
+		            (select count(*) from gr_join where group_no=g.group_no and GR_JOIN_TYPE in (1,2)) total_count,
+                	(select count(*) from group_save where group_no=g.group_no) group_like
 		        FROM GROUP_TBL g
 		        WHERE GROUP_CATEGORY = #{categoryValue}
-		        ORDER BY 1 DESC)B)
+		        ORDER BY group_like DESC)B)
 		WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>
 	
@@ -57,28 +59,61 @@
 	                GROUP_MAXNUM,
 		            GROUP_CATEGORY,
 		            GROUP_LOCAL,
-		            (select count(*) from gr_join where group_no=g.group_no and GR_JOIN_TYPE in (1,2)) total_count
+		            (select count(*) from gr_join where group_no=g.group_no and GR_JOIN_TYPE in (1,2)) total_count,
+                	(select count(*) from group_save where group_no=g.group_no) group_like
 		        FROM GROUP_TBL g
 		        WHERE GROUP_LOCAL = #{categoryValue}
-		        ORDER BY 1 DESC)B)
+		        ORDER BY group_like DESC)B)
 		WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>
 	
 	<select id="search" resultType="group">
 		select * from group_tbl where group_name like '%'||#{searchContent}||'%' or group_content like '%'||#{searchContent}||'%'
 	</select>
+
+	<select id="searchTotalCount" resultType="int">
+		select count(*) from group_tbl where group_name like '%'||#{searchKeyword}||'%' or group_content like '%'||#{searchKeyword}||'%'
+	</select>
 	
-	<select id="peopleCount" resultType="int">
-		select count(*) from gr_join where group_no=#{groupNo}
-		
-		SELECT count(*) FROM    
+	<select id="socialingSearchList" resultType="group">
+		SELECT * FROM    
 		    (SELECT ROWNUM AS RNUM, B.* FROM
 		        (SELECT
-		            GROUP_NO
-		        FROM GR_JOIN
-		        WHERE GROUP_LOCAL = #{categoryValue}
-		        ORDER BY 1 DESC)B)
-		WHERE RNUM BETWEEN #{start} AND #{end}
+		            GROUP_NO,
+		            GROUP_NAME,
+		            GROUP_IMG,
+	                GROUP_MAXNUM,
+		            GROUP_CATEGORY,
+		            GROUP_LOCAL,
+                    (select count(*) from gr_join where group_no=g.group_no and GR_JOIN_TYPE in (1,2)) total_count,
+                	(select count(*) from group_save where group_no=g.group_no) group_like
+		        FROM GROUP_TBL g
+		        where group_name like '%'||#{searchKeyword}||'%' or group_content like '%'||#{searchKeyword}||'%'
+		        ORDER BY group_like DESC)B)
+		WHERE RNUM BETWEEN #{start} AND #{end}		        
+	</select>
+
+	<select id="searchTotalCountFeed" resultType="int">
+		select count(*) from feed where feed_content like '%'||#{searchKeyword}||'%'
+	</select>
+	
+	<select id="feedSearchList" resultType="feed">
+		SELECT * FROM    
+		    (SELECT ROWNUM AS RNUM, B.* FROM
+		        (SELECT
+		            FEED_NO,
+		            FEED_IMG,
+		            FEED_CONTENT,
+	                FEED_WRITER,
+                    MEMBER_ID,
+                    MEMBER_NAME,
+		            FEED_DATE,
+		            (select count(*) from feed_like where feed_no=f.feed_no) feed_like
+		        FROM FEED f
+                JOIN MEMBER ON (FEED_WRITER = MEMBER_NO)
+		        where FEED_CONTENT like '%'||#{searchKeyword}||'%'
+		        ORDER BY feed_like DESC)B)
+		WHERE RNUM BETWEEN #{start} AND #{end}		  
 	</select>
 
 </mapper>

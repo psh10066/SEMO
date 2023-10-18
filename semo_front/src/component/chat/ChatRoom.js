@@ -3,6 +3,7 @@ import { Client } from "@stomp/stompjs";
 import { format } from "date-fns";
 import axios from "axios";
 import ChatToggle from "./ChatToggle";
+import ChatPrevious from "./ChatPrevious";
 
 const ChatRoom = (props) => {
   const { roomId, senderName, memberNo, groupName } = props;
@@ -16,10 +17,11 @@ const ChatRoom = (props) => {
   useEffect(() => {
     const client = new Client({
       brokerURL: "ws://localhost:9999/ws",
+
       onConnect: () => {
         console.log("WebSocket connected");
         client.subscribe(`/chat/rooms/${roomId}`, (message) => {
-          const receivedMsg = JSON.parse(message.body);
+          const receivedMsg = JSON.parse(message.body); // JSON 형식의 문자열을 JavaScript 객체로 변환
           console.log("Received message:", receivedMsg);
           onMessageReceive(receivedMsg, `/chat/rooms/${roomId}`);
         });
@@ -33,11 +35,9 @@ const ChatRoom = (props) => {
       console.error("STOMP error", frame);
     };
 
-    //
     //roomId 가 바뀌면  current clinet active  / 이전 client 웹소켓 종료
     client.activate();
     clientRef.current = client;
-
     return () => {
       sendLastAccessTime(); // 웹소켓 종료 전 마지막 접속 시간 전송
       client.deactivate();
@@ -117,6 +117,32 @@ const ChatRoom = (props) => {
     }
   };
 
+  //지난대화불러오기
+  const chatPreviousWrapRef = useRef(null);
+  const chatSpanRef = useRef(null);
+  const [showPreviousChat, setShowPreviousChat] = useState(false); //이전대화 보여주기
+
+  // roomId가 변경될 때마다 showPreviousChat를 초기화
+  useEffect(() => {
+    setShowPreviousChat(false);
+    if (chatSpanRef.current) {
+      //버튼
+      chatSpanRef.current.style.display = "flex";
+    }
+  }, [roomId]);
+
+  const previousChatClick = () => {
+    if (chatPreviousWrapRef.current) {
+      chatPreviousWrapRef.current.style.display = "block";
+    }
+
+    if (chatSpanRef.current) {
+      //버튼
+      chatSpanRef.current.style.display = "none";
+    }
+    setShowPreviousChat(true); // showPreviousChat 상태를 true로 변경
+  };
+
   return (
     <>
       <div className="chat-header">
@@ -128,12 +154,27 @@ const ChatRoom = (props) => {
       </div>
       {/* 메세지 출력 */}
       <div className="chat-content">
+        <span
+          className="previous-chat-btn"
+          onClick={previousChatClick}
+          ref={chatSpanRef}
+        >
+          지난대화불러오기
+        </span>
+        {/* showPreviousChat 값이 true일 때만 ChatPrevious 컴포넌트 렌더링 */}
+        {showPreviousChat && (
+          <div className="chatPrevious-wrap" ref={chatPreviousWrapRef}>
+            <ChatPrevious roomId={roomId} />
+          </div>
+        )}
+        {/* 메세지 출력 */}
         {messages[roomId]?.map((msg, idx) => (
           <div key={idx}>
             {msg.senderName}: {msg.message}
           </div>
         ))}
       </div>
+
       <div className="chat-input">
         <input
           type="text"
