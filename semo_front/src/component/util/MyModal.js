@@ -118,7 +118,7 @@ const FollowMember = (props) => {
     onModalCancel();
   };
   const loginMsg = () => {
-    Swal.fire("로그인 후 이용해 주세요.");
+    Swal.fire({ icon: "info", text: "로그인 후 이용해 주세요." });
   };
   const follow = () => {
     axios
