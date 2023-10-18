@@ -48,7 +48,7 @@
 .commentItem-date {
   font-size: 13px;
   padding-left: 7px;
-  width: 85%;
+  width: 75%;
 }
 .comment-mid {
   padding: 5px 20px;
@@ -87,11 +87,10 @@
   padding: 3px 10px;
   border-radius: 5px; */
 }
-.comment-like > span {
-  float: right;
-}
+
 .comment-like > span {
   font-size: 19px;
+  cursor: pointer;
 }
 .comment-like > .commentLikeCount {
   padding-left: 5px;
