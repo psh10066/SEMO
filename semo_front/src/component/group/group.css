@@ -123,10 +123,11 @@ input[type="file"]::file-selector-button {
   text-align: center;
   margin: 20px 0;
 }
-.group-join-btn button {
+.group-join-btn > button {
   background-color: #5457e9;
   border: none;
   margin: 20px 0;
+  border-radius: 5px;
 }
 .group-view-tap {
   width: 100%;
