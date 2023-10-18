@@ -49,9 +49,7 @@ public class MeetingController {
 	//약속 참가 취소
 	@PostMapping(value = "/cancelJoin/")
 	public int cancelJoin(@RequestBody MeetingJoin m, @RequestAttribute String memberId) {
-		System.out.println("멤버 아이디는? " +memberId);
 		int meetingNo = m.getMeetingNo();
-		System.out.println("미팅 넘버는?" +meetingNo);
 		return meetingService.cancelJoin(meetingNo,memberId);
 	}
 	//약속 참가하는 맴버 조회
@@ -60,6 +58,10 @@ public class MeetingController {
 		int meetingNo = m.getMeetingNo();
 		List list = meetingService.selectJoinMember(meetingNo);
 		return list;
+	}
+	@PostMapping(value = "/modify")
+	public int modify(@RequestBody Meeting m) {
+		return meetingService.modify(m);
 	}
 
 	
