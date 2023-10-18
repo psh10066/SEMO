@@ -64,7 +64,9 @@ const GrPhotoView = (props) => {
             console.log(res.data);
             if (res.data === 1) {
               Swal.fire("삭제가 완료되었습니다.");
-              navigate("/group/groupPhoto");
+              navigate("/group/groupPhoto", {
+                state: { groupNo: grPhoto.groupNo },
+              });
             }
           })
           .catch((res) => {

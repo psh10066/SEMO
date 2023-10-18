@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Route, Routes, Link } from "react-router-dom";
+import { Route, Routes, Link, useLocation } from "react-router-dom";
 import "./grBoard.css";
 import GrBoardList from "./GrBoardList";
 import GrBoardWrite from "./GrBoardWrite";
@@ -9,6 +9,8 @@ import GrBoardModify from "./GrBoardModify";
 const GrBoardMain = (props) => {
   const isLogin = props.isLogin;
   const setIsLogin = props.setIsLogin;
+  const location = useLocation();
+  const groupNo = location.state.groupNo;
 
   const [menus, setMenus] = useState([
     {
@@ -32,7 +34,11 @@ const GrBoardMain = (props) => {
         <div>
           {menus.map((menu, index) => (
             <div key={"menu" + index}>
-              <Link to={menu.url} className={menu.active ? "active-side" : ""}>
+              <Link
+                to={menu.url}
+                state={{ groupNo: groupNo }}
+                className={menu.active ? "active-side" : ""}
+              >
                 {menu.text}
               </Link>
             </div>

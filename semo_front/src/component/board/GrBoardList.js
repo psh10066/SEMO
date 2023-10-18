@@ -3,15 +3,18 @@ import "./grBoard.css";
 import axios from "axios";
 import Pagination from "../common/Pagination";
 import { Button1 } from "../util/Buttons";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const GrBoardList = (props) => {
   const isLogin = props.isLogin;
+  const location = useLocation();
   const [GrboardList, setGrBoardList] = useState([]);
   const [reqPage, setReqPage] = useState(1);
   console.log(isLogin);
   const [pageInfo, setPageInfo] = useState({});
-  const groupNo = 10; //임시
+  const groupNo = location.state.groupNo;
+  console.log("groupNo : " + groupNo);
+
   useEffect(() => {
     axios
       .get("/groupBoard/list/" + groupNo + "/" + reqPage)

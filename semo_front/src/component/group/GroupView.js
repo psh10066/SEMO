@@ -420,6 +420,7 @@ const MySideMenu = (props) => {
           <div key={"menu" + index}>
             <Link
               to={menu.url}
+              state={{ groupNo: groupNo }}
               className={menu.active ? "active-side" : ""}
               onClick={() => {
                 activeTab(index);
