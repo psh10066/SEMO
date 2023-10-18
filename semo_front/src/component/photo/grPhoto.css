@@ -153,3 +153,7 @@
 .photo-view-btn-zone > button {
   margin-right: 20px;
 }
+a.active-side {
+  background-color: #5457e9;
+  color: #fff;
+}

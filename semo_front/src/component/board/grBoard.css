@@ -155,3 +155,7 @@
   background-color: #220895;
   border: none;
 }
+a.active-side {
+  background-color: #5457e9;
+  color: #fff;
+}
