@@ -44,6 +44,7 @@
   padding-left: 7px;
   font-family: ns-b;
   font-size: 16px;
+  cursor: pointer;
 }
 .commentItem-date {
   font-size: 13px;
@@ -117,4 +118,10 @@
   font-size: 35px;
   padding-right: 15px;
   color: #ccc;
+}
+.comment-profile-image {
+  margin-top: 8px;
+}
+.commentItem-profile-image {
+  cursor: pointer;
 }

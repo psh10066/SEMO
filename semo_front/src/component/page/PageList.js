@@ -174,7 +174,7 @@ const PageItem = (props) => {
               ? " 운동·액티비티"
               : " 푸드·드링크"}
           </div>
-          <div>
+          <div className="page-icons-location">
             <span className="material-icons">location_on</span>
             {/*{" "}*/}
             {page.groupLocal === 1

@@ -75,14 +75,14 @@ const GroupItem = (props) => {
                 return people.peopelImg === null ? (
                   <Avatar
                     key={"feedAvatar" + index}
-                    sx={{ width: 22, height: 22 }}
+                    sx={{ width: 25, height: 25 }}
                     alt="Remy Sharp"
                     src="/image/person.png"
                   />
                 ) : (
                   <Avatar
                     key={"feedAvatar" + index}
-                    sx={{ width: 22, height: 22 }}
+                    sx={{ width: 25, height: 25 }}
                     alt="Remy Sharp"
                     src={"/member/" + people.memberImg}
                   />
