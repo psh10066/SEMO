@@ -25,6 +25,7 @@ const GroupMain = (props) => {
           path="/groupPhoto/*"
           element={<GrPhotoMain isLogin={isLogin} setIsLogin={setIsLogin} />}
         />
+        <Route path="setting/*" element={<GroupSetting />} />
       </Routes>
     </div>
   );

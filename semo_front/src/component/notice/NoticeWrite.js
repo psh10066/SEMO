@@ -11,8 +11,8 @@ const NoticeWrite = () => {
 
   const navigate = useNavigate();
   const write = () => {
-    console.log(noticeTitle);
-    console.log(noticeContent);
+    //console.log(noticeTitle);
+    //console.log(noticeContent);
     if (noticeTitle !== "" && noticeContent !== "") {
       const form = new FormData();
       form.append("noticeTitle", noticeTitle);
@@ -28,7 +28,7 @@ const NoticeWrite = () => {
           },
         })
         .then((res) => {
-          console.log(res.data);
+          //console.log(res.data);
           if (res.data > 0) {
             navigate("/notice");
           }

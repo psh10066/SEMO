@@ -38,7 +38,7 @@ public class PageService {
 			pageList = pageDao.selectPageList1(mapCat);
 			//System.out.println("pageList는 "+pageList);
 			
-		}else if(categoryLocal.equals("groupCategory")) {
+		}else if(categoryLocal.equals("groupCategory")) { //관심사
 			
 			int totalCount = pageDao.totalCount2(categoryValue);
 			pi = pagination.getPageInfo(reqPage, numPerPage, pageNaviSize, totalCount);
@@ -54,7 +54,7 @@ public class PageService {
 			pageList = pageDao.selectPageList2(mapCat);
 			//System.out.println("pageList는 "+pageList);
 			
-		}else if(categoryLocal.equals("groupLocal")) {
+		}else if(categoryLocal.equals("groupLocal")) {  //관심지역
 			
 			int totalCount = pageDao.totalCount3(categoryValue);
 			pi = pagination.getPageInfo(reqPage, numPerPage, pageNaviSize, totalCount);

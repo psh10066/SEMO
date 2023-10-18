@@ -53,6 +53,8 @@ a {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  min-width: 100vw;
+  flex-wrap: wrap;
 }
 .content {
   flex: 1;
@@ -60,16 +62,17 @@ a {
 }
 
 /*헤더 푸터 */
-
+header {
+  position: relative;
+}
 .header {
   z-index: 1;
   box-sizing: border-box;
   left: 50%;
   transform: translateX(-50%);
-  position: absolute;
+  position: fixed;
   width: 1200px;
   height: 60px;
-  margin: 0 auto;
   display: flex;
   margin-left: auto;
   margin-right: auto;
@@ -128,7 +131,7 @@ a {
 .header-leftside button {
   float: right;
   width: 20%;
-  height: 80%;
+  height: 70%;
   line-height: 80%;
   border: none;
   border-radius: 10px;

@@ -94,6 +94,7 @@
   font-size: 20px;
   line-height: 43px;
   text-align: center;
+  cursor: pointer;
 }
 /*검색페이지 css*/
 .searchresult-category-wrap {

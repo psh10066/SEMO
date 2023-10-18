@@ -148,4 +148,16 @@ public class GroupService {
 		List<Group> g = groupDao.myLikeGroup(groupNo);
 		return g;
 	}
+
+	public List selectGrJoinMember(int groupNo) {
+		// TODO Auto-generated method stub
+		return groupDao.selectGrJoinMember(groupNo);
+	}
+
+	public List groupMemberList(int groupNo) {
+		// TODO Auto-generated method stub
+		return groupDao.groupMemberList(groupNo);
+	}
+
+	
 }

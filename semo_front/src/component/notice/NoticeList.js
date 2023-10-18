@@ -61,7 +61,7 @@ const NoticeList = (props) => {
 
       <div className="notice-content-title">공지사항</div>
       <div className="notice-list-wrap">
-        <table class="notice-tbl">
+        <table className="notice-tbl">
           <thead>
             <tr>
               <td width={"20%"}>번호</td>

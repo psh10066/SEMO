@@ -13,7 +13,7 @@ const LoungeList = (props) => {
     axios
       .get("/page/loungeList/" + reqPage)
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
         setLoungeList(res.data.loungeList);
         setPageInfo(res.data.pi);
       })
@@ -42,7 +42,7 @@ const LoungeList = (props) => {
 
 const LoungeItem = (props) => {
   const lounge = props.lounge;
-  console.log(lounge);
+  //console.log(lounge);
   const navigate = useNavigate();
   const feedView = () => {
     navigate("/feed/view", {

@@ -33,8 +33,8 @@ public class NoticeController {
 	
 	@PostMapping(value="/insert")
 	public int insertNotice(@ModelAttribute Notice n, @RequestAttribute String memberId) {
-		System.out.println("n은 "+n);
-		System.out.println("memberId는 "+memberId);
+		//System.out.println("n은 "+n);
+		//System.out.println("memberId는 "+memberId);
 		n.setMemberId(memberId);
 		int result = noticeService.insertNotice(n);
 		return result;
@@ -42,7 +42,7 @@ public class NoticeController {
 	
 	@PostMapping(value="/modify")
 	public int modifyNotice(@ModelAttribute Notice n) {
-		System.out.println(n);
+		//System.out.println(n);
 		int result = noticeService.modifyNotice(n);
 			return result;
 	}

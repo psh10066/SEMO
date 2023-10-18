@@ -11,6 +11,7 @@ import ModifyMyInfo from "./ModifyMyInfo";
 import ModifyMyFeed from "./ModifyMyFeed";
 import ModifyMyLike from "./ModifyMyLike";
 import ModifyMyPassword from "./ModifyMyPassword";
+import MypageReport from "./MypageReport";
 
 const Mypage = (props) => {
   const navigate = useNavigate();
@@ -140,11 +141,11 @@ const Mypage = (props) => {
               path="modifyMyLike"
               element={<ModifyMyLike member={member} setMember={setMember} />}
             />
-
             <Route
               path="adminMain/*"
               element={<AdminMain isLogin={isLogin} setIsLogin={setIsLogin} />}
             />
+            <Route path="mygroup/mypageReport" element={<MypageReport />} />
           </Routes>
         </div>
       </div>

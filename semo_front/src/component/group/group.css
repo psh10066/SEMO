@@ -186,3 +186,10 @@ input[type="file"]::file-selector-button {
 .likeIcon {
   cursor: pointer;
 }
+
+#group-member-content {
+  text-overflow: ellipsis;
+  /* white-space: nowrap; */
+  overflow: hidden;
+  height: 70px;
+}

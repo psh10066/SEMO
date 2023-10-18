@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const MyLikeGroup = (props) => {
   const member = props.member;
+  console.log(member);
   const [group, setGroup] = useState([]);
   useEffect(() => {
     axios

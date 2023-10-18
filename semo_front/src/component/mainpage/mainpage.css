@@ -1,7 +1,15 @@
-.mainpage {
-  top: 0;
-}
 .circle {
-  width: 100vw;
+  transition: opacity 0.5s ease;
   height: 100vh;
+  width: 100vw;
+  background-color: #000;
+}
+
+.black {
+  transition: margin-top 0.5s ease;
+  position: relative;
+  z-index: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: #000;
 }

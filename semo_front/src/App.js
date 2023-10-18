@@ -20,6 +20,7 @@ import MeetingMain from "./component/meeting/MeetingMain";
 import KakaoCallBack from "./component/member/KakaoCallback";
 import SearchResult from "./component/searchresult/SearchResult";
 import LoungeMain from "./component/lounge/LoungeMain";
+import MypageReport from "./component/mypage/MypageReport";
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
@@ -66,9 +67,7 @@ function App() {
           />
           <Route
             path="/page/*"
-            element={<PageMain />}
-            isLogin={isLogin}
-            setIsLogin={setIsLogin}
+            element={<PageMain isLogin={isLogin} setIsLogin={setIsLogin} />}
           />
           <Route
             path="/mypage/*"
@@ -84,9 +83,7 @@ function App() {
           />
           <Route
             path="/lounge/*"
-            element={<LoungeMain />}
-            isLogin={isLogin}
-            setIsLogin={setIsLogin}
+            element={<LoungeMain isLogin={isLogin} setIsLogin={setIsLogin} />}
           />
           <Route path="/" element={<Mainpage />} />
         </Routes>
