@@ -17,13 +17,13 @@ const MyLikeGroup = (props) => {
     <div className="groupList-wrap">
       <div className="group-item-wrap">
         {group.map((group, index) => {
-          return <GroupItem key={"feedGroup" + index} group={group} />;
+          return <MypageItem key={"GroupItem" + index} group={group} />;
         })}
       </div>
     </div>
   );
 };
-const GroupItem = (props) => {
+const MypageItem = (props) => {
   const group = props.group;
   const [peopleList, setPeopleList] = useState([]);
   const [peopleCount, setPeopleCount] = useState(0);
@@ -73,12 +73,14 @@ const GroupItem = (props) => {
               {peopleList.map((people, index) => {
                 return people.peopelImg === null ? (
                   <Avatar
+                    key={"groupAvatar" + index}
                     sx={{ width: 22, height: 22 }}
                     alt="Remy Sharp"
                     src="/image/person.png"
                   />
                 ) : (
                   <Avatar
+                    key={"groupAvatar" + index}
                     sx={{ width: 22, height: 22 }}
                     alt="Remy Sharp"
                     src={"/member/" + people.memberImg}

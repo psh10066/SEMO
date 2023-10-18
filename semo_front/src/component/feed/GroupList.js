@@ -74,12 +74,14 @@ const GroupItem = (props) => {
               {peopleList.map((people, index) => {
                 return people.peopelImg === null ? (
                   <Avatar
+                    key={"feedAvatar" + index}
                     sx={{ width: 22, height: 22 }}
                     alt="Remy Sharp"
                     src="/image/person.png"
                   />
                 ) : (
                   <Avatar
+                    key={"feedAvatar" + index}
                     sx={{ width: 22, height: 22 }}
                     alt="Remy Sharp"
                     src={"/member/" + people.memberImg}
