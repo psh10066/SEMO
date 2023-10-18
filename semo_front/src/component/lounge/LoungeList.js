@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Pagination from "../common/Pagination";
+import { useNavigate } from "react-router-dom";
 
 const LoungeList = (props) => {
   const isLogin = props.isLogin;
@@ -22,8 +24,42 @@ const LoungeList = (props) => {
 
   return (
     <div>
-      <div className="lounge-wrap">
-        <ul>피드 목록</ul>
+      <div className="lounge-list-wrap">
+        {loungeList.map((lounge, index) => {
+          return <LoungeItem key={"lounge" + index} lounge={lounge} />;
+        })}
+      </div>
+      <div className="lounge-page">
+        <Pagination
+          reqPage={reqPage}
+          setReqPage={setReqPage}
+          pageInfo={pageInfo}
+        />
+      </div>
+    </div>
+  );
+};
+
+const LoungeItem = (props) => {
+  const lounge = props.lounge;
+  console.log(lounge);
+  const navigate = useNavigate();
+  const feedView = () => {
+    navigate("/feed/view", {
+      state: { feedNo: lounge.feedNo },
+    });
+    console.log(lounge.feedNo);
+  };
+  return (
+    <div className="lounge-item-wrap" onClick={feedView}>
+      <div className="lounge-item-img">
+        <img src={"/feed/" + lounge.feedImg} />
+      </div>
+      <div className="lounge-item-info">
+        <div className="lounge-infos">
+          <div className="lounge-writer-name">{lounge.memberName}</div>
+          <div className="lounge-content">{lounge.feedContent}</div>
+        </div>
       </div>
     </div>
   );

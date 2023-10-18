@@ -133,4 +133,29 @@ public class PageService {
 		return map;
 	}
 
+	public Map loungeList(int reqPage) {
+		int numPerPage = 12;
+		int pageNaviSize = 5;
+		
+		List loungeList = null;
+		PageInfo pi = null;
+		
+		int totalCount = pageDao.totalCountLounge();
+		pi = pagination.getPageInfo(reqPage, numPerPage, pageNaviSize, totalCount);
+		System.out.println("pi는 "+pi);
+		
+		HashMap<String, Object> mapLounge = new HashMap<String, Object>();
+		mapLounge.put("start", pi.getStart());
+		mapLounge.put("end", pi.getEnd());
+		
+		loungeList = pageDao.selectLoungeList(mapLounge);
+		System.out.println("loungeList는 "+loungeList);
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("loungeList", loungeList);
+		map.put("pi", pi);
+		
+		return map;
+	}
+
 }
