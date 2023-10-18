@@ -249,40 +249,47 @@ const FeedView = (props) => {
         </div>
         <div className="feed-view-mid-icon">
           <div className="feed-view-like">
-            {isLogin ? (
-              isLike === 0 ? (
-                <span className="material-icons" onClick={addLike}>
+            <div>
+              {isLogin ? (
+                isLike === 0 ? (
+                  <span className="material-icons" onClick={addLike}>
+                    favorite_border
+                  </span>
+                ) : (
+                  <span
+                    className="material-icons likeicon"
+                    onClick={removeLike}
+                  >
+                    favorite
+                  </span>
+                )
+              ) : (
+                <span className="material-icons" onClick={loginMsg}>
                   favorite_border
                 </span>
+              )}
+              {feedLikeCount === 0 ? (
+                <span className="feed-count">{feedLikeCount}</span>
               ) : (
-                <span className="material-icons likeicon" onClick={removeLike}>
-                  favorite
+                <span className="feed-count" onClick={modalClick}>
+                  {feedLikeCount}
                 </span>
-              )
-            ) : (
-              <span className="material-icons" onClick={loginMsg}>
-                favorite_border
-              </span>
-            )}
-            {feedLikeCount === 0 ? (
-              <span className="feed-count">{feedLikeCount}</span>
-            ) : (
-              <span className="feed-count" onClick={modalClick}>
-                {feedLikeCount}
-              </span>
-            )}
-            <MyModal
-              isModalOpen={isModalOpen}
-              onModalCancel={onModalCancel}
-              memberList={memberList}
-              isLogin={isLogin}
-              changeFeed={changeFeed}
-              setChangeFeed={setChangeFeed}
-            />
-          </div>
-          <div className="feed-view-commentCount">
-            <span className="material-icons">chat_bubble_outline</span>
-            <span className="feed-count">{commentCount}</span>
+              )}
+
+              <MyModal
+                isModalOpen={isModalOpen}
+                onModalCancel={onModalCancel}
+                memberList={memberList}
+                isLogin={isLogin}
+                changeFeed={changeFeed}
+                setChangeFeed={setChangeFeed}
+              />
+            </div>
+
+            <div className="feed-view-commentCount">
+              <span className="material-icons">chat_bubble_outline</span>
+              <span className="feed-count">{commentCount}</span>
+            </div>
           </div>
           {isLogin ? (
             member && member.memberNo === feed.feedWriter ? (
