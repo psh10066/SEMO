@@ -30,3 +30,4 @@ npm install moment
 
 npm install date-fns
 
+npm install react-awesome-reveal @emotion/react --save

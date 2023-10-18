@@ -17,81 +17,96 @@ const Header = (props) => {
   let headerStyle = {};
   let headerBackgroundColor = {};
   let headerWrapHeight = {};
+  let headerPosition = {};
 
   if (location.pathname.includes("/login")) {
     headerStyle = { color: "#220895" };
     headerBackgroundColor = { backgroundColor: "#fff" };
     headerWrapHeight = { height: "60px" };
+    headerPosition = { position: "absolute" };
   }
   if (location.pathname.includes("/admin")) {
     headerStyle = { color: "#220895" };
     headerBackgroundColor = { backgroundColor: "#fff" };
     headerWrapHeight = { height: "60px" };
+    headerPosition = { position: "absolute" };
   }
   if (location.pathname.includes("/login")) {
     headerStyle = { color: "#220895" };
     headerBackgroundColor = { backgroundColor: "#fff" };
     headerWrapHeight = { height: "60px" };
+    headerPosition = { position: "absolute" };
   }
   if (location.pathname.includes("/join")) {
     headerStyle = { color: "#220895" };
     headerBackgroundColor = { backgroundColor: "#fff" };
     headerWrapHeight = { height: "60px" };
+    headerPosition = { position: "absolute" };
   }
   if (location.pathname.includes("/group")) {
     headerStyle = { color: "#220895" };
     headerBackgroundColor = { backgroundColor: "#fff" };
     headerWrapHeight = { height: "60px" };
+    headerPosition = { position: "absolute" };
   }
   if (location.pathname.includes("/groupBoard")) {
     headerStyle = { color: "#220895" };
     headerBackgroundColor = { backgroundColor: "#fff" };
     headerWrapHeight = { height: "60px" };
+    headerPosition = { position: "absolute" };
   }
   if (location.pathname.includes("/notice")) {
     headerStyle = { color: "#220895" };
     headerBackgroundColor = { backgroundColor: "#fff" };
     headerWrapHeight = { height: "60px" };
+    headerPosition = { position: "absolute" };
   }
   if (location.pathname.includes("/meeting")) {
     headerStyle = { color: "#220895" };
     headerBackgroundColor = { backgroundColor: "#fff" };
     headerWrapHeight = { height: "60px" };
+    headerPosition = { position: "absolute" };
   }
   if (location.pathname.includes("/feed")) {
     headerStyle = { color: "#220895" };
     headerBackgroundColor = { backgroundColor: "#fff" };
     headerWrapHeight = { height: "60px" };
+    headerPosition = { position: "absolute" };
   }
   if (location.pathname.includes("/page")) {
     headerStyle = { color: "#220895" };
     headerBackgroundColor = { backgroundColor: "#fff" };
     headerWrapHeight = { height: "60px" };
+    headerPosition = { position: "absolute" };
   }
   if (location.pathname.includes("/mypage")) {
     headerStyle = { color: "#220895" };
     headerBackgroundColor = { backgroundColor: "#fff" };
     headerWrapHeight = { height: "60px" };
+    headerPosition = { position: "absolute" };
   }
   if (location.pathname.includes("/chat")) {
     headerStyle = { color: "#220895" };
     headerBackgroundColor = { backgroundColor: "#fff" };
     headerWrapHeight = { height: "60px" };
+    headerPosition = { position: "absolute" };
   }
   if (location.pathname.includes("/searchresult")) {
     headerStyle = { color: "#220895" };
     headerBackgroundColor = { backgroundColor: "#fff" };
     headerWrapHeight = { height: "60px" };
+    headerPosition = { position: "absolute" };
   }
   if (location.pathname.includes("/lounge")) {
     headerStyle = { color: "#220895" };
     headerBackgroundColor = { backgroundColor: "#fff" };
     headerWrapHeight = { height: "60px" };
+    headerPosition = { position: "absolute" };
   }
 
   return (
     <header style={headerWrapHeight}>
-      <div className="header" style={headerBackgroundColor}>
+      <div className="header" style={(headerBackgroundColor, headerPosition)}>
         <div className="main-logo">
           <Link to="/" style={headerStyle}>
             SEMOMO
