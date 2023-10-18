@@ -165,7 +165,7 @@ const ReCommentItem = (props) => {
           <span className="material-icons arrowReComment">
             subdirectory_arrow_right
           </span>
-          <div className="comment-wrap">
+          <div className="comment-wrap recomment-wrap">
             <div className="comment-top">
               {recomment.memberImg === null ? (
                 <div className="commentItem-profile-image">

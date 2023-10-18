@@ -29,7 +29,7 @@
  	</update>
   
   	<select id="selectByOauthLogin" resultType="member">
-  		select * from member where member_name=#{memberName} and member_id=#{memberId}
+  		select * from member where member_id=#{memberId}
   	</select>
   
    	<update id="updateMyFeed">

@@ -41,6 +41,7 @@ const KakaoCallBack = () => {
   const handleChange3 = (event) => {
     setMemberCategory2(event.target.value);
   };
+  const kakaoJoin = () => {};
   return (
     <div className="join-wrap">
       <div className="join-title">추가정보 입력</div>
@@ -101,7 +102,7 @@ const KakaoCallBack = () => {
         </div>
       </div>
       <div className="join-btn-box">
-        <Button1 text="회원가입" clickEvent="#" />
+        <Button1 text="회원가입" clickEvent={kakaoJoin} />
       </div>
     </div>
   );

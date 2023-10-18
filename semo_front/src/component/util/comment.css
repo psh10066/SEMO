@@ -59,14 +59,21 @@
   padding-left: 5%; */
   margin: 15px;
 }
+.recomment-wrap {
+  width: 91%;
+}
 .reCommentBox-wrap {
   /* padding-left: 8%;
   width: 92%; */
-  /* display: flex;
+  display: flex;
   align-items: center;
+  flex-wrap: wrap;
+
+  /*
   flex 대신 float: left로 처리하기 내일 무조건 해!!!!!!!!
   */
 }
+
 .comment-bottom {
   display: flex;
   align-items: center;

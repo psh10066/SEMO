@@ -78,16 +78,20 @@ const GrBoardView = (props) => {
         <tbody>
           <tr>
             <th className="board-view-info">제목</th>
-            <td className="board-view-info-content">{grBoard.grBoardTitle}</td>
+            <td className="board-view-info-content board-view-info-title">
+              {grBoard.grBoardTitle}
+            </td>
+            <th className="board-view-info board-view-info-title2">작성일</th>
+            <td className="board-view-info-content board-view-info-date">
+              {grBoard.grBoardDate}
+            </td>
           </tr>
-          <tr>
-            <th className="board-view-info">작성일</th>
-            <td className="board-view-info-content">{grBoard.grBoardDate}</td>
-          </tr>
+          <tr></tr>
           <tr>
             <th className="board-view-info">내용</th>
             <td
-              className="board-view-info-content"
+              colSpan={3}
+              className="board-view-info-content board-view-info-content2"
               dangerouslySetInnerHTML={{ __html: grBoard.grBoardContent }}
             ></td>
           </tr>
