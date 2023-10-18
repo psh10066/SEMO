@@ -2,7 +2,14 @@ import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import { useState } from "react";
-import { Link, Route, Routes, useLocation, useParams } from "react-router-dom";
+import {
+  Link,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import { Button1 } from "../util/Buttons";
 import FeedList from "./FeedList";
 import GroupList from "./GroupList";
@@ -35,16 +42,18 @@ const FeedProfile = (props) => {
   const [memberList, setMemberList] = useState([]);
   const token = window.localStorage.getItem("token");
   const [isFolllowModalOpen, setIsFolllowModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
       .get("/feed/profile/" + memberNo)
       .then((res) => {
-        // console.log(res.data);
         setMember(res.data);
       })
       .catch((res) => {
-        console.log(res.response.status);
+        if (memberNo === null) {
+          navigate("/");
+        }
       });
     axios
       .get("/member/getFollower/" + memberNo)

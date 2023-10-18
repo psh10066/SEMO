@@ -7,10 +7,16 @@ const MyLikeGroup = (props) => {
   const member = props.member;
   const [group, setGroup] = useState([]);
   useEffect(() => {
-    axios.post("/group/myLikeGroup", member).then((res) => {
-      setGroup(res.data);
-    });
-    console.log(group);
+    axios
+      .post("/group/myLikeGroup", member)
+      .then((res) => {
+        // console.log("1: " + res.data);
+        setGroup(res.data);
+      })
+      .catch((res) => {
+        // console.log("catch2: " + res.response.status); 문제생기면 500에러 떴을때 메인페이지
+      });
+    // console.log(group);
   }, []);
 
   return (
@@ -35,7 +41,7 @@ const MypageItem = (props) => {
     axios
       .get("/group/groupPeopleList/" + group.groupNo)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setPeopleList(res.data.peopleList);
         setPeopleCount(res.data.peopleCount);
       })
