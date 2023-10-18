@@ -12,7 +12,6 @@
     */
 
 .photo-all-wrap {
-  width: 1200px;
   margin: 50px auto;
 }
 .photo-title {
@@ -119,7 +118,6 @@
 }
 /* view */
 .photo-view-wrap {
-  width: 1200px;
   margin: 0 auto;
   padding: 20px;
   box-sizing: border-box;
