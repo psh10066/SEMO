@@ -78,7 +78,7 @@ const SearchResult = (props) => {
               <li key={"searchResult" + index}>
                 {searchResult.active ? (
                   <div
-                    className="searchresult-category searchCategory-active"
+                    className="searchresult-tab-category searchCategory-active"
                     onClick={() => {
                       activeSearchResultCategory(index);
                       setReqPage(1);
@@ -93,7 +93,7 @@ const SearchResult = (props) => {
                   </div>
                 ) : (
                   <div
-                    className="searchresult-category"
+                    className="searchresult-tab-category"
                     onClick={() => {
                       activeSearchResultCategory(index);
                       setReqPage(1);
