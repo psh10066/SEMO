@@ -8,9 +8,20 @@ import { BsCaretDownFill } from 'react-icons/bs';
 
 
 const Mainpage = () => {
+
+  const [isLoading, setIsLoading] = useState(true); // 로딩중..
+
   const [scrollY, setScrollY] = useState(0);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isScrollingUp, setIsScrollingUp] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 300); 
+
+    return () => clearTimeout(timer); // 컴포넌트가 언마운트될 때 타이머 클리어 > 로딩 끝
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,6 +45,10 @@ const Mainpage = () => {
       blackRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  if (isLoading) {
+    return <div className="loading-main">로딩중...</div>;
+  }
 
   return (
     <div className="mainpage">
