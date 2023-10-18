@@ -6,16 +6,32 @@
     INSERT INTO CHAT_MESSAGE (GROUP_NO, MEMBER_NO, MESSAGE, CHAT_TIME, SENDER_NAME)
 	VALUES (#{roomId}, #{memberNo}, #{message}, TO_DATE(#{chatTime}, 'YYYY-MM-DD HH24:MI:SS'), #{senderName})
 </insert>
+
+
+<select id="chatTimeList" resultType="LastAccessChatTime">
+	select *
+	from CHAT_LAST_ACCESS_TIME
+	where group_no=#{roomId} AND MEMBER_NO=#{memberNo}
+</select>
+
 <insert id="chatAccessTimeInsert" >
     INSERT INTO CHAT_LAST_ACCESS_TIME (GROUP_NO, MEMBER_NO, CHAT_MY_LAST_TIME)
 	VALUES (#{roomId}, #{memberNo}, TO_DATE(#{chatMyLastTime}, 'YYYY-MM-DD HH24:MI:SS'))
 </insert>
+
+<update id="updateAccessTime" >
+    UPDATE CHAT_LAST_ACCESS_TIME SET
+    CHAT_MY_LAST_TIME = TO_DATE(#{chatMyLastTime}, 'YYYY-MM-DD HH24:MI:SS')
+	where group_no=#{roomId} AND MEMBER_NO=#{memberNo}
+</update>
+
 <select id="chatPreviousMessage" resultType="Message">
 	select group_no AS room_id , MEMBER_NO, MESSAGE, CHAT_TIME, SENDER_NAME
 	from chat_message
 	where group_no=#{roomId}
 	order by chat_time
 </select>
+
 
 <select id="myChatTime" resultType="String">
 select max(CHAT_MY_LAST_TIME) from CHAT_LAST_ACCESS_TIME where GROUP_NO=#{roomId} and MEMBER_NO=#{memberNo}

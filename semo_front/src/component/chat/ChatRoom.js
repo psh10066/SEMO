@@ -8,11 +8,14 @@ import ChatInput from "./ChatInput";
 import ChatNewNotice from "./chatNewNotice";
 
 const ChatRoom = (props) => {
+  const token = window.localStorage.getItem("token");
   const { roomId, senderName, memberNo, groupName } = props;
   const groupAllMemberName = props.groupAllMemberName;
   const groupAllMemberType = props.groupAllMemberType;
+
   const [messages, setMessages] = useState({});
   const [newMessage, setNewMessage] = useState("");
+
   const clientRef = useRef(null);
   const [hasPreviousChatBeenClicked, setHasPreviousChatBeenClicked] =
     useState(false); // 지난대화 불러왔는지 체크
@@ -49,33 +52,66 @@ const ChatRoom = (props) => {
       client.deactivate();
     };
   }, [roomId, hasPreviousChatBeenClicked]);
-  //
-  //
+
   //마지막 접속 시간 전송 함수
+  //먼저, CHAT_LAST_ACCESS_TIME 테이블에 데이터 있는지 없는지 조회
+  const [chatTimeList, setChatTimeList] = useState([]);
   const sendLastAccessTime = () => {
     const now = new Date();
     const formattedDate = format(now, "yyyy-MM-dd HH:mm:ss");
-    const token = window.localStorage.getItem("token");
+
     const lastAccessTime = {
       roomId: roomId,
       memberNo: memberNo,
       chatMyLastTime: formattedDate,
     };
+    //챗 타임 리스트
     axios
-      .post("/chat/insertAccessTime", lastAccessTime, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      })
+      .post(
+        "/chat/chatTimeList",
+        { roomId: roomId, memberNo: memberNo },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      )
       .then((res) => {
-        console.log(roomId + "번 마지막 접속시간 저장 성공");
+        setChatTimeList(res.data);
+
+        if (res.data.length > 0) {
+          axios
+            .post("/chat/updateAccessTime", lastAccessTime, {
+              headers: {
+                Authorization: "Bearer " + token,
+              },
+            })
+            .then((response) => {
+              console.log(roomId + "번 마지막 접속시간 업데이트 성공");
+            })
+            .catch((error) => {
+              console.log(error.response.status);
+            });
+        } else {
+          axios
+            .post("/chat/insertAccessTime", lastAccessTime, {
+              headers: {
+                Authorization: "Bearer " + token,
+              },
+            })
+            .then((response) => {
+              console.log(roomId + "번 마지막 접속시간 저장 성공");
+            })
+            .catch((error) => {
+              console.log(error.response.status);
+            });
+        }
       })
-      .catch((res) => {
-        console.log(res.response.status);
+      .catch((error) => {
+        console.log(error.response.status);
       });
   };
 
-  //
   //
   //화면에 메세지 띄우기
   const onMessageReceive = (msg, index) => {
@@ -93,7 +129,6 @@ const ChatRoom = (props) => {
     if (clientRef.current && newMessage) {
       const now = new Date();
       const formattedDate = format(now, "yyyy-MM-dd HH:mm:ss");
-      const token = window.localStorage.getItem("token");
 
       const messagePayload = {
         message: newMessage,
@@ -182,7 +217,7 @@ const ChatRoom = (props) => {
             <ChatPrevious roomId={roomId} memberNo={memberNo} />
           </div>
         )}
-        {/* 메세지 출력 */}
+        {/* 실시간 채팅 메세지 출력 */}
         {messages[roomId]?.map((msg, idx) => (
           <div
             key={idx}
