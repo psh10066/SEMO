@@ -35,7 +35,10 @@ const NoticeWrite = () => {
         })
         .catch((res) => [console.log(res.response.status)]);
     } else {
-      Swal.fire("에러가 발생했습니다. 잠시 후 다시 시도해주세요.");
+      Swal.fire({
+        icon: "error",
+        html: "에러가 발생했습니다.<br>잠시 후 다시 시도해주세요.",
+      });
     }
   };
   return (

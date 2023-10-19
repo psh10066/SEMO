@@ -30,15 +30,15 @@
 .adminmenu > ul > li > a {
   color: black;
   font-size: 20px;
-  font-family: ns-b;
-  padding: 20px;
+  font-family: ns-r;
+  padding: 15px;
 }
-.adminmenu > ul > li > a.active-side {
+.adminmenu > ul > li > a.admin-active-side {
   background-color: #5457e9;
   border-radius: 20px;
   color: #fff;
 }
-.adminmenu > ul > li > a.active-side > span {
+.adminmenu > ul > li > a.admin-active-side > span {
   color: #fff;
 }
 .admin-member-tbl-box {
