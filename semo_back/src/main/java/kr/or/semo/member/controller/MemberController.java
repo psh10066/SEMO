@@ -22,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.semo.EmailSender;
 import kr.or.semo.FileUtil;
-import kr.or.semo.kakao.service.OAuthService;
+
 import kr.or.semo.kakao.vo.KakaoParams;
 import kr.or.semo.member.model.service.MemberService;
 import kr.or.semo.member.model.vo.Member;
@@ -38,8 +38,7 @@ public class MemberController {
 	private FileUtil fileUtil;
 	@Value("${file.root}")
 	private String root;
-	@Autowired
-	private OAuthService oauthService;
+	
 	
 
 	

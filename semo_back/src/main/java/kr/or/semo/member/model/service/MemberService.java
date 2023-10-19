@@ -179,7 +179,7 @@ public class MemberService {
 		// 획득한 회원정보로 검증할 MemberDTO 생성
 		Member accessMember = new Member();
 		accessMember.setMemberId(oauthMember.getEmail());
-		//accessMember.setMemberName(oauthMember.getNickName());
+		
 
 		// 획득된 회원정보 DB 조회
 		Member result = memberDao.selectByOauthLogin(accessMember);
