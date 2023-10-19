@@ -1,32 +1,30 @@
 import React, { useState, useRef, useEffect } from "react";
-import { motion } from 'framer-motion';
-import "./mainpage.css"
+import { motion } from "framer-motion";
+import "./mainpage.css";
 
 const Black = () => {
-
   const [mousePosition, setMousePosition] = useState({
     x: 0,
-    y: 0
+    y: 0,
   });
   const [cursorVariant, setCursorVariant] = useState("default");
-  const [isCursorVisible, setIsCursorVisible] = useState(false); // 원 보이는지 안보이는지 
-  const blackRef = useRef(null); 
-  
+  const [isCursorVisible, setIsCursorVisible] = useState(false); // 원 보이는지 안보이는지
+  const blackRef = useRef(null);
 
   useEffect(() => {
-    const mouseMove = e => {
+    const mouseMove = (e) => {
       setMousePosition({
         x: e.clientX,
-        y: e.clientY
-      })
-    }
+        y: e.clientY,
+      });
+    };
 
     const blackElement = blackRef.current;
     if (blackElement) {
       blackElement.addEventListener("mousemove", mouseMove); // ref를 사용하여 이벤트 리스너를 추가
       return () => {
         blackElement.removeEventListener("mousemove", mouseMove); // 이벤트 리스너를 제거
-      }
+      };
     }
   }, []);
 
@@ -41,27 +39,33 @@ const Black = () => {
       x: mousePosition.x - 75,
       y: mousePosition.y - 75,
       backgroundColor: "#fff",
-      mixBlendMode: "difference"
-    }
-  }
+      mixBlendMode: "difference",
+    },
+  };
 
   const textEnter = () => setCursorVariant("text");
   const textLeave = () => setCursorVariant("default");
 
-
-  return(
+  return (
     <div
       className="black"
       ref={blackRef}
-      onMouseEnter={() => setIsCursorVisible(true)}  // 마우스가 컴포넌트 안으로 들어왔을 때 원
+      onMouseEnter={() => setIsCursorVisible(true)} // 마우스가 컴포넌트 안으로 들어왔을 때 원
       onMouseLeave={() => setIsCursorVisible(false)} // 마우스가 컴포넌트 밖으로 나갔을 때 원
     >
-      <h1 onMouseEnter={textEnter} onMouseLeave={textLeave} className='black-title'>세상의 모든</h1>
+      <h1
+        onMouseEnter={textEnter}
+        onMouseLeave={textLeave}
+        className="black-title"
+      >
+        당신의 취향을<br></br>
+        찾아보세요!
+      </h1>
       <motion.div
-        className='cursor'
+        className="cursor"
         variants={variants}
         animate={cursorVariant}
-        style={{ display: isCursorVisible ? "block" : "none" }}  // 원의 가시성을 제어합니다.
+        style={{ display: isCursorVisible ? "block" : "none" }} // 원의 가시성을 제어합니다.
       />
     </div>
   );
