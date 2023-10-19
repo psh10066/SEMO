@@ -108,10 +108,7 @@ public class MemberController {
 	@PostMapping(value = "/updateMyFeed")
 	public int updateMyFeed(@ModelAttribute Member member, @ModelAttribute MultipartFile feedThumbnail,
 			@RequestAttribute String memberId) {
-
 		member.setMemberId(memberId);
-	
-
 		String savepath = root + "member/";
 
 		if (feedThumbnail != null) {
@@ -143,7 +140,7 @@ public class MemberController {
 	public ResponseEntity<String> handleKakaoLogin(@RequestBody KakaoParams kakaoParams){
 		System.out.println("넘겨받은 Kakao 인증키 :: " + kakaoParams.getAuthorizationCode());
 		
-		String accessToken = oauthService.getMemberByOauthLogin(kakaoParams);
+		String accessToken = memberService.getMemberByOauthLoginMember(kakaoParams);
 		//응답 헤더 생성
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("accessToken", accessToken);
@@ -219,7 +216,10 @@ public class MemberController {
 	public int findChangePwMember(@RequestBody Member member) {
 		return memberService.findChangePwMember(member);
 	}
-	
+	@PostMapping(value="/kakaojoin")
+	public int kakaoJoin(@ModelAttribute Member member) {
+		return memberService.kakaoJoin(member);
+	}
 	
 	
 	

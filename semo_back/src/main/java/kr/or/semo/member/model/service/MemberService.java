@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.semo.JwtUtil;
+import kr.or.semo.kakao.oauth.OauthMember;
+import kr.or.semo.kakao.oauth.OauthParams;
+import kr.or.semo.kakao.service.RequestOauthInfoService;
 import kr.or.semo.member.model.dao.MemberDao;
 import kr.or.semo.member.model.vo.Follow;
 import kr.or.semo.member.model.vo.Member;
@@ -23,9 +26,12 @@ public class MemberService {
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	@Autowired
 	private JwtUtil jwtUtil;
+	@Autowired
+	private RequestOauthInfoService requestOauthInfoService;
 	@Value("${jwt.secret}")
 	private String secretKey;
 	private long expiredMs;
+	
 
 	public MemberService() {
 		super();
@@ -161,8 +167,55 @@ public class MemberService {
 		// TODO Auto-generated method stub
 		return memberDao.findChangePwMember(member);
 	}
-
 	
+	@Transactional
+	public String getMemberByOauthLoginMember(OauthParams oauthParams) {
+		
+		System.out.println("------ Oauth 로그인 시도 ------");
+		// 인증 파라미터 객체를 이용하여 해당 enum클래스에 해당하는 메소드 수행
+		OauthMember oauthMember = requestOauthInfoService.request(oauthParams);
+		System.out.println("전달받은 유저정보:: " + oauthMember.getEmail());
+		
+		// 획득한 회원정보로 검증할 MemberDTO 생성
+		Member accessMember = new Member();
+		accessMember.setMemberId(oauthMember.getEmail());
+		//accessMember.setMemberName(oauthMember.getNickName());
+
+		// 획득된 회원정보 DB 조회
+		Member result = memberDao.selectByOauthLogin(accessMember);
+		System.out.println(result);
+		// 반환할 JWT
+		String accessJwt = null;
+
+		if (result == null) {
+			System.out.println("------ 회원가입 필요한 회원 ------");
+			// 회원가입이 되지 않은 회원이기 때문에 회원 Dao에 값을 전달하여 DB저장
+			System.out.println("회원가입 요청 :: " + accessMember.getMemberId());
+			
+			// kakaoMember에서 전달된 데이터를 가진 memberDao DB 저장
+			String kakaoPass = "semomokakaoMember";
+			accessMember.setMemberPw(kakaoPass);
+			System.out.println(accessMember);
+			int success = memberDao.insertKakaoMember(accessMember);
+			
+			System.out.println("로그인 성공값 : "+success);
+
+			System.out.println("회원가입 완료 :: " + accessMember.getMemberName());
+		}
+		// 이미 가입된 회원은 토큰발급
+		System.out.println("------ JWT 발급 ------");
+		accessJwt = jwtUtil.createToken(accessMember.getMemberId(), secretKey, expiredMs);
+		
+		System.out.println("------ JWT 발급완료 ------ :"+accessJwt);
+		return accessJwt;
+	}
+	
+	@Transactional
+	public int kakaoJoin(Member member) {
+		// TODO Auto-generated method stub
+		System.out.println(member);
+		return memberDao.kakaoJoin(member);
+	}
 	
 	
 }

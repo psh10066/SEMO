@@ -57,6 +57,12 @@ public interface MemberDao {
 
 	List myLikeGroup(String groupNoList);
 
+	int insertKakao(Member accessMember);
+
+	int insertKakaoMember(Member accessMember);
+
+	int kakaoJoin(Member member);
+
 	
 
 

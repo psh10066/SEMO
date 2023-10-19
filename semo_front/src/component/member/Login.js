@@ -58,7 +58,7 @@ const Login = (props) => {
         />
       </div>
       <div className="login-icon-box">
-        <KakaoLogin />
+        <KakaoLogin setIsLogin={setIsLogin} />
         <Link to="#">
           <img src="/image/ico-naver.png" />
         </Link>
