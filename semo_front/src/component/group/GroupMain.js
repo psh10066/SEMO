@@ -5,6 +5,7 @@ import GroupView from "./GroupView";
 import GroupSetting from "./GroupSetting";
 import GrBoardMain from "../board/GrBoardMain";
 import GrPhotoMain from "../photo/GrPhotoMain";
+import GroupModify from "./GroupModify";
 
 const GroupMain = (props) => {
   const groupName = props.groupName;
@@ -17,6 +18,7 @@ const GroupMain = (props) => {
         <Route path="create" element={<GroupCreate />} />
         <Route path="view" element={<GroupView isLogin={isLogin} />} />
         <Route path="setting" element={<GroupSetting />} />
+        <Route path="modify" element={<GroupModify />} />
         <Route
           path="/groupBoard/*"
           element={<GrBoardMain isLogin={isLogin} setIsLogin={setIsLogin} />}

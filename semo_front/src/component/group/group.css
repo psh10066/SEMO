@@ -188,8 +188,37 @@ input[type="file"]::file-selector-button {
 }
 
 #group-member-content {
-  text-overflow: ellipsis;
-  /* white-space: nowrap; */
+  white-space: nowrap;
   overflow: hidden;
-  height: 70px;
+  text-overflow: ellipsis;
+  max-width: 300px;
+  padding-left: 15px;
+}
+#group-member-name {
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#group-icon {
+  text-align: right;
+}
+#group-icon > a > span {
+  color: #5457e9;
+  cursor: pointer;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+#group-icon > a > span:last-child {
+  margin-right: 32px;
+}
+
+#icon-area {
+  text-align: right;
+  margin-right: 10px;
+}
+#icon-area > span {
+  color: #5457e9;
+  font-size: 30px;
+  cursor: pointer;
 }

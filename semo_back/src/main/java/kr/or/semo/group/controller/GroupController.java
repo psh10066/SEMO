@@ -154,6 +154,23 @@ public class GroupController {
 	public List groupMemberList(@PathVariable int groupNo) {
 		return groupService.groupMemberList(groupNo);
 	}
+	//그룹 수정
+	@PostMapping(value = "/modify")
+	public int modifyGroup(@ModelAttribute Group g, @ModelAttribute MultipartFile thumbnail) {
+		String savepath = root+"group/";
+		System.out.println(g);
+		if(thumbnail != null) {
+			String filepath = fileUtil.getfilepath(savepath, thumbnail.getOriginalFilename(), thumbnail);
+			g.setGroupImg(filepath);
+		}
+		return groupService.modifyGroup(g);
+	}
+	//그룹 등급 변경
+	@PostMapping(value = "/changeType")
+	public int changeType(@RequestBody GroupJoin grJoin) {
+		System.out.println(grJoin);
+		return groupService.chanceType(grJoin);
+	}
 	
 	//가장 많이 찜된 그룹 검색 :  10개
 	@GetMapping(value="/groupLikeList")

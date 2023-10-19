@@ -8,19 +8,21 @@ const MypageReport = () => {
   const location = useLocation();
   const group = location.state.group;
   const member = location.state.member;
-  console.log(group);
-  console.log(member);
+  //console.log(group);
+  //console.log(member);
 
-  const [reportContent, setReportContent] = useState("");
+  const [reportDetail, setReportDetail] = useState("");
 
   const navigate = useNavigate();
   const report = () => {
-    console.log(reportContent);
-    if (reportContent !== "") {
+    console.log(reportDetail);
+    console.log(member.memberNo);
+    console.log(group.groupNo);
+    if (reportDetail !== "") {
       const form = new FormData();
-      form.append("reportContent", reportContent);
+      form.append("reportDetail", reportDetail);
       form.append("groupNo", group.groupNo);
-      form.append("memberName", member.memberNo);
+      form.append("memberNo", member.memberNo);
       const token = window.localStorage.getItem("token");
       axios
         .post("/report/insert", form, {
@@ -31,13 +33,19 @@ const MypageReport = () => {
         .then((res) => {
           console.log(res.data);
           if (res.data > 0) {
-            Swal.fire("신고가 접수되었습니다.");
-            navigate("/mygroup");
+            Swal.fire({
+              icon: "success",
+              html: "신고가 접수되었습니다.",
+            });
+            navigate("/mypage/mygroup");
           }
         })
         .catch((res) => [console.log(res.response.status)]);
     } else {
-      Swal.fire("에러가 발생했습니다. 잠시 후 다시 시도해주세요.");
+      Swal.fire({
+        icon: "error",
+        html: "에러가 발생했습니다.<br>잠시 후 다시 시도해주세요.",
+      });
     }
   };
   return (
@@ -46,8 +54,8 @@ const MypageReport = () => {
       <ReportFrm
         group={group}
         member={member}
-        reportContent={reportContent}
-        setReportContent={setReportContent}
+        reportDetail={reportDetail}
+        setReportDetail={setReportDetail}
         buttonEvent={report}
       />
     </div>

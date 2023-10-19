@@ -45,17 +45,30 @@
   padding: 30px;
 }
 .admin-member-tbl-box > table {
+  width: 100%;
   padding: 20px;
   background-color: #fff;
   border-radius: 20px;
+  border-spacing: 0;
 }
 .admin-member-tbl-box td {
   text-align: center;
-  border-bottom: 1px solid #ccc;
   height: 70px;
+}
+.admin-member-tbl-box th {
+  font-size: 18px;
+  padding-bottom: 15px;
+}
+.admin-member-tbl-box > table > tbody td {
+  border-bottom: 1px solid #ccc;
+  font-size: 16px;
 }
 .admin-report-board {
   padding: 30px;
+}
+.admin-report-board th {
+  font-size: 18px;
+  padding-bottom: 10px;
 }
 .admin-report-board td {
   text-align: center;
@@ -66,7 +79,32 @@
   padding: 20px;
   background-color: #fff;
   border-radius: 20px;
+  border-spacing: 0;
+  width: 100%;
 }
 #reportDetail {
   text-align: left;
+}
+.admin-report-detail > div {
+  width: 100%;
+  /*white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;*/
+}
+.admin-group-name > div {
+  width: 100%;
+}
+.admin-group-name {
+  text-align: center;
+  white-space: normal;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+.admin-report-detail {
+  text-align: center;
+  white-space: normal;
+  padding-right: 10px;
+}
+.admin-tbl-line:hover {
+  background-color: rgba(0, 0, 0, 0.02);
 }

@@ -13,7 +13,7 @@ const NoticeTextEditor = (props) => {
   const formats = [
     "header",
     "font",
-    "side",
+    "size",
     "bold",
     "italic",
     "underline",
