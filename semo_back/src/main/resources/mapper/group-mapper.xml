@@ -132,6 +132,22 @@
 		(select member_no from gr_join where group_no=#{groupNo})
 	</select>
 	
+	<!-- 가장 많이 찜된 그룹 검색 -->
+	<select id="groupLikeList" resultType="groupSave">
+	 SELECT ROWNUM, t.*
+        FROM (
+            SELECT group_no, COUNT(*) as count
+            FROM group_save
+            GROUP BY group_no
+            ORDER BY COUNT(*) DESC
+        ) t
+        WHERE ROWNUM <![CDATA[<]]> 11
+	</select>
+	<select id="groupLikeListDetail" resultType="Group">
+		select *
+		from group_tbl
+		where groupNo=#{groupNo}
+	</select>
 	
 	
 </mapper>

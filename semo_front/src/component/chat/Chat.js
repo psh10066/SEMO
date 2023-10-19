@@ -81,8 +81,7 @@ const Chat = (props) => {
         }
       )
       .then((res) => {
-        // grJoinType이 3인 회원은 모임승인대기상태
-        // grJoinType이 3이 아닌 회원만 필터링
+        // grJoinType이 3인 회원은 모임승인대기상태 >> grJoinType이 3이 아닌 회원만 필터링
         const filteredMembers = res.data.filter(
           (item) => item.grJoinType !== 3
         );

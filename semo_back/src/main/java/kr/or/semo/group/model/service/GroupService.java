@@ -26,6 +26,7 @@ public class GroupService {
 	private GroupDao groupDao;
 	@Autowired
 	private MemberDao memberDao;
+
 	
 	//모임생성
 	@Transactional
@@ -159,5 +160,15 @@ public class GroupService {
 		return groupDao.groupMemberList(groupNo);
 	}
 
+	public List groupLikeList() {
+		return groupDao.groupLikeList();
+	}
+
+	public List groupLikeListDetail(int groupNo) {
+		return groupDao.groupLikeListDetail(groupNo);
+	}
+
+
+   
 	
 }

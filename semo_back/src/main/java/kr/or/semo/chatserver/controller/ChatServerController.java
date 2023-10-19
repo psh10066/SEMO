@@ -71,7 +71,7 @@ public class ChatServerController {
     	return chatServerService.chatPreviousMessage(roomId);
     }
     
-    //
+    //new 알림기능
 
     @PostMapping("/chat/mychatTime")
     public String myChatTime (@RequestBody Map<String, Integer> request) {
