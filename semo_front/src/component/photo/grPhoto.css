@@ -180,6 +180,7 @@
   border: none;
 }
 a.active-side {
-  background-color: #5457e9;
-  color: #fff;
+  box-sizing: border-box;
+  border-top: 5px solid #5457e9 !important;
+  color: black;
 }
