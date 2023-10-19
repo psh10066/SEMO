@@ -76,12 +76,14 @@
 .profile-category > a {
   display: inline-block;
   color: #220895;
-  font-size: 17px;
+  font-size: 15px;
   margin-right: 20px;
-}
-.profile-category > a:hover {
   font-family: ns-b;
+  cursor: default;
 }
+/* .profile-category > a:hover {
+  font-family: ns-b;
+} */
 .profile-menu {
   width: 100%;
 }
@@ -248,10 +250,11 @@
 .feed-group-category > a {
   color: #220895;
   font-size: 14px;
-}
-.feed-group-category > a:hover {
   font-family: ns-b;
 }
+/* .feed-group-category > a:hover {
+  font-family: ns-b;
+} */
 .feed-group-right {
   display: flex;
   flex-direction: column;
