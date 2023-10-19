@@ -126,7 +126,10 @@ const SearchResult = (props) => {
             </div>
             {socialPageInfo.totalPage === 0 ? (
               <div className="searchresult-page">
-                <div className="paging-wrap">검색 결과가 없습니다.</div>
+                <div className="paging-wrap">
+                  <div className="material-icons">warning_amber</div>
+                  <div>검색 결과가 없습니다.</div>
+                </div>
               </div>
             ) : (
               <div className="searchresult-page">
@@ -152,7 +155,12 @@ const SearchResult = (props) => {
             </div>
             {feedPageInfo.totalPage === 0 ? (
               <div className="searchresult-page">
-                <div className="paging-wrap">검색 결과가 없습니다.</div>
+                <div className="paging-wrap">
+                  <div className="material-icons">warning_amber</div>
+                  <div className="empty-result-message">
+                    검색 결과가 없습니다.
+                  </div>
+                </div>
               </div>
             ) : (
               <div className="searchresult-page">

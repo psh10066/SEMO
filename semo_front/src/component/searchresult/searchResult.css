@@ -203,3 +203,22 @@
   font-weight: bold;
   height: 40px;
 }
+/*검색결과 없는 화면 css*/
+.paging-wrap {
+  /*width: 200px;*/
+  margin: 0 auto;
+}
+.paging-wrap > div {
+  font-size: 28px;
+  width: 1200px;
+}
+.paging-wrap > .material-icons {
+  font-size: 60px;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.empty-result-message {
+  width: 300px;
+  text-align: center;
+}
