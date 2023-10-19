@@ -22,9 +22,13 @@ const ChatRoom = (props) => {
     useState(false); // 지난대화 불러왔는지 체크
 
   //메세지 받기
+
+  const serverIP = "192.168.10.39"; // IP 주소
+  const webSocketEndpoint = `http://${serverIP}:9999/ws`;
+
   useEffect(() => {
     const client = new Client({
-      webSocketFactory: () => new SockJS("http://localhost:9999/ws"),
+      webSocketFactory: () => new SockJS(webSocketEndpoint),
 
       onConnect: () => {
         console.log("WebSocket connected");
