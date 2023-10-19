@@ -205,7 +205,7 @@ header {
   background-color: #eee;
 }
 .footer-content {
-  width: 85vw;
+  min-width: 85vw;
   margin: 0 auto;
 }
 .footer-content * {
