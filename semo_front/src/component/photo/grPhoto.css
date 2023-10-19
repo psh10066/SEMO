@@ -100,7 +100,7 @@
 }
 .photo-info-tbl tr > td:first-child {
   width: 150px;
-  padding: 15px 20px;
+  padding: 15px;
   background-color: rgba(5, 59, 80, 0.1);
   border: 1px solid lightgray;
   text-align: center;
@@ -112,9 +112,12 @@
 .photo-info-tbl tr > td > input[type="text"] {
   border: none;
   padding: 0;
+  background-color: rgba(248, 249, 250);
 }
 .input-content > textarea {
   height: 230px;
+  background-color: rgba(248, 249, 250);
+  border: none;
 }
 .photo-content-box {
   margin: 10px 0px;
@@ -176,7 +179,7 @@
   border: none;
 }
 .photo-view-btn-zone > button:first-child:hover {
-  background-color: #5457e9;
+  background-color: #220895;
   border: none;
 }
 a.active-side {
