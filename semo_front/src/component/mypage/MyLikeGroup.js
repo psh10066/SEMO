@@ -6,12 +6,20 @@ import { Link, useNavigate } from "react-router-dom";
 const MyLikeGroup = (props) => {
   const navigate = useNavigate();
   const member = props.member;
+  console.log(member);
   const [group, setGroup] = useState([]);
   console.log(member);
   useEffect(() => {
-    axios.post("/group/myLikeGroup", member).then((res) => {
-      setGroup(res.data);
-    });
+    axios
+      .post("/group/myLikeGroup", member)
+      .then((res) => {
+        // console.log("1: " + res.data);
+        setGroup(res.data);
+      })
+      .catch((res) => {
+        // console.log("catch2: " + res.response.status); 문제생기면 500에러 떴을때 메인페이지
+      });
+    // console.log(group);
   }, []);
 
   return (
@@ -37,6 +45,7 @@ const MypageItem = (props) => {
     axios
       .get("/group/groupPeopleList/" + group.groupNo)
       .then((res) => {
+        // console.log(res.data);
         setPeopleList(res.data.peopleList);
         setPeopleCount(res.data.peopleCount);
       })

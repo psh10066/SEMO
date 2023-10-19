@@ -48,14 +48,14 @@ export const Carousel = (props) => {
   return (
     <>
       <group
-        scale={[0.85, 0.85, 0.85]}
+        scale={[0.9, 0.9, 0.9]}
         rotation-y={-Math.PI / 4}
         position-y={-0.01}
       >
         <animated.group rotation-y={carouselRotation}>
           <CarouselLights currentStepSpring={currentStep} />
           <mesh position={[0, -2, 0]}>
-            <meshStandardMaterial color="#fdff6a" />
+            <meshStandardMaterial color="#FFFF39" />
             <cylinderGeometry args={[11, 11, 1.5, 64]} />
           </mesh>
           <mesh scale={[1, 6, 24]} position-y={3}></mesh>

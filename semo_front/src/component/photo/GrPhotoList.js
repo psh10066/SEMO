@@ -4,14 +4,16 @@ import "./grPhoto.css";
 import axios from "axios";
 import Pagination from "../common/Pagination";
 import { Button1 } from "../util/Buttons";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const GrPhotoList = (props) => {
   const isLogin = props.isLogin;
+  const location = useLocation();
   const [grPhotoList, setGrPhotoList] = useState([]);
   const [reqPage, setReqPage] = useState(1);
   const [pageInfo, setPageInfo] = useState({});
-  const groupNo = 10;
+  const groupNo = location.state.groupNo;
+  console.log("groupNo : " + groupNo);
   useEffect(() => {
     axios
       .get("/groupPhoto/list/" + groupNo + "/" + reqPage)
@@ -57,7 +59,9 @@ const PhotoItem = (props) => {
   const grPhoto = props.grPhoto;
   const navigate = useNavigate();
   const photoView = () => {
-    navigate("/groupPhoto/view", { state: { grPhotoNo: grPhoto.grPhotoNo } });
+    navigate("/group/groupPhoto/view", {
+      state: { grPhotoNo: grPhoto.grPhotoNo },
+    });
   };
   return (
     <div className="photo-item" onClick={photoView}>

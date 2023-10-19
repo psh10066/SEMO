@@ -122,7 +122,15 @@
     	</foreach>
  	 </select>
 	
-	
+	<select id="selectGrJoinMember" resultType="groupJoin">
+		select * from gr_join 
+		where group_no=#{groupNo}
+	</select>
+	<select id="groupMemberList" resultType="member">
+		select * from member 
+		where member_no in 
+		(select member_no from gr_join where group_no=#{groupNo})
+	</select>
 	
 	
 	

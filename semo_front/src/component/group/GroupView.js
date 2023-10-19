@@ -249,12 +249,12 @@ const GroupView = (props) => {
 
   const [menus, setMenus] = useState([
     {
-      url: "/groupBoard",
+      url: "/group/groupBoard",
       text: "게시판",
       active: false,
     },
     {
-      url: "/groupPhoto",
+      url: "/group/groupPhoto",
       text: "사진첩",
       active: false,
     },
@@ -395,7 +395,7 @@ const MySideMenu = (props) => {
   };
 
   const settingGroup = () => {
-    navigate("/group/setting", { state: { groupNo: groupNo } });
+    navigate("/group/setting/groupMember", { state: { groupNo: groupNo } });
   };
 
   return (
@@ -420,6 +420,7 @@ const MySideMenu = (props) => {
           <div key={"menu" + index}>
             <Link
               to={menu.url}
+              state={{ groupNo: groupNo }}
               className={menu.active ? "active-side" : ""}
               onClick={() => {
                 activeTab(index);

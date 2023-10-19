@@ -35,6 +35,7 @@
 }
 .adminmenu > ul > li > a.active-side {
   background-color: #5457e9;
+  border-radius: 20px;
   color: #fff;
 }
 .adminmenu > ul > li > a.active-side > span {
@@ -65,4 +66,7 @@
   padding: 20px;
   background-color: #fff;
   border-radius: 20px;
+}
+#reportDetail {
+  text-align: left;
 }

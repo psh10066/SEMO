@@ -46,7 +46,7 @@ const GrPhotoView = (props) => {
   }, []);
   //게시판 상세정보 수정
   const modify = () => {
-    navigate("/groupPhoto/modify", { state: { grPhoto: grPhoto } });
+    navigate("/group/groupPhoto/modify", { state: { grPhoto: grPhoto } });
   };
   //게시판 상세정보 삭제
   const deletePhoto = () => {
@@ -64,7 +64,9 @@ const GrPhotoView = (props) => {
             console.log(res.data);
             if (res.data === 1) {
               Swal.fire("삭제가 완료되었습니다.");
-              navigate("/groupPhoto");
+              navigate("/group/groupPhoto", {
+                state: { groupNo: grPhoto.groupNo },
+              });
             }
           })
           .catch((res) => {

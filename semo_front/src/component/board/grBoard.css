@@ -12,7 +12,6 @@
     */
 
 .board-all-wrap {
-  width: 1200px;
   margin: 50px auto;
 }
 .board-title {
@@ -154,4 +153,8 @@
 .board-view-btn-zone > button:first-child:hover {
   background-color: #220895;
   border: none;
+}
+a.active-side {
+  background-color: #5457e9;
+  color: #fff;
 }

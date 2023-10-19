@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import kr.or.semo.PageInfo;
 import kr.or.semo.Pagination;
+import kr.or.semo.group.model.vo.Group;
+import kr.or.semo.member.model.vo.Member;
 import kr.or.semo.report.model.dao.ReportDao;
 
 @Service
@@ -28,5 +30,17 @@ public class ReportService {
 		map.put("pi", pi);
 		map.put("list", reportList);
 		return map;
+	}
+
+	/*
+	public List myGroup(int memberNo) {
+		List list = reportDao.myGroup(memberNo);
+		return list;
+	}
+	*/
+
+	public List myGroupList(int memberNo) {
+		List list = reportDao.myGroupList(memberNo);
+		return list;
 	}
 }

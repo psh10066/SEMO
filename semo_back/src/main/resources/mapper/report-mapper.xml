@@ -22,4 +22,18 @@
 	WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>
 	
+	<select id="myGroupList" resultType="group">
+		select group_no,
+	        gr_join_type,
+	        group_name,
+	        group_img,
+	        group_maxnum,
+	        group_content,
+	        group_category,
+	        group_local
+	    from gr_join
+	    join group_tbl USING (GROUP_NO)
+	    where member_no=#{memberNo}
+	</select>
+	
 </mapper>

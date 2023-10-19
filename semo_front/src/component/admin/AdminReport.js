@@ -58,7 +58,7 @@ const ReportItem = (props) => {
       <td>{report.reportNo}</td>
       <td>{report.groupName}</td>
       <td>{report.memberId}</td>
-      <td>{report.reportDetail}</td>
+      <td id="reportDetail">{report.reportDetail}</td>
       <td>{report.reportDate}</td>
     </tr>
   );

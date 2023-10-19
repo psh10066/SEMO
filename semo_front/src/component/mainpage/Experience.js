@@ -7,9 +7,6 @@ import * as THREE from "three";
 import { ContactShadows } from "@react-three/drei";
 
 
-
-
-
 const BG_SPEED = 0.3;
 
 const Background = () => {
@@ -26,7 +23,7 @@ const Background = () => {
     <mesh scale={100} ref={ref}>
       <sphereGeometry args={[1, 64, 64]} />
       <LayerMaterial side={THREE.BackSide}>
-      <Depth
+        <Depth
           colorA="#5457E9"
           colorB="#8BB4FF"
           alpha={1}
@@ -40,31 +37,23 @@ const Background = () => {
   );
 };
 
-
 export const Experience = () => {
-  
   return (
     <>
-      <OrbitControls enableZoom={false}/>
+      <OrbitControls enableZoom={false} />
       <ContactShadows scale={30} opacity={0.32} />
       <ambientLight intensity={1} />
-      <directionalLight
-        position={[4, 5, 6]}
-        intensity={1}
-        color={"#000000"}
-      />
+      <directionalLight position={[4, 5, 6]} intensity={1} color={"#000000"} />
 
       <directionalLight
         position={[-4, 5, 6]}
         intensity={1.5}
         color={"#ffffff"}
       />
-    
+
       <Carousel />
 
-
       <Background />
-    
     </>
   );
 };
