@@ -43,9 +43,9 @@ public class NoticeService {
 
 	@Transactional
 	public int insertNotice(Notice n) {
-		System.out.println("서비스에서의 n값은 "+n);
+		//System.out.println("서비스에서의 n값은 "+n);
 		Member member = memberDao.selectOneMember(n.getMemberId());
-		System.out.println("서비스에서의 member는 "+member);
+		//System.out.println("서비스에서의 member는 "+member);
 		n.setMemberNo(member.getMemberNo());
 		int result = noticeDao.insertNotice(n);
 		if(result >0) {

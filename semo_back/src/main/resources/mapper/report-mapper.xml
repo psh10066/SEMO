@@ -36,4 +36,8 @@
 	    where member_no=#{memberNo}
 	</select>
 	
+	<insert id="insertReport">
+		INSERT INTO GR_REPORT VALUES(GR_REPORT_SEQ.NEXTVAL,#{reportDetail},SYSDATE,#{groupNo},#{memberNo})
+	</insert>
+	
 </mapper>

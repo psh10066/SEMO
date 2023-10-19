@@ -3,10 +3,10 @@ import { Button1 } from "../util/Buttons";
 const ReportFrm = (props) => {
   const group = props.group;
   const member = props.member;
-  console.log(group);
-  console.log(member);
-  const reportContent = props.reportContent;
-  const setReportContent = props.setReportContent;
+  //console.log(group);
+  //console.log(member);
+  const reportDetail = props.reportDetail;
+  const setReportDetail = props.setReportDetail;
 
   const buttonEvent = props.buttonEvent;
 
@@ -24,13 +24,15 @@ const ReportFrm = (props) => {
           </tr>
           <tr>
             <td colSpan="2" className="report-content-box">
+              {/* 텍스트에디터 효과 없이 줄글 입력만 받을거라 textarea 사용했습니다.
+              관리자페이지: 신고내역 조회 참고 */}
               <textarea
                 onChange={(e) => {
                   const changeValue = e.currentTarget.value;
-                  setReportContent(changeValue);
+                  setReportDetail(changeValue);
                 }}
               >
-                {reportContent}
+                {reportDetail}
               </textarea>
             </td>
           </tr>

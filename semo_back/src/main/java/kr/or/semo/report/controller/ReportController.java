@@ -27,16 +27,15 @@ public class ReportController {
 	public Map reportList(@PathVariable int reqPage) {
 		return reportService.reportList(reqPage);
 	}
-	/*
+	
 	@PostMapping(value="/insert")
-	public int insertReport(@ModelAttribute Report r, @RequestAttribute int memberNo) {
+	public int insertReport(@ModelAttribute Report r) {
 		System.out.println("r은 "+r);
-		System.out.println("memberNo는 "+memberNo);
-		r.setMemberNo(memberNo);
+		//System.out.println("memberNo는 "+memberNo);
+		//r.setMemberNo(memberNo);
 		int result = reportService.insertReport(r);
 		return result;
 	}
-	*/
 	
 	@GetMapping(value="/mygroup/{memberNo}")
 	public List myGroupList(@PathVariable int memberNo) {

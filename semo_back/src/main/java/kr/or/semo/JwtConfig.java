@@ -30,7 +30,7 @@ public class JwtConfig {
 
 				.antMatchers(HttpMethod.POST,"/member/sendMail","/member/oauth/kakao","/member/login","/member/join","/groupBoard/write","/groupPhoto/write","/member/mailCheck","/member/findPw","/member/findChangePw").permitAll()
 
-				.antMatchers(HttpMethod.POST,"/member/login","/member/join","/groupBoard/write","/groupPhoto/write","/page/search","/group/myLikeGroup").permitAll()
+				.antMatchers(HttpMethod.POST,"/member/login","/member/join","/groupBoard/write","/groupPhoto/write","/page/search","/group/myLikeGroup","/report/insert").permitAll()
 
 				//post요청중에 /member/로 시작하면 반드시 인증을 하도록 설정
 				.antMatchers(HttpMethod.POST/*"/member/**","board/insert","/board/contentImg"*/).authenticated()
