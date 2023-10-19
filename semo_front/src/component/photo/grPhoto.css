@@ -34,7 +34,7 @@
   cursor: pointer;
 }
 .photo-item:hover {
-  box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.2);
 }
 .photo-item-img {
   height: 240px;
@@ -150,6 +150,18 @@
 }
 .photo-view-btn-zone > button {
   margin-right: 20px;
+  width: 100px;
+  border-radius: 5px;
+  height: 50px;
+  line-height: 10px;
+}
+.photo-view-btn-zone > button:first-child {
+  background-color: #5457e9;
+  border: none;
+}
+.photo-view-btn-zone > button:first-child:hover {
+  background-color: #5457e9;
+  border: none;
 }
 a.active-side {
   background-color: #5457e9;
