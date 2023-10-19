@@ -92,7 +92,7 @@ function App() {
         </Routes>
       </div>
 
-      <Footer />
+      <Footer setIsLogin={setIsLogin} isLogin={isLogin} />
     </div>
   );
 }

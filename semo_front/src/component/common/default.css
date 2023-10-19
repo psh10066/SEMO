@@ -774,3 +774,7 @@ textarea.input-form {
   margin: 30px 0px;
   display: none;
 }
+
+.deleteMember {
+  cursor: pointer;
+}

@@ -216,6 +216,11 @@ public class MemberService {
 		System.out.println(member);
 		return memberDao.kakaoJoin(member);
 	}
+
+	public int deleteMember(String memberId) {
+		// TODO Auto-generated method stub
+		return memberDao.deleteMember(memberId);
+	}
 	
 	
 }
