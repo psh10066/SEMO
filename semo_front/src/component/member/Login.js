@@ -37,6 +37,12 @@ const Login = (props) => {
         console.log(res);
       });
   };
+  const naver = () => {
+    Swal.fire({
+      icon: "warning",
+      text: "준비중입니다",
+    });
+  };
   return (
     <div className="login-wrap">
       <div className="login-title">LOGIN</div>
@@ -51,7 +57,7 @@ const Login = (props) => {
       </div>
       <div className="login-input-wrap">
         <Input
-          type="text"
+          type="password"
           data={memberPw}
           setData={setMemberPw}
           placeholder="비밀번호"
@@ -59,7 +65,7 @@ const Login = (props) => {
       </div>
       <div className="login-icon-box">
         <KakaoLogin setIsLogin={setIsLogin} />
-        <Link to="#">
+        <Link to="#" onClick={naver}>
           <img src="/image/ico-naver.png" />
         </Link>
       </div>
