@@ -23,7 +23,7 @@ import LoungeMain from "./component/lounge/LoungeMain";
 import MypageReport from "./component/mypage/MypageReport";
 
 function App() {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -33,7 +33,7 @@ function App() {
     } else {
       setIsLogin(true);
     }
-  }, []);
+  }, [isLogin]);
 
   return (
     <div className="wrap">
