@@ -136,15 +136,15 @@ public class MemberController {
 
 	
 	@PostMapping("/oauth/kakao")
-	public ResponseEntity<String> handleKakaoLogin(@RequestBody KakaoParams kakaoParams){
+	public String handleKakaoLogin(@RequestBody KakaoParams kakaoParams){
 		System.out.println("넘겨받은 Kakao 인증키 :: " + kakaoParams.getAuthorizationCode());
 		
 		String accessToken = memberService.getMemberByOauthLoginMember(kakaoParams);
 		//응답 헤더 생성
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("accessToken", accessToken);
-		
-		return ResponseEntity.ok().headers(headers).body("Response with header using ResponseEntity");
+		//ResponseEntity.ok().headers(headers).body("Response with header using ResponseEntity")
+		return accessToken;
 	}
 	
 	@PostMapping("/sendMail")

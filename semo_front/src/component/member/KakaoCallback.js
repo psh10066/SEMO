@@ -29,14 +29,12 @@ const KakaoCallBack = (props) => {
       .then((res) => {
         //spring에서 발급된 jwt localStorage 저장
         console.log(res.data);
-        localStorage.setItem("access_token", res.headers.accesstoken);
         setIsLogin(true);
-        window.location.href = "/";
+        localStorage.setItem("token", res.data);
+        navigate("/");
       })
       .catch((err) => {
-        console.log(err.data);
-        setIsLogin(true);
-        window.location.href = "/";
+        console.log(err.response.data.detail);
       });
   }, []);
   const handleChange1 = (event) => {
