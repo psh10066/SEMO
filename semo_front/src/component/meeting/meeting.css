@@ -10,7 +10,7 @@
   font-size: 28px;
   text-align: center;
   padding: 40px;
-  color: #220895;
+  color: #282c34;
 }
 
 .meeting-title div {
@@ -60,12 +60,16 @@
   text-align: center;
   margin: 20px;
 }
-#meeting-btn > button {
-  width: 300px;
+#meeting-btn :first-child {
+  margin-right: 15px;
+}
+#meeting-btn button {
+  width: 120px;
   border: none;
+  background-color: #5457e9;
 }
 #meeting-btn > button:hover {
-  background-color: #5457e9;
+  background-color: rgba(37, 42, 52, 0.9);
   border: none;
 }
 
@@ -102,22 +106,40 @@
 }
 #meeting-btn-area > button {
   background-color: #5457e9;
+  border: none;
   border-radius: 5px;
   color: #fff;
 }
 #meeting-btn-area > button:hover {
-  background-color: #8bb4ff;
+  background-color: rgba(57, 62, 70, 0.9);
 }
-.meetingView-content > button {
+#meeting-btn-area2 button {
+  background-color: #8bb4ff;
+  border: #8bb4ff;
+  border-radius: 5px;
+  width: 90px;
+  height: 50px;
+  padding: 0.5rem;
+}
+#meeting-btn-area2 button:hover {
+  background-color: rgba(37, 42, 52, 0.9);
+  border: rgba(37, 42, 52, 0.9);
+}
+#meeting-btn-area2 :first-child {
   margin-right: 10px;
 }
 
 /* PostCode */
 #address-btn > button {
-  background-color: #8bb4ff;
+  background-color: #535760;
   color: #fff;
   font-weight: 500;
+  width: 80px;
+  height: 45px;
+  border: none;
+  padding: 0.5rem;
 }
 #address-btn > button:hover {
-  background-color: #5457e9;
+  background-color: #8c92a4;
+  color: #fff;
 }

@@ -63,7 +63,10 @@ public class MeetingController {
 	public int modify(@RequestBody Meeting m) {
 		return meetingService.modify(m);
 	}
-
+	@GetMapping(value = "/delete/{meetingNo}")
+	public int delete(@PathVariable int meetingNo) {
+		return meetingService.delete(meetingNo);
+	}
 	
 
 }

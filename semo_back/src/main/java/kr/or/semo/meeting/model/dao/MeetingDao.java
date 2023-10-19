@@ -24,6 +24,8 @@ public interface MeetingDao {
 
 	int modify(Meeting m);
 
+	int delete(int meetingNo);
+
 
 	
 
