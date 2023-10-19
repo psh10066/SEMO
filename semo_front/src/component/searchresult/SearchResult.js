@@ -128,7 +128,9 @@ const SearchResult = (props) => {
               <div className="searchresult-page">
                 <div className="paging-wrap">
                   <div className="material-icons">warning_amber</div>
-                  <div>검색 결과가 없습니다.</div>
+                  <div className="empty-result-message">
+                    검색 결과가 없습니다.
+                  </div>
                 </div>
               </div>
             ) : (
