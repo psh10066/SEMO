@@ -14,4 +14,5 @@ public class GroupSave {
 	private int groupSaveNo;
 	private int groupNo;
 	private int memberNo;
+	private int count;
 }

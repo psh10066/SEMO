@@ -62,6 +62,11 @@ public interface GroupDao {
 
 	List groupMemberList(int groupNo);
 
+	List groupLikeList();
+
+	List groupLikeListDetail(int groupNo);
+
+
 	
 
 }

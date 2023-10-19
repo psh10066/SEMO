@@ -33,3 +33,5 @@ npm install date-fns
 npm install react-awesome-reveal @emotion/react --save  ->10/18 정아 설치
 npm install react-icons     ->10/19 정아 설치
 npm install framer-motion   ->10/19 정아 설치
+
+npm i swiper
