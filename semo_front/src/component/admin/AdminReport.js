@@ -28,9 +28,9 @@ const AdminReport = () => {
           <thead>
             <tr>
               <th width={"10%"}>신고번호</th>
-              <th width={"10%"}>모임명</th>
-              <th width={"15%"}>신고회원아이디</th>
-              <th width={"55%"}>신고사유</th>
+              <th width={"10%"}>아이디</th>
+              <th width={"20%"}>모임명</th>
+              <th width={"50%"}>신고사유</th>
               <th width={"10%"}>신고일자</th>
             </tr>
           </thead>
@@ -54,11 +54,15 @@ const AdminReport = () => {
 const ReportItem = (props) => {
   const report = props.report;
   return (
-    <tr>
+    <tr className="admin-tbl-line">
       <td>{report.reportNo}</td>
-      <td>{report.groupName}</td>
       <td>{report.memberId}</td>
-      <td id="reportDetail">{report.reportDetail}</td>
+      <td className="admin-group-name">
+        <div>{report.groupName}</div>
+      </td>
+      <td className="admin-report-detail" id="reportDetail">
+        <div>{report.reportDetail}</div>
+      </td>
       <td>{report.reportDate}</td>
     </tr>
   );

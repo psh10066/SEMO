@@ -6,12 +6,14 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.semo.PageInfo;
 import kr.or.semo.Pagination;
 import kr.or.semo.group.model.vo.Group;
 import kr.or.semo.member.model.vo.Member;
 import kr.or.semo.report.model.dao.ReportDao;
+import kr.or.semo.report.model.vo.Report;
 
 @Service
 public class ReportService {
@@ -32,15 +34,19 @@ public class ReportService {
 		return map;
 	}
 
-	/*
-	public List myGroup(int memberNo) {
-		List list = reportDao.myGroup(memberNo);
-		return list;
-	}
-	*/
-
 	public List myGroupList(int memberNo) {
 		List list = reportDao.myGroupList(memberNo);
 		return list;
+	}
+
+	@Transactional
+	public int insertReport(Report r) {
+		System.out.println("서비스에서의 r값은 "+r);
+		int result = reportDao.insertReport(r);
+		if(result >0) {
+			return result;
+		}else {
+			return 0;
+		}
 	}
 }

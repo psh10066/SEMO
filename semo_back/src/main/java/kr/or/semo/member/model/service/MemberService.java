@@ -179,7 +179,7 @@ public class MemberService {
 		// 획득한 회원정보로 검증할 MemberDTO 생성
 		Member accessMember = new Member();
 		accessMember.setMemberId(oauthMember.getEmail());
-		//accessMember.setMemberName(oauthMember.getNickName());
+		
 
 		// 획득된 회원정보 DB 조회
 		Member result = memberDao.selectByOauthLogin(accessMember);
@@ -200,7 +200,7 @@ public class MemberService {
 			
 			System.out.println("로그인 성공값 : "+success);
 
-			System.out.println("회원가입 완료 :: " + accessMember.getMemberName());
+			System.out.println("회원가입 완료 :: " + accessMember.getMemberId());
 		}
 		// 이미 가입된 회원은 토큰발급
 		System.out.println("------ JWT 발급 ------");

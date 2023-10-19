@@ -227,7 +227,7 @@
 .feed-group-item {
   margin: 30px 140px;
   padding: 15px;
-  background-color: #fff;
+  background-color: rgba(248, 249, 250);
   border-radius: 7px;
   display: flex;
   cursor: pointer;
@@ -299,7 +299,7 @@
 }
 .none-groupList-wrap {
   height: 470px;
-  background-color: #fff;
+  background-color: rgba(248, 249, 250);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -319,7 +319,7 @@
   font-size: 17px;
 }
 .feedList-wrap {
-  background-color: #fff;
+  background-color: rgba(248, 249, 250);
 }
 .feed-view-btn-zone > span {
   cursor: pointer;

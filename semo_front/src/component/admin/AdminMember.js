@@ -88,7 +88,7 @@ const MemberItem = (props) => {
       });
   };
   return (
-    <tr>
+    <tr className="admin-tbl-line">
       <td>{member.memberNo}</td>
       <td>{member.memberId}</td>
       <td>{member.memberName}</td>

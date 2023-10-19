@@ -3,6 +3,7 @@ import axios from "axios";
 import { FormControl, MenuItem, Select } from "@mui/material";
 import Input from "../util/InputFrm";
 import { Button1 } from "../util/Buttons";
+
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
@@ -27,21 +28,18 @@ const KakaoCallBack = (props) => {
       })
       .then((res) => {
         //spring에서 발급된 jwt localStorage 저장
+        console.log(res.data);
+        setIsLogin(true);
+        localStorage.setItem("token", res.data);
         Swal.fire({
           icon: "info",
+          title: "개인정보를 꼭수정해주세요!",
+          text: "원할한 이용을원하시면...!",
         });
-        localStorage.setItem("token", res.headers.accesstoken);
-        console.log("여기");
-        setIsLogin(true);
-        window.location.href = "/";
+        navigate("/");
       })
       .catch((err) => {
-        Swal.fire({
-          icon: "info",
-        });
-        console.log(err.data);
-        setIsLogin(true);
-        window.location.href = "/";
+        console.log(err.response.data.detail);
       });
   }, []);
   const handleChange1 = (event) => {
@@ -151,31 +149,32 @@ const KakaoCallBack = (props) => {
       </div>
     );
   };
-  const JoinInputWrap = (props) => {
-    const data = props.data;
-    const setData = props.setData;
-    const type = props.type;
-    const content = props.content;
-    const blurEvent = props.blurEvent;
-    const checkMsg = props.checkMsg;
-    const placeholder = props.placeholder;
-    return (
-      <div className="join-input-wrap">
-        <div>
-          <div className="input">
-            <Input
-              type={type}
-              data={data}
-              setData={setData}
-              content={content}
-              blurEvent={blurEvent}
-              placeholder={placeholder}
-            />
-          </div>
-        </div>
-        <div className="check-msg">{checkMsg}</div>
-      </div>
-    );
-  };
 };
+const JoinInputWrap = (props) => {
+  const data = props.data;
+  const setData = props.setData;
+  const type = props.type;
+  const content = props.content;
+  const blurEvent = props.blurEvent;
+  const checkMsg = props.checkMsg;
+  const placeholder = props.placeholder;
+  return (
+    <div className="join-input-wrap">
+      <div>
+        <div className="input">
+          <Input
+            type={type}
+            data={data}
+            setData={setData}
+            content={content}
+            blurEvent={blurEvent}
+            placeholder={placeholder}
+          />
+        </div>
+      </div>
+      <div className="check-msg">{checkMsg}</div>
+    </div>
+  );
+};
+
 export default KakaoCallBack;

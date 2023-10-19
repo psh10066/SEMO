@@ -6,7 +6,7 @@ const KakaoLogin = () => {
   const url = `https://kauth.kakao.com/oauth/authorize?scope=account_email&client_id=${client_id}&redirect_uri=${redirect_uri}&response_type=code`;
 
   const loginKaKao = () => {
-    window.open(url, "_self");
+    window.location.href = url;
   };
   return <img src="/image/ico-kakao.png" onClick={loginKaKao} />;
 };

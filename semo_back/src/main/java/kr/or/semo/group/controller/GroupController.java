@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -153,5 +154,34 @@ public class GroupController {
 	public List groupMemberList(@PathVariable int groupNo) {
 		return groupService.groupMemberList(groupNo);
 	}
+	//그룹 수정
+	@PostMapping(value = "/modify")
+	public int modifyGroup(@ModelAttribute Group g, @ModelAttribute MultipartFile thumbnail) {
+		String savepath = root+"group/";
+		System.out.println(g);
+		if(thumbnail != null) {
+			String filepath = fileUtil.getfilepath(savepath, thumbnail.getOriginalFilename(), thumbnail);
+			g.setGroupImg(filepath);
+		}
+		return groupService.modifyGroup(g);
+	}
+	//그룹 등급 변경
+	@PostMapping(value = "/changeType")
+	public int changeType(@RequestBody GroupJoin grJoin) {
+		System.out.println(grJoin);
+		return groupService.chanceType(grJoin);
+	}
 	
+	//가장 많이 찜된 그룹 검색 :  10개
+	@GetMapping(value="/groupLikeList")
+	public List groupLikeList() {
+		return groupService.groupLikeList();
+	}
+	
+	//위에서 검색한 그룹의 정보들
+	@PostMapping(value="/groupLikeListDetail")
+	public List groupLikeListDetail(@RequestBody Map<String, Integer> request) {
+		int groupNo = request.get("groupNo");
+		return groupService.groupLikeListDetail(groupNo);
+	}
 }
