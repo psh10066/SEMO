@@ -4,11 +4,10 @@ import { Canvas } from "@react-three/fiber";
 import Black from "./Black";
 import "./mainpage.css";
 import { Fade } from "react-awesome-reveal";
-import { BsCaretDownFill } from 'react-icons/bs';
-
+import { BsCaretDownFill } from "react-icons/bs";
+import PopularGroup from "./PopularGroup";
 
 const Mainpage = () => {
-
   const [isLoading, setIsLoading] = useState(true); // 로딩중..
 
   const [scrollY, setScrollY] = useState(0);
@@ -18,7 +17,7 @@ const Mainpage = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 300); 
+    }, 300);
 
     return () => clearTimeout(timer); // 컴포넌트가 언마운트될 때 타이머 클리어 > 로딩 끝
   }, []);
@@ -63,17 +62,21 @@ const Mainpage = () => {
           </Canvas>
         </div>
         <div className="scroll-icon">
-          <BsCaretDownFill size={85} style={circleStyle} onClick={scrollToBlack} />
+          <BsCaretDownFill
+            size={85}
+            style={circleStyle}
+            onClick={scrollToBlack}
+          />
         </div>
       </Fade>
-    
+
       <div className="black-main" ref={blackRef}>
         <Black />
       </div>
       <div className="popular-main">
+        <PopularGroup />
       </div>
-      <div className="local-main">
-      </div>
+      <div className="local-main"></div>
     </div>
   );
 };

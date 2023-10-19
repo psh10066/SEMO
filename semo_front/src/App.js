@@ -45,7 +45,10 @@ function App() {
             element={<AdminMain isLogin={isLogin} setIsLogin={setIsLogin} />}
           />
           <Route path="/login" element={<Login setIsLogin={setIsLogin} />} />
-          <Route path="/oauth2/kakao" element={<KakaoCallBack />} />
+          <Route
+            path="/oauth2/kakao"
+            element={<KakaoCallBack setIsLogin={setIsLogin} />}
+          />
           <Route path="/join" element={<Join />} />
           <Route
             path="/group/*"
