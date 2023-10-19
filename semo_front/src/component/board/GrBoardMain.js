@@ -10,7 +10,7 @@ const GrBoardMain = (props) => {
   const isLogin = props.isLogin;
   const setIsLogin = props.setIsLogin;
   const location = useLocation();
-  const groupNo = location.state.groupNo;
+  const [groupNo, setGroupNo] = useState(location.state.groupNo);
 
   const [menus, setMenus] = useState([
     {
