@@ -24,7 +24,7 @@ public class EmailSender {
 		boolean result = false;
 		try {
 			helper.setSentDate(new Date());
-			helper.setFrom(new InternetAddress("suibb1313@gamil.com", "해피해피해피"));
+			helper.setFrom(new InternetAddress("suibb1313@gamil.com", "해피해피 SEMO"));
 			helper.setTo(receiver);
 			helper.setSubject(mailTitle);
 
@@ -69,17 +69,15 @@ public class EmailSender {
 				sb.append(ch);
 			}
 		}
-		
+
 		try {
 			helper.setSentDate(new Date());
-			helper.setFrom(new InternetAddress("suibb1313@gmail.com","해피해피햅삐"));
+			helper.setFrom(new InternetAddress("suibb1313@gmail.com", "해피해피햅삐"));
 			helper.setTo(email);
 			helper.setSubject("인증메일입니다.");
-			helper.setText("<h1>안녕하세요 집에가고싶습니다.</h1>"
-							+"<h3>인증번호는 [<span style='color:red;'>"
-							+sb.toString()
-							+"</span>] 입니다.</h3>" 
-					, true);
+			helper.setText("<h1>안녕하세요 세모입니다</h1>" + 
+							"<h2>그동안 수고하셨습니다 !</h2>"
+					+ "<h3>인증번호는 [<span style='color:red;'>" + sb.toString() + "</span>] 입니다.</h3>", true);
 			sender.send(message);
 		} catch (MessagingException e) {
 			// TODO Auto-generated catch block
@@ -92,4 +90,3 @@ public class EmailSender {
 	}
 
 }
-

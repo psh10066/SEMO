@@ -20,6 +20,8 @@ const FindPw = (props) => {
   const token = window.localStorage.getItem("token");
   const [memberPw, setMemberPw] = useState("");
   const [memberPwRe, setMemberPwRe] = useState("");
+  const [checkPwMsg, setCheckPwMsg] = useState("");
+  const [checkPwOmsg, setCheckPwOmsg] = useState("");
   const pwCheck = () => {
     const member = { memberMail: currMail, memberId: currId };
     axios
@@ -44,7 +46,7 @@ const FindPw = (props) => {
       });
   };
   const findChangePw = () => {
-    if (memberPw === memberPwRe) {
+    if (checkPwMsg === "" && checkPwOmsg === "") {
       const member = { memberId: currId, memberPw: memberPw };
       axios
         .post("/member/findChangePw", member, {
@@ -75,6 +77,23 @@ const FindPw = (props) => {
         });
     }
   };
+  const findPwCheck = () => {
+    if (memberPw !== memberPwRe) {
+      setCheckPwMsg("비밀번호가 일치하지 않습니다.");
+    } else {
+      setCheckPwMsg("");
+    }
+  };
+  const findPwOCheck = () => {
+    const pwReg = /^(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]|.*[0-9]).{8,12}$/;
+    if (!pwReg.test(memberPw) && memberPw != null) {
+      setCheckPwOmsg(
+        "비밀번호는 영어 대소문자,숫자,특수문자 혼합사용가능 8~12글자입니다."
+      );
+    } else {
+      setCheckPwOmsg("");
+    }
+  };
   return (
     <div className="findIdModal">
       <Modal
@@ -96,16 +115,20 @@ const FindPw = (props) => {
                     type="password"
                     data={memberPw}
                     setData={setMemberPw}
+                    blurEvent={findPwOCheck}
                     content="chkId"
                     placeholder="새 비밀번호"
                   />
+                  <div className="check-msg">{checkPwOmsg}</div>
                   <Input
                     type="password"
                     data={memberPwRe}
                     setData={setMemberPwRe}
+                    blurEvent={findPwCheck}
                     content="chkId"
                     placeholder="새 비밀번호 확인"
                   />
+                  <div className="check-msg">{checkPwMsg}</div>
                 </div>
                 <div className="chk-id-mail">
                   <Button1 text="변경하기" clickEvent={findChangePw} />

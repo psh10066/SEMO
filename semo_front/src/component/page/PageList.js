@@ -33,24 +33,33 @@ const PageList = (props) => {
   }, [reqPage, categoryLocal, categoryValue]);
 
   const [categories, setCategories] = useState([
-    { text: "전체", categoryLocal: "all", categoryValue: 0, active: true },
+    {
+      text: "전체",
+      categoryLocal: "all",
+      categoryValue: 0,
+      active: true,
+      image: "/image/menu_icon/allMenu.png",
+    },
     {
       text: "문화·예술",
       categoryLocal: "groupCategory",
       categoryValue: 1,
       active: false,
+      image: "/image/menu_icon/menu1.png",
     },
     {
       text: "운동·액티비티",
       categoryLocal: "groupCategory",
       categoryValue: 2,
       active: false,
+      image: "/image/menu_icon/menu2.png",
     },
     {
       text: "푸드·드링크",
       categoryLocal: "groupCategory",
       categoryValue: 3,
       active: false,
+      image: "/image/menu_icon/menu3.png",
     },
     /*
     {
@@ -101,6 +110,7 @@ const PageList = (props) => {
                       //console.log(category.categoryValue);
                     }}
                   >
+                    <img src={category.image} />
                     {category.text}
                   </div>
                 ) : (
@@ -115,6 +125,7 @@ const PageList = (props) => {
                       //console.log(categoryValue);
                     }}
                   >
+                    <img src={category.image} />
                     {category.text}
                   </div>
                 )}
@@ -167,17 +178,17 @@ const PageItem = (props) => {
       </div>
       <div className="page-item-info">
         <div className="page-infos">
+          <div className="page-groupCategory">
+            {page.groupCategory === 1
+              ? " #문화·예술"
+              : page.groupCategory === 2
+              ? " #운동·액티비티"
+              : " #푸드·드링크"}
+          </div>
           <div className="page-group-name">{page.groupName}</div>
           <div className="page-icons">
             <span className="material-icons">groups</span>
             {page.totalCount}/{page.groupMaxnum}
-          </div>
-          <div className="page-groupCategory">
-            {page.groupCategory === 1
-              ? " 문화·예술"
-              : page.groupCategory === 2
-              ? " 운동·액티비티"
-              : " 푸드·드링크"}
           </div>
           <div className="page-icons-location">
             <span className="material-icons">location_on</span>

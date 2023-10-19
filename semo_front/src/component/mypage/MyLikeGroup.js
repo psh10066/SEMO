@@ -4,9 +4,11 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const MyLikeGroup = (props) => {
+  const navigate = useNavigate();
   const member = props.member;
   console.log(member);
   const [group, setGroup] = useState([]);
+  console.log(member);
   useEffect(() => {
     axios
       .post("/group/myLikeGroup", member)
@@ -32,6 +34,7 @@ const MyLikeGroup = (props) => {
 };
 const MypageItem = (props) => {
   const group = props.group;
+
   const [peopleList, setPeopleList] = useState([]);
   const [peopleCount, setPeopleCount] = useState(0);
   const navigate = useNavigate();

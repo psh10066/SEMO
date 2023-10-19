@@ -225,11 +225,14 @@
 .feed-group-item {
   margin: 30px 140px;
   padding: 15px;
-  background-color: #fff;
+  background-color: rgba(248, 249, 250);
   border-radius: 7px;
   display: flex;
   cursor: pointer;
   /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) inset; */
+}
+.feed-group-item:hover {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 .feed-group-img {
   width: 120px;
@@ -293,7 +296,7 @@
 }
 .none-groupList-wrap {
   height: 470px;
-  background-color: #fff;
+  background-color: rgba(248, 249, 250);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -313,7 +316,7 @@
   font-size: 17px;
 }
 .feedList-wrap {
-  background-color: #fff;
+  background-color: rgba(248, 249, 250);
 }
 .feed-view-btn-zone > span {
   cursor: pointer;

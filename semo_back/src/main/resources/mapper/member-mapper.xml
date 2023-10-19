@@ -91,6 +91,9 @@
   		update member set member_pw =#{memberPw} where member_id=#{memberId}
   	</update>
   	
+  	<insert id="insertKakaoMember">
+  	insert into member values(member_seq.nextval,#{memberId},#{memberPw},'010-1234-1234','카카오회원'||member_seq.nextval,#{memberId},2,null,1,2,1,null)
+  	</insert>
 
 
 </mapper>

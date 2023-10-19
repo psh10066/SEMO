@@ -30,13 +30,18 @@ const Login = (props) => {
         } else {
           window.localStorage.setItem("token", res.data);
           setIsLogin(true);
-          console.log(res.data);
           navigate("/");
         }
       })
       .catch((res) => {
         console.log(res);
       });
+  };
+  const naver = () => {
+    Swal.fire({
+      icon: "warning",
+      text: "준비중입니다",
+    });
   };
   return (
     <div className="login-wrap">
@@ -52,15 +57,15 @@ const Login = (props) => {
       </div>
       <div className="login-input-wrap">
         <Input
-          type="text"
+          type="password"
           data={memberPw}
           setData={setMemberPw}
           placeholder="비밀번호"
         />
       </div>
       <div className="login-icon-box">
-        <KakaoLogin />
-        <Link to="#">
+        <KakaoLogin setIsLogin={setIsLogin} />
+        <Link to="#" onClick={naver}>
           <img src="/image/ico-naver.png" />
         </Link>
       </div>

@@ -293,3 +293,6 @@ input[type="file"]::file-selector-button:hover {
   border: none;
   background-color: #5457e9;
 }
+.login-icon-box > img {
+  cursor: pointer;
+}

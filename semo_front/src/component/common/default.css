@@ -65,13 +65,15 @@ a {
 header {
   position: relative;
 }
+
 .header {
   z-index: 1;
   box-sizing: border-box;
   left: 50%;
   transform: translateX(-50%);
   position: fixed;
-  width: 1200px;
+  width: 100%; /* 기본 값을 100%로 설정 */
+  max-width: 1200px; /* 최대 너비는 1200px */
   height: 60px;
   display: flex;
   margin-left: auto;
@@ -82,15 +84,18 @@ header {
   align-self: center;
   padding-left: 30px;
 }
+
 .nav > ul {
   list-style-type: none;
   display: flex;
   width: 600px;
 }
+
 .nav > ul > li {
   width: calc(100% / 3.5);
   text-align: center;
 }
+
 .nav > ul > li > a {
   color: #fff;
   font-size: 17px;
@@ -102,22 +107,27 @@ header {
   justify-content: end;
   align-items: center;
 }
+
 .chatTotal {
   display: flex;
   margin-right: 24px;
 }
+
 .groupCreate {
   margin-right: 24px;
 }
+
 .chat {
   float: right;
   margin-top: 8px;
   font-weight: 500;
   cursor: pointer;
 }
+
 .chat span {
   color: #fff;
 }
+
 .chatNew {
   color: #fbff00e8;
   align-self: flex-start;
@@ -127,41 +137,66 @@ header {
   display: none;
 }
 
-/*로그인 버튼*/
 .header-leftside button {
   float: right;
-  width: 25%;
-  height: 70%;
+  width: 100px;
+  height: 40px;
   line-height: 80%;
   border: none;
   border-radius: 10px;
   background-color: #f9d8ff;
 }
+
 .header-leftside button a {
   color: #5457e9;
   font-family: ns-black;
   font-size: 14px;
   letter-spacing: 1px;
 }
+
 .main-logo {
   align-self: center;
 }
+
 .main-logo > a {
   font-size: 32px;
   font-family: jalnan;
   color: #fff;
 }
+
 .header-link {
   display: flex;
   align-items: center;
   height: 50px;
 }
+
 .header-link > a {
   margin-left: 30px;
 }
+
 .header-link > a > span {
   font-size: 30px;
   color: #fff;
+}
+
+/* 반응형 스타일: 1200px 미만 */
+@media (max-width: 1200px) {
+  .header {
+    flex-direction: row;
+    align-items: center; /* 중앙 정렬 */
+    height: 60px; /* 높이를 자동으로 조정 */
+  }
+
+  .nav {
+    padding-left: 0; /* 패딩 제거 */
+  }
+
+  .nav > ul {
+    justify-content: center; /* 중앙 정렬 */
+    width: 100%; /* 너비 조정 */
+    min-width: 350px;
+    padding: 0 15px; /* 좌우 패딩 추가 */
+  }
 }
 
 /*푸터*/
@@ -170,7 +205,7 @@ header {
   background-color: #eee;
 }
 .footer-content {
-  width: 1200px;
+  min-width: 85vw;
   margin: 0 auto;
 }
 .footer-content * {

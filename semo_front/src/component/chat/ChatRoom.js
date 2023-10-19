@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import SockJS from "sockjs-client";
 import { Client } from "@stomp/stompjs";
 import { format } from "date-fns";
 import axios from "axios";
@@ -21,9 +22,13 @@ const ChatRoom = (props) => {
     useState(false); // 지난대화 불러왔는지 체크
 
   //메세지 받기
+
+  const serverIP = "192.168.10.39"; // IP 주소
+  const webSocketEndpoint = `http://${serverIP}:9999/ws`;
+
   useEffect(() => {
     const client = new Client({
-      brokerURL: "ws://localhost:9999/ws",
+      webSocketFactory: () => new SockJS(webSocketEndpoint),
 
       onConnect: () => {
         console.log("WebSocket connected");
@@ -192,6 +197,16 @@ const ChatRoom = (props) => {
     return timeString.substr(0, 16);
   };
 
+  //렌더링될때 자동으로 스크롤이 아래에 위치하기
+  const endOfMessagesRef = useRef(null);
+  useEffect(() => {
+    if (endOfMessagesRef.current) {
+      setTimeout(() => {
+        endOfMessagesRef.current.scrollIntoView({ behavior: "smooth" });
+      }, 0);
+    }
+  }, [messages]);
+
   return (
     <>
       <div className="chat-header">
@@ -234,6 +249,7 @@ const ChatRoom = (props) => {
             </span>
           </div>
         ))}
+        <div ref={endOfMessagesRef}></div>
       </div>
       {/* 메세지 입력 */}
       <ChatInput

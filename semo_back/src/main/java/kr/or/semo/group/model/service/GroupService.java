@@ -26,6 +26,7 @@ public class GroupService {
 	private GroupDao groupDao;
 	@Autowired
 	private MemberDao memberDao;
+
 	
 	//모임생성
 	@Transactional
@@ -155,9 +156,31 @@ public class GroupService {
 	}
 
 	public List groupMemberList(int groupNo) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub 
 		return groupDao.groupMemberList(groupNo);
 	}
+
+	public List groupLikeList() {
+		return groupDao.groupLikeList();
+	}
+
+	public List groupLikeListDetail(int groupNo) {
+		return groupDao.groupLikeListDetail(groupNo);
+	}
+
+
+   
+	@Transactional
+	public int modifyGroup(Group g) {
+		// TODO Auto-generated method stub
+		return groupDao.modifyGroup(g);
+	}
+
+	public int chanceType(GroupJoin grJoin) {
+		// TODO Auto-generated method stub
+		return groupDao.changeType(grJoin);
+	}
+	
 
 	
 }

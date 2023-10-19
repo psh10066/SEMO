@@ -56,10 +56,9 @@ const LoungeItem = (props) => {
         <img src={"/feed/" + lounge.feedImg} />
       </div>
       <div className="lounge-item-info">
-        <div className="lounge-infos">
-          <div className="lounge-writer-name">{lounge.memberName}</div>
+        {/* <div className="lounge-infos">
           <div className="lounge-content">{lounge.feedContent}</div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

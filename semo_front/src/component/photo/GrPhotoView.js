@@ -75,16 +75,22 @@ const GrPhotoView = (props) => {
       }
     });
   };
+  //목록
+  const list = () => {
+    navigate("/group/groupPhoto", { state: { grPhoto: grPhoto } });
+  };
   return (
     <div className="photo-view-wrap">
       <table className="photo-view-table">
         <tbody>
           <tr>
-            <th className="photo-view-info">제목</th>
-            <td className="photo-view-info-content">{grPhoto.grPhotoTitle}</td>
+            {/* <th className="photo-view-info">제목</th> */}
+            <td className="photo-view-info-content photo-view-info-title">
+              {grPhoto.grPhotoTitle}
+            </td>
           </tr>
           <tr>
-            <th className="photo-view-info">이미지</th>
+            {/* <th className="photo-view-info">이미지</th> */}
             <td className="photo-view-thumbnail">
               {grPhoto.grPhotoImg ? (
                 <img src={"/groupPhoto/" + grPhoto.grPhotoImg} />
@@ -94,7 +100,7 @@ const GrPhotoView = (props) => {
             </td>
           </tr>
           <tr>
-            <th className="photo-view-info">내용</th>
+            {/* <th className="photo-view-info">내용</th> */}
             <td
               className="photo-view-info-content"
               dangerouslySetInnerHTML={{ __html: grPhotoContentHtml }}
@@ -115,6 +121,9 @@ const GrPhotoView = (props) => {
         ) : (
           ""
         )}
+        <>
+          <Button2 text="목록" clickEvent={list} />
+        </>
       </div>
     </div>
   );
