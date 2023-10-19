@@ -54,6 +54,11 @@ public class MeetingService {
 		return meetingDao.modify(m);
 	}
 
+	public int delete(int meetingNo) {
+		// TODO Auto-generated method stub
+		return meetingDao.delete(meetingNo);
+	}
+
 
 	
 	

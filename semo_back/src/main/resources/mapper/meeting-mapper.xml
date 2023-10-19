@@ -44,6 +44,9 @@
 		meeting_price=#{meetingPrice}, meeting_maxnum=#{meetingMaxnum}
 		where meeting_no=#{meetingNo}
 	</update>
+	<delete id="delete">
+		delete meeting where meeting_no=#{meetingNo}
+	</delete>
 	 
 	
 	
