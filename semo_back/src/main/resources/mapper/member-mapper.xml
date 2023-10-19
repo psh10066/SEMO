@@ -92,7 +92,7 @@
   	</update>
   	
   	<insert id="insertKakaoMember">
-  	insert into member values(member_seq.nextval,#{memberId},#{memberPw},'010-1234-1234','카카오회원',#{memberId},2,'카카오회원입니다',1,2,1,null)
+  	insert into member values(member_seq.nextval,#{memberId},#{memberPw},'010-1234-1234','카카오회원'||member_seq.nextval,#{memberId},2,'나는똥쟁이다',1,2,1,null)
   	</insert>
 
 
