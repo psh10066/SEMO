@@ -62,6 +62,9 @@
   padding: 20px 0px;
 }
 .photo-write-btn > button {
+  background-color: #5457e9;
+  border: none;
+  border-radius: 5px;
   width: 100px;
 }
 .photo-frm-top {
