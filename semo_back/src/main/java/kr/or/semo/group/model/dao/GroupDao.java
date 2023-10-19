@@ -64,7 +64,9 @@ public interface GroupDao {
 
 	List groupLikeList();
 
-	List groupLikeListDetail(int groupNo);
+	List groupLikeListDetail(String[] groupNo);
+
+
 
 
 	

@@ -164,9 +164,14 @@ public class GroupService {
 		return groupDao.groupLikeList();
 	}
 
-	public List groupLikeListDetail(int groupNo) {
+	public List groupLikeListDetail(String stringGroupNo) {
+		String[] groupNo = {};
+		groupNo = stringGroupNo.split(",");
 		return groupDao.groupLikeListDetail(groupNo);
 	}
+
+
+
 
 
    
