@@ -18,6 +18,9 @@
   width: 100vw;
   cursor: none;
 }
+.popular-main {
+  width: 100vw;
+}
 /*아이콘*/
 .scroll-icon {
   position: absolute;
@@ -66,13 +69,28 @@
 }
 .black-title {
   font-size: 7rem;
+  min-width: 658px;
   color: #fff;
   text-align: center;
   letter-spacing: 2px;
 }
 .black-subTitle {
   margin-top: 50px;
+  min-width: 658px;
   font-size: 3rem;
   color: #fff;
   text-align: center;
+}
+
+/*popularGroup*/
+.popularGroup {
+  height: 100vh;
+  background-color: #000;
+}
+.popularGroup-title {
+  padding-top: 50px;
+  text-align: center;
+}
+.popularGroup-title > h2 {
+  color: #fff;
 }

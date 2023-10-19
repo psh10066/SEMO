@@ -158,6 +158,9 @@
   margin-top: 5px;
   font-size: 18px;
 }
+.message-left > .chat-message-box {
+  background-color: rgb(253, 255, 148);
+}
 .chat-message-name {
   font-size: 14px;
 }
