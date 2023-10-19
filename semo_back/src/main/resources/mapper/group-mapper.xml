@@ -127,11 +127,25 @@
 		where group_no=#{groupNo}
 	</select>
 	<select id="groupMemberList" resultType="member">
-		select * from member 
-		where member_no in 
-		(select member_no from gr_join where group_no=#{groupNo})
+		select m.*,gr.gr_join_type 
+		from gr_join gr join member m 
+		on m.member_no = gr.member_no
+		where gr.group_no = #{groupNo} order by gr_join_type
 	</select>
 	
+	<update id="modifyGroup">
+		update group_tbl set 
+		group_name = #{groupName},
+		group_img = #{groupImg},
+		group_maxnum = #{groupMaxnum},
+		group_content = #{groupContent},
+		group_category = #{groupCategory},
+		group_local = #{groupLocal}
+		where group_no = #{groupNo}
+	</update>
+	<update id="changeType">
+		update gr_join set gr_join_type=#{grJoinType} where member_no=#{memberNo} 
+	</update>
 	
 	
 </mapper>

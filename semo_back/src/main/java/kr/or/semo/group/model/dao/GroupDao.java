@@ -62,6 +62,10 @@ public interface GroupDao {
 
 	List groupMemberList(int groupNo);
 
+	int modifyGroup(Group g);
+
+	int changeType(GroupJoin grJoin);
+
 	
 
 }
