@@ -72,10 +72,10 @@ const PhotoItem = (props) => {
           <img src={"/groupPhoto/" + grPhoto.grPhotoImg} />
         )}
       </div>
-      <div className="photo-item-info">
+      {/* <div className="photo-item-info">
         <div className="photo-item-title">{grPhoto.grPhotoTitle}</div>
         <div className="photo-item-name">{grPhoto.memberId}</div>
-      </div>
+      </div> */}
     </div>
   );
 };
