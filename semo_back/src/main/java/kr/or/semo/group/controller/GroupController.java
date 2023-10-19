@@ -179,9 +179,8 @@ public class GroupController {
 	}
 	
 	//위에서 검색한 그룹의 정보들
-	@PostMapping(value="/groupLikeListDetail")
-	public List groupLikeListDetail(@RequestBody Map<String, Integer> request) {
-		int groupNo = request.get("groupNo");
-		return groupService.groupLikeListDetail(groupNo);
+	@GetMapping(value="/groupLikeListDetail")
+	public List groupLikeListDetail(String stringGroupNo) {
+		return groupService.groupLikeListDetail(stringGroupNo);
 	}
 }

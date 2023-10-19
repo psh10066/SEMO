@@ -23,7 +23,7 @@ const ChatRoom = (props) => {
 
   //메세지 받기
 
-  const serverIP = "192.168.10.39"; // IP 주소
+  const serverIP = "192.168.10.39"; // IP 주소 >> 추후 도메인으로 바꾸기
   const webSocketEndpoint = `http://${serverIP}:9999/ws`;
 
   useEffect(() => {
