@@ -466,7 +466,7 @@ const CommentContent = (props) => {
       <textarea
         name="commentContent"
         className="comment-input-form"
-        placeholder="댓글 추가..."
+        placeholder="댓글을 입력하세요."
         ref={textRef}
         onInput={resizeHeight}
         value={commentContent}
