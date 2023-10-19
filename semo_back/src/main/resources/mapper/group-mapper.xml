@@ -144,10 +144,13 @@
         ) t
         WHERE ROWNUM <![CDATA[<]]> 11
 	</select>
+	
+	
 	<select id="groupLikeListDetail" resultType="Group">
-		select *
-		from group_tbl
-		where groupNo=#{groupNo}
+			select * from group_tbl where group_no in
+  		<foreach collection="array" open="(" close=")" separator="," item="groupNo">
+  			#{groupNo}
+  		</foreach>
 	</select>
 	<update id="modifyGroup">
 		update group_tbl set 

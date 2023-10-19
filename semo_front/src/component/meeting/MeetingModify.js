@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
 import "./meeting.css";
 import axios from "axios";
-import { Button1 } from "../util/Buttons";
+import { Button1, Button2, Button3 } from "../util/Buttons";
 import Input from "../util/InputFrm";
 import Postcode from "../util/PostCode";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -22,7 +22,35 @@ const MeetingModify = () => {
   const [meetingPrice, setMeetingPrice] = useState(meeting.meetingPrice);
   const [meetingMaxnum, setMeetingMaxnum] = useState(meeting.meetingMaxnum);
 
-  const canNot = () => {
+  const deleteMeeting = () => {
+    Swal.fire({
+      icon: "warning",
+      text: "약속을 삭제하시겠습니까?",
+      showCancelButton: true,
+      confirmButtonText: "삭제",
+      cancelButtonText: "취소",
+    }).then((res) => {
+      if (res.isConfirmed) {
+        axios.get("/meeting/delete/" + meeting.meetingNo).then((res) => {
+          if (res.data === 1) {
+            Swal.fire({
+              icon: "success",
+              text: "삭제 완료!",
+            });
+            navigate("/group/view", { state: { groupNo } });
+          } else {
+            Swal.fire({
+              icon: "error",
+              text: "삭제 중 문제가 발생했습니다!",
+            }).catch((res) => {
+              console.log(res.response.status);
+            });
+          }
+        });
+      }
+    });
+  };
+  const canNotFix = () => {
     Swal.fire({
       icon: "warning",
       text: "날짜는 수정이 불가능합니다!",
@@ -78,7 +106,7 @@ const MeetingModify = () => {
             locale: ko,
           })}
           readOnly
-          onClick={canNot}
+          onClick={canNotFix}
         />
       </div>
       <div>
@@ -109,7 +137,8 @@ const MeetingModify = () => {
         />
       </div>
       <div id="meeting-btn">
-        <Button1 text="모임 수정" clickEvent={modifyMeeting}></Button1>
+        <Button2 text="모임 수정" clickEvent={modifyMeeting}></Button2>
+        <Button1 text="모임 삭제" clickEvent={deleteMeeting}></Button1>
       </div>
     </div>
   );

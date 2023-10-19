@@ -14,24 +14,20 @@ npm install --save-dev @types/react-datepicker
 npm install three-orbitcontrols
 npm i lamina
 npm install leva
-
 npm install react-daum-postcode
 npm install react-kakao-maps-sdk
 npm install nodemailer --save
-
 npm i socket.io-client
 npm i sockjs-client --save
 npm install @stomp/stompjs
 npm install react-stomp
-
 npm i redux react-redux
-
 npm install moment
-
 npm install date-fns
-
 npm install react-awesome-reveal @emotion/react --save  ->10/18 정아 설치
-npm install react-icons     ->10/19 정아 설치
-npm install framer-motion   ->10/19 정아 설치
+npm install react-icons     
+npm install framer-motion   
 
-npm i swiper
+
+npm i swiper ->10/19 정아 설치 
+npm install smooth-scrollbar ->10/19 정아 설치 >> 삭제

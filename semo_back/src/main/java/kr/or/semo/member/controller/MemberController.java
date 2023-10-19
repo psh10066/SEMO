@@ -39,10 +39,6 @@ public class MemberController {
 	@Value("${file.root}")
 	private String root;
 	
-	
-
-	
-
 	// 로그인
 	@PostMapping(value = "/login")
 	public String login(@RequestBody Member member) {
@@ -199,28 +195,32 @@ public class MemberController {
 	}
 
 
-	
+	//메일 체크
 	@PostMapping(value="/mailCheck")
 	public String mailCheck(@RequestBody Member m) {
 		String memberMail = m.getMemberMail();
 		return memberService.mailCheck(memberMail);	
 	}
 
-	
+	//비밀번호체크
 	@PostMapping(value="/findPw")
 	public int pwChk(@RequestBody Member member) {		
 		return memberService.pwChk(member);
 	}
+	//비밀번호 변경
 	@PostMapping(value="/findChangePw")
 	public int findChangePwMember(@RequestBody Member member) {
 		return memberService.findChangePwMember(member);
 	}
+	//카카오로그인
 	@PostMapping(value="/kakaojoin")
 	public int kakaoJoin(@ModelAttribute Member member) {
 		return memberService.kakaoJoin(member);
 	}
 	
-	
-	
+	@PostMapping(value="/deleteMember")
+	public int deleteMember(@RequestAttribute String memberId) {
+		return memberService.deleteMember(memberId);
+	}
 
 }

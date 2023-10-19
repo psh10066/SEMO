@@ -14,8 +14,10 @@ const ModifyMyPassword = () => {
   //3
   const [memberPw, setMemberPw] = useState(""); //새 비밀번호
   const [memberPwRe, setMemberPwRe] = useState("");
+  const [checkPwOmsg, setCheckPwOmsg] = useState("");
   const [checkPwMsg, setCheckPwMsg] = useState(""); //새비밀번호시, 일치하는지 안하는지 메세지
 
+  console.log(checkPwOmsg);
   //현재비밀번호확인
   const pwCheck = () => {
     axios
@@ -46,6 +48,18 @@ const ModifyMyPassword = () => {
       setCheckPwMsg("비밀번호가 일치하지 않습니다");
     } else {
       setCheckPwMsg("");
+    }
+  };
+
+  // 비밀번호 정규표현식
+  const pwOCheck = () => {
+    const pwReg = /^(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]|.*[0-9]).{8,12}$/;
+    if (!pwReg.test(memberPw)) {
+      setCheckPwOmsg(
+        "비밀번호는 영어 대소문자,숫자,특수문자 혼합사용가능 8~12글자입니다."
+      );
+    } else {
+      setCheckPwOmsg("");
     }
   };
 
@@ -96,13 +110,16 @@ const ModifyMyPassword = () => {
                     type="password"
                     value={memberPw}
                     content="memberPw"
-                    onBlur={pwCheckMsg}
+                    checkMsg={checkPwOmsg}
+                    onBlur={pwOCheck}
                     onChange={(e) => {
                       // onChange prop으로 변경하고 pwCheckMsg도 호출
                       setMemberPw(e.target.value);
-                      pwCheckMsg();
+                      setCheckPwOmsg();
                     }}
                   />
+                  {/* 비밀번호 정규표현식 메세지*/}
+                  <span>{checkPwOmsg}</span>
                 </div>
                 <div>
                   <label htmlFor="memberPw">새 비밀번호 확인</label>

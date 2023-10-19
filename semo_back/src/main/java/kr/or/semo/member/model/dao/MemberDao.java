@@ -63,6 +63,8 @@ public interface MemberDao {
 
 	int kakaoJoin(Member member);
 
+	int deleteMember(String memberId);
+
 	
 
 
