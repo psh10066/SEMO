@@ -75,6 +75,10 @@ const GrPhotoView = (props) => {
       }
     });
   };
+  //목록
+  const list = () => {
+    navigate("/group/groupPhoto", { state: { grPhoto: grPhoto } });
+  };
   return (
     <div className="photo-view-wrap">
       <table className="photo-view-table">
@@ -115,6 +119,9 @@ const GrPhotoView = (props) => {
         ) : (
           ""
         )}
+        <>
+          <Button2 text="목록" clickEvent={list} />
+        </>
       </div>
     </div>
   );
