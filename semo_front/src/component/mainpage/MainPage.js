@@ -46,7 +46,7 @@ const Mainpage = () => {
   };
 
   if (isLoading) {
-    return <div className="loading-main">로딩중...</div>;
+    return <div className="loading-main">Loading...</div>;
   }
 
   return (

@@ -176,12 +176,19 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 .mylike-group-img {
+  max-width: 120px;
+  max-height: 120px;
   width: 120px;
   height: 120px;
   border-radius: 7px;
   margin-right: 20px;
 }
-
+.mylike-group-img > img {
+  max-width: 120px;
+  max-height: 120px;
+  width: 120px;
+  height: 120px;
+}
 .myLikeMore {
   display: flex;
   justify-content: center;
