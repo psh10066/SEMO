@@ -16,7 +16,8 @@ public class GroupBoard {
 	private String grBoardContent;
 	private String grBoardDate;	
 	private int grBoardWriter;
-	private String memberId;//화면 처리를 위한 게시글 작성자
+	private String memberId;
+	private String memberName;
 	private int groupNo;//모임번호
 	private int grBoardState;
 }

@@ -81,7 +81,7 @@ const BoardItem = (props) => {
     <tr className="board-item" onClick={boardView}>
       <td>{grBoard.grBoardNo}</td>
       <td>{grBoard.grBoardTitle}</td>
-      <td>{grBoard.memberId}</td>
+      <td>{grBoard.memberName}</td>
       <td>{grBoard.grBoardDate}</td>
     </tr>
   );
