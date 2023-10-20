@@ -10,10 +10,6 @@
   width: 1200px;
   margin: 50px auto;
 }
-.lounge-explain {
-  height: 100px;
-  line-height: 100px;
-}
 /* loungeList css */
 .lounge-list-wrap {
   overflow: hidden;

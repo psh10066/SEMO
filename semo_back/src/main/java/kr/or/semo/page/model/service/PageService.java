@@ -108,7 +108,7 @@ public class PageService {
 	}
 
 	public Map searchFeed(String searchKeyword, int reqPage) {
-		int numPerPage = 8;
+		int numPerPage = 12;
 		int pageNaviSize = 5;
 		
 		List searchFeedList = null;

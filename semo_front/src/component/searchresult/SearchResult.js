@@ -157,7 +157,7 @@ const SearchResult = (props) => {
           </div>
         ) : (
           <div>
-            <div className="searchresult-list-wrap">
+            <div className="searchresult-list-wrap-feed">
               {searchFeedList.map((feedList, index) => {
                 return (
                   <SearchFeedItem
@@ -286,16 +286,18 @@ const SearchFeedItem = (props) => {
       <div className="searchresult-feed-item-img">
         <img src={"/feed/" + feedList.feedImg} />
       </div>
+      {/*
       <div className="searchresult-feed-item-info">
-        {/* <div className="searchresult-feed-infos">
+         <div className="searchresult-feed-infos">
           <div className="searchresult-feed-writer-name">
             {feedList.memberName}
           </div>
           <div className="searchresult-feed-content">
             {feedList.feedContent}
           </div>
-        </div> */}
+        </div> 
       </div>
+      */}
     </div>
   );
 };
