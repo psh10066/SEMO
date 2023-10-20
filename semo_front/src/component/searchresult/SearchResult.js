@@ -202,38 +202,66 @@ const SearchSocialingItem = (props) => {
     });
     console.log(socialingList.groupNo);
   };
+  const [isMouse, setIsMouse] = useState(false);
+  const mouseOver = () => {
+    setIsMouse(true);
+  };
+  const mouseOut = () => {
+    setIsMouse(false);
+  };
+  const textMouse = () => {
+    // document.getElementsByClassName("page-item-img").style.filter =
+    //   "grayscale(10%) brightness(40%)";
+  };
   return (
     <div className="searchresult-item-wrap" onClick={groupView}>
-      <div className="searchresult-item-img">
-        {socialingList.groupImg === null ? (
-          <img src="/image/default.png" />
+      <div
+        className="searchresult-item-img-wrap"
+        onMouseOver={mouseOver}
+        onMouseOut={mouseOut}
+      >
+        {isMouse ? (
+          <div
+            className="searchresult-time-img-text"
+            onClick={groupView}
+            onMouseOver={textMouse}
+          >
+            상세보기
+          </div>
         ) : (
-          <img src={"/group/" + socialingList.groupImg} />
+          ""
         )}
-      </div>
-      <div className="searchresult-item-info">
-        <div className="searchresult-infos">
-          <div className="searchresult-group-name">
-            {socialingList.groupName}
-          </div>
-          <div className="searchresult-icons">
-            <span className="material-icons">groups</span>
-            {socialingList.totalCount}/{socialingList.groupMaxnum}
-          </div>
-          <div className="searchresult-category">
-            {socialingList.groupCategory === 1
-              ? " 문화·예술"
-              : socialingList.groupCategory === 2
-              ? " 운동·액티비티"
-              : " 푸드·드링크"}
-          </div>
-          <div className="searchresult-icons">
-            <span className="material-icons">location_on</span>
-            {socialingList.groupLocal === 1
-              ? "서울"
-              : socialingList.groupLocal === 2
-              ? "경기"
-              : "부산"}
+        <div className="searchresult-item-img">
+          {socialingList.groupImg === null ? (
+            <img src="/image/default.png" />
+          ) : (
+            <img src={"/group/" + socialingList.groupImg} />
+          )}
+        </div>
+        <div className="searchresult-item-info">
+          <div className="searchresult-infos">
+            <div className="searchresult-group-name">
+              {socialingList.groupName}
+            </div>
+            <div className="searchresult-icons">
+              <span className="material-icons">groups</span>
+              {socialingList.totalCount}/{socialingList.groupMaxnum}
+            </div>
+            <div className="searchresult-category">
+              {socialingList.groupCategory === 1
+                ? " 문화·예술"
+                : socialingList.groupCategory === 2
+                ? " 운동·액티비티"
+                : " 푸드·드링크"}
+            </div>
+            <div className="searchresult-icons">
+              <span className="material-icons">location_on</span>
+              {socialingList.groupLocal === 1
+                ? "서울"
+                : socialingList.groupLocal === 2
+                ? "경기"
+                : "부산"}
+            </div>
           </div>
         </div>
       </div>
