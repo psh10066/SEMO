@@ -103,7 +103,7 @@ const Mypage = (props) => {
         <div className="current-content">
           <Routes>
             <Route
-              path="mygroup"
+              path="mygroup/*"
               element={
                 <MyGroup
                   member={member}

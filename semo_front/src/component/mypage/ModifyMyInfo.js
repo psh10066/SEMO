@@ -10,8 +10,18 @@ const ModifyMyInfo = (props) => {
   const setMember = props.setMember;
   const token = window.localStorage.getItem("token");
 
+  //비밀변호 변경하기
+
   const modifyMyPassword = () => {
-    navigate("/mypage/modifyMyPassword");
+    if (member.memberId.includes("@")) {
+      Swal.fire({
+        icon: "warning",
+        title: "카카오 회원은 비밀번호 수정이 불가능합니다.",
+      });
+      return;
+    } else {
+      navigate("/mypage/modifyMyPassword");
+    }
   };
 
   // 상태 업데이트
@@ -47,29 +57,60 @@ const ModifyMyInfo = (props) => {
   //저장버튼
   const updateMember = () => {
     const token = window.localStorage.getItem("token");
-    axios
-      .post("/member/updateMyInfo", member, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      })
-      .then((res) => {
-        Swal.fire({
-          icon: "success",
-          title: "회원정보가 수정되었습니다.",
-        });
-      })
-      .catch((res) => {
-        if (res.response.status === 403) {
-          Swal.fire({
-            title: "로그인이 필요한 서비스 입니다.",
-            text: "로그인 페이지로 이동합니다.",
-            icon: "info",
-          }).then(() => {
-            navigate("/login");
-          });
-        }
+
+    //알림 뜨게하기
+    if (!member.memberName || member.memberName.trim() === "") {
+      Swal.fire({
+        icon: "warning",
+        title: "이름을 입력해주세요.",
       });
+      return;
+    }
+
+    if (!member.memberPhone || member.memberPhone.trim() === "") {
+      Swal.fire({
+        icon: "warning",
+        title: "전화번호를 입력해주세요.",
+      });
+      return;
+    }
+
+    if (!member.memberMail || member.memberMail.trim() === "") {
+      Swal.fire({
+        icon: "warning",
+        title: "이메일을 입력해주세요.",
+      });
+      return;
+    }
+
+    {
+      member.memberName != null &&
+        member.memberPhone != null &&
+        member.memberMail != null &&
+        axios
+          .post("/member/updateMyInfo", member, {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          })
+          .then((res) => {
+            Swal.fire({
+              icon: "success",
+              title: "회원정보가 수정되었습니다.",
+            });
+          })
+          .catch((res) => {
+            if (res.response.status === 403) {
+              Swal.fire({
+                title: "로그인이 필요한 서비스 입니다.",
+                text: "로그인 페이지로 이동합니다.",
+                icon: "info",
+              }).then(() => {
+                navigate("/login");
+              });
+            }
+          });
+    }
   };
 
   return (

@@ -6,7 +6,6 @@ import { Link, useNavigate } from "react-router-dom";
 const MyLikeGroup = (props) => {
   const navigate = useNavigate();
   const member = props.member;
-
   const [group, setGroup] = useState([]);
   const [itemsToShow, setItemsToShow] = useState(3); // 더보기
 
@@ -88,27 +87,32 @@ const MypageItem = (props) => {
             ? "경기"
             : "부산"}
         </div>
-        <div className="feed-group-member">
-          <div className="feed-like-person-wrap">
-            <AvatarGroup max={7} total={peopleCount}>
-              {peopleList.map((people, index) => {
-                return people.peopelImg === null ? (
-                  <Avatar
-                    key={"groupAvatar" + index}
-                    sx={{ width: 22, height: 22 }}
-                    alt="Remy Sharp"
-                    src="/image/person.png"
-                  />
-                ) : (
-                  <Avatar
-                    key={"groupAvatar" + index}
-                    sx={{ width: 22, height: 22 }}
-                    alt="Remy Sharp"
-                    src={"/member/" + people.memberImg}
-                  />
-                );
-              })}
-            </AvatarGroup>
+        <div className="feed-group-member" style={{ width: "516px" }}>
+          <div style={{ display: "flex", width: "82.5%" }}>
+            <div
+              className="feed-like-person-wrap"
+              style={{ justifyContent: "flex-end" }}
+            >
+              <AvatarGroup max={7} total={peopleCount}>
+                {peopleList.map((people, index) => {
+                  return people.peopelImg === null ? (
+                    <Avatar
+                      key={"groupAvatar" + index}
+                      sx={{ width: 22, height: 22 }}
+                      alt="Remy Sharp"
+                      src="/image/person.png"
+                    />
+                  ) : (
+                    <Avatar
+                      key={"groupAvatar" + index}
+                      sx={{ width: 22, height: 22 }}
+                      alt="Remy Sharp"
+                      src={"/member/" + people.memberImg}
+                    />
+                  );
+                })}
+              </AvatarGroup>
+            </div>
           </div>
           <div className="feed-group-maxNum">
             <span className="material-icons">groups</span>
