@@ -204,15 +204,15 @@
   height: 40px;
 }
 /*검색결과 없는 화면 css*/
-.paging-wrap {
+.paging-wrap-noresult {
   /*width: 200px;*/
   margin: 0 auto;
 }
-.paging-wrap > div {
+.paging-wrap-noresult > div {
   font-size: 28px;
   width: 1200px;
 }
-.paging-wrap > .material-icons {
+.paging-wrap-noresult > .material-icons {
   font-size: 60px;
   text-align: center;
   padding-top: 20px;
