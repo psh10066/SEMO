@@ -23,7 +23,7 @@ import LoungeMain from "./component/lounge/LoungeMain";
 import MypageReport from "./component/mypage/MypageReport";
 
 function App() {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
