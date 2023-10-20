@@ -49,8 +49,18 @@ const SearchResult = (props) => {
   }, [searchKeyword, reqPage]);
 
   const [searchResultCategories, setSearchResultCategories] = useState([
-    { text: "소셜링", categoryType: "socialing", active: true },
-    { text: "피드", categoryType: "feed", active: false },
+    {
+      text: "소셜링",
+      categoryType: "socialing",
+      active: true,
+      image: "/image/menu_icon/meeting2.png",
+    },
+    {
+      text: "피드",
+      categoryType: "feed",
+      active: false,
+      image: "/image/menu_icon/feed2.png",
+    },
   ]);
   //피드와 소셜링 구분
   const [categoryType, setCategoryType] = useState("socialing");
@@ -89,6 +99,7 @@ const SearchResult = (props) => {
                       //console.log(category.socialingSearch);
                     }}
                   >
+                    <img src={searchResult.image} />
                     {searchResult.text}
                   </div>
                 ) : (
@@ -103,6 +114,7 @@ const SearchResult = (props) => {
                       );
                     }}
                   >
+                    <img src={searchResult.image} />
                     {searchResult.text}
                   </div>
                 )}
@@ -244,14 +256,14 @@ const SearchFeedItem = (props) => {
         <img src={"/feed/" + feedList.feedImg} />
       </div>
       <div className="searchresult-feed-item-info">
-        <div className="searchresult-feed-infos">
+        {/* <div className="searchresult-feed-infos">
           <div className="searchresult-feed-writer-name">
             {feedList.memberName}
           </div>
           <div className="searchresult-feed-content">
             {feedList.feedContent}
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
