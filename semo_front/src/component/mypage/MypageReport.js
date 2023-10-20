@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 import ReportFrm from "./ReportFrm";
+import "./report.css";
 
 const MypageReport = () => {
   const location = useLocation();
@@ -49,7 +50,7 @@ const MypageReport = () => {
     }
   };
   return (
-    <div>
+    <div className="report-all-wrap">
       <div className="report-frm-title">모임 신고</div>
       <ReportFrm
         group={group}

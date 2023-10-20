@@ -5,6 +5,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import Swal from "sweetalert2";
 
 Modal.setAppElement("#root");
 
@@ -14,18 +15,26 @@ const MainSearchModal = (props) => {
   const navigate = useNavigate();
   const modalState = props.modalState;
   const setModalState = props.setModalState;
-  const Search = () => {
-    navigate("searchresult", { state: { searchContent: searchContent } });
-    if (setSearchContent != null) {
+  const Search = (e) => {
+    console.log(e.type);
+    if (searchContent != "") {
+      navigate("searchresult", { state: { searchContent: searchContent } });
       setSearchContent("");
+      setModalState(false);
+    } else {
+      Swal.fire({
+        icon: "info",
+        text: "입력값을 확인하세요!",
+        showCancelButton: false,
+        showConfirmButton: false,
+      }).then(() => {});
     }
-    setModalState(false);
   };
 
   // 엔터키가 눌렸을 때 sendMessage 호출
   const handleKeyDown = (event) => {
     if (event.key === "Enter" || event.keyCode === 13) {
-      Search();
+      Search(event);
     }
   };
 
