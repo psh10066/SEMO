@@ -15,6 +15,11 @@ const Login = (props) => {
   const [memberPw, setMemberPw] = useState("");
   const navigate = useNavigate();
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter" || event.keyCode === 13) {
+      login();
+    }
+  };
   const login = () => {
     const member = { memberId, memberPw };
     axios
@@ -61,6 +66,7 @@ const Login = (props) => {
           data={memberPw}
           setData={setMemberPw}
           placeholder="비밀번호"
+          onKeyDown={handleKeyDown}
         />
       </div>
       <div className="login-icon-box">
