@@ -32,6 +32,7 @@
   font-size: 20px;
   font-family: ns-r;
   padding: 15px;
+  padding-top: 12px;
 }
 .adminmenu > ul > li > a.admin-active-side {
   background-color: #5457e9;

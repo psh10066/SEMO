@@ -51,7 +51,7 @@ const MypageReport = () => {
   };
   return (
     <div className="report-all-wrap">
-      <div className="report-frm-title">모임 신고</div>
+      <div className="report-frm-title"></div>
       <ReportFrm
         group={group}
         member={member}

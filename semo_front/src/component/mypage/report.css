@@ -1,9 +1,38 @@
 .report-all-wrap {
-  background-color: aquamarine;
-  width: 1000px;
+  width: 900px;
 }
-.report-frm-title {
-  background-color: antiquewhite;
-  padding: 30px;
-  font-size: 24px;
+
+.report-frm-wrap {
+  background-color: rgba(0, 0, 0, 0.05);
+  width: 600px;
+  padding: 40px;
+  box-sizing: border-box;
+  margin: 20px auto;
+}
+.report-tbl {
+  font-size: 18px;
+}
+.report-group-name > td {
+  padding-bottom: 20px;
+}
+.report-writer-name > td {
+  padding-bottom: 20px;
+}
+.report-content-box > textarea {
+  width: 92%;
+  height: 10.25em;
+  border: none;
+  resize: none;
+  margin-bottom: 30px;
+  padding: 20px;
+  font-size: 18px;
+}
+.report-content-box > textarea::placeholder {
+  font-size: 1.1em;
+}
+.report-btn-box {
+  text-align: center;
+}
+.report-btn-box button {
+  padding: 10px;
 }
