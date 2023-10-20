@@ -219,34 +219,36 @@ const GroupView = (props) => {
       confirmButtonText: "가입하기",
       cancelButtonText: "취소",
     }).then((res) => {
-      if (joinNum === 3) {
-        Swal.fire({
-          icon: "error",
-          text: "최대 모임 가입 가능 수는 3개입니다",
-        });
-      } else {
-        axios
-          .post(
-            "/group/groupJoin",
-            {
-              groupNo,
-            },
-            {
-              headers: {
-                Authorization: "Bearer " + token,
-              },
-            }
-          )
-          .then((res) => {
-            Swal.fire({
-              icon: "success",
-              text: "가입완료!",
-            });
-            setChangeLevel(!changeLevel);
-          })
-          .catch((error) => {
-            console.log(error);
+      if (res.isConfirmed) {
+        if (joinNum === 3) {
+          Swal.fire({
+            icon: "error",
+            text: "최대 모임 가입 가능 수는 3개입니다",
           });
+        } else {
+          axios
+            .post(
+              "/group/groupJoin",
+              {
+                groupNo,
+              },
+              {
+                headers: {
+                  Authorization: "Bearer " + token,
+                },
+              }
+            )
+            .then((res) => {
+              Swal.fire({
+                icon: "success",
+                text: "가입완료!",
+              });
+              setChangeLevel(!changeLevel);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
       }
     });
   };
