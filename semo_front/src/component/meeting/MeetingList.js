@@ -86,6 +86,10 @@ const MeetingList = (props) => {
             if (res.data === 1) {
               setIsAddMeet(!isAddMeet);
               setJoinStatus(-1);
+              Swal.fire({
+                icon: "success",
+                text: "취소 완료!",
+              });
             }
             // console.log(res.data);
           })
@@ -171,7 +175,7 @@ const MeetingList = (props) => {
               (groupLevel === 1 || groupLevel === 2) &&
               meeting.meetingMaxnum > joinMember ? (
               <Button2
-                text="참가취소"
+                text="취소"
                 clickEvent={() => {
                   cancelJoin(meeting.meetingNo);
                 }}
