@@ -6,8 +6,8 @@ const PopularGroup = () => {
   const [groupSave, setGroupSave] = useState([]); //groupNo , Count >> 가장 많이 찜된 모임순으로 검색
   const [groupNo, setGroupNo] = useState([]); //groupNo 배열
   const [stringGroupNo, setStringGroupNo] = useState(""); //groupNo String
-
   const [groupDetail, setGroupDetail] = useState([]); //이 번호들에 해당되는 그룹 정보
+  const [groupMapping, setGroupMapping] = useState([]); // groupDetail 찜많은순으로 맵핑
 
   const token = window.localStorage.getItem("token");
 
@@ -23,6 +23,24 @@ const PopularGroup = () => {
         console.log(res.response.status);
       });
   }, []);
+
+  //groupNo[0] //번호를 조회해와서
+  //groupDetail 배열에서 groupNo[0]번째 값의 groupDetail.groupNo 찾기
+  //setGroupMapping[0]에 넣기
+
+  useEffect(() => {
+    const newGroupMapping = [];
+
+    for (let i = 0; i < 10; i++) {
+      const targetGroupDetail = groupDetail.find(
+        (detail) => detail.groupNo === groupNo[i]
+      );
+      if (targetGroupDetail) {
+        newGroupMapping.push(targetGroupDetail);
+      }
+    }
+    setGroupMapping(newGroupMapping);
+  }, [groupNo, groupDetail]);
 
   //배열 처리
   useEffect(() => {
@@ -49,7 +67,7 @@ const PopularGroup = () => {
       </div>
       <div className="popularGroup-detail">
         <div className="popular-groupWrap">
-          <PopularGroupImg groupDetail={groupDetail} />
+          <PopularGroupImg groupDetail={groupMapping} />
         </div>
       </div>
     </div>

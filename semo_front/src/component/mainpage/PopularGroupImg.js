@@ -1,6 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -13,8 +13,10 @@ const PopularGroupImg = (props) => {
   const [activeIndex, setActiveIndex] = useState(0); // 현재 슬라이드 인덱스 저장
 
   const navigate = useNavigate();
-  const groupView = () => {
-    navigate("/group/view/" + groupDetail[activeIndex].groupNo);
+  const groupClick = () => {
+    navigate("/group/view", {
+      state: { groupNo: groupDetail[activeIndex].groupNo },
+    });
   };
 
   return (
@@ -26,7 +28,7 @@ const PopularGroupImg = (props) => {
         loop={true}
         slidesPerView="3" // 중앙 슬라이드를 포함하여 총 3개의 슬라이드 표시
         spaceBetween={100} // 슬라이드 간의 간격 설정 (원하는 값을 사용하여 조정 가능)
-        initialSlide={groupDetail.length + 1}
+        initialSlide={groupDetail.length}
         coverflowEffect={{
           rotate: 50, // 슬라이드의 회전 각도 조절
           stretch: -100,
@@ -49,7 +51,7 @@ const PopularGroupImg = (props) => {
         {groupDetail.map((detail, index) => (
           <SwiperSlide key={index}>
             <div className="slideBox">
-              <div className="slideImg-box" onClick={groupView}>
+              <div className="slideImg-box" onClick={groupClick}>
                 <div className="slideImg-size">
                   <img src={"/group/" + detail.groupImg} alt="slide_image" />
                 </div>
