@@ -48,7 +48,11 @@ const GroupView = (props) => {
         setGroupSave(res.data.groupSave);
       })
       .catch((error) => {
-        console.log(error.response.status);
+        Swal.fire({
+          icon: "warning",
+          text: "로그인시 이용가능합니다",
+        });
+        navigate("/login");
       });
 
     if (isLogin) {
@@ -304,7 +308,7 @@ const GroupView = (props) => {
           ></div>
           <div className="group-view-member">
             <div className="feed-like-person-wrap">
-              <AvatarGroup max={7} total={peopleCount}>
+              <AvatarGroup max={7} total={peopleCount} className="avatarGroup">
                 {peopleList.map((people, index) => {
                   let memberNo = people.memberNo;
                   return people.peopelImg === null ? (
