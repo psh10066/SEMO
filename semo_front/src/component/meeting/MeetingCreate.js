@@ -5,15 +5,14 @@ import { ko } from "date-fns/esm/locale";
 import "./meeting.css";
 import axios from "axios";
 import { Button1 } from "../util/Buttons";
-import Input from "../util/InputFrm";
 import Postcode from "../util/PostCode";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import MeetingInputWrap from "./MeetingInputWrap";
 
 const MeetingCreate = (props) => {
-  const isLogin = props.isLogin;
-  const setIsLogin = props.setIsLogin;
+  // const isLogin = props.isLogin;
+  // const setIsLogin = props.setIsLogin;
   const [meetingName, setMeetingName] = useState("");
   const [meetingDate, setMeetingDate] = useState("");
   const [meetingPlace, setMeetingPlace] = useState("");
@@ -23,7 +22,7 @@ const MeetingCreate = (props) => {
   const location = useLocation();
 
   const groupNo = location.state.groupNo;
-  const memberNo = location.state.memberNo;
+  // const memberNo = location.state.memberNo;
   const navigate = useNavigate();
   const createMeeting = () => {
     const meeting = {
@@ -45,7 +44,7 @@ const MeetingCreate = (props) => {
     ];
 
     const token = window.localStorage.getItem("token");
-    if (notNullData.every((data) => data != null && data != "")) {
+    if (notNullData.every((data) => data !== null && data !== "")) {
       axios
         .post("create", meeting, {
           headers: {

@@ -6,8 +6,6 @@ const MeetingInputWrap = (props) => {
   const type = props.type;
   const content = props.content;
   const label = props.label;
-  const blurEvent = props.blurEvent;
-  const checkMsg = props.checkMsg;
   const placeholder = props.placeholder;
   return (
     <div className="join-input-wrap">
@@ -21,12 +19,10 @@ const MeetingInputWrap = (props) => {
             data={data}
             setData={setData}
             content={content}
-            blurEvent={blurEvent}
             placeholder={placeholder}
           />
         </div>
       </div>
-      <div className="check-msg">{checkMsg}</div>
     </div>
   );
 };
