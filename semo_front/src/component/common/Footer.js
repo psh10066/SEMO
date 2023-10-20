@@ -49,9 +49,13 @@ const Footer = (props) => {
             <Link to="/notice">공지사항</Link>
           </li>
           <li>
-            <div className="deleteMember" onClick={deleteMember}>
-              회원탈퇴
-            </div>
+            {isLogin ? (
+              <div className="deleteMember" onClick={deleteMember}>
+                회원탈퇴
+              </div>
+            ) : (
+              ""
+            )}
           </li>
         </ul>
       </div>
