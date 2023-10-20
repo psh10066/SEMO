@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 import "./grPhoto.css";
 import axios from "axios";
 import Pagination from "../common/Pagination";
@@ -13,12 +12,10 @@ const GrPhotoList = (props) => {
   const [reqPage, setReqPage] = useState(1);
   const [pageInfo, setPageInfo] = useState({});
   const groupNo = location.state.groupNo;
-  console.log("groupNo : " + groupNo);
   useEffect(() => {
     axios
       .get("/groupPhoto/list/" + groupNo + "/" + reqPage)
       .then((res) => {
-        console.log(res.data);
         setGrPhotoList(res.data.groupPhotoList);
         setPageInfo(res.data.pi);
       })
@@ -72,10 +69,6 @@ const PhotoItem = (props) => {
           <img src={"/groupPhoto/" + grPhoto.grPhotoImg} />
         )}
       </div>
-      {/* <div className="photo-item-info">
-        <div className="photo-item-title">{grPhoto.grPhotoTitle}</div>
-        <div className="photo-item-name">{grPhoto.memberId}</div>
-      </div> */}
     </div>
   );
 };

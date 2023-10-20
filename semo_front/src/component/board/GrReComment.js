@@ -18,9 +18,7 @@ const ReComment = (props) => {
     axios
       .get("/groupBoard/groupBoardReCommentList/" + grBoardNo)
       .then((res) => {
-        // console.log(res.data);
         setReCommentList(res.data);
-        // console.log(res.data);
       })
       .catch((res) => {
         console.log(res.response.status);
@@ -214,7 +212,7 @@ const ReCommentItem = (props) => {
                 <textarea
                   name="commentContent"
                   className="comment-modify-form comment-input-form"
-                  placeholder="댓글 추가..."
+                  placeholder="댓글을 입력하세요."
                   ref={textRef}
                   onInput={resizeHeight}
                   defaultValue={grBoardCommentContent}

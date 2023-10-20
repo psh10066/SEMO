@@ -10,16 +10,13 @@ const GrBoardList = (props) => {
   const location = useLocation();
   const [GrboardList, setGrBoardList] = useState([]);
   const [reqPage, setReqPage] = useState(1);
-  console.log(isLogin);
   const [pageInfo, setPageInfo] = useState({});
   const groupNo = location.state.groupNo;
-  console.log("groupNo : " + groupNo);
 
   useEffect(() => {
     axios
       .get("/groupBoard/list/" + groupNo + "/" + reqPage)
       .then((res) => {
-        console.log(res.data);
         setGrBoardList(res.data.groupBoardList);
         setPageInfo(res.data.pi);
       })

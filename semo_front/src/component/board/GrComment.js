@@ -296,7 +296,7 @@ const CommentItem = (props) => {
             <textarea
               name="commentContent"
               className="comment-modify-form comment-input-form"
-              placeholder="댓글 추가..."
+              placeholder="댓글을 입력하세요."
               ref={textRef}
               onInput={resizeHeight}
               value={grBoardCommentContent}
