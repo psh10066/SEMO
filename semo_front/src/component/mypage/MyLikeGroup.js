@@ -22,7 +22,7 @@ const MyLikeGroup = (props) => {
   }, []);
 
   return (
-    <div className="mylikeWrap">
+    <div className="mylikeWrap" style={{ paddingRight: "150px" }}>
       <div className="mylikeWrap-item-wrap">
         {group.slice(0, itemsToShow).map((group, index) => {
           //그룹 3개만 보여주기

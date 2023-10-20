@@ -15,7 +15,7 @@ const Myinfo = () => {
   };
   return (
     <>
-      <div className="mypage-form">
+      <div className="mypage-form" style={{ paddingRight: "150px" }}>
         <div className="mypage-buttons">
           <div className="mypage-myfeed edit">
             <div className="textb" onClick={modifyMyinfo}>

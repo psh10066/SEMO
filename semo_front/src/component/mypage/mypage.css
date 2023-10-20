@@ -69,7 +69,6 @@
 /*사이드메뉴*/
 .mysidemenu {
   width: 200px;
-  margin-left: -30px;
 }
 .mysidemenu > ul {
   list-style-type: none;
@@ -102,7 +101,6 @@
   flex: 1;
   display: flex;
   justify-content: center;
-  padding-right: 200px;
 }
 /**************************************************/
 

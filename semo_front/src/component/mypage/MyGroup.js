@@ -64,7 +64,7 @@ const GroupItem = (props) => {
     });
   };
   return (
-    <div className="mygroup-wrap">
+    <div className="mygroup-wrap" style={{ paddingRight: "150px" }}>
       <div className="mylike-group-item" onClick={groupView}>
         <div className="mylike-group-img">
           <img src={"/group/" + group.groupImg} />
