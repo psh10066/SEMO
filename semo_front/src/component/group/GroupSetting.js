@@ -25,19 +25,6 @@ const GroupSetting = () => {
       .catch((error) => {
         console.log(error.response.status);
       });
-    // // gr_join 불러오기
-    // axios
-    //   .get("/group/grJoinList/" + groupNo, {
-    //     headers: {
-    //       Authorization: "Bearer " + token,
-    //     },
-    //   })
-    //   .then((res) => {
-    //     setGrJoinList(res.data);
-    //   })
-    //   .catch((res) => {
-    //     console.log(res.response.status);
-    //   });
     //그룹에 가입된 회원리스트
     axios
       .get("/group/memberList/" + groupNo, {
