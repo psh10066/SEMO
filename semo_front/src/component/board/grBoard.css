@@ -48,6 +48,9 @@
   font-size: 15px;
   cursor: pointer;
 }
+.board-item:hover {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
 /* write */
 .board-page {
   margin-top: 30px;
@@ -56,6 +59,9 @@
   padding: 20px 0px;
 }
 .board-write-btn > button {
+  background-color: #5457e9;
+  border: none;
+  border-radius: 5px;
   width: 100px;
 }
 
@@ -89,6 +95,7 @@
 .board-info-tbl tr > td > input[type="text"] {
   border: none;
   padding: 0;
+  background-color: rgba(248, 249, 250);
 }
 .board-content-box {
   margin: 10px 0px;
@@ -141,7 +148,7 @@
 
 .board-view-btn-zone > button {
   margin-right: 20px;
-  width: 130px;
+  width: 100px;
   border-radius: 5px;
   height: 50px;
   line-height: 10px;

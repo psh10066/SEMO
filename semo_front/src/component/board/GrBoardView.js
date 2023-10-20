@@ -75,7 +75,7 @@ const GrBoardView = (props) => {
   };
   //목록
   const list = () => {
-    navigate("/group/groupBoard", { state: { grBoard: grBoard } });
+    navigate("/group/groupBoard", { state: { groupNo: grBoard.groupNo } });
   };
   return (
     <div className="board-view-wrap">
@@ -115,9 +115,9 @@ const GrBoardView = (props) => {
         ) : (
           ""
         )}
-        <>
+        <div className="board-view-btn-zone list">
           <Button2 text="목록" clickEvent={list} />
-        </>
+        </div>
       </div>
       <div className="board-view-bottom">
         <GrComment

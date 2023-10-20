@@ -400,21 +400,21 @@ const MySideMenu = (props) => {
 
   return (
     <div className="group-view-tap">
-      {/* {groupLevel == 1 ? ( */}
-      <div id="group-setting-area">
-        <span
-          className="material-icons"
-          id="group-setting"
-          onClick={() => {
-            settingGroup();
-          }}
-        >
-          settings
-        </span>
-      </div>
-      {/* ) : ( */}
-      {/* "" */}
-      {/* )} */}
+      {groupLevel == 1 ? (
+        <div id="group-setting-area">
+          <span
+            className="material-icons"
+            id="group-setting"
+            onClick={() => {
+              settingGroup();
+            }}
+          >
+            settings
+          </span>
+        </div>
+      ) : (
+        ""
+      )}
       <div>
         {menus.map((menu, index) => (
           <div key={"menu" + index}>

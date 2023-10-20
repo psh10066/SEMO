@@ -156,37 +156,39 @@ const MeetingList = (props) => {
             장소 : {meeting.meetingPlace}
             <Kakao data={meeting.meetingPlace} index={index} />
           </div>
-          {isLogin &&
-          isJoin &&
-          (groupLevel === 1 || groupLevel === 2) &&
-          joinStatus === -1 &&
-          meeting.meetingMaxnum > joinMember ? (
-            <Button1
-              text="모임참가"
-              clickEvent={() => {
-                join(meeting.meetingNo);
-              }}
-            />
-          ) : isLogin && isJoin && (groupLevel === 1 || groupLevel === 2) ? (
-            <Button2
-              text="취소"
-              clickEvent={() => {
-                cancelJoin(meeting.meetingNo);
-              }}
-            />
-          ) : (
-            ""
-          )}
-          {isLogin && isJoin && groupLevel === 1 ? (
-            <Button2
-              text="모임수정"
-              clickEvent={() => {
-                modifyMeeting(meeting.meetingNo);
-              }}
-            />
-          ) : (
-            ""
-          )}
+          <div id="meeting-btn-area2">
+            {isLogin &&
+            isJoin &&
+            (groupLevel === 1 || groupLevel === 2) &&
+            joinStatus === -1 &&
+            meeting.meetingMaxnum > joinMember ? (
+              <Button1
+                text="모임참가"
+                clickEvent={() => {
+                  join(meeting.meetingNo);
+                }}
+              />
+            ) : isLogin && isJoin && (groupLevel === 1 || groupLevel === 2) ? (
+              <Button2
+                text="취소"
+                clickEvent={() => {
+                  cancelJoin(meeting.meetingNo);
+                }}
+              />
+            ) : (
+              ""
+            )}
+            {isLogin && isJoin && groupLevel === 1 ? (
+              <Button2
+                text="모임수정"
+                clickEvent={() => {
+                  modifyMeeting(meeting.meetingNo);
+                }}
+              />
+            ) : (
+              ""
+            )}
+          </div>
         </div>
       </div>
     );

@@ -130,7 +130,7 @@ const AdminMenu = (props) => {
               {adminMenu.active ? (
                 <Link
                   to={adminMenu.url}
-                  className="active-side"
+                  className="admin-active-side"
                   onClick={() => {
                     activeTab(index);
                   }}

@@ -77,7 +77,7 @@ const GrPhotoView = (props) => {
   };
   //목록
   const list = () => {
-    navigate("/group/groupPhoto", { state: { grPhoto: grPhoto } });
+    navigate("/group/groupPhoto", { state: { groupNo: grPhoto.groupNo } });
   };
   return (
     <div className="photo-view-wrap">
