@@ -35,11 +35,11 @@ const AdminMember = () => {
           <thead>
             <tr>
               <th width={"10%"}>회원번호</th>
-              <th width={"15%"}>회원아이디</th>
-              <th width={"15%"}>회원이름</th>
-              <th width={"25%"}>이메일</th>
+              <th width={"25%"}>회원아이디</th>
+              <th width={"20%"}>회원이름</th>
+              <th width={"20%"}>이메일</th>
               <th width={"20%"}>연락처</th>
-              <th width={"15%"}>회원등급</th>
+              <th width={"10%"}>회원등급</th>
             </tr>
           </thead>
           <tbody>
@@ -90,14 +90,20 @@ const MemberItem = (props) => {
   return (
     <tr className="admin-tbl-line">
       <td>{member.memberNo}</td>
-      <td>{member.memberId}</td>
-      <td>{member.memberName}</td>
-      <td>{member.memberMail}</td>
+      <td className="admin-tbl-member-id">
+        <div>{member.memberId}</div>
+      </td>
+      <td className="admin-tbl-member-name">
+        <div>{member.memberName}</div>
+      </td>
+      <td className="admin-tbl-member-mail">
+        <div>{member.memberMail}</div>
+      </td>
       <td>{member.memberPhone}</td>
       <td>
         <FormControl sx={{ m: 1, minWidth: 100 }}>
           <Select value={memberType} onChange={handleChange}>
-            <MenuItem value={1}>관리자</MenuItem>
+            <MenuItem value={1}> 관리자 </MenuItem>
             <MenuItem value={2}>일반회원</MenuItem>
           </Select>
         </FormControl>

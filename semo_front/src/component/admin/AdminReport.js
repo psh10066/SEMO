@@ -30,8 +30,8 @@ const AdminReport = () => {
               <th width={"10%"}>신고번호</th>
               <th width={"10%"}>아이디</th>
               <th width={"20%"}>모임명</th>
-              <th width={"50%"}>신고사유</th>
-              <th width={"10%"}>신고일자</th>
+              <th width={"45%"}>신고사유</th>
+              <th width={"15%"}>신고일자</th>
             </tr>
           </thead>
           <tbody>
