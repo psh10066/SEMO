@@ -9,7 +9,7 @@ const NoticeMain = (props) => {
   const isLogin = props.isLogin;
   const setIsLogin = props.setIsLogin;
   return (
-    <div className="notice-wrap">
+    <div className="notice-all-wrap">
       <Routes>
         <Route path="view" element={<NoticeView isLogin={isLogin} />} />
         <Route path="write" element={<NoticeWrite />} />
