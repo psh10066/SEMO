@@ -1,27 +1,40 @@
-.notice-content-wrap {
-  width: 1200px;
+.notice-all-wrap {
+  width: 600px;
   margin: 0 auto;
-  background-color: antiquewhite;
-  padding: 10px;
-  border: 1px solid black;
 }
-.notice-tbl td {
-  border: 1px solid black;
-  background-color: beige;
+.notice-content-wrap {
   padding: 10px;
+  margin: 50px 0;
+}
+.notice-titles {
+  padding-bottom: 40px;
+}
+.notice-content-title {
+  font-size: 24px;
+  font-family: ns-b;
+  float: left;
+  height: 40px;
+}
+.notice-list-wrap {
+  border-top: 1px solid #ccc;
 }
 .notice-tbl {
+  width: 100%;
   border-spacing: 0;
   margin: 0 auto;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  /* border-bottom: 1px solid #ccc; */
 }
-.notice-item > td {
-  background-color: cornflowerblue;
-  padding: 10px;
+.notice-item {
+  width: 100%;
+  list-style: none;
+}
+.notice-item > li {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ccc;
 }
 .notice-view-wrap {
-  background-color: antiquewhite;
+  /*background-color: antiquewhite;*/
   width: 1000px;
   margin: 0 auto;
   padding: 20px;
@@ -39,6 +52,8 @@
 }
 .notice-view-btn-zone > button {
   margin-right: 20px;
+  width: 100px;
+  border: none;
 }
 .notice-content-box {
   min-height: 400px;
@@ -47,4 +62,29 @@
   height: 400px;
   width: 600px;
 }
-/*NoticeView*/
+/* noticeList css */
+.notice-write-btn > button {
+  width: 80px;
+  border: none;
+  padding: 5px;
+  border-radius: 15px;
+  margin-left: 400px;
+  margin-top: 5px;
+  font-size: 16px;
+}
+.notice-titles {
+  overflow: hidden;
+}
+.notice-write-wrap {
+  float: left;
+}
+.notice-page {
+  margin-top: 60px;
+}
+.notice-list-title {
+  font-size: 18px;
+}
+.notice-list-info > span {
+  padding-right: 20px;
+  font-size: 14px;
+}

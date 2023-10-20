@@ -12,6 +12,7 @@ const NoticeList = (props) => {
   const [reqPage, setReqPage] = useState(1);
   const [pageInfo, setPageInfo] = useState({});
   const [member, setMember] = useState(null);
+
   useEffect(() => {
     axios
       .get("/notice/list/" + reqPage)
@@ -38,44 +39,44 @@ const NoticeList = (props) => {
           console.log(res.response.status);
         });
     }
-  }, [reqPage]);
+  }, [reqPage, isLogin]);
   const navigate = useNavigate();
   const write = () => {
     navigate("write");
   };
   return (
     <div className="notice-content-wrap">
-      <div className="notice-write-wrap">
-        {isLogin ? (
-          member && member.memberType === 1 ? (
-            <div className="notice-write-btn">
-              <Button2 text="글쓰기" clickEvent={write} />
-            </div>
+      <div className="notice-titles">
+        <div className="notice-content-title">공지사항</div>
+        <div className="notice-write-wrap">
+          {isLogin ? (
+            member && member.memberType === 1 ? (
+              <div className="notice-write-btn">
+                <Button2 text="글쓰기" clickEvent={write} />
+              </div>
+            ) : (
+              ""
+            )
           ) : (
             ""
-          )
-        ) : (
-          ""
-        )}
+          )}
+        </div>
       </div>
 
-      <div className="notice-content-title">공지사항</div>
       <div className="notice-list-wrap">
-        <table className="notice-tbl">
-          <thead>
-            <tr>
+        <div className="notice-tbl">
+          {/* <tr>
               <td width={"20%"}>번호</td>
               <td width={"40%"}>제목</td>
               <td width={"20%"}>작성자</td>
               <td width={"20%"}>작성일</td>
-            </tr>
-          </thead>
-          <tbody>
+            </tr> */}
+          <div>
             {noticeList.map((notice, index) => {
               return <NoticeItem key={"notice" + index} notice={notice} />;
             })}
-          </tbody>
-        </table>
+          </div>
+        </div>
       </div>
       <div className="notice-page">
         <Pagination
@@ -94,12 +95,19 @@ const NoticeItem = (props) => {
     navigate("/notice/view", { state: { noticeNo: notice.noticeNo } });
   };
   return (
-    <tr className="notice-item" onClick={noticeView}>
-      <td>{notice.noticeNo}</td>
-      <td>{notice.noticeTitle}</td>
+    <ul className="notice-item" onClick={noticeView}>
+      {/* <td>{notice.noticeNo}</td> */}
+      <li>
+        <div className="notice-list-title">{notice.noticeTitle}</div>
+        <div className="notice-list-info">
+          <span>{notice.memberId}</span>
+          <span>{notice.noticeDate}</span>
+        </div>
+      </li>
+      {/* <td>{notice.noticeTitle}</td>
       <td>{notice.memberId}</td>
-      <td>{notice.noticeDate}</td>
-    </tr>
+      <td>{notice.noticeDate}</td> */}
+    </ul>
   );
 };
 export default NoticeList;

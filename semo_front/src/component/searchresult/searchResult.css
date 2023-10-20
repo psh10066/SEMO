@@ -40,6 +40,7 @@
   margin: 0 auto;
   padding-top: 30px;
   padding-bottom: 50px;
+  padding-left: 20px;
 }
 .searchresult-item-wrap {
   height: 400px;
@@ -86,23 +87,29 @@
 }
 .searchresult-tab-category {
   float: left;
-  margin-left: 45px;
-  margin-right: 45px;
+  /* margin-left: 45px;
+  margin-right: 45px; */
   box-sizing: border-box;
-  width: calc(80% / 2);
-  height: 45px;
+  width: calc(100% / 2);
+  height: 55px;
   font-size: 20px;
-  line-height: 43px;
+  line-height: 55px;
   text-align: center;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: ns-r;
+}
+.searchresult-tab-category:hover {
+  font-family: ns-b;
 }
 /*검색페이지 css*/
 .searchresult-category-wrap {
-  margin: 0 auto;
   overflow: hidden;
   display: block;
   margin: 0 auto;
-  width: 1200px;
+  /* width: calc(100% / 2); */
 }
 .searchresult-category {
   /*display: block;*/
@@ -113,16 +120,18 @@
   line-height: 43px;
 }
 .searchresult-category-wrap > ul > li > div {
-  border: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
   color: black;
   /*background-color: #ccc;*/
-  border-radius: 10px;
+  /* border-radius: 10px; */
 }
 .searchresult-category-wrap > ul > li > div.searchCategory-active {
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc;
   color: black;
   background-color: #ccc;
-  border-radius: 10px;
+  border-radius: 10px; */
+  border-bottom: 4px solid #5457e9;
+  font-family: ns-b;
 }
 .searchresult-category-wrap > ul {
   list-style-type: none;
@@ -131,7 +140,7 @@
   margin: 0;
 }
 .searchresult-category-wrap > ul > li {
-  width: 1000px;
+  /*width: 1000px;*/
   margin: 0 auto;
 }
 .searchresult-group-name {
@@ -204,15 +213,15 @@
   height: 40px;
 }
 /*검색결과 없는 화면 css*/
-.paging-wrap {
+.paging-wrap-noresult {
   /*width: 200px;*/
   margin: 0 auto;
 }
-.paging-wrap > div {
+.paging-wrap-noresult > div {
   font-size: 28px;
   width: 1200px;
 }
-.paging-wrap > .material-icons {
+.paging-wrap-noresult > .material-icons {
   font-size: 60px;
   text-align: center;
   padding-top: 20px;
@@ -221,4 +230,9 @@
 .empty-result-message {
   width: 300px;
   text-align: center;
+}
+.searchresult-tab-category > img {
+  width: 30px;
+  height: 30px;
+  padding-right: 10px;
 }
