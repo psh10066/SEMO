@@ -18,9 +18,7 @@ const ReComment = (props) => {
     axios
       .get("/groupBoard/groupBoardReCommentList/" + grBoardNo)
       .then((res) => {
-        // console.log(res.data);
         setReCommentList(res.data);
-        // console.log(res.data);
       })
       .catch((res) => {
         console.log(res.response.status);
@@ -169,34 +167,47 @@ const ReCommentItem = (props) => {
           </span>
           <div className="comment-wrap recomment-wrap">
             <div className="comment-top">
-              {recomment.memberImg === null ? (
-                <div className="commentItem-profile-image">
-                  <Stack direction="row" spacing={2} onClick={naviFeedProfile}>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="/image/person.png"
-                      sx={{ width: 22, height: 22 }}
-                    />
-                  </Stack>
+              <div className="comment-top-left">
+                {recomment.memberImg === null ? (
+                  <div className="commentItem-profile-image">
+                    <Stack
+                      direction="row"
+                      spacing={2}
+                      onClick={naviFeedProfile}
+                    >
+                      <Avatar
+                        alt="Remy Sharp"
+                        src="/image/person.png"
+                        sx={{ width: 22, height: 22 }}
+                      />
+                    </Stack>
+                  </div>
+                ) : (
+                  <div className="commentItem-profile-image">
+                    <Stack
+                      direction="row"
+                      spacing={2}
+                      onClick={naviFeedProfile}
+                    >
+                      <Avatar
+                        alt="Remy Sharp"
+                        src={"/member/" + recomment.memberImg}
+                        sx={{ width: 22, height: 22 }}
+                      />
+                    </Stack>
+                  </div>
+                )}
+                <div
+                  className="commentItem-memberName"
+                  onClick={naviFeedProfile}
+                >
+                  {recomment.memberName}
                 </div>
-              ) : (
-                <div className="commentItem-profile-image">
-                  <Stack direction="row" spacing={2} onClick={naviFeedProfile}>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src={"/member/" + recomment.memberImg}
-                      sx={{ width: 22, height: 22 }}
-                    />
-                  </Stack>
+                <div className="commentItem-date">
+                  {recomment.grBoardCommentDate
+                    ? formatTime(recomment.grBoardCommentDate)
+                    : ""}
                 </div>
-              )}
-              <div className="commentItem-memberName" onClick={naviFeedProfile}>
-                {recomment.memberName}
-              </div>
-              <div className="commentItem-date">
-                {recomment.grBoardCommentDate
-                  ? formatTime(recomment.grBoardCommentDate)
-                  : ""}
               </div>
               <div className="comment-like">
                 <GrBoardCommentLike
@@ -214,7 +225,7 @@ const ReCommentItem = (props) => {
                 <textarea
                   name="commentContent"
                   className="comment-modify-form comment-input-form"
-                  placeholder="댓글 추가..."
+                  placeholder="댓글을 입력하세요."
                   ref={textRef}
                   onInput={resizeHeight}
                   defaultValue={grBoardCommentContent}

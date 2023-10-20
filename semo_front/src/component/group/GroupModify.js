@@ -18,12 +18,11 @@ const GroupModify = () => {
   const [groupLocal, setGroupLocal] = useState(group.groupLocal);
   const [chkGroupNameMsg, setChkGroupNameMsg] = useState("");
   const navigate = useNavigate();
-
   const token = window.localStorage.getItem("token");
+  //그룹 맴버 관리 페이지로 이동
   const gotoSetting = () => {
     navigate(`/group/setting/groupMember/`, { state: { groupNo } });
   };
-
   const modify = () => {
     if (
       groupImg !== null &&
@@ -70,7 +69,6 @@ const GroupModify = () => {
         });
     }
   };
-
   return (
     <div className="groupcreate-all-wrap">
       <div className="page-title">

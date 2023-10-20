@@ -167,34 +167,47 @@ const ReCommentItem = (props) => {
           </span>
           <div className="comment-wrap recomment-wrap">
             <div className="comment-top">
-              {recomment.memberImg === null ? (
-                <div className="commentItem-profile-image">
-                  <Stack direction="row" spacing={2} onClick={naviFeedProfile}>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="/image/person.png"
-                      sx={{ width: 22, height: 22 }}
-                    />
-                  </Stack>
+              <div className="comment-top-left">
+                {recomment.memberImg === null ? (
+                  <div className="commentItem-profile-image">
+                    <Stack
+                      direction="row"
+                      spacing={2}
+                      onClick={naviFeedProfile}
+                    >
+                      <Avatar
+                        alt="Remy Sharp"
+                        src="/image/person.png"
+                        sx={{ width: 22, height: 22 }}
+                      />
+                    </Stack>
+                  </div>
+                ) : (
+                  <div className="commentItem-profile-image">
+                    <Stack
+                      direction="row"
+                      spacing={2}
+                      onClick={naviFeedProfile}
+                    >
+                      <Avatar
+                        alt="Remy Sharp"
+                        src={"/member/" + recomment.memberImg}
+                        sx={{ width: 22, height: 22 }}
+                      />
+                    </Stack>
+                  </div>
+                )}
+                <div
+                  className="commentItem-memberName"
+                  onClick={naviFeedProfile}
+                >
+                  {recomment.memberName}
                 </div>
-              ) : (
-                <div className="commentItem-profile-image">
-                  <Stack direction="row" spacing={2} onClick={naviFeedProfile}>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src={"/member/" + recomment.memberImg}
-                      sx={{ width: 22, height: 22 }}
-                    />
-                  </Stack>
+                <div className="commentItem-date">
+                  {recomment.feedCommentDate
+                    ? formatTime(recomment.feedCommentDate)
+                    : ""}
                 </div>
-              )}
-              <div className="commentItem-memberName" onClick={naviFeedProfile}>
-                {recomment.memberName}
-              </div>
-              <div className="commentItem-date">
-                {recomment.feedCommentDate
-                  ? formatTime(recomment.feedCommentDate)
-                  : ""}
               </div>
               <div className="comment-like">
                 <CommentLike

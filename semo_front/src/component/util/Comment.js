@@ -253,32 +253,36 @@ const CommentItem = (props) => {
     <>
       <div className="comment-wrap">
         <div className="comment-top">
-          {comment.memberImg === null ? (
-            <div className="commentItem-profile-image">
-              <Stack direction="row" spacing={2} onClick={naviFeedProfile}>
-                <Avatar
-                  alt="Remy Sharp"
-                  src="/image/person.png"
-                  sx={{ width: 22, height: 22 }}
-                />
-              </Stack>
+          <div className="comment-top-left">
+            {comment.memberImg === null ? (
+              <div className="commentItem-profile-image">
+                <Stack direction="row" spacing={2} onClick={naviFeedProfile}>
+                  <Avatar
+                    alt="Remy Sharp"
+                    src="/image/person.png"
+                    sx={{ width: 22, height: 22 }}
+                  />
+                </Stack>
+              </div>
+            ) : (
+              <div className="commentItem-profile-image">
+                <Stack direction="row" spacing={2} onClick={naviFeedProfile}>
+                  <Avatar
+                    alt="Remy Sharp"
+                    src={"/member/" + comment.memberImg}
+                    sx={{ width: 22, height: 22 }}
+                  />
+                </Stack>
+              </div>
+            )}
+            <div className="commentItem-memberName" onClick={naviFeedProfile}>
+              {comment.memberName}
             </div>
-          ) : (
-            <div className="commentItem-profile-image">
-              <Stack direction="row" spacing={2} onClick={naviFeedProfile}>
-                <Avatar
-                  alt="Remy Sharp"
-                  src={"/member/" + comment.memberImg}
-                  sx={{ width: 22, height: 22 }}
-                />
-              </Stack>
+            <div className="commentItem-date">
+              {comment.feedCommentDate
+                ? formatTime(comment.feedCommentDate)
+                : ""}
             </div>
-          )}
-          <div className="commentItem-memberName" onClick={naviFeedProfile}>
-            {comment.memberName}
-          </div>
-          <div className="commentItem-date">
-            {comment.feedCommentDate ? formatTime(comment.feedCommentDate) : ""}
           </div>
           <div className="comment-like">
             <CommentLike commentNo={comment.feedCommentNo} isLogin={isLogin} />

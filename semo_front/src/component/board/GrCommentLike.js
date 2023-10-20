@@ -11,7 +11,6 @@ const GrBoardCommentLike = (props) => {
     axios
       .get("/groupBoard/commentLikeCount/" + grBoardCommentNo)
       .then((res) => {
-        // console.log(res.data);
         setGrBoardCommentLikeCount(res.data);
       })
       .catch((res) => {
@@ -26,7 +25,6 @@ const GrBoardCommentLike = (props) => {
           },
         })
         .then((res) => {
-          //   console.log(res.data);
           if (res.data === 1) {
             setGrBoardCommentLike(true);
           } else {
