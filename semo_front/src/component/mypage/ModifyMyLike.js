@@ -65,12 +65,27 @@ const ModifyMyLike = (props) => {
       });
   };
 
+  //같은 카테고리 선택 불가
+  const catState = () => {
+    if (member.memberCategory2 == member.memberCategory1) {
+      Swal.fire({
+        icon: "error",
+        text: "같은 카테고리는 선택할수 없습니다!",
+      });
+      setMemberCategory2(0);
+    }
+  };
+
   return (
     <div className="modifyMyLike-wrap">
       <div className="modifyMyLike-title">내 관심사·지역 수정</div>
       <div>
         <FormControl sx={{ m: 0.5, width: 400 }}>
-          <Select value={member.memberCategory1} onChange={handleChange2}>
+          <Select
+            value={member.memberCategory1}
+            onChange={handleChange2}
+            onBlur={catState}
+          >
             <MenuItem value={1}>문화·예술</MenuItem>
             <MenuItem value={2}>운동·액티비티</MenuItem>
             <MenuItem value={3}>푸드·드링크</MenuItem>
@@ -79,7 +94,11 @@ const ModifyMyLike = (props) => {
       </div>
       <div>
         <FormControl sx={{ m: 0.5, width: 400 }}>
-          <Select value={member.memberCategory2} onChange={handleChange3}>
+          <Select
+            value={member.memberCategory2}
+            onChange={handleChange3}
+            onBlur={catState}
+          >
             <MenuItem value={1}>문화·예술</MenuItem>
             <MenuItem value={2}>운동·액티비티</MenuItem>
             <MenuItem value={3}>푸드·드링크</MenuItem>
