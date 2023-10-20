@@ -18,7 +18,6 @@ const GroupSave = (props) => {
         },
       })
       .then((res) => {
-        console.log(res.data);
         if (res.data) {
           Swal.fire("찜모임에 추가되었습니다.");
           setGroupSave(true);
