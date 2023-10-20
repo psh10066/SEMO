@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button2 } from "../util/Buttons";
+import { Button2, Button1 } from "../util/Buttons";
 import Swal from "sweetalert2";
 
 const GrPhotoView = (props) => {
@@ -18,7 +18,6 @@ const GrPhotoView = (props) => {
     axios
       .get("/groupPhoto/view/" + grPhotoNo)
       .then((res) => {
-        console.log(res.data);
         setGrPhoto(res.data);
         setGrPhotoContentHtml(
           res.data.grPhotoContent.replaceAll("\r\n", "<br>")
@@ -36,7 +35,6 @@ const GrPhotoView = (props) => {
           },
         })
         .then((res) => {
-          console.log(res.data);
           setMember(res.data);
         })
         .catch((res) => {
@@ -84,13 +82,11 @@ const GrPhotoView = (props) => {
       <table className="photo-view-table">
         <tbody>
           <tr>
-            {/* <th className="photo-view-info">제목</th> */}
             <td className="photo-view-info-content photo-view-info-title">
               {grPhoto.grPhotoTitle}
             </td>
           </tr>
           <tr>
-            {/* <th className="photo-view-info">이미지</th> */}
             <td className="photo-view-thumbnail">
               {grPhoto.grPhotoImg ? (
                 <img src={"/groupPhoto/" + grPhoto.grPhotoImg} />
@@ -100,7 +96,6 @@ const GrPhotoView = (props) => {
             </td>
           </tr>
           <tr>
-            {/* <th className="photo-view-info">내용</th> */}
             <td
               className="photo-view-info-content"
               dangerouslySetInnerHTML={{ __html: grPhotoContentHtml }}
@@ -122,7 +117,7 @@ const GrPhotoView = (props) => {
           ""
         )}
         <>
-          <Button2 text="목록" clickEvent={list} />
+          <Button1 text="목록" clickEvent={list} />
         </>
       </div>
     </div>

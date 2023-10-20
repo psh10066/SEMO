@@ -12,7 +12,7 @@ import kr.or.semo.groupBoard.model.vo.GroupBoardCommentLike;
 @Mapper
 public interface GroupBoardDao {
 
-	int totalCount();
+	int totalCount(int groupNo);
 
 	List selectgroupBoardList(int groupNo, PageInfo pi);
 

@@ -339,14 +339,14 @@ const GroupView = (props) => {
             groupLevel={groupLevel}
           />
           <div className="group-view-category">
-            <Link to="#">
+            <Link to="/page">
               {group.groupCategory === 1
                 ? "#문화·예술"
                 : group.groupCategory === 2
                 ? "#운동·액티비티"
                 : "#푸드·드링크"}
             </Link>
-            <Link to="#">
+            <Link to="/page">
               {group.groupLocal === 1
                 ? "#서울"
                 : group.groupCategory === 2

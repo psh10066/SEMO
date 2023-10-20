@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button2 } from "../util/Buttons";
+import { Button2, Button1 } from "../util/Buttons";
 import Swal from "sweetalert2";
 import GrComment from "../board/GrComment";
 
@@ -19,7 +19,6 @@ const GrBoardView = (props) => {
     axios
       .get("/groupBoard/view/" + grBoardNo)
       .then((res) => {
-        console.log(res.data);
         setGrBoard(res.data);
       })
       .catch((res) => {
@@ -34,7 +33,6 @@ const GrBoardView = (props) => {
           },
         })
         .then((res) => {
-          console.log(res.data);
           setMember(res.data);
         })
         .catch((res) => {
@@ -91,7 +89,6 @@ const GrBoardView = (props) => {
               {grBoard.grBoardDate}
             </td>
           </tr>
-          <tr></tr>
           <tr>
             <th className="board-view-info">내용</th>
             <td
@@ -115,8 +112,8 @@ const GrBoardView = (props) => {
         ) : (
           ""
         )}
-        <div className="board-view-btn-zone list">
-          <Button2 text="목록" clickEvent={list} />
+        <div className="board-view-btn-zone-list">
+          <Button1 text="목록" clickEvent={list} />
         </div>
       </div>
       <div className="board-view-bottom">
