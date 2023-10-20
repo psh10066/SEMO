@@ -39,6 +39,11 @@
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+.comment-top-left {
+  display: flex;
+  align-items: center;
 }
 .commentItem-memberName {
   padding-left: 7px;
@@ -49,7 +54,7 @@
 .commentItem-date {
   font-size: 13px;
   padding-left: 7px;
-  width: 75%;
+  /* width: 7%; */
 }
 .comment-mid {
   padding: 5px 20px;

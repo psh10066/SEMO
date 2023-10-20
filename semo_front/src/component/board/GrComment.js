@@ -253,32 +253,34 @@ const CommentItem = (props) => {
     <>
       <div className="comment-wrap">
         <div className="comment-top">
-          {comment.memberImg === null ? (
-            <div className="commentItem-profile-image">
-              <Stack direction="row" spacing={2}>
-                <Avatar
-                  alt="Remy Sharp"
-                  src="/image/person.png"
-                  sx={{ width: 22, height: 22 }}
-                />
-              </Stack>
+          <div className="comment-top-left">
+            {comment.memberImg === null ? (
+              <div className="commentItem-profile-image">
+                <Stack direction="row" spacing={2}>
+                  <Avatar
+                    alt="Remy Sharp"
+                    src="/image/person.png"
+                    sx={{ width: 22, height: 22 }}
+                  />
+                </Stack>
+              </div>
+            ) : (
+              <div className="commentItem-profile-image">
+                <Stack direction="row" spacing={2}>
+                  <Avatar
+                    alt="Remy Sharp"
+                    src={"/member/" + comment.memberImg}
+                    sx={{ width: 22, height: 22 }}
+                  />
+                </Stack>
+              </div>
+            )}
+            <div className="commentItem-memberName">{comment.memberName}</div>
+            <div className="commentItem-date">
+              {comment.grBoardCommentDate
+                ? formatTime(comment.grBoardCommentDate)
+                : ""}
             </div>
-          ) : (
-            <div className="commentItem-profile-image">
-              <Stack direction="row" spacing={2}>
-                <Avatar
-                  alt="Remy Sharp"
-                  src={"/member/" + comment.memberImg}
-                  sx={{ width: 22, height: 22 }}
-                />
-              </Stack>
-            </div>
-          )}
-          <div className="commentItem-memberName">{comment.memberName}</div>
-          <div className="commentItem-date">
-            {comment.grBoardCommentDate
-              ? formatTime(comment.grBoardCommentDate)
-              : ""}
           </div>
           <div className="comment-like">
             <GrBoardCommentLike
@@ -296,7 +298,7 @@ const CommentItem = (props) => {
             <textarea
               name="commentContent"
               className="comment-modify-form comment-input-form"
-              placeholder="댓글 추가..."
+              placeholder="댓글을 입력하세요."
               ref={textRef}
               onInput={resizeHeight}
               value={grBoardCommentContent}

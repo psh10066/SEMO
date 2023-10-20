@@ -166,15 +166,42 @@ const PageItem = (props) => {
   const groupView = () => {
     navigate("/group/view", { state: { groupNo: page.groupNo } });
   };
-  //const [peopleCount, setPeopleCount] = useState(0);
+  const [isMouse, setIsMouse] = useState(false);
+  const mouseOver = () => {
+    setIsMouse(true);
+  };
+  const mouseOut = () => {
+    setIsMouse(false);
+  };
+  const textMouse = () => {
+    // document.getElementsByClassName("page-item-img").style.filter =
+    //   "grayscale(10%) brightness(40%)";
+  };
   return (
-    <div className="page-item-wrap" onClick={groupView}>
-      <div className="page-item-img">
-        {page.groupImg === null ? (
-          <img src="/image/default.png" />
+    <div className="page-item-wrap">
+      <div
+        className="page-item-img-wrap"
+        onMouseOver={mouseOver}
+        onMouseOut={mouseOut}
+      >
+        {isMouse ? (
+          <div
+            className="page-time-img-text"
+            onClick={groupView}
+            onMouseOver={textMouse}
+          >
+            상세보기
+          </div>
         ) : (
-          <img src={"/group/" + page.groupImg} />
+          ""
         )}
+        <div className="page-item-img">
+          {page.groupImg === null ? (
+            <img src="/image/default.png" />
+          ) : (
+            <img src={"/group/" + page.groupImg} />
+          )}
+        </div>
       </div>
       <div className="page-item-info">
         <div className="page-infos">
@@ -186,18 +213,20 @@ const PageItem = (props) => {
               : " #푸드·드링크"}
           </div>
           <div className="page-group-name">{page.groupName}</div>
-          <div className="page-icons">
-            <span className="material-icons">groups</span>
-            {page.totalCount}/{page.groupMaxnum}
-          </div>
-          <div className="page-icons-location">
-            <span className="material-icons">location_on</span>
-            {/*{" "}*/}
-            {page.groupLocal === 1
-              ? "서울"
-              : page.groupLocal === 2
-              ? "경기"
-              : "부산"}
+          <div className="page-group-bottom">
+            <div className=" page-icons page-icons-location">
+              <span className="material-icons">location_on</span>
+              {/*{" "}*/}
+              {page.groupLocal === 1
+                ? "서울"
+                : page.groupLocal === 2
+                ? "경기"
+                : "부산"}
+            </div>
+            <div className="page-icons">
+              <span className="material-icons">groups</span>
+              {page.totalCount}/{page.groupMaxnum}
+            </div>
           </div>
         </div>
       </div>

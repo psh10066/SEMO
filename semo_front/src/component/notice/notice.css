@@ -6,51 +6,35 @@
   padding: 10px;
   margin: 50px 0;
 }
+.notice-titles {
+  padding-bottom: 35px;
+  overflow: hidden;
+}
 .notice-content-title {
   font-size: 24px;
   font-family: ns-b;
+  float: left;
+  height: 40px;
+  padding-left: 10px;
 }
- {
-  /* .notice-tbl td 
-  border: 1px solid #ccc;
-  background-color: beige;
-  padding: 10px;
- */
+.notice-list-wrap {
+  border-top: 1px solid #ccc;
 }
 .notice-tbl {
   width: 100%;
   border-spacing: 0;
   margin: 0 auto;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  /* border-bottom: 1px solid #ccc; */
 }
 .notice-item {
   width: 100%;
   list-style: none;
 }
-/* .notice-item > td {
-  padding: 10px;
-  display: block;
-} */
-.notice-view-wrap {
-  /*background-color: antiquewhite;*/
-  width: 1000px;
-  margin: 0 auto;
-  padding: 20px;
-  box-sizing: border-box;
-}
-.notice-view-info {
-  display: flex;
-}
-.notice-view-content {
-  min-height: 400px;
-  border-bottom: 1px solid #053b50;
-}
-.notice-view-btn-zone {
-  padding: 20px 0px;
-}
-.notice-view-btn-zone > button {
-  margin-right: 20px;
+.notice-item > li {
+  padding-top: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #ccc;
+  padding-left: 18px;
 }
 .notice-content-box {
   min-height: 400px;
@@ -58,4 +42,65 @@
 .notice-content-box .ql-container {
   height: 400px;
   width: 600px;
+}
+/* noticeList css */
+.notice-write-btn > button {
+  width: 80px;
+  border: none;
+  padding: 5px;
+  border-radius: 15px;
+  margin-left: 400px;
+  margin-top: 5px;
+  font-size: 16px;
+}
+.notice-write-wrap {
+  float: left;
+}
+.notice-page {
+  margin-top: 60px;
+}
+.notice-list-title {
+  font-size: 18px;
+}
+.notice-list-info > span {
+  padding-right: 20px;
+  font-size: 14px;
+}
+
+/* noticeView css */
+.notice-view-wrap {
+  padding: 10px;
+  margin: 50px 0;
+  width: 100%;
+}
+.notice-view-title {
+  font-size: 24px;
+}
+.notice-view-info {
+  display: flex;
+  padding-top: 10px;
+  padding-bottom: 30px;
+}
+.notice-view-info > span {
+  padding-right: 20px;
+  font-size: 14px;
+}
+.notice-view-content {
+  padding-top: 40px;
+  min-height: 400px;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  font-size: 16px;
+}
+.notice-view-btn-zone {
+  padding: 20px 0px;
+}
+.notice-view-btn-zone > button {
+  margin-right: 20px;
+  width: 80px;
+  border: none;
+  padding: 5px;
+  border-radius: 15px;
+  margin-top: 5px;
+  font-size: 14px;
 }
