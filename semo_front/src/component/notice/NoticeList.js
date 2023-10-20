@@ -12,6 +12,7 @@ const NoticeList = (props) => {
   const [reqPage, setReqPage] = useState(1);
   const [pageInfo, setPageInfo] = useState({});
   const [member, setMember] = useState(null);
+
   useEffect(() => {
     axios
       .get("/notice/list/" + reqPage)
@@ -38,28 +39,30 @@ const NoticeList = (props) => {
           console.log(res.response.status);
         });
     }
-  }, [reqPage]);
+  }, [reqPage, isLogin]);
   const navigate = useNavigate();
   const write = () => {
     navigate("write");
   };
   return (
     <div className="notice-content-wrap">
-      <div className="notice-write-wrap">
-        {isLogin ? (
-          member && member.memberType === 1 ? (
-            <div className="notice-write-btn">
-              <Button2 text="글쓰기" clickEvent={write} />
-            </div>
+      <div className="notice-titles">
+        <div className="notice-content-title">공지사항</div>
+        <div className="notice-write-wrap">
+          {isLogin ? (
+            member && member.memberType === 1 ? (
+              <div className="notice-write-btn">
+                <Button2 text="글쓰기" clickEvent={write} />
+              </div>
+            ) : (
+              ""
+            )
           ) : (
             ""
-          )
-        ) : (
-          ""
-        )}
+          )}
+        </div>
       </div>
 
-      <div className="notice-content-title">공지사항</div>
       <div className="notice-list-wrap">
         <div className="notice-tbl">
           {/* <tr>
@@ -95,9 +98,11 @@ const NoticeItem = (props) => {
     <ul className="notice-item" onClick={noticeView}>
       {/* <td>{notice.noticeNo}</td> */}
       <li>
-        <span>{notice.noticeTitle}</span>
-        <span>{notice.memberId}</span>
-        <span>{notice.noticeDate}</span>
+        <div className="notice-list-title">{notice.noticeTitle}</div>
+        <div className="notice-list-info">
+          <span>{notice.memberId}</span>
+          <span>{notice.noticeDate}</span>
+        </div>
       </li>
       {/* <td>{notice.noticeTitle}</td>
       <td>{notice.memberId}</td>
