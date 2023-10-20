@@ -315,6 +315,7 @@ const GroupView = (props) => {
                   let memberNo = people.memberNo;
                   return people.peopelImg === null ? (
                     <Avatar
+                      key={("people", index)}
                       onClick={() => {
                         clickAvatarHandler(memberNo);
                       }}
@@ -324,6 +325,7 @@ const GroupView = (props) => {
                     ></Avatar>
                   ) : (
                     <Avatar
+                      key={("people", index)}
                       onClick={() => {
                         clickAvatarHandler(memberNo);
                       }}
