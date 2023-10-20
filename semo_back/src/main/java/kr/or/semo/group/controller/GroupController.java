@@ -144,11 +144,6 @@ public class GroupController {
 		return groupService.myLikeGroup(m);
 	}
 	
-	//그룹 가입 현황 조회
-	@GetMapping(value = "/grJoinList/{groupNo}")
-	public List selectGrJoinMember(@PathVariable int groupNo) {
-		return groupService.selectGrJoinMember(groupNo);
-	}
 	//그룹에 가입된 회원 리스트
 	@GetMapping(value = "/memberList/{groupNo}")
 	public List groupMemberList(@PathVariable int groupNo) {
@@ -164,6 +159,11 @@ public class GroupController {
 			g.setGroupImg(filepath);
 		}
 		return groupService.modifyGroup(g);
+	}
+	// 그룹에 모임장을 제외한 모임원 조회
+	@GetMapping(value = "/selectMemberState/{groupNo}")
+	public int selectMemberState(@PathVariable int groupNo) {
+		return groupService.selectMemberState(groupNo);
 	}
 	//그룹 등급 변경
 	@PostMapping(value = "/changeType")

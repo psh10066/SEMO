@@ -166,5 +166,10 @@
 		update gr_join set gr_join_type=#{grJoinType} where member_no=#{memberNo} 
 	</update>
 	
+	<select id="selectMemberState" resultType="int">
+		select count(*) from gr_join where gr_join_type in (2,3)
+		and group_no = #{groupNo}
+	</select>
+	
 	
 </mapper>

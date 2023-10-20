@@ -4,40 +4,63 @@ import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
 import { useState } from "react";
 import Swal from "sweetalert2";
+import { useEffect } from "react";
 
 const GroupMember = (props) => {
   const memberList = props.memberList;
   const groupNo = props.groupNo;
+  const [memberStateNum, setMemberStateNum] = useState(0);
+  const token = window.localStorage.getItem("token");
+  useEffect(() => {
+    if (groupNo !== null) {
+      axios
+        .get("/group/selectMemberState/" + groupNo, {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then((res) => {
+          setMemberStateNum(res.data);
+        })
+        .catch((res) => {
+          console.log(res.response.status);
+        });
+    }
+  });
 
   return (
     <div className="my-content-wrap">
       <div className="admin-member-tbl-box">
-        <table>
-          <thead>
-            <tr>
-              <th width={"10%"}></th>
-              <th width={"20%"}>회원이름</th>
-              <th width={"40%"}>회원소개</th>
-              <th width={"30%"}>회원 서식지</th>
-              <th width={"15%"}>가입현황</th>
-            </tr>
-          </thead>
-          {memberList != null ? (
-            <tbody>
-              {memberList.map((member, index) => {
-                return (
-                  <MemberItem
-                    groupNo={groupNo}
-                    key={"member" + index}
-                    member={member}
-                  />
-                );
-              })}
-            </tbody>
-          ) : (
-            ""
-          )}
-        </table>
+        {memberStateNum === 0 ? (
+          <div>모임에 가입된 회원이 없습니다.</div>
+        ) : (
+          <table>
+            <thead>
+              <tr>
+                <th width={"10%"}></th>
+                <th width={"20%"}>회원이름</th>
+                <th width={"40%"}>회원소개</th>
+                <th width={"30%"}>회원 서식지</th>
+                <th width={"15%"}>가입현황</th>
+              </tr>
+            </thead>
+            {memberList != null ? (
+              <tbody>
+                {memberList.map((member, index) => {
+                  return (
+                    <MemberItem
+                      groupNo={groupNo}
+                      key={"member" + index}
+                      member={member}
+                    />
+                  );
+                })}
+              </tbody>
+            ) : (
+              ""
+            )}
+          </table>
+        )}
       </div>
     </div>
   );
@@ -45,23 +68,31 @@ const GroupMember = (props) => {
 const MemberItem = (props) => {
   const member = props.member;
   const [grJoinType, setGrJoinType] = useState(member.grJoinType);
-
+  //모임원 가입 승인
   const changeJoinType = (event) => {
     const token = window.localStorage.getItem("token");
     const obj = { memberNo: member.memberNo, grJoinType: event.target.value };
-    axios
-      .post("/group/changeType", obj, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      })
-      .then((res) => {
-        Swal.fire("회원 등급 변경 완료!");
-        setGrJoinType(event.target.value);
-      })
-      .catch((res) => {
-        console.log(res.response.status);
+    const grJoinType = obj.grJoinType;
+    if (grJoinType === 1) {
+      Swal.fire({
+        icon: "error",
+        text: "모임장은 변경이 불가능합니다!",
       });
+    } else {
+      axios
+        .post("/group/changeType", obj, {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then((res) => {
+          Swal.fire("회원 등급 변경 완료!");
+          setGrJoinType(event.target.value);
+        })
+        .catch((res) => {
+          console.log(res.response.status);
+        });
+    }
   };
   return (
     <>

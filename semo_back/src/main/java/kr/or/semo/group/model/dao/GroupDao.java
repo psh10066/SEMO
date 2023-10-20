@@ -58,19 +58,17 @@ public interface GroupDao {
 
 	List<Group> myLikeGroup(List<Integer> groupNo);
 
-	List selectGrJoinMember(int groupNo);
-
 	List groupMemberList(int groupNo);
 
 	List groupLikeList();
 
 	List groupLikeListDetail(String[] groupNo);
 
-
-
 	int modifyGroup(Group g);
 
 	int changeType(GroupJoin grJoin);
+
+	int selectMemberState(int groupNo);
 
 	
 
