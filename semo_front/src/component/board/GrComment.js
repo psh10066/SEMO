@@ -253,32 +253,34 @@ const CommentItem = (props) => {
     <>
       <div className="comment-wrap">
         <div className="comment-top">
-          {comment.memberImg === null ? (
-            <div className="commentItem-profile-image">
-              <Stack direction="row" spacing={2}>
-                <Avatar
-                  alt="Remy Sharp"
-                  src="/image/person.png"
-                  sx={{ width: 22, height: 22 }}
-                />
-              </Stack>
+          <div className="comment-top-left">
+            {comment.memberImg === null ? (
+              <div className="commentItem-profile-image">
+                <Stack direction="row" spacing={2}>
+                  <Avatar
+                    alt="Remy Sharp"
+                    src="/image/person.png"
+                    sx={{ width: 22, height: 22 }}
+                  />
+                </Stack>
+              </div>
+            ) : (
+              <div className="commentItem-profile-image">
+                <Stack direction="row" spacing={2}>
+                  <Avatar
+                    alt="Remy Sharp"
+                    src={"/member/" + comment.memberImg}
+                    sx={{ width: 22, height: 22 }}
+                  />
+                </Stack>
+              </div>
+            )}
+            <div className="commentItem-memberName">{comment.memberName}</div>
+            <div className="commentItem-date">
+              {comment.grBoardCommentDate
+                ? formatTime(comment.grBoardCommentDate)
+                : ""}
             </div>
-          ) : (
-            <div className="commentItem-profile-image">
-              <Stack direction="row" spacing={2}>
-                <Avatar
-                  alt="Remy Sharp"
-                  src={"/member/" + comment.memberImg}
-                  sx={{ width: 22, height: 22 }}
-                />
-              </Stack>
-            </div>
-          )}
-          <div className="commentItem-memberName">{comment.memberName}</div>
-          <div className="commentItem-date">
-            {comment.grBoardCommentDate
-              ? formatTime(comment.grBoardCommentDate)
-              : ""}
           </div>
           <div className="comment-like">
             <GrBoardCommentLike
