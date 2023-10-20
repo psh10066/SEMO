@@ -16,6 +16,7 @@ public class Meeting {
 	private String meetingName;
 	private String meetingDate;
 	private String meetingPlace;
+	private String meetingPlaceDetail;
 	private String meetingPrice;
 	private int meetingMaxnum;
 	private String memberId;

@@ -17,7 +17,6 @@ const ModifyMyPassword = () => {
   const [checkPwOmsg, setCheckPwOmsg] = useState("");
   const [checkPwMsg, setCheckPwMsg] = useState(""); //새비밀번호시, 일치하는지 안하는지 메세지
 
-  console.log(checkPwOmsg);
   //현재비밀번호확인
   const pwCheck = () => {
     axios

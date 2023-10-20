@@ -8,6 +8,7 @@
     		#{meetingName},
     		#{meetingDate},
     		#{meetingPlace},
+    		#{meetingPlaceDetail},
     		#{meetingPrice},
     		#{meetingMaxnum})
 	</insert>
@@ -41,8 +42,8 @@
 	<update id="modify">
 		update meeting set 
 		meeting_name=#{meetingName}, meeting_place=#{meetingPlace},
-		meeting_price=#{meetingPrice}, meeting_maxnum=#{meetingMaxnum}
-		where meeting_no=#{meetingNo}
+		meeting_place_detail=#{meetingPlaceDetail},meeting_price=#{meetingPrice}, 
+		meeting_maxnum=#{meetingMaxnum} where meeting_no=#{meetingNo}
 	</update>
 	<delete id="delete">
 		delete meeting where meeting_no=#{meetingNo}

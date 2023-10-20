@@ -9,6 +9,7 @@ import Input from "../util/InputFrm";
 import Postcode from "../util/PostCode";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import MeetingInputWrap from "./MeetingInputWrap";
 
 const MeetingCreate = (props) => {
   const isLogin = props.isLogin;
@@ -16,6 +17,7 @@ const MeetingCreate = (props) => {
   const [meetingName, setMeetingName] = useState("");
   const [meetingDate, setMeetingDate] = useState("");
   const [meetingPlace, setMeetingPlace] = useState("");
+  const [meetingPlaceDetail, setMeetingPlaceDetail] = useState("");
   const [meetingPrice, setMeetingPrice] = useState("");
   const [meetingMaxnum, setMeetingMaxnum] = useState("");
   const location = useLocation();
@@ -28,12 +30,19 @@ const MeetingCreate = (props) => {
       meetingName,
       meetingDate,
       meetingPlace,
+      meetingPlaceDetail,
       meetingPrice,
       meetingMaxnum,
       groupNo,
     };
     // if문을 위해 값이 무조건 들어가야 하는 값만 넣음
-    const notNullData = [meetingName, meetingDate, meetingPlace, meetingMaxnum];
+    const notNullData = [
+      meetingName,
+      meetingDate,
+      meetingPlace,
+      meetingPrice,
+      meetingMaxnum,
+    ];
 
     const token = window.localStorage.getItem("token");
     if (notNullData.every((data) => data != null && data != "")) {
@@ -83,7 +92,7 @@ const MeetingCreate = (props) => {
           showTimeSelect
           locale={ko}
           dateFormat="yyyy년 MM월 dd일 aa hh:mm "
-          // showPopperArrow={false} // 화살표 변경
+          // showPopperArrow={false} //   화살표 변경
           selected={meetingDate}
           minDate={new Date()}
           placeholderText="날짜를 선택해주세요"
@@ -98,6 +107,16 @@ const MeetingCreate = (props) => {
           type="type"
           content="meetingPlace"
           label="장소"
+        />
+      </div>
+      <div>
+        <MeetingInputWrap
+          data={meetingPlaceDetail}
+          setData={setMeetingPlaceDetail}
+          type="type"
+          content="meetingPlaceDetail"
+          placeholder="상세주소를 입력해주세요"
+          label=""
         />
       </div>
       <div>
@@ -121,35 +140,6 @@ const MeetingCreate = (props) => {
       <div id="meeting-btn">
         <Button1 text="모임 생성" clickEvent={createMeeting}></Button1>
       </div>
-    </div>
-  );
-};
-
-const MeetingInputWrap = (props) => {
-  const data = props.data;
-  const setData = props.setData;
-  const type = props.type;
-  const content = props.content;
-  const label = props.label;
-  const blurEvent = props.blurEvent;
-  const checkMsg = props.checkMsg;
-  return (
-    <div className="join-input-wrap">
-      <div>
-        <div className="meeting-label">
-          <label htmlFor={content}>{label}</label>
-        </div>
-        <div className="input">
-          <Input
-            type={type}
-            data={data}
-            setData={setData}
-            content={content}
-            blurEvent={blurEvent}
-          />
-        </div>
-      </div>
-      <div className="check-msg">{checkMsg}</div>
     </div>
   );
 };

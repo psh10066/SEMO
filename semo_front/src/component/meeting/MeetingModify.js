@@ -9,6 +9,7 @@ import Input from "../util/InputFrm";
 import Postcode from "../util/PostCode";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import MeetingInputWrap from "./MeetingInputWrap";
 
 const MeetingModify = () => {
   const location = useLocation();
@@ -19,6 +20,9 @@ const MeetingModify = () => {
   const [meetingName, setMeetingName] = useState(meeting.meetingName);
   const [meetingDate, setMeetingDate] = useState(meeting.meetingDate);
   const [meetingPlace, setMeetingPlace] = useState(meeting.meetingPlace);
+  const [meetingPlaceDetail, setMeetingPlaceDetail] = useState(
+    meeting.meetingPlaceDetail
+  );
   const [meetingPrice, setMeetingPrice] = useState(meeting.meetingPrice);
   const [meetingMaxnum, setMeetingMaxnum] = useState(meeting.meetingMaxnum);
 
@@ -62,26 +66,38 @@ const MeetingModify = () => {
       meetingName: meetingName,
       meetingDate: meetingDate,
       meetingPlace: meetingPlace,
+      meetingPlaceDetail: meetingPlaceDetail,
       meetingPrice: meetingPrice,
       meetingMaxnum: meetingMaxnum,
     };
+    const notNullData = [
+      meetingName,
+      meetingDate,
+      meetingPlace,
+      meetingPrice,
+      meetingMaxnum,
+    ];
     const token = window.localStorage.getItem("token");
-    axios
-      .post("/meeting/modify", data, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      })
-      .then((res) => {
-        if (res.data === 1) {
-          navigate("/group/view", { state: { groupNo } });
-        } else {
-          Swal.fire("수정 중 문제가 발생했습니다!");
-        }
-      })
-      .catch((res) => {
-        console.log(res.response.status);
-      });
+    if (notNullData.every((data) => data != null && data != "")) {
+      axios
+        .post("/meeting/modify", data, {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then((res) => {
+          if (res.data === 1) {
+            navigate("/group/view", { state: { groupNo } });
+          } else {
+            Swal.fire("수정 중 문제가 발생했습니다!");
+          }
+        })
+        .catch((res) => {
+          console.log(res.response.status);
+        });
+    } else {
+      Swal.fire("입력값을 확인해주세요!");
+    }
   };
   return (
     <div className="meeting-wrap">
@@ -120,6 +136,15 @@ const MeetingModify = () => {
       </div>
       <div>
         <MeetingInputWrap
+          data={meetingPlaceDetail}
+          setData={setMeetingPlaceDetail}
+          type="type"
+          content="meetingPlaceDetail"
+          label=""
+        />
+      </div>
+      <div>
+        <MeetingInputWrap
           data={meetingPrice}
           setData={setMeetingPrice}
           type="type"
@@ -140,35 +165,6 @@ const MeetingModify = () => {
         <Button2 text="모임 수정" clickEvent={modifyMeeting}></Button2>
         <Button1 text="모임 삭제" clickEvent={deleteMeeting}></Button1>
       </div>
-    </div>
-  );
-};
-
-const MeetingInputWrap = (props) => {
-  const data = props.data;
-  const setData = props.setData;
-  const type = props.type;
-  const content = props.content;
-  const label = props.label;
-  const blurEvent = props.blurEvent;
-  const checkMsg = props.checkMsg;
-  return (
-    <div className="join-input-wrap">
-      <div>
-        <div className="meeting-label">
-          <label htmlFor={content}>{label}</label>
-        </div>
-        <div className="input">
-          <Input
-            type={type}
-            data={data}
-            setData={setData}
-            content={content}
-            blurEvent={blurEvent}
-          />
-        </div>
-      </div>
-      <div className="check-msg">{checkMsg}</div>
     </div>
   );
 };

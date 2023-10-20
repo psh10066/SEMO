@@ -146,14 +146,20 @@ const MeetingList = (props) => {
             </div>
           </div>
           <div className="meeting-date">
-            일시 : {formatUtcDate(new Date(meeting.meetingDate))}{" "}
+            <span className="material-icons">calendar_today</span>일시 :{" "}
+            {formatUtcDate(new Date(meeting.meetingDate))}{" "}
           </div>
-          <div className="meeting-price">금액 :{meeting.meetingPrice} </div>
+          <div className="meeting-price">
+            <span className="price-icon">￦</span>금액 :{meeting.meetingPrice}{" "}
+          </div>
           <div className="meeting-memberNum">
-            참여수 : {joinMember} / {meeting.meetingMaxnum}
+            <span className="material-icons">people</span>참여수 : {joinMember}{" "}
+            / {meeting.meetingMaxnum}
           </div>
           <div className="meeting-place">
-            장소 : {meeting.meetingPlace}
+            <span className="material-icons">location_on</span>장소 :{" "}
+            {meeting.meetingPlace}
+            <p id="meeting-place-detail">{meeting.meetingPlaceDetail}</p>
             <Kakao data={meeting.meetingPlace} index={index} />
           </div>
           <div id="meeting-btn-area2">
@@ -168,9 +174,12 @@ const MeetingList = (props) => {
                   join(meeting.meetingNo);
                 }}
               />
-            ) : isLogin && isJoin && (groupLevel === 1 || groupLevel === 2) ? (
+            ) : isLogin &&
+              isJoin &&
+              (groupLevel === 1 || groupLevel === 2) &&
+              meeting.meetingMaxnum > joinMember ? (
               <Button2
-                text="취소"
+                text="참가취소"
                 clickEvent={() => {
                   cancelJoin(meeting.meetingNo);
                 }}

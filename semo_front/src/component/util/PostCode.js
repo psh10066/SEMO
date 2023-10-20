@@ -54,12 +54,13 @@ const Postcode = (props) => {
           onChange={changeValue}
           data={data}
           readOnly
+          placeholder="주소를 검색해주세요"
         />
       </div>
       <div id="address-btn">
         <Button3 clickEvent={handleClick} text="주소검색" />
-        {showMap && <Kakao data={data} setData={setData} />}
       </div>
+      {showMap && <Kakao data={data} setData={setData} />}
     </div>
   );
 };
