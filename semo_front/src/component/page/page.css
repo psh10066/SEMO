@@ -34,6 +34,10 @@
   font-size: 13px;
   color: #fff;
   cursor: pointer;
+  z-index: 1000;
+}
+.page-time-img-text:hover ~ .page-item-img {
+  filter: grayscale(30%) brightness(40%);
 }
 .page-item-img > img {
   width: 100%;

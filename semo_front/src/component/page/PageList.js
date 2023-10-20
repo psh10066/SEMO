@@ -184,13 +184,6 @@ const PageItem = (props) => {
         onMouseOver={mouseOver}
         onMouseOut={mouseOut}
       >
-        <div className="page-item-img">
-          {page.groupImg === null ? (
-            <img src="/image/default.png" />
-          ) : (
-            <img src={"/group/" + page.groupImg} />
-          )}
-        </div>
         {isMouse ? (
           <div
             className="page-time-img-text"
@@ -202,6 +195,13 @@ const PageItem = (props) => {
         ) : (
           ""
         )}
+        <div className="page-item-img">
+          {page.groupImg === null ? (
+            <img src="/image/default.png" />
+          ) : (
+            <img src={"/group/" + page.groupImg} />
+          )}
+        </div>
       </div>
       <div className="page-item-info">
         <div className="page-infos">
