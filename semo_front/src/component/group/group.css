@@ -209,6 +209,10 @@ input[type="file"]::file-selector-button {
   vertical-align: middle;
   margin-right: 5px;
 }
+#group-icon > a:hover {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  transition: 0.2s;
+}
 #group-icon > a > span:last-child {
   margin-right: 32px;
 }
