@@ -11,8 +11,6 @@ const NoticeWrite = () => {
 
   const navigate = useNavigate();
   const write = () => {
-    //console.log(noticeTitle);
-    //console.log(noticeContent);
     if (noticeTitle !== "" && noticeContent !== "") {
       const form = new FormData();
       form.append("noticeTitle", noticeTitle);
@@ -28,7 +26,6 @@ const NoticeWrite = () => {
           },
         })
         .then((res) => {
-          //console.log(res.data);
           if (res.data > 0) {
             navigate("/notice");
           }
@@ -42,7 +39,7 @@ const NoticeWrite = () => {
     }
   };
   return (
-    <div>
+    <div className="notice-frm-wrap">
       <div className="notice-frm-title">공지사항 작성</div>
       <NoticeFrm
         noticeTitle={noticeTitle}

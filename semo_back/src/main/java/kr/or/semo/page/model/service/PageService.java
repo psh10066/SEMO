@@ -20,7 +20,7 @@ public class PageService {
 	private Pagination pagination;
 	
 	public Map pageList(int reqPage, String categoryLocal, String categoryValue) {
-		int numPerPage = 6;
+		int numPerPage = 8;
 		int pageNaviSize = 5;
 
 		List pageList = null;
