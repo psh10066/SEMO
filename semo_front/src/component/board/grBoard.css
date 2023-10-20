@@ -165,3 +165,7 @@ a.active-side {
   border-top: 5px solid #5457e9 !important;
   color: black;
 }
+.board-view-btn-zone-list > button {
+  border-radius: 5px;
+  display: block;
+}
