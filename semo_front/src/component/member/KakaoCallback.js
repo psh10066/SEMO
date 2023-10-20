@@ -31,11 +31,6 @@ const KakaoCallBack = (props) => {
         console.log(res.data);
         setIsLogin(true);
         localStorage.setItem("token", res.data);
-        Swal.fire({
-          icon: "info",
-          title: "개인정보를 꼭수정해주세요!",
-          text: "원할한 이용을원하시면...!",
-        });
         navigate("/");
       })
       .catch((err) => {

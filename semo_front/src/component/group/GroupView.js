@@ -307,7 +307,7 @@ const GroupView = (props) => {
             dangerouslySetInnerHTML={{ __html: group.groupContent }}
           ></div>
           <div className="group-view-member">
-            <div className="feed-like-person-wrap">
+            <div className="group-like-person-wrap">
               <AvatarGroup max={7} total={peopleCount} className="avatarGroup">
                 {peopleList.map((people, index) => {
                   let memberNo = people.memberNo;
