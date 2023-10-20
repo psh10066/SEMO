@@ -46,9 +46,10 @@ const Kakao = (props) => {
           width: "400px",
           height: "150px",
           zIndex: 0,
-          boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+          boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
           marginTop: "10px",
           borderRadius: "10px",
+          marginLeft: "1px",
         }}
       ></div>
     </div>
