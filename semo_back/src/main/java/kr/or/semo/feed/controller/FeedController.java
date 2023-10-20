@@ -73,8 +73,8 @@ public class FeedController {
 		}
 		
 		String savepath = root+"feed/";
-		File delFile = new File(savepath+f.getFeedImg());
-		delFile.delete();
+//		File delFile = new File(savepath+f.getFeedImg());
+//		delFile.delete();
 		if(thumbnail != null) {
 			String filepath = fileUtil.getfilepath(savepath, thumbnail.getOriginalFilename(), thumbnail);
 			f.setFeedImg(filepath);
