@@ -222,3 +222,9 @@ input[type="file"]::file-selector-button {
   font-size: 30px;
   cursor: pointer;
 }
+.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
+  background-color: #fff;
+}
+.ql-editor {
+  background-color: #fff;
+}
