@@ -1,5 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
+import { useNavigate } from "react-router-dom";
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -10,6 +11,11 @@ import { useEffect, useState } from "react";
 const PopularGroupImg = (props) => {
   const groupDetail = props.groupDetail;
   const [activeIndex, setActiveIndex] = useState(0); // 현재 슬라이드 인덱스 저장
+
+  const navigate = useNavigate();
+  const groupView = () => {
+    navigate("/group/view/" + groupDetail[activeIndex].groupNo);
+  };
 
   return (
     <div className="popular-groupWrap-thumbnail">
@@ -43,13 +49,13 @@ const PopularGroupImg = (props) => {
         {groupDetail.map((detail, index) => (
           <SwiperSlide key={index}>
             <div className="slideBox">
-              <div className="slideImg-box">
+              <div className="slideImg-box" onClick={groupView}>
                 <div className="slideImg-size">
                   <img src={"/group/" + detail.groupImg} alt="slide_image" />
                 </div>
               </div>
               <div className="detail-box">
-                {activeIndex === index && (
+                {activeIndex === index && ( //슬라이드인덱스랑 groupDetail인덱스랑 같은거 정보 불러오기
                   <div className="group-info">
                     <div className="detail-title">
                       <h3>{detail.groupName}</h3>
