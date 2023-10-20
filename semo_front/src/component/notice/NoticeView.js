@@ -69,12 +69,10 @@ const NoticeView = (props) => {
   };
   return (
     <div className="notice-view-wrap">
-      <div className="notice-view-title">제목 : {notice.noticeTitle}</div>
+      <div className="notice-view-title">{notice.noticeTitle}</div>
       <div className="notice-view-info">
-        <div>
-          작성자(이름) : {notice.memberId}({notice.memberName})
-        </div>
-        <div>{notice.noticeDate}</div>
+        <span>{notice.memberId}</span>
+        <span>{notice.noticeDate}</span>
       </div>
       <div
         className="notice-view-content"
