@@ -70,7 +70,7 @@
 #meeting-btn button {
   width: 120px;
   border: none;
-  background-color: #5457e9;
+  background-color: #8bb4ff;
 }
 #meeting-btn > button:hover {
   background-color: rgba(37, 42, 52, 0.9);
@@ -115,7 +115,7 @@
   text-align: right;
 }
 #meeting-btn-area > button {
-  background-color: #5457e9;
+  background-color: #8bb4ff;
   border: none;
   border-radius: 5px;
   color: #fff;
