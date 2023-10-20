@@ -27,7 +27,7 @@
 		            (select count(*) from gr_join where group_no=g.group_no and GR_JOIN_TYPE in (1,2)) total_count,
                 	(select count(*) from group_save where group_no=g.group_no) group_like
 		        FROM GROUP_TBL g
-		        ORDER BY group_like DESC)B)
+		        ORDER BY 1 DESC)B)
 		WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>
 	
@@ -45,7 +45,7 @@
                 	(select count(*) from group_save where group_no=g.group_no) group_like
 		        FROM GROUP_TBL g
 		        WHERE GROUP_CATEGORY = #{categoryValue}
-		        ORDER BY group_like DESC)B)
+		        ORDER BY 1 DESC)B)
 		WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>
 	
@@ -63,7 +63,7 @@
                 	(select count(*) from group_save where group_no=g.group_no) group_like
 		        FROM GROUP_TBL g
 		        WHERE GROUP_LOCAL = #{categoryValue}
-		        ORDER BY group_like DESC)B)
+		        ORDER BY 1 DESC)B)
 		WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>
 	

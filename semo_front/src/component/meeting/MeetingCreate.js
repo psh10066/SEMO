@@ -19,6 +19,7 @@ const MeetingCreate = (props) => {
   const [meetingPlaceDetail, setMeetingPlaceDetail] = useState("");
   const [meetingPrice, setMeetingPrice] = useState("");
   const [meetingMaxnum, setMeetingMaxnum] = useState("");
+
   const location = useLocation();
 
   const groupNo = location.state.groupNo;
