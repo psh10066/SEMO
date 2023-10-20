@@ -24,7 +24,6 @@
   width: 100%;
   border-spacing: 0;
   margin: 0 auto;
-  /* border-bottom: 1px solid #ccc; */
 }
 .notice-item {
   width: 100%;
@@ -35,13 +34,7 @@
   padding-bottom: 18px;
   border-bottom: 1px solid #ccc;
   padding-left: 18px;
-}
-.notice-content-box {
-  min-height: 400px;
-}
-.notice-content-box .ql-container {
-  height: 400px;
-  width: 600px;
+  cursor: pointer;
 }
 /* noticeList css */
 .notice-write-btn > button {
@@ -103,4 +96,50 @@
   border-radius: 15px;
   margin-top: 5px;
   font-size: 14px;
+}
+
+/* noticeWrite css */
+.notice-frm-wrap {
+  padding: 10px;
+  margin: 50px 0;
+  width: 100%;
+}
+.notice-frm-title {
+  font-size: 24px;
+}
+.notice-frm-content-wrap {
+  display: flex;
+  padding-top: 10px;
+  padding-bottom: 30px;
+}
+.notice-frm-tbl {
+  width: 100%;
+  border-spacing: 0;
+  margin: 0 auto;
+  padding-top: 30px;
+}
+.notice-frm-title-label {
+  font-size: 18px;
+  width: 50px;
+}
+.notice-frm-title-input > input {
+  height: 45px;
+}
+.notice-content-box {
+  padding-top: 20px;
+  min-height: 400px;
+  padding-bottom: 20px;
+}
+.notice-content-box .ql-container {
+  height: 400px;
+  width: 600px;
+}
+.notice-btn-box > td {
+  text-align: center;
+}
+.notice-btn-box > td > button {
+  width: 200px;
+  border-radius: 20px;
+  height: 40px;
+  line-height: 5px;
 }

@@ -53,7 +53,7 @@ const SearchResult = (props) => {
       text: "소셜링",
       categoryType: "socialing",
       active: true,
-      image: "/image/menu_icon/meeting2.png",
+      image: "/image/menu_icon/meeting5.png",
     },
     {
       text: "피드",

@@ -56,7 +56,10 @@ const NoticeView = (props) => {
           .then((res) => {
             console.log(res.data);
             if (res.data === 1) {
-              Swal.fire("공지사항이 삭제되었습니다.");
+              Swal.fire({
+                icon: "success",
+                text: "공지사항이 삭제되었습니다.",
+              });
               navigate("/notice"); //성공 시 noticeList로 이동
             }
           })
