@@ -12,7 +12,7 @@
 			    gr_board_no,
 			    gr_board_title,
 			    gr_board_writer,
-			    member_id,
+			    member_name,
 			    to_char(gr_board_date, 'yyyy-mm-dd') as gr_board_date
 			from gr_board
 			join member on (gr_board_writer = member_no)

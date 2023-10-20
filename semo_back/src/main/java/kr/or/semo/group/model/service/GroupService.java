@@ -150,11 +150,6 @@ public class GroupService {
 		return g;
 	}
 
-	public List selectGrJoinMember(int groupNo) {
-		// TODO Auto-generated method stub
-		return groupDao.selectGrJoinMember(groupNo);
-	}
-
 	public List groupMemberList(int groupNo) {
 		// TODO Auto-generated method stub 
 		return groupDao.groupMemberList(groupNo);
@@ -180,10 +175,15 @@ public class GroupService {
 		// TODO Auto-generated method stub
 		return groupDao.modifyGroup(g);
 	}
-
+	@Transactional
 	public int chanceType(GroupJoin grJoin) {
 		// TODO Auto-generated method stub
 		return groupDao.changeType(grJoin);
+	}
+
+	public int selectMemberState(int groupNo) {
+		// TODO Auto-generated method stub
+		return groupDao.selectMemberState(groupNo);
 	}
 	
 

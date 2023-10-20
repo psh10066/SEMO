@@ -35,8 +35,8 @@ const GroupCreate = (props) => {
       groupContent != "" &&
       groupMaxnum !== 0 &&
       groupCategory !== 0 &&
-      groupLocal !== 0 &&
-      chkGroupNameMsg == ""
+      groupLocal !== 0
+      //&& chkGroupNameMsg == ""
     ) {
       const form = new FormData();
       form.append("groupName", groupName);
