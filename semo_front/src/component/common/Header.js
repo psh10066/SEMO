@@ -137,7 +137,7 @@ const Header = (props) => {
             </div>
             <div className="chatNew">
               {/* 새로운 채팅 있을때, N 뜨게하기*/}
-              {isLogin ? <Chatalert /> : null}
+              {isLogin ? "" : null}
             </div>
           </div>
           <MainSearch />
@@ -250,6 +250,7 @@ const HeaderLink = (props) => {
   );
 };
 
+/*
 //채팅 뉴 띄우기
 const Chatalert = () => {
   const navigate = useNavigate();
@@ -341,5 +342,5 @@ const Chatalert = () => {
     <>{myLatestChatTime - totalLatestChatTime > 0 ? <strong>N</strong> : ""}</>
   );
 };
-
+*/
 export default Header;
