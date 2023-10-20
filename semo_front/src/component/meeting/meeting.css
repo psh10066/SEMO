@@ -50,6 +50,10 @@
 .meeting-date {
   margin: 0 !important;
 }
+#meeting-date,
+#meetingPlace {
+  background-color: #fff;
+}
 .meeting-input {
   margin-bottom: 10px;
 }
