@@ -22,6 +22,13 @@ const MainSearchModal = (props) => {
     setModalState(false);
   };
 
+  // 엔터키가 눌렸을 때 sendMessage 호출
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter" || event.keyCode === 13) {
+      Search();
+    }
+  };
+
   return (
     <div className="mainSearchModal">
       <Modal
@@ -45,10 +52,11 @@ const MainSearchModal = (props) => {
       >
         <div className="mainSearchModalIn">
           <div className="search-box">
-            <Input
+            <input
               type="text"
-              data={searchContent}
-              setData={setSearchContent}
+              value={searchContent}
+              onChange={(e) => setSearchContent(e.target.value)}
+              onKeyDown={handleKeyDown} // 엔터키 감지 핸들러 추가
               content="searchContent"
               placeholder="관심사 , 지역명(예: 독서, 북한산)을 검색해보세요"
             />
