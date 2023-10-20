@@ -7,9 +7,8 @@ import ChatRoom from "./ChatRoom";
 import ChatInfo from "./ChatInfo";
 import ChatToggle from "./ChatToggle";
 
-const Chat = (props) => {
+const Chat = () => {
   const navigate = useNavigate();
-  const isLogin = props.isLogin;
   const token = window.localStorage.getItem("token");
 
   //로그인한 유저 (이름) 불러오기
@@ -37,9 +36,9 @@ const Chat = (props) => {
       });
   }, []);
 
-  //모든 채팅방이름 불러오기 == 그룹이름 : 내가 속해있는 모임
+  //내가 속해있는 모든 채팅방이름 불러오기 == 그룹이름
   const [roomName, setRoomName] = useState([]);
-  //모든 채팅방 넘버 == 그룹넘버 : 내가 속해있는 모임
+  //내가 속해있는 모든 채팅방 넘버 == 그룹넘버
   const [chatHostAddress, setChatHostAddress] = useState([]);
   useEffect(() => {
     axios

@@ -27,7 +27,6 @@ const PopularGroup = () => {
   //groupNo[0] //번호를 조회해와서
   //groupDetail 배열에서 groupNo[0]번째 값의 groupDetail.groupNo 찾기
   //setGroupMapping[0]에 넣기
-
   useEffect(() => {
     const newGroupMapping = [];
     for (let i = 0; i < 10; i++) {

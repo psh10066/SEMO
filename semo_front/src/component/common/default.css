@@ -132,9 +132,6 @@ header {
   color: #fbff00e8;
   align-self: flex-start;
   margin-left: 1px;
-  display: block;
-  font-weight: 600;
-  display: none;
 }
 
 .header-leftside button {
