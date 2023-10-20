@@ -10,7 +10,7 @@ import kr.or.semo.groupPhoto.model.vo.GroupPhoto;
 @Mapper
 public interface GroupPhotoDao {
 
-	int totalCount();
+	int totalCount(int groupNo);
 
 	List selectgroupPhotoList(int groupNo, PageInfo pi);
 
