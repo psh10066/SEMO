@@ -214,7 +214,7 @@ const PageItem = (props) => {
           </div>
           <div className="page-group-name">{page.groupName}</div>
           <div className="page-group-bottom">
-            <div className=" page-icons page-icons-location">
+            <div className="page-icons page-icons-location">
               <span className="material-icons">location_on</span>
               {/*{" "}*/}
               {page.groupLocal === 1

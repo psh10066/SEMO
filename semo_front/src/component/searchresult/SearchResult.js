@@ -214,7 +214,7 @@ const SearchSocialingItem = (props) => {
     //   "grayscale(10%) brightness(40%)";
   };
   return (
-    <div className="searchresult-item-wrap" onClick={groupView}>
+    <div className="searchresult-item-wrap">
       <div
         className="searchresult-item-img-wrap"
         onMouseOver={mouseOver}
@@ -238,23 +238,21 @@ const SearchSocialingItem = (props) => {
             <img src={"/group/" + socialingList.groupImg} />
           )}
         </div>
-        <div className="searchresult-item-info">
-          <div className="searchresult-infos">
-            <div className="searchresult-group-name">
-              {socialingList.groupName}
-            </div>
-            <div className="searchresult-icons">
-              <span className="material-icons">groups</span>
-              {socialingList.totalCount}/{socialingList.groupMaxnum}
-            </div>
-            <div className="searchresult-category">
-              {socialingList.groupCategory === 1
-                ? " 문화·예술"
-                : socialingList.groupCategory === 2
-                ? " 운동·액티비티"
-                : " 푸드·드링크"}
-            </div>
-            <div className="searchresult-icons">
+      </div>
+      <div className="searchresult-item-info">
+        <div className="searchresult-infos">
+          <div className="searchresult-category">
+            {socialingList.groupCategory === 1
+              ? " #문화·예술"
+              : socialingList.groupCategory === 2
+              ? " #운동·액티비티"
+              : " #푸드·드링크"}
+          </div>
+          <div className="searchresult-group-name">
+            {socialingList.groupName}
+          </div>
+          <div className="searchresult-group-bottom">
+            <div className="searchresult-icons searchresult-icons-location">
               <span className="material-icons">location_on</span>
               {socialingList.groupLocal === 1
                 ? "서울"
@@ -262,12 +260,17 @@ const SearchSocialingItem = (props) => {
                 ? "경기"
                 : "부산"}
             </div>
+            <div className="searchresult-icons">
+              <span className="material-icons">groups</span>
+              {socialingList.totalCount}/{socialingList.groupMaxnum}
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
 };
+
 const SearchFeedItem = (props) => {
   const feedList = props.feedList;
   //console.log(feedList);
