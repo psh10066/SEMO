@@ -1,7 +1,9 @@
-import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import MainSearch from "../mainpage/search/MainSearch";
 import ChatNewNotice from "../chat/chatNewNotice";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const Header = (props) => {
   const isLogin = props.isLogin;
@@ -135,7 +137,7 @@ const Header = (props) => {
             </div>
             <div className="chatNew">
               {/* 새로운 채팅 있을때, N 뜨게하기*/}
-              {isLogin ? <Link to="/chat" title="채팅"></Link> : null}
+              {isLogin ? <Chatalert /> : null}
             </div>
           </div>
           <MainSearch />
@@ -247,4 +249,97 @@ const HeaderLink = (props) => {
     </div>
   );
 };
+
+//채팅 뉴 띄우기
+const Chatalert = () => {
+  const navigate = useNavigate();
+  const token = window.localStorage.getItem("token");
+  const [stringGroupNo, setStringGroupNo] = useState(""); //groupNo String
+
+  //로그인한 유저 (이름) 불러오기 (완료)
+  const [member, setMember] = useState({});
+  useEffect(() => {
+    axios
+      .post("/member/getMember", null, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => {
+        setMember(res.data);
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+  }, []);
+
+  //내가 속해있는 모든 채팅방 넘버 == 그룹넘버 (완료)
+  const [totalRooms, setTotalRooms] = useState([]);
+  useEffect(() => {
+    axios
+      .post(
+        "/group/groupChatRoomName", //객체로 그룹이름,그룹넘버 불러옴
+        {},
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      )
+      .then((res) => {
+        setTotalRooms(res.data.map((item) => item.groupNo));
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+  }, []);
+
+  console.log(totalRooms);
+
+  //나의 가장 최신 채팅 시간 확인
+  const [myLatestChatTime, setMyLatestChatTime] = useState("");
+  useEffect(() => {
+    axios
+      .post(
+        "/chat/myLatestChatTime",
+        {},
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      )
+      .then((res) => {
+        setMyLatestChatTime(res.data);
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+  }, []);
+
+  //내 모든 채팅방 total 채팅 시간 확인
+  const [totalLatestChatTime, setTotalLatestChatTime] = useState("");
+
+  useEffect(() => {
+    setStringGroupNo(totalRooms.join(","));
+  }, [totalRooms]);
+
+  useEffect(() => {
+    axios
+      .get("/chat/totalLatestChatTime", {
+        params: { stringGroupNo: stringGroupNo },
+      })
+      .then((res) => {
+        setTotalLatestChatTime(res.data); // 서버에서 전체 데이터 배열을 반환하므로 그대로 설정
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+  }, [stringGroupNo]);
+
+  return (
+    <>{myLatestChatTime - totalLatestChatTime > 0 ? <strong>N</strong> : ""}</>
+  );
+};
+
 export default Header;

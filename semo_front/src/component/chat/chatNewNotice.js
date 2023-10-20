@@ -11,7 +11,7 @@ const ChatNewNotice = (props) => {
   //mychatTime은 내가 "지난대화보기"를 클릭하고 > 채팅방을 나갔을때 , 자동으로 시간(웹소켓 소실 시간) 세팅 됨
   //지난대화보기를 클릭 안했을경우 New 안사라짐.
   //웹소켓 소실 시간을 세팅해서 (내가 마지막까지 채팅한 경우는 해당 안됨 )
-  const [totalChatTime, setTotalChatTime] = useState(""); //전체 채팅 타임중에 가장 최신 채팅 시간
+  const [totalChatTime, setTotalChatTime] = useState(""); //해당 방의 전체 채팅 타임중에 가장 최신 채팅 시간
 
   useEffect(() => {
     axios
