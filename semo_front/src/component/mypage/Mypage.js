@@ -175,7 +175,7 @@ const MySideMenu = (props) => {
               {menu.active ? (
                 <Link
                   to={menu.url}
-                  className="active-side"
+                  className="active-mymenu"
                   onClick={() => {
                     activeTab(index);
                   }}

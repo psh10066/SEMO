@@ -30,7 +30,6 @@ const PopularGroup = () => {
 
   useEffect(() => {
     const newGroupMapping = [];
-
     for (let i = 0; i < 10; i++) {
       const targetGroupDetail = groupDetail.find(
         (detail) => detail.groupNo === groupNo[i]

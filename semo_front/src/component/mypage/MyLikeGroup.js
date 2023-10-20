@@ -6,14 +6,14 @@ import { Link, useNavigate } from "react-router-dom";
 const MyLikeGroup = (props) => {
   const navigate = useNavigate();
   const member = props.member;
-  console.log(member);
+
   const [group, setGroup] = useState([]);
-  console.log(member);
+  const [itemsToShow, setItemsToShow] = useState(3); // 더보기
+
   useEffect(() => {
     axios
       .post("/group/myLikeGroup", member)
       .then((res) => {
-        // console.log("1: " + res.data);
         setGroup(res.data);
       })
       .catch((res) => {
@@ -23,11 +23,22 @@ const MyLikeGroup = (props) => {
   }, []);
 
   return (
-    <div className="groupList-wrap">
-      <div className="group-item-wrap">
-        {group.map((group, index) => {
+    <div className="mylikeWrap">
+      <div className="mylikeWrap-item-wrap">
+        {group.slice(0, itemsToShow).map((group, index) => {
+          //그룹 3개만 보여주기
           return <MypageItem key={"GroupItem" + index} group={group} />;
         })}
+        <div className="myLikeMore">
+          {group.length > itemsToShow && (
+            <button
+              className="myLikeMore-btn"
+              onClick={() => setItemsToShow(itemsToShow + 3)}
+            >
+              <h4>더보기</h4>
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -45,7 +56,6 @@ const MypageItem = (props) => {
     axios
       .get("/group/groupPeopleList/" + group.groupNo)
       .then((res) => {
-        // console.log(res.data);
         setPeopleList(res.data.peopleList);
         setPeopleCount(res.data.peopleCount);
       })
@@ -54,8 +64,9 @@ const MypageItem = (props) => {
       });
   }, []);
   return (
-    <div className="feed-group-item" onClick={groupView}>
-      <div className="feed-group-img">
+    //내가 찜한 그룹
+    <div className="mylike-group-item" onClick={groupView}>
+      <div className="mylike-group-img">
         <img src={"/group/" + group.groupImg} />
       </div>
       <div className="feed-group-right">
