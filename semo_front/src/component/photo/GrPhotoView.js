@@ -116,9 +116,9 @@ const GrPhotoView = (props) => {
         ) : (
           ""
         )}
-        <>
+        <div className="photo-view-btn-zone-list">
           <Button1 text="목록" clickEvent={list} />
-        </>
+        </div>
       </div>
     </div>
   );

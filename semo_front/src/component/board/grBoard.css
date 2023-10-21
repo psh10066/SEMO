@@ -17,8 +17,8 @@
 .board-title {
   font-size: 20px;
   color: #8bb4ff;
-  padding: 30px 0px;
-  border-bottom: 2px solid #220895;
+  padding: 20px;
+  border-bottom: 1px solid #ccc;
   font-weight: bold;
   text-align: center;
 }
@@ -139,7 +139,7 @@
   width: 10%;
 }
 .board-view-info-date {
-  width: 10%;
+  width: 15%;
 }
 .board-view-btn-zone {
   padding: 20px 0px;
@@ -165,7 +165,12 @@ a.active-side {
   border-top: 5px solid #5457e9 !important;
   color: black;
 }
-.board-view-btn-zone-list > button {
+.board-view-btn-zone-list > button:last-child {
+  background-color: #5457e9;
   border-radius: 5px;
-  display: block;
+  border: none;
+  float: right;
+}
+.comment-all-wrap {
+  margin-top: 65px;
 }

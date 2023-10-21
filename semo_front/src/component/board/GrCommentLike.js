@@ -52,7 +52,6 @@ const GrBoardCommentLike = (props) => {
         },
       })
       .then((res) => {
-        console.log(res.data);
         if (res.data) {
           setGrBoardCommentLike(true);
         } else {
