@@ -6,6 +6,7 @@ import "./mainpage.css";
 import { Fade } from "react-awesome-reveal";
 import { BsCaretDownFill } from "react-icons/bs";
 import PopularGroup from "./PopularGroup";
+import Local from "./Local";
 
 const Mainpage = () => {
   const [isLoading, setIsLoading] = useState(true); // 로딩중..
@@ -76,7 +77,9 @@ const Mainpage = () => {
       <div className="popular-main">
         <PopularGroup />
       </div>
-      <div className="local-main"></div>
+      <div className="local-main">
+        <Local />
+      </div>
     </div>
   );
 };

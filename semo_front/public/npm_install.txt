@@ -27,7 +27,5 @@ npm install date-fns
 npm install react-awesome-reveal @emotion/react --save
 npm install react-icons     
 npm install framer-motion   
-
-
-npm i swiper ->10/19 정아 설치 
+npm i swiper 
 npm install smooth-scrollbar ->10/19 정아 설치 >> 삭제

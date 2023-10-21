@@ -199,6 +199,7 @@
   height: 55px;
   border: none;
   border-radius: 10px;
+  cursor: pointer;
 }
 .myLikeMore-btn > h4 {
   color: #fff;
