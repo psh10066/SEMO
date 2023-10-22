@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { Route, Routes, Link, useLocation } from "react-router-dom";
+import {
+  Route,
+  Routes,
+  Link,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import "./grBoard.css";
 import GrBoardList from "./GrBoardList";
 import GrBoardWrite from "./GrBoardWrite";
@@ -11,7 +17,6 @@ const GrBoardMain = (props) => {
   const setIsLogin = props.setIsLogin;
   const location = useLocation();
   const [groupNo, setGroupNo] = useState(location.state.groupNo);
-
   const [menus, setMenus] = useState([
     {
       url: "/group/groupBoard",
@@ -47,11 +52,21 @@ const GrBoardMain = (props) => {
       </div>
     );
   };
-
+  const navigate = useNavigate();
+  const allList = () => {
+    navigate("/group/view", { state: { groupNo: groupNo } });
+  };
   return (
     <div className="board-all-wrap">
       <MySideMenu menus={menus} setMenus={setMenus} />
-      <div className="board-title">나의 모임 게시판</div>
+      <div className="board-title">
+        나의 모임 게시판
+        <div className="board-page-back">
+          <span className="material-icons" onClick={allList}>
+            reply
+          </span>
+        </div>
+      </div>
       <Routes>
         <Route path="view" element={<GrBoardView isLogin={isLogin} />} />
         <Route path="write" element={<GrBoardWrite />} />

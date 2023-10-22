@@ -57,9 +57,8 @@ const GrBoardView = (props) => {
         axios
           .get("/groupBoard/delete/" + grBoard.grBoardNo)
           .then((res) => {
-            console.log(res.data);
             if (res.data === 1) {
-              Swal.fire("삭제가 완료되었습니다.");
+              Swal.fire({ icon: "success", text: "삭제가 완료되었습니다." });
               navigate("/group/groupBoard", {
                 state: { groupNo: grBoard.groupNo },
               });

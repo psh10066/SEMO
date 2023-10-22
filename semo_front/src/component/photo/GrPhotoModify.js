@@ -7,8 +7,6 @@ import Swal from "sweetalert2";
 const GrPhotoModify = () => {
   const location = useLocation();
   const grPhoto = location.state.grPhoto;
-  console.log(grPhoto);
-  //제목,썸네일,내용,첨부파일 -> 전송용 데이터를 담을 state
   const [grPhotoTitle, setGrPhotoTitle] = useState(grPhoto.grPhotoTitle);
   const [thumbnail, setThumbnail] = useState({});
   const [grPhotoContent, setGrPhotoContent] = useState(grPhoto.grPhotoContent);
@@ -29,7 +27,6 @@ const GrPhotoModify = () => {
     for (let i = 0; i < grPhotoFile.length; i++) {
       form.append("grPhotoFile", grPhotoFile[i]);
     }
-    //join 문자열로 합치기
     form.append("delFileNo", delFileNo.join("/"));
     const token = window.localStorage.getItem("token");
     axios
@@ -42,14 +39,15 @@ const GrPhotoModify = () => {
       })
       .then((res) => {
         if (res.data === 1) {
-          Swal.fire("수정이 완료되었습니다.");
+          Swal.fire({ icon: "success", text: "수정이 완료되었습니다." });
           navigate("/group/groupPhoto", {
             state: { groupNo: grPhoto.groupNo },
           });
         } else {
-          Swal.fire(
-            "수정 중 문제가 발생하였습니다. 잠시 후 다시 시도해주세요."
-          );
+          Swal.fire({
+            icon: "info",
+            text: "수정 중 오류가 발생하였습니다. 잠시 후 다시 시도해주세요.",
+          });
         }
       })
       .catch((res) => {

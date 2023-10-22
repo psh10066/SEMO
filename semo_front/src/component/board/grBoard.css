@@ -17,7 +17,7 @@
 .board-title {
   font-size: 20px;
   color: #8bb4ff;
-  padding: 20px;
+  padding: 15px;
   border-bottom: 1px solid #ccc;
   font-weight: bold;
   text-align: center;
@@ -83,7 +83,6 @@
 }
 .board-info-tbl tr > td:first-child {
   width: 150px;
-  padding: 15px 20px;
   background-color: rgba(5, 59, 80, 0.1);
   border: 1px solid lightgray;
   text-align: center;
@@ -171,6 +170,17 @@ a.active-side {
   border: none;
   float: right;
 }
+.board-view-btn-zone-list > button:last-child:hover {
+  background-color: #220895;
+  border: none;
+}
 .comment-all-wrap {
   margin-top: 65px;
+}
+.board-page-back {
+  cursor: pointer;
+  float: right;
+}
+.board-page-back > span {
+  font-size: 30px;
 }

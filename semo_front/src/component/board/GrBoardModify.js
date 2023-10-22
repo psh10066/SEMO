@@ -29,14 +29,15 @@ const GrBoardModify = () => {
       })
       .then((res) => {
         if (res.data === 1) {
-          Swal.fire("수정이 완료되었습니다.");
+          Swal.fire({ icon: "success", text: "수정이 완료되었습니다." });
           navigate("/group/groupBoard", {
             state: { groupNo: grBoard.groupNo },
           });
         } else {
-          Swal.fire(
-            "수정 중 문제가 발생하였습니다. 잠시 후 다시 시도해주세요."
-          );
+          Swal.fire({
+            icon: "info",
+            text: "수정 중 오류가 발생하였습니다. 잠시 후 다시 시도해주세요.",
+          });
         }
       })
       .catch((res) => {
