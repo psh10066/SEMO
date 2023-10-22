@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./localmap.css";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Local = (props) => {
   const navigate = useNavigate();
@@ -100,6 +101,15 @@ const Local = (props) => {
     navigate("local", { state: { searchContent: localName } });
   };
 
+  //서비스 준비중
+  const ready = () => {
+    Swal.fire({
+      icon: "info",
+      title: "서비스 준비중 입니다",
+    });
+    return;
+  };
+
   return (
     <div
       style={{
@@ -130,6 +140,7 @@ const Local = (props) => {
           d={daegu}
           onMouseEnter={() => setIsHovered("대구")}
           onMouseLeave={() => setIsHovered(false)}
+          onClick={ready}
         />
 
         <path
@@ -139,6 +150,7 @@ const Local = (props) => {
           d={daejeon}
           onMouseEnter={() => setIsHovered("대전")}
           onMouseLeave={() => setIsHovered(false)}
+          onClick={ready}
         />
 
         <path
@@ -148,6 +160,7 @@ const Local = (props) => {
           d={gangwon}
           onMouseEnter={() => setIsHovered("강원")}
           onMouseLeave={() => setIsHovered(false)}
+          onClick={ready}
         />
 
         <path
@@ -157,6 +170,7 @@ const Local = (props) => {
           d={gwangju}
           onMouseEnter={() => setIsHovered("광주")}
           onMouseLeave={() => setIsHovered(false)}
+          onClick={ready}
         />
 
         <path
@@ -176,6 +190,7 @@ const Local = (props) => {
           d={incheon}
           onMouseEnter={() => setIsHovered("인천")}
           onMouseLeave={() => setIsHovered(false)}
+          onClick={ready}
         />
 
         <path
@@ -185,6 +200,7 @@ const Local = (props) => {
           d={jeju}
           onMouseEnter={() => setIsHovered("제주")}
           onMouseLeave={() => setIsHovered(false)}
+          onClick={ready}
         />
 
         <path
@@ -194,6 +210,7 @@ const Local = (props) => {
           d={north_chungcheong}
           onMouseEnter={() => setIsHovered("충북")}
           onMouseLeave={() => setIsHovered(false)}
+          onClick={ready}
         />
 
         <path
@@ -203,6 +220,7 @@ const Local = (props) => {
           d={north_gyeongsang}
           onMouseEnter={() => setIsHovered("경북")}
           onMouseLeave={() => setIsHovered(false)}
+          onClick={ready}
         />
 
         <path
@@ -212,6 +230,7 @@ const Local = (props) => {
           d={north_jeolla}
           onMouseEnter={() => setIsHovered("전북")}
           onMouseLeave={() => setIsHovered(false)}
+          onClick={ready}
         />
 
         <path
@@ -221,6 +240,7 @@ const Local = (props) => {
           d={sejong}
           onMouseEnter={() => setIsHovered("세종")}
           onMouseLeave={() => setIsHovered(false)}
+          onClick={ready}
         />
 
         <path
@@ -240,6 +260,7 @@ const Local = (props) => {
           d={south_chungcheong}
           onMouseEnter={() => setIsHovered("충남")}
           onMouseLeave={() => setIsHovered(false)}
+          onClick={ready}
         />
 
         <path
@@ -249,6 +270,7 @@ const Local = (props) => {
           d={south_gyeongsang}
           onMouseEnter={() => setIsHovered("경남")}
           onMouseLeave={() => setIsHovered(false)}
+          onClick={ready}
         />
 
         <path
@@ -258,6 +280,7 @@ const Local = (props) => {
           d={south_jeolla}
           onMouseEnter={() => setIsHovered("전남")}
           onMouseLeave={() => setIsHovered(false)}
+          onClick={ready}
         />
 
         <path
@@ -267,6 +290,7 @@ const Local = (props) => {
           d={ulsan}
           onMouseEnter={() => setIsHovered("울산")}
           onMouseLeave={() => setIsHovered(false)}
+          onClick={ready}
         />
         <>
           <text

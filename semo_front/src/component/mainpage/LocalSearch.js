@@ -38,17 +38,18 @@ const LocalSearch = () => {
   return (
     <div className="searchresult-all-wrap">
       <div className="searchresult-title">
-        <div className="searchresult-title-result">
-          <strong>'{searchKeyword}'</strong> 지역 검색 결과
-        </div>
+        <div className="searchresult-title-result"></div>
       </div>
       <div
         className="searchresult-category-wrap"
         style={{ display: "flex", justifyContent: "center" }}
       >
-        <div className="searchresult-tab-category searchCategory-active">
+        <div
+          className="searchresult-tab-category searchCategory-active"
+          style={{ pointerEvents: "none" }}
+        >
           <img src={searchResultCategories[0].image} />
-          {searchResultCategories[0].text}
+          <strong>{searchKeyword}</strong> 지역 소셜링
         </div>
       </div>
       <div>

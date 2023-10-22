@@ -114,63 +114,69 @@ const ModifyMyInfo = (props) => {
   };
 
   return (
-    <div className="modifyMyInfo-wrap">
-      <div className="modifyMyInfo-title">내 정보 수정</div>
-      <table className="my-info-tbl">
-        <tbody>
-          <tr>
-            <td>아이디</td>
-            <td>
-              <input type="text" placeholder={member.memberId} readOnly />
-            </td>
-          </tr>
-          <tr>
-            <td>비밀번호</td>
-            <td>
-              <input type="password" placeholder="••••••••" readOnly />
-              <button onClick={modifyMyPassword}>변경하기</button>
-            </td>
-          </tr>
-          <tr>
-            <td>이름</td>
-            <td>
-              <input
-                type="text"
-                content="memberName"
-                value={member.memberName}
-                className="input-style"
-                onChange={handleInputChange1}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>전화번호</td>
-            <td>
-              <input
-                type="text"
-                content="memberPhone"
-                value={member.memberPhone}
-                className="input-style"
-                onChange={handleInputChange2}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>이메일</td>
-            <td>
-              <input
-                type="text"
-                id="memberMail"
-                value={member.memberMail}
-                className="input-style"
-                onChange={handleInputChange3}
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div className="modifyMyInfo-saveBtn">
-        <button onClick={updateMember}>저장</button>
+    <div className="modifyMy-wrap">
+      <div className="modifyMy-title">내 정보 수정</div>
+      <div className="modifyMy-content">
+        <table className="my-info-tbl">
+          <tbody>
+            <tr>
+              <td>아이디</td>
+              <td>
+                <input type="text" placeholder={member.memberId} readOnly />
+              </td>
+            </tr>
+            <tr>
+              <td>비밀번호</td>
+              <td>
+                <input type="password" placeholder="••••••••" readOnly />
+                <button onClick={modifyMyPassword} className="modyfyPw">
+                  변경하러가기
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>이름</td>
+              <td>
+                <input
+                  type="text"
+                  content="memberName"
+                  value={member.memberName}
+                  className="input-style"
+                  onChange={handleInputChange1}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>전화번호</td>
+              <td>
+                <input
+                  type="text"
+                  content="memberPhone"
+                  value={member.memberPhone}
+                  className="input-style"
+                  onChange={handleInputChange2}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>이메일</td>
+              <td>
+                <input
+                  type="text"
+                  id="memberMail"
+                  value={member.memberMail}
+                  className="input-style"
+                  onChange={handleInputChange3}
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div className="modifyMyInfo-saveBtn">
+          <button onClick={updateMember} className="modifyMysave">
+            저장
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -91,31 +91,37 @@ const ModifyMyFeed = (props) => {
   };
 
   return (
-    <div className="modifyMyFeed-wrap">
-      <div className="modifyMyFeed-title">내 피드 설정</div>
-      <div className="modifyMyFeed-thumbnail">
-        <input
-          type="file"
-          id="memberThumbnail"
-          accept="image/*"
-          onChange={thumbnailChange}
-        />
-        <div>
-          <Avatar
-            src={memberThumbnail}
-            key={memberThumbnail}
-            sx={{ width: 108, height: 108 }}
-          />
-          <textarea
-            value={memberContent}
-            id={memberContent}
-            placeholder="피드 소개글"
-            onChange={feedContentChange}
-          />
+    <div className="modifyMy-wrap">
+      <div className="modifyMy-title">내 피드 설정</div>
+      <div className="modifyMy-content">
+        <div className="modifyMyFeed-thumbnail">
+          <div className="modifyMyFeed-file">
+            <Avatar
+              src={memberThumbnail}
+              key={memberThumbnail}
+              sx={{ width: 108, height: 108 }}
+            />
+            <input
+              type="file"
+              id="memberThumbnail"
+              accept="image/*"
+              onChange={thumbnailChange}
+            />
+          </div>
+          <div className="modifyMyFeed-text">
+            <textarea
+              value={memberContent}
+              id={memberContent}
+              placeholder="피드 소개글"
+              onChange={feedContentChange}
+            />
+          </div>
+          <div className="modifyMyFeed-saveBtn">
+            <button onClick={updateMemberFeed} className="modifymyfeedsave">
+              저장
+            </button>
+          </div>
         </div>
-      </div>
-      <div className="modifyMyFeed-saveBtn">
-        <button onClick={updateMemberFeed}>저장</button>
       </div>
     </div>
   );
