@@ -29,3 +29,5 @@ npm install react-icons
 npm install framer-motion   
 npm i swiper 
 npm install smooth-scrollbar ->10/19 정아 설치 >> 삭제
+
+npm i @svg-maps/south-korea

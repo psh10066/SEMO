@@ -63,12 +63,14 @@ const PopularGroup = () => {
 
   return (
     <div className="popularGroup">
-      <div className="popularGroup-title">
-        <h2>인기모임</h2>
-      </div>
-      <div className="popularGroup-detail">
-        <div className="popular-groupWrap">
-          <PopularGroupImg groupDetail={groupMapping} />
+      <div className="popularGroup-total">
+        <div className="popularGroup-title">
+          <h2>인기 모임</h2>
+        </div>
+        <div className="popularGroup-detail">
+          <div className="popular-groupWrap">
+            <PopularGroupImg groupDetail={groupMapping} />
+          </div>
         </div>
       </div>
     </div>

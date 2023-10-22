@@ -58,7 +58,7 @@ const GroupItem = (props) => {
 
   //그룹신고
   const GroupReport = (e) => {
-    e.stopPropagation(); // /group/view로 이동 못하게 이벤트 전파 중단
+    e.stopPropagation(); // 신고 버튼 클릭시 /group/view로 이동 못하게 이벤트 전파 중단
     navigate("mypageReport", {
       state: { group: group, member: member },
     });

@@ -1,0 +1,22 @@
+.svgmap{
+    min-width:700px;
+    max-width:700px;
+    height: 800px;
+}
+
+svg > .local{
+    fill : #fffdfd;
+    stroke: #efefef;
+    stroke-width:1.5px;
+}
+svg > .local:hover {
+    fill:#c5d9ff;
+    cursor: pointer;
+}
+.mapMarker{
+    color: #0059ff;
+}
+svg text{
+    pointer-events: none;
+    font-size: 13px;
+}
