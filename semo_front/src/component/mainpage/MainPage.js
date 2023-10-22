@@ -79,7 +79,7 @@ const Mainpage = () => {
       </div>
       <div className="local-main">
         <div className="local-main-title">
-          <h2>우리 지역 모임</h2>
+          <h2>지역 소셜링</h2>
         </div>
         <LocalXY />
       </div>

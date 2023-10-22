@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 const Local = (props) => {
   const navigate = useNavigate();
-  const [searchLocal, setSearchLocal] = useState("");
   const [isHovered, setIsHovered] = useState(null);
 
   const {
@@ -95,10 +94,10 @@ const Local = (props) => {
   const ulsanTextX = props.ulsanCenter.x;
   const ulsanTextY = props.ulsanCenter.y;
 
+  //클릭 시 지역모임 찾기
   const search = (e) => {
-    setSearchLocal(e.value);
-    console.log(searchLocal);
-    navigate("searchresult", { state: { searchContent: searchLocal } });
+    const localName = e.target.getAttribute("name");
+    navigate("local", { state: { searchContent: localName } });
   };
 
   return (
@@ -117,10 +116,11 @@ const Local = (props) => {
         <path
           className="local" //부산
           id="busan"
-          name="Busan"
+          name="부산"
           d={busan}
           onMouseOver={() => setIsHovered("부산")}
           onMouseOut={() => setIsHovered(null)}
+          onClick={search}
         />
 
         <path
@@ -162,10 +162,11 @@ const Local = (props) => {
         <path
           className="local" //경기
           id="gyeonggi"
-          name="Gyeonggi"
+          name="경기"
           d={gyeonggi}
           onMouseEnter={() => setIsHovered("경기")}
           onMouseLeave={() => setIsHovered(false)}
+          onClick={search}
         />
 
         <path
@@ -225,10 +226,11 @@ const Local = (props) => {
         <path
           className="local" //서울
           id="seoul"
-          name="Seoul"
+          name="서울"
           d={seoul}
           onMouseEnter={() => setIsHovered("서울")}
           onMouseLeave={() => setIsHovered(false)}
+          onClick={search}
         />
 
         <path

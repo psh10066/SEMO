@@ -158,4 +158,43 @@ public class PageService {
 		return map;
 	}
 
+	public Map searchLocal(String searchKeyword, int reqPage) {
+		int numPerPage = 8;
+		int pageNaviSize = 5;
+		
+		List searchSocialingList = null;
+		PageInfo pi = null;
+		
+		int localCategory = 0;
+
+		switch (searchKeyword) {
+		  case "서울":
+			    localCategory = 1;
+			    break;
+		  case "경기":
+			    localCategory = 2;
+			    break;
+		  case "부산":
+		    localCategory = 3;
+		    break;
+		}
+		
+		
+		int totalCount = pageDao.searhLocalTotalCount(localCategory);
+		pi = pagination.getPageInfo(reqPage, numPerPage, pageNaviSize, totalCount);
+		
+		HashMap<String, Object> mapSearch = new HashMap<String, Object>();
+		mapSearch.put("start", pi.getStart());
+		mapSearch.put("end", pi.getEnd());
+		mapSearch.put("localCategory", localCategory);
+		
+		searchSocialingList = pageDao.searhLocalTotalList(mapSearch);
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("searchSocialingList", searchSocialingList);
+		map.put("pi", pi);
+		
+		return map;
+	}
+
 }

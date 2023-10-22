@@ -105,6 +105,12 @@ const Header = (props) => {
     headerWrapHeight = { height: "60px" };
     headerPosition = { position: "absolute" };
   }
+  if (location.pathname.includes("/local")) {
+    headerStyle = { color: "#220895" };
+    headerBackgroundColor = { backgroundColor: "#fff" };
+    headerWrapHeight = { height: "60px" };
+    headerPosition = { position: "absolute" };
+  }
 
   return (
     <header style={headerWrapHeight}>
@@ -196,6 +202,9 @@ const Navi = (props) => {
     naviStyle = { color: "#220895" };
   }
   if (location.pathname.includes("/lounge")) {
+    naviStyle = { color: "#220895" };
+  }
+  if (location.pathname.includes("/local")) {
     naviStyle = { color: "#220895" };
   }
 
