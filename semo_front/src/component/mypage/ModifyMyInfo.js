@@ -129,7 +129,11 @@ const ModifyMyInfo = (props) => {
               <td>비밀번호</td>
               <td>
                 <input type="password" placeholder="••••••••" readOnly />
-                <button onClick={modifyMyPassword} className="modyfyPw">
+                <button
+                  onClick={modifyMyPassword}
+                  className="modyfyPw"
+                  style={{ backgroundColor: "#8bb4ff" }}
+                >
                   변경하러가기
                 </button>
               </td>

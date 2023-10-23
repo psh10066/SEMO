@@ -41,5 +41,19 @@ select max(CHAT_MY_LAST_TIME) from CHAT_LAST_ACCESS_TIME where GROUP_NO=#{roomId
 select max(CHAT_TIME) from CHAT_MESSAGE where GROUP_NO=#{roomId}
 </select>
 
+<select id="myLatestChatTime" resultType="String">
+select max(CHAT_MY_LAST_TIME) from  CHAT_LAST_ACCESS_TIME where MEMBER_NO=#{memberNo}
+</select>
+
+<select id="totalLatestChatTime" resultType="String">
+SELECT max(CHAT_MY_LAST_TIME)
+FROM CHAT_LAST_ACCESS_TIME
+WHERE group_no IN (
+    SELECT group_no 
+    FROM CHAT_LAST_ACCESS_TIME 
+    WHERE member_no=#{memberNo}
+)
+</select>
+
 
 </mapper>

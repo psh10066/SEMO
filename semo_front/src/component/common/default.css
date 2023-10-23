@@ -775,3 +775,9 @@ textarea.input-form {
 .deleteMember {
   cursor: pointer;
 }
+
+/*채팅 알람*/
+.chatNew strong {
+  color: #ffee00;
+  cursor: pointer;
+}

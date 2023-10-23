@@ -24,6 +24,10 @@ public interface ChatServerDao {
 
 	String totalChatTime(int roomId);
 
+	String myLatestChatTime(int memberNo);
+
+	String totalLatestChatTime(int memberNo);
+
 
 
 

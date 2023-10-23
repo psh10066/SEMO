@@ -152,6 +152,7 @@
   			#{groupNo}
   		</foreach>
 	</select>
+	
 	<update id="modifyGroup">
 		update group_tbl set 
 		group_name = #{groupName},

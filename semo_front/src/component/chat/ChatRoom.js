@@ -33,7 +33,6 @@ const ChatRoom = (props) => {
         console.log("WebSocket connected");
         client.subscribe(`/chat/rooms/${roomId}`, (message) => {
           const receivedMsg = JSON.parse(message.body); // JSON 형식의 문자열을 JavaScript 객체로 변환
-          console.log("Received message:", receivedMsg);
           onMessageReceive(receivedMsg, `/chat/rooms/${roomId}`);
         });
       },
@@ -112,12 +111,8 @@ const ChatRoom = (props) => {
                 Authorization: "Bearer " + token,
               },
             })
-            .then((response) => {
-              console.log(roomId + "번 마지막 접속시간 업데이트 성공");
-            })
-            .catch((error) => {
-              console.log(error.response.status);
-            });
+            .then((response) => {})
+            .catch((error) => {});
         } else {
           axios
             .post("/chat/insertAccessTime", lastAccessTime, {
@@ -125,17 +120,11 @@ const ChatRoom = (props) => {
                 Authorization: "Bearer " + token,
               },
             })
-            .then((response) => {
-              console.log(roomId + "번 마지막 접속시간 저장 성공");
-            })
-            .catch((error) => {
-              console.log(error.response.status);
-            });
+            .then((response) => {})
+            .catch((error) => {});
         }
       })
-      .catch((error) => {
-        console.log(error.response.status);
-      });
+      .catch((error) => {});
   };
 
   //
@@ -176,12 +165,8 @@ const ChatRoom = (props) => {
             Authorization: "Bearer " + token,
           },
         })
-        .then((res) => {
-          console.log("메세지 저장 성공");
-        })
-        .catch((res) => {
-          console.log(res.response.status);
-        });
+        .then((res) => {})
+        .catch((res) => {});
     }
   };
 

@@ -37,6 +37,7 @@
   cursor: pointer;
 }
 /* noticeList css */
+
 .notice-write-btn > button {
   width: 80px;
   border: none;
@@ -45,6 +46,7 @@
   margin-left: 400px;
   margin-top: 5px;
   font-size: 16px;
+  background-color: #5457e9;
 }
 .notice-write-wrap {
   float: left;

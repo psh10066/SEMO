@@ -260,7 +260,7 @@
 }
 .modyfyPw {
   border: none;
-  background-color: #8bb4ff;
+  background-color: #5457e9;
   border-radius: 6px;
   height: 35px;
   width: 90px;
@@ -271,7 +271,7 @@
 }
 .modifyMysave {
   border: none;
-  background-color: #8bb4ff;
+  background-color: #5457e9;
   border-radius: 6px;
   height: 35px;
   width: 90px;
@@ -344,7 +344,7 @@
 }
 .modifymyfeedsave {
   border: none;
-  background-color: #8bb4ff;
+  background-color: #5457e9;
   border-radius: 6px;
   height: 35px;
   width: 90px;
@@ -356,7 +356,7 @@
 .modifyMyLikesave {
   margin-top: 10px;
   border: none;
-  background-color: #8bb4ff;
+  background-color: #5457e9;
   border-radius: 6px;
   height: 43px;
   width: 100px;
@@ -416,9 +416,9 @@
 .pwchange-btn {
   margin-top: 20px;
   border: none;
-  background-color: #8bb4ff;
+  background-color: #5457e9;
   border-radius: 6px;
-  height: 43px;
+  height: 40px;
   width: 100px;
   color: #fff;
   font-weight: bold;

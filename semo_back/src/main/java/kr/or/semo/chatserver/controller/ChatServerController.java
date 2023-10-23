@@ -11,12 +11,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.or.semo.chatserver.model.vo.LastAccessChatTime;
 import kr.or.semo.chatserver.model.vo.Message;
 import kr.or.semo.chatserver.service.ChatServerService;
+import kr.or.semo.group.model.vo.Group;
+import kr.or.semo.member.model.vo.Member;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -85,5 +88,20 @@ public class ChatServerController {
     }
     
    //헤더에 new 알림 기능 
+    //
+    @PostMapping("/chat/myLatestChatTime")
+    public String myLatestChatTime (@RequestBody Member m,@RequestAttribute String memberId) {
+    	m.setMemberId(memberId);
+    	int memberNo = m.getMemberNo();
+    	return chatServerService.myLatestChatTime(memberNo);
+    }
     
+	//내가 참여하고있는 총 채팅방 
+    @PostMapping(value="/chat/totalLatestChatTime")
+	public String totalLatestChatTime(@RequestBody Member m,@RequestAttribute String memberId) {
+		m.setMemberId(memberId);
+    	int memberNo = m.getMemberNo();
+		return chatServerService.totalLatestChatTime(memberNo);
+	}
+	
 }

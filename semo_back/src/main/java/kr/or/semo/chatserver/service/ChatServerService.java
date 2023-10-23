@@ -45,6 +45,16 @@ public class ChatServerService {
 		return chatServerDao.totalChatTime(roomId);
 	}
 
+	public String myLatestChatTime(int memberNo) {
+		return chatServerDao.myLatestChatTime(memberNo);
+	}
+
+	public String totalLatestChatTime(int memberNo) {
+		return chatServerDao.totalLatestChatTime(memberNo);
+	}
+
+
+
 
 
 
