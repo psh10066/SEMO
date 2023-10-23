@@ -242,11 +242,15 @@ const FeedProfile = (props) => {
           ) : (
             <div className="profile-image">
               <Stack direction="row" spacing={2}>
-                <Avatar
-                  alt="Remy Sharp"
-                  src={"/member/" + member.memberImg}
-                  sx={{ width: 100, height: 100 }}
-                />
+                {member.memberImg ? (
+                  <Avatar
+                    alt="Remy Sharp"
+                    src={"/member/" + member.memberImg}
+                    sx={{ width: 100, height: 100 }}
+                  />
+                ) : (
+                  ""
+                )}
               </Stack>
             </div>
           )}
