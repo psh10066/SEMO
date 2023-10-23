@@ -11,7 +11,11 @@ const NoticeWrite = () => {
 
   const navigate = useNavigate();
   const write = () => {
-    if (noticeTitle !== "" && noticeContent !== "") {
+    if (
+      noticeTitle !== "" &&
+      noticeContent !== "" &&
+      noticeContent !== "<p><br></p>"
+    ) {
       const form = new FormData();
       form.append("noticeTitle", noticeTitle);
       form.append("noticeContent", noticeContent);
@@ -28,13 +32,17 @@ const NoticeWrite = () => {
         .then((res) => {
           if (res.data > 0) {
             navigate("/notice");
+          } else {
+            Swal.fire("잠시 후 다시 시도해주세요.");
           }
         })
-        .catch((res) => [console.log(res.response.status)]);
+        .catch((res) => {
+          console.log(res.response.status);
+        });
     } else {
       Swal.fire({
-        icon: "error",
-        html: "에러가 발생했습니다.<br>잠시 후 다시 시도해주세요.",
+        icon: "warning",
+        html: "내용을 입력해주세요.",
       });
     }
   };

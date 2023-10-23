@@ -31,7 +31,8 @@ const GroupModify = () => {
       groupMaxnum !== 0 &&
       groupCategory !== 0 &&
       groupLocal !== 0 &&
-      chkGroupNameMsg === ""
+      chkGroupNameMsg === "" &&
+      groupContent !== "<p><br></p>"
     ) {
       const form = new FormData();
       form.append("groupNo", group.groupNo);
@@ -67,6 +68,11 @@ const GroupModify = () => {
         .catch((res) => {
           console.log(res.response.status);
         });
+    } else {
+      Swal.fire({
+        icon: "warning",
+        text: "입력값을 확인해 주세요.",
+      });
     }
   };
   return (

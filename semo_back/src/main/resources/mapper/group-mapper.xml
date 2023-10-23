@@ -163,7 +163,7 @@
 		where group_no = #{groupNo}
 	</update>
 	<update id="changeType">
-		update gr_join set gr_join_type=#{grJoinType} where member_no=#{memberNo} 
+		update gr_join set gr_join_type=#{grJoinType} where member_no=#{memberNo} and group_no=#{groupNo} 
 	</update>
 	
 	<select id="selectMemberState" resultType="int">

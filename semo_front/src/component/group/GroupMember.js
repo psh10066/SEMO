@@ -11,7 +11,6 @@ const GroupMember = (props) => {
   const groupNo = props.groupNo;
   const [memberStateNum, setMemberStateNum] = useState(0);
   const token = window.localStorage.getItem("token");
-  console.log(memberList);
   useEffect(() => {
     if (groupNo !== null) {
       axios
@@ -68,12 +67,16 @@ const GroupMember = (props) => {
 };
 const MemberItem = (props) => {
   const member = props.member;
-  console.log(member);
+  const groupNo = props.groupNo;
   const [grJoinType, setGrJoinType] = useState(member.grJoinType);
   //모임원 가입 승인
   const changeJoinType = (event) => {
     const token = window.localStorage.getItem("token");
-    const obj = { memberNo: member.memberNo, grJoinType: event.target.value };
+    const obj = {
+      memberNo: member.memberNo,
+      grJoinType: event.target.value,
+      groupNo: groupNo,
+    };
     const grJoinType = obj.grJoinType;
     if (grJoinType === 1) {
       Swal.fire({
@@ -102,7 +105,7 @@ const MemberItem = (props) => {
         <tr>
           <td>
             {member.memberImg === null ? (
-              <Avatar src="/image/default.png" sx={{ width: 50, height: 50 }} />
+              <Avatar src="/image/person.png" sx={{ width: 50, height: 50 }} />
             ) : (
               <Avatar
                 src={"/member/" + member.memberImg}

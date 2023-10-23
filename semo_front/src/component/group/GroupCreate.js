@@ -44,6 +44,7 @@ const GroupCreate = (props) => {
       groupImg !== null &&
       groupName !== "" &&
       groupContent != "" &&
+      groupContent != "<p><br></p>" &&
       groupMaxnum !== 0 &&
       groupCategory !== 0 &&
       groupLocal !== 0
