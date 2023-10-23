@@ -12,22 +12,20 @@ const ModifyMyFeed = (props) => {
   const token = window.localStorage.getItem("token");
 
   const [memberContent, setMemberContent] = useState(member.memberContent);
-  const [memberImg, setMemberImg] = useState(member.memberImg);
+  const [memberImg, setMemberImg] = useState(member.memberImg); //기존 이미지 불러오기
 
   //썸네일 수정시 파일
   const [feedThumbnail, setFeedThumbnail] = useState(null);
-
-  const defaultThumbnail = useState(
-    feedThumbnail === null ? (
-      <Avatar src={Image} sx={{ width: 108, height: 108 }} />
-    ) : (
-      feedThumbnail
-    )
-  );
   const [memberThumbnail, setMemberThumbnail] = useState(
-    //보여주기용
-    memberImg === null ? defaultThumbnail : "/member/" + memberImg
+    memberImg === null ? "Image" : "/member/" + memberImg
   );
+
+  //기존 이미지 삭제
+  const deleteMyProfile = () => {
+    setMemberThumbnail("Image");
+    setMemberImg(null);
+    setFeedThumbnail(null);
+  };
 
   //상태 업데이트
   const thumbnailChange = (e) => {
@@ -44,9 +42,11 @@ const ModifyMyFeed = (props) => {
       setFeedThumbnail(files[0]);
     } else {
       setFeedThumbnail(null);
+      setMemberImg(member.memberImg);
     }
   };
-  //상태 업데이트
+
+  //피드 글 업데이트
   const feedContentChange = (e) => {
     const newValue = e.currentTarget.value;
     setMemberContent(newValue);
@@ -60,15 +60,22 @@ const ModifyMyFeed = (props) => {
     if (memberContent) {
       form.append("memberContent", memberContent);
     }
+    //피드이미지 변경
     if (feedThumbnail) {
       form.append("feedThumbnail", feedThumbnail);
       form.append("memberImg", memberImg);
     }
-    if (feedThumbnail == null && member.memberImg) {
-      setFeedThumbnail(member.memberImg);
-      form.append("feedThumbnail", feedThumbnail);
-      form.append("memberImg", memberImg);
+    //기존 피드 이미지 삭제
+    if (feedThumbnail == null && memberImg == null) {
+      form.append("feedThumbnail", null);
+      form.append("memberImg", null);
     }
+    //feedThumbnail 안바꾸고 , 기존이미지 있을때
+    if (feedThumbnail == null && memberImg != null) {
+      form.append("feedThumbnail", member.memberImg);
+      form.append("memberImg", member.memberImg);
+    }
+
     axios
       .post("/member/updateMyFeed", form, {
         headers: {
@@ -113,17 +120,21 @@ const ModifyMyFeed = (props) => {
               key={memberThumbnail}
               sx={{ width: 108, height: 108 }}
             />
-            <input
-              type="file"
-              id="memberThumbnail"
-              accept="image/*"
-              onChange={thumbnailChange}
-            />
+            <div className="feedButton">
+              <input
+                type="file"
+                id="memberThumbnail"
+                accept="image/*"
+                onChange={thumbnailChange}
+              />
+              <button className="deleteMyProfile" onClick={deleteMyProfile}>
+                기존 이미지 삭제
+              </button>
+            </div>
           </div>
           <div className="modifyMyFeed-text">
             <textarea
               value={memberContent}
-              id={memberContent}
               placeholder="피드 소개글"
               onChange={feedContentChange}
             />
@@ -138,4 +149,5 @@ const ModifyMyFeed = (props) => {
     </div>
   );
 };
+
 export default ModifyMyFeed;

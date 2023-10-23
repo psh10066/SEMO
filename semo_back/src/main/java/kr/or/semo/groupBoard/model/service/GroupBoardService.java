@@ -26,11 +26,9 @@ public class GroupBoardService {
 	private MemberDao memberDao;
 	
 	public Map groupBoardList(int groupNo, int reqPage) {
-		//게시물 조회, 페이징에 필요한 데이터를 취합
 		int numPerPage = 8;	//한페이지당 게시물 수
 		int pageNaviSize = 5; 	//페이지 네비게이션 길이
 		int totalCount = groupBoardDao.totalCount(groupNo); // 전체게시물 수
-		//페이징조회 및 페이지네비 제작에 필요한 데이터를 객체로 받아옴
 		PageInfo pi = pagination.getPageInfo(reqPage, numPerPage, pageNaviSize, totalCount);
 		List groupBoardList = groupBoardDao.selectgroupBoardList(groupNo, pi);
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -40,7 +38,6 @@ public class GroupBoardService {
 	}
 	@Transactional
 	public int insertGroupBoard(GroupBoard gb) {
-		//아이디를 이용해서 번호를 구해옴(회원정보를 조회해서 회원정보 중 번호를  사용)
 		Member member = memberDao.selectOneMember(gb.getMemberId());
 		gb.setGrBoardWriter(member.getMemberNo());
 		int result = groupBoardDao.insertGroupBoard(gb);

@@ -9,8 +9,6 @@ import Swal from "sweetalert2";
 import Pagination from "../common/Pagination";
 
 const AdminMember = () => {
-  //const adminMember = props.adminMember;
-  //const navigation = useNavigate();
   const [memberList, setMemberList] = useState([]);
   const [pageInfo, setPageInfo] = useState({});
   const [reqPage, setReqPage] = useState(1);
@@ -29,7 +27,6 @@ const AdminMember = () => {
 
   return (
     <div className="my-content-wrap">
-      {/*<div className="admin-content-title">전체 회원 조회</div>*/}
       <div className="admin-member-tbl-box">
         <table>
           <thead>
@@ -78,9 +75,7 @@ const MemberItem = (props) => {
           setMemberType(event.target.value);
           Swal.fire("회원 등급 변경 완료!");
         } else {
-          Swal.fire(
-            "회원 등급 변경 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요."
-          );
+          Swal.fire("잠시 후 다시 시도해주세요.");
         }
       })
       .catch((res) => {

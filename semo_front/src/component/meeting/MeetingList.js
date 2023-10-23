@@ -22,25 +22,26 @@ const MeetingList = (props) => {
   const navigate = useNavigate();
   //모임의 약속에 참여하는 memberNo[] 조회
   useEffect(() => {
-    const token = window.localStorage.getItem("token");
-    if (isLogin) {
-      axios
-        .post("/meeting/meetingMember", meeting, {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        })
-        .then((res) => {
-          setJoinMemberNo(res.data);
-          if (res.data.length > 0) {
-            const indexOf = res.data.indexOf(member.memberNo);
-            setJoinStatus(indexOf);
-            // console.log(indexOf);
-          }
-        })
-        .catch((res) => {
-          // console.log(res.response.status);
-        });
+    if (member != null) {
+      const token = window.localStorage.getItem("token");
+      if (isLogin) {
+        axios
+          .post("/meeting/meetingMember", meeting, {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          })
+          .then((res) => {
+            setJoinMemberNo(res.data);
+            if (res.data.length > 0) {
+              const indexOf = res.data.indexOf(member.memberNo);
+              setJoinStatus(indexOf);
+            }
+          })
+          .catch((res) => {
+            console.log(res);
+          });
+      }
     }
   }, [isAddMeet]);
   //참여수 보이기
@@ -91,7 +92,6 @@ const MeetingList = (props) => {
                 text: "취소 완료!",
               });
             }
-            // console.log(res.data);
           })
           .catch((error) => {
             console.log(error.response.status);
@@ -127,7 +127,6 @@ const MeetingList = (props) => {
     const day = localDate.getDate();
     return `${month}월 ${day}일`;
   };
-  // console.log(isLogin, isJoin, groupLevel, joinStatus);
   if (calculateDDay(new Date(meeting.meetingDate)) > -1) {
     return (
       <div className="meetingView-frm">

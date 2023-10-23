@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import Pagination from "../common/Pagination";
 
 const AdminReport = () => {
-  //const reportList2 = props.reportList;
   const [reportList, setReportList] = useState([]);
   const [pageInfo, setPageInfo] = useState({});
   const [reqPage, setReqPage] = useState(1);
@@ -22,7 +21,6 @@ const AdminReport = () => {
   }, [reqPage]);
   return (
     <div className="my-content-wrap">
-      {/*<div className="admin-content-title">모임 신고 내역</div>*/}
       <div className="admin-report-board">
         <table>
           <thead>

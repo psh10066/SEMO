@@ -72,7 +72,7 @@ const GroupItem = (props) => {
           <div className="feed-like-person-wrap">
             <AvatarGroup max={7} total={peopleCount}>
               {peopleList.map((people, index) => {
-                return people.peopelImg === null ? (
+                return people.memberImg === null ? (
                   <Avatar
                     key={"feedAvatar" + index}
                     sx={{ width: 25, height: 25 }}
@@ -83,7 +83,7 @@ const GroupItem = (props) => {
                   <Avatar
                     key={"feedAvatar" + index}
                     sx={{ width: 25, height: 25 }}
-                    alt="Remy Sharp"
+                    alt="멤"
                     src={"/member/" + people.memberImg}
                   />
                 );

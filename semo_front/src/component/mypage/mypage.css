@@ -313,6 +313,17 @@
 .modifyMyFeed-file input {
   margin-left: 20px;
 }
+.deleteMyProfile {
+  /*버튼*/
+  margin-left: 20px;
+  width: 100px;
+  height: 37px;
+  border-radius: 7px;
+  border: none;
+  background-color: #5457e9;
+  color: #fff;
+  cursor: pointer;
+}
 .modifyMyFeed-text {
   margin-top: 20px;
   margin-left: 10px;

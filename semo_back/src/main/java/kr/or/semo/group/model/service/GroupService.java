@@ -144,7 +144,7 @@ public class GroupService {
 		// TODO Auto-generated method stub
 		
 		int memberNo = m.getMemberNo();
-		System.out.println(memberNo);
+//		System.out.println(memberNo);
 		 List<Integer> groupNo= groupDao.LikeGroupNo(m);
 		List<Group> g = groupDao.myLikeGroup(groupNo);
 		return g;

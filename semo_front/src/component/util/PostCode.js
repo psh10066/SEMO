@@ -14,12 +14,11 @@ const Postcode = (props) => {
     const inputValue = e.currentTarget.value;
     setData(inputValue);
   };
+  //popup창 사용
   const open = useDaumPostcodePopup();
-  // const [meetingAddress, setMeetingAddress] = useState("");
   const handleComplete = (data) => {
     let fullAddress = data.address;
     let extraAddress = "";
-
     if (data.addressType === "R") {
       if (data.bname !== "") {
         extraAddress += data.bname;
@@ -31,15 +30,12 @@ const Postcode = (props) => {
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
     setData(fullAddress);
-
     // 주소 검색 완료 시 Kakao Map을 보이도록 설정
     setShowMap(true);
   };
-
   const handleClick = () => {
     open({ onComplete: handleComplete });
   };
-
   return (
     <div>
       <div className="meeting-label">
