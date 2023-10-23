@@ -1,4 +1,4 @@
-import "/Users/jeongahhan/Documents/SEMO/semo_front/src/component/searchresult/searchResult.css";
+//import "/Users/jeongahhan/Documents/SEMO/semo_front/src/component/searchresult/searchResult.css";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
