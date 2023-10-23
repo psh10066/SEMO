@@ -70,13 +70,16 @@ public class FeedController {
 	public int modify(@ModelAttribute Feed f, @ModelAttribute MultipartFile thumbnail) {
 		if(f.getFeedImg().equals("null")) {
 			f.setFeedImg(null);
-		}
-		
+		}	
 		String savepath = root+"feed/";
-//		File delFile = new File(savepath+f.getFeedImg());
-//		delFile.delete();
+		
 		if(thumbnail != null) {
 			String filepath = fileUtil.getfilepath(savepath, thumbnail.getOriginalFilename(), thumbnail);
+			
+			if(f.getFeedImg() != null) {
+				File delFile = new File(savepath+f.getFeedImg());
+				delFile.delete();
+			}
 			f.setFeedImg(filepath);
 		}
 		return feedService.modifyFeed(f);

@@ -20,6 +20,7 @@ const FeedModal = ({
   const [feedImg, setFeedImg] = useState(null);
   const [feedContent, setFeedConTent] = useState("");
   useEffect(() => {
+    console.log(feed);
     if (type === "modify") {
       setFeedImg(feed.feedImg);
       setFeedConTent(feed.feedContent);
@@ -87,8 +88,12 @@ const FeedModal = ({
     form.append("feedNo", feed.feedNo);
     form.append("feedImg", feed.feedImg);
     form.append("thumbnail", thumbnail);
-    form.append("feedContent", feedContent);
+    if (feedContent) {
+      form.append("feedContent", feedContent);
+    }
+    // console.log("fc", feedContent, typeof feedContent);
     const token = window.localStorage.getItem("token");
+
     axios
       .post("/feed/modify", form, {
         headers: {
@@ -98,7 +103,7 @@ const FeedModal = ({
         },
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setShowInsertImg(true);
         setChangeFeed(!changeFeed);
         onSubmit();
