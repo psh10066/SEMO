@@ -168,7 +168,7 @@ public class GroupController {
 	//그룹 등급 변경
 	@PostMapping(value = "/changeType")
 	public int changeType(@RequestBody GroupJoin grJoin) {
-		System.out.println(grJoin);
+		
 		return groupService.chanceType(grJoin);
 	}
 	
