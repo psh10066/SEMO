@@ -3,11 +3,14 @@
 }
 
 .report-frm-wrap {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: #fff;
   width: 600px;
   padding: 40px;
   box-sizing: border-box;
   margin: 20px auto;
+
+  border-radius: 40px;
+  border: 1px solid #8bb4ff;
 }
 .report-tbl {
   font-size: 18px;
@@ -21,11 +24,13 @@
 .report-content-box > textarea {
   width: 92%;
   height: 10.25em;
-  border: none;
   resize: none;
   margin-bottom: 30px;
   padding: 20px;
   font-size: 18px;
+
+  border: 2px solid #8bb4ff;
+  border-radius: 20px;
 }
 .report-content-box > textarea::placeholder {
   font-size: 1.1em;
@@ -35,4 +40,7 @@
 }
 .report-btn-box button {
   padding: 10px;
+  background-color: #8bb4ff;
+  border: none;
+  border-radius: 10px;
 }
