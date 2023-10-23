@@ -24,8 +24,8 @@ const ModifyMyFeed = (props) => {
       feedThumbnail
     )
   );
-
   const [memberThumbnail, setMemberThumbnail] = useState(
+    //보여주기용
     memberImg === null ? defaultThumbnail : "/member/" + memberImg
   );
 
@@ -61,6 +61,11 @@ const ModifyMyFeed = (props) => {
       form.append("memberContent", memberContent);
     }
     if (feedThumbnail) {
+      form.append("feedThumbnail", feedThumbnail);
+      form.append("memberImg", memberImg);
+    }
+    if (feedThumbnail == null && member.memberImg) {
+      setFeedThumbnail(member.memberImg);
       form.append("feedThumbnail", feedThumbnail);
       form.append("memberImg", memberImg);
     }

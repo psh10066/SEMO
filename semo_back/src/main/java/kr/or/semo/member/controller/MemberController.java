@@ -103,6 +103,7 @@ public class MemberController {
 	@PostMapping(value = "/updateMyFeed")
 	public int updateMyFeed(@ModelAttribute Member member, @ModelAttribute MultipartFile feedThumbnail,
 			@RequestAttribute String memberId) {
+		
 		member.setMemberId(memberId);
 		String savepath = root + "member/";
 
