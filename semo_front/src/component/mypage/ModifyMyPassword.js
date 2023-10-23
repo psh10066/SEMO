@@ -96,66 +96,73 @@ const ModifyMyPassword = () => {
   };
 
   return (
-    <div className="my-content-wrap">
-      <div className="my-content-title">비밀번호 변경</div>
-      <div className="pw-auth">
-        {isPwauth ? (
-          <>
-            <div className="new-pw-input-wrap">
-              <div className="pw-input-wrap">
-                <div>
-                  <label htmlFor="memberPw">새 비밀번호</label>
-                  <input
-                    type="password"
-                    value={memberPw}
-                    content="memberPw"
-                    checkMsg={checkPwOmsg}
-                    onBlur={pwOCheck}
-                    onChange={(e) => {
-                      // onChange prop으로 변경하고 pwCheckMsg도 호출
-                      setMemberPw(e.target.value);
-                      setCheckPwOmsg();
-                    }}
-                  />
-                  {/* 비밀번호 정규표현식 메세지*/}
-                  <span>{checkPwOmsg}</span>
+    <div className="modifyMy-wrap">
+      <div className="modifyMy-title">비밀번호 변경</div>
+      <div className="modifyMy-content">
+        <div className="pw-auth">
+          {isPwauth ? (
+            <>
+              <div className="modifyMy-newPw-wrap">
+                <div className="modifyMy-newPw">
+                  <div>
+                    <label htmlFor="memberPw">새 비밀번호</label>
+                    <input
+                      className="newPw1"
+                      type="password"
+                      value={memberPw}
+                      content="memberPw"
+                      checkMsg={checkPwOmsg}
+                      onBlur={pwOCheck}
+                      onChange={(e) => {
+                        // onChange prop으로 변경하고 pwCheckMsg도 호출
+                        setMemberPw(e.target.value);
+                        setCheckPwOmsg();
+                      }}
+                    />
+                    {/* 비밀번호 정규표현식 메세지*/}
+                    <div className="checkPwOmsg">{checkPwOmsg}</div>
+                  </div>
+                  <div className="newPwcheck">
+                    <label htmlFor="memberPw">새 비밀번호 확인</label>
+                    <input
+                      type="password"
+                      value={memberPwRe}
+                      content="memberPwRe"
+                      checkMsg={checkPwMsg}
+                      onBlur={pwCheckMsg}
+                      onChange={(e) => {
+                        // onChange prop으로 변경하고 pwCheckMsg도 호출
+                        setMemberPwRe(e.target.value);
+                        pwCheckMsg();
+                      }}
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label htmlFor="memberPw">새 비밀번호 확인</label>
-                  <input
-                    type="password"
-                    value={memberPwRe}
-                    content="memberPwRe"
-                    checkMsg={checkPwMsg}
-                    onBlur={pwCheckMsg}
-                    onChange={(e) => {
-                      // onChange prop으로 변경하고 pwCheckMsg도 호출
-                      setMemberPwRe(e.target.value);
-                      pwCheckMsg();
-                    }}
-                  />
+                <div className="pwcheck-msg">{checkPwMsg}</div>
+                <div className="pwchange-btn-box">
+                  <button onClick={changePw} className="pwchange-btn">
+                    변경하기
+                  </button>
                 </div>
               </div>
-              <div className="check-msg">{checkPwMsg}</div>
-              <div className="change-btn-box">
-                <button onClick={changePw}>변경하기</button>
+            </>
+          ) : (
+            <div className="pw-input-wrap">
+              <div>
+                <label htmlFor="currPw">현재비밀번호</label>
+                <input
+                  value={currPw}
+                  onChange={(e) => setCurrPw(e.target.value)}
+                  type="password"
+                  content="currPw"
+                />
+                <button onClick={pwCheck} className="modyfyPw">
+                  입력
+                </button>
               </div>
             </div>
-          </>
-        ) : (
-          <div className="pw-input-wrap">
-            <div>
-              <label htmlFor="currPw">현재비밀번호</label>
-              <input
-                value={currPw}
-                onChange={(e) => setCurrPw(e.target.value)}
-                type="password"
-                content="currPw"
-              />
-              <button onClick={pwCheck}>입력</button>
-            </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );
