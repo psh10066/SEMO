@@ -87,7 +87,7 @@ const FeedView = (props) => {
       .catch((res) => {
         console.log(res.response.status);
       });
-  }, [changeFeed, changeFeedComment, memberList]);
+  }, [changeFeed, changeFeedComment, feedLikeCount]);
   const handelClick = () => {
     //모달오픈
     setIsOpen(true);
