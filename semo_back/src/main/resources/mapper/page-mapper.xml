@@ -134,7 +134,7 @@
 		            (select count(*) from feed_like where feed_no=f.feed_no) feed_like
 		        FROM FEED f
                 JOIN MEMBER ON (FEED_WRITER = MEMBER_NO)
-		        ORDER BY feed_like DESC)B)
+		        ORDER BY 1 DESC)B)
 		 WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>
 	
