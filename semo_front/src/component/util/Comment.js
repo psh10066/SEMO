@@ -12,7 +12,10 @@ const feedCommentRegist = (
   feedCommentNo2,
   isLogin,
   changeFeedComment,
-  setChangeFeedComment
+  setChangeFeedComment,
+  setFeedCommentContent,
+  setRecommentState,
+  setList
 ) => {
   const feedCommentInesrt = { feedNo, feedCommentContent, feedCommentNo2 };
   if (isLogin) {
@@ -26,6 +29,7 @@ const feedCommentRegist = (
         })
         .then((res) => {
           if (res.data === 1) {
+            setList([]);
             setChangeFeedComment(!changeFeedComment);
           }
         })
@@ -54,7 +58,7 @@ const Comment = (props) => {
   const setChangeFeedComment = props.setChangeFeedComment;
   const feedNo = feed.feedNo;
 
-  //댓글 작성하기
+  //댓글 작성하기1
   const feedCommentSubmit = () => {
     feedCommentRegist(
       feedNo,
@@ -62,7 +66,11 @@ const Comment = (props) => {
       feedCommentNo2,
       isLogin,
       changeFeedComment,
-      setChangeFeedComment
+
+      setChangeFeedComment,
+      setFeedCommentContent,
+      null,
+      setCommentList
     );
   };
   //댓글 리스트 불러오기
@@ -229,7 +237,11 @@ const CommentItem = (props) => {
       comment.feedCommentNo,
       isLogin,
       changeFeedComment,
-      setChangeFeedComment
+
+      setChangeFeedComment,
+      setFeedRecommentContent,
+      setRecommentState,
+      setReCommentList
     );
   };
   return (
