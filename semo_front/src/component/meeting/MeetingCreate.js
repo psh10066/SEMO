@@ -10,20 +10,15 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import MeetingInputWrap from "./MeetingInputWrap";
 
-const MeetingCreate = (props) => {
-  // const isLogin = props.isLogin;
-  // const setIsLogin = props.setIsLogin;
+const MeetingCreate = () => {
   const [meetingName, setMeetingName] = useState("");
   const [meetingDate, setMeetingDate] = useState("");
   const [meetingPlace, setMeetingPlace] = useState("");
   const [meetingPlaceDetail, setMeetingPlaceDetail] = useState("");
   const [meetingPrice, setMeetingPrice] = useState("");
   const [meetingMaxnum, setMeetingMaxnum] = useState("");
-
   const location = useLocation();
-
   const groupNo = location.state.groupNo;
-  // const memberNo = location.state.memberNo;
   const navigate = useNavigate();
   const createMeeting = () => {
     const meeting = {
@@ -43,7 +38,6 @@ const MeetingCreate = (props) => {
       meetingPrice,
       meetingMaxnum,
     ];
-
     const token = window.localStorage.getItem("token");
     if (notNullData.every((data) => data !== null && data !== "")) {
       axios
@@ -53,8 +47,6 @@ const MeetingCreate = (props) => {
           },
         })
         .then((res) => {
-          // console.log(res);
-          //console.log(res.config.data);
           if (res.data > 0) {
             navigate("/group/view", { state: { groupNo } });
           }
@@ -66,12 +58,10 @@ const MeetingCreate = (props) => {
       Swal.fire("입력값을 확인해주세요!");
     }
   };
-
   //날짜
   let handleColor = (time) => {
     return time.getHours() > 12 ? "text-success" : "text-error";
   };
-
   return (
     <div className="meeting-wrap">
       <h2 className="meeting-title">정모 생성</h2>

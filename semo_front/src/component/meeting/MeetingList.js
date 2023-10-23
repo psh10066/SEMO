@@ -35,11 +35,10 @@ const MeetingList = (props) => {
           if (res.data.length > 0) {
             const indexOf = res.data.indexOf(member.memberNo);
             setJoinStatus(indexOf);
-            // console.log(indexOf);
           }
         })
         .catch((res) => {
-          // console.log(res.response.status);
+          console.log(res.response.status);
         });
     }
   }, [isAddMeet]);
@@ -91,7 +90,6 @@ const MeetingList = (props) => {
                 text: "취소 완료!",
               });
             }
-            // console.log(res.data);
           })
           .catch((error) => {
             console.log(error.response.status);
@@ -127,7 +125,6 @@ const MeetingList = (props) => {
     const day = localDate.getDate();
     return `${month}월 ${day}일`;
   };
-  // console.log(isLogin, isJoin, groupLevel, joinStatus);
   if (calculateDDay(new Date(meeting.meetingDate)) > -1) {
     return (
       <div className="meetingView-frm">
