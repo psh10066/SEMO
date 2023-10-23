@@ -14,7 +14,11 @@ const GrBoardWrite = () => {
 
   //글쓰기 버튼 클릭 시 동작할 함수(서버에 insert요청 함수)
   const write = () => {
-    if (grBoardTitle !== "" && grBoardContent !== "") {
+    if (
+      grBoardTitle !== "" &&
+      grBoardContent !== "" &&
+      grBoardContent !== "<p><br></p>"
+    ) {
       const form = new FormData();
       form.append("grBoardTitle", grBoardTitle);
       form.append("grBoardContent", grBoardContent);
