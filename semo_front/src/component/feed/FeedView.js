@@ -210,7 +210,6 @@ const FeedView = (props) => {
     navigate("/feed/profile", {
       state: { memberNo: feed.feedWriter },
     });
-    console.log(feed);
   };
   return (
     <div className="feed-view-wrap">
