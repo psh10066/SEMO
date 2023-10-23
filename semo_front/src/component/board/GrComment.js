@@ -16,7 +16,8 @@ const grBoardCommentRegist = (
   changeGrBoardComment,
   setChangeGrBoardComment,
   setGrBoardCommentContent,
-  setRecommentState
+  setRecommentState,
+  setList
 ) => {
   const groupBoardCommentInsert = {
     grBoardNo,
@@ -34,6 +35,7 @@ const grBoardCommentRegist = (
         })
         .then((res) => {
           if (res.data === 1) {
+            setList([]);
             setChangeGrBoardComment(!changeGrBoardComment);
             setGrBoardCommentContent("");
             if (setRecommentState) {
@@ -74,7 +76,8 @@ const Comment = (props) => {
       changeGrBoardComment,
       setChangeGrBoardComment,
       setGrBoardCommentContent,
-      null
+      null,
+      setCommentList
     );
   };
   //댓글 리스트 불러오기
@@ -246,7 +249,8 @@ const CommentItem = (props) => {
       changeGrBoardComment,
       setChangeGrBoardComment,
       setGrBoardRecommentContent,
-      setRecommentState
+      setRecommentState,
+      setReCommentList
     );
   };
   return (
