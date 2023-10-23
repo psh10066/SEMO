@@ -302,6 +302,7 @@
   height: 300px;
   align-items: center;
   border: 3px solid #8bb4ff;
+  box-sizing: border-box;
 }
 .modifyMyFeed-file {
   display: flex;

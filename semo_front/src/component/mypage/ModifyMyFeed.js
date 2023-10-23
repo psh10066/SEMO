@@ -4,6 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { el } from "date-fns/locale";
 
 const ModifyMyFeed = (props) => {
   const navigate = useNavigate();
@@ -14,17 +15,18 @@ const ModifyMyFeed = (props) => {
   const [memberContent, setMemberContent] = useState(member.memberContent);
   const [memberImg, setMemberImg] = useState(member.memberImg); //기존 이미지 불러오기
 
-  //썸네일 수정시 파일
-  const [feedThumbnail, setFeedThumbnail] = useState(null);
+  const [feedThumbnail, setFeedThumbnail] = useState(null); //썸네일 변경사항 확인
   const [memberThumbnail, setMemberThumbnail] = useState(
     memberImg === null ? "Image" : "/member/" + memberImg
   );
+  //썸네일 이미지
+  const [profile, setProfile] = useState(null);
 
   //기존 이미지 삭제
   const deleteMyProfile = () => {
     setMemberThumbnail("Image");
     setMemberImg(null);
-    setFeedThumbnail(null);
+    setFeedThumbnail("deleteImage");
   };
 
   //상태 업데이트
@@ -39,10 +41,8 @@ const ModifyMyFeed = (props) => {
       reader.onloadend = () => {
         setMemberThumbnail(reader.result); //data
       };
-      setFeedThumbnail(files[0]);
-    } else {
-      setFeedThumbnail(null);
-      setMemberImg(member.memberImg);
+      setProfile(files[0]);
+      setFeedThumbnail("updateImage");
     }
   };
 
@@ -55,25 +55,29 @@ const ModifyMyFeed = (props) => {
   //저장버튼
   const updateMemberFeed = () => {
     const token = window.localStorage.getItem("token");
-    //값보내기
+    // 피드 글 보내기
     const form = new FormData();
     if (memberContent) {
       form.append("memberContent", memberContent);
     }
     //피드이미지 변경
-    if (feedThumbnail) {
-      form.append("feedThumbnail", feedThumbnail);
-      form.append("memberImg", memberImg);
+    if (feedThumbnail == "updateImage") {
+      form.append("feedThumbnail", profile); // 변경 이미지
+      form.append("memberImg", member.memberImg); //기존 이미지 삭제
     }
     //기존 피드 이미지 삭제
-    if (feedThumbnail == null && memberImg == null) {
+    if (feedThumbnail == "deleteImage" && memberImg == null) {
       form.append("feedThumbnail", null);
-      form.append("memberImg", null);
+      form.append("memberImg", member.memberImg); //기존 이미지 삭제
     }
-    //feedThumbnail 안바꾸고 , 기존이미지 있을때
-    if (feedThumbnail == null && memberImg != null) {
-      form.append("feedThumbnail", member.memberImg);
-      form.append("memberImg", member.memberImg);
+    // 이미지 변경이나 삭제가 아니라면 기존 이미지를 그대로 사용
+    if (
+      member.memberImg &&
+      feedThumbnail != "updateImage" &&
+      feedThumbnail != "deleteImage"
+    ) {
+      form.append("feedThumbnail", null);
+      form.append("memberImg", member.memberImg); //기존 이미지 삭제
     }
 
     axios
@@ -92,7 +96,7 @@ const ModifyMyFeed = (props) => {
             icon: "success",
             title: "내 피드 수정되었습니다.",
           }).then(() => {
-            window.location.reload(); // 여기에 원하는 경로를 넣어주기
+            window.location.reload();
           });
         }
       })
