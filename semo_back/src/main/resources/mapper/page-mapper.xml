@@ -137,5 +137,29 @@
 		        ORDER BY feed_like DESC)B)
 		 WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>
+	
+	
+	<select id="searhLocalTotalCount" resultType="int">
+		select count(*) from group_tbl where group_local = #{localCategory}
+	</select>
+	<select id="searhLocalTotalList" resultType="group">
+		SELECT * FROM    
+		    (SELECT ROWNUM AS RNUM, B.* FROM
+		        (SELECT
+		            GROUP_NO,
+		            GROUP_NAME,
+		            GROUP_IMG,
+	                GROUP_MAXNUM,
+		            GROUP_CATEGORY,
+		            GROUP_LOCAL,
+                    (select count(*) from gr_join where group_no=g.group_no and GR_JOIN_TYPE in (1,2)) total_count,
+                	(select count(*) from group_save where group_no=g.group_no) group_like
+		        FROM GROUP_TBL g
+		        where group_local = #{localCategory}
+		        ORDER BY group_like DESC)B)
+		WHERE RNUM BETWEEN #{start} AND #{end}		
+	</select>
+	
+	
 
 </mapper>

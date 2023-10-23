@@ -21,6 +21,7 @@ import KakaoCallBack from "./component/member/KakaoCallback";
 import SearchResult from "./component/searchresult/SearchResult";
 import LoungeMain from "./component/lounge/LoungeMain";
 import MypageReport from "./component/mypage/MypageReport";
+import LocalSearch from "./component/mainpage/LocalSearch";
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
@@ -88,6 +89,11 @@ function App() {
             path="/lounge/*"
             element={<LoungeMain isLogin={isLogin} setIsLogin={setIsLogin} />}
           />
+          <Route
+            path="/local/*"
+            element={<LocalSearch isLogin={isLogin} setIsLogin={setIsLogin} />}
+          />
+
           <Route path="/" element={<Mainpage />} />
         </Routes>
       </div>

@@ -31,7 +31,6 @@ const MainSearchModal = (props) => {
     }
   };
 
-  // 엔터키가 눌렸을 때 sendMessage 호출
   const handleKeyDown = (event) => {
     if (event.key === "Enter" || event.keyCode === 13) {
       Search(event);

@@ -21,6 +21,7 @@ const PopularGroupImg = (props) => {
 
   return (
     <div className="popular-groupWrap-thumbnail">
+      {groupDetail.length > 0 && //groupDetail 불러오면 진행 
       <Swiper
         effect="coverflow"
         grabCursor={true}
@@ -28,7 +29,7 @@ const PopularGroupImg = (props) => {
         loop={true}
         slidesPerView="3" // 중앙 슬라이드를 포함하여 총 3개의 슬라이드 표시
         spaceBetween={100} // 슬라이드 간의 간격 설정 (원하는 값을 사용하여 조정 가능)
-        initialSlide={groupDetail.length}
+        initialSlide={0}
         coverflowEffect={{
           rotate: 50, // 슬라이드의 회전 각도 조절
           stretch: -100,
@@ -53,7 +54,12 @@ const PopularGroupImg = (props) => {
             <div className="slideBox">
               <div className="slideImg-box" onClick={groupClick}>
                 <div className="slideImg-size">
-                  <img src={"/group/" + detail.groupImg} alt="slide_image" />
+                  <img src={"/group/" + detail.groupImg} alt="slide_image" 
+                  onError={(e) => { //이미지 로드 안됐을경우 
+                    e.target.onerror = null; // 이벤트 핸들러 중복 호출 방지
+                    e.target.src = "/image/default.png"; // 기본 이미지 경로
+                  }}
+                  />
                 </div>
               </div>
               <div className="detail-box">
@@ -78,7 +84,9 @@ const PopularGroupImg = (props) => {
         <div className="swiper-button-next"></div>
         <div className="swiper-pagination"></div>
       </Swiper>
+}
     </div>
+    
   );
 };
 

@@ -29,7 +29,7 @@
   lightgray : #EEEEEE
   white : #fff
   
-  메인색상 (찐한순)
+  메인색상 (연한순)
   #220895 rgba(34,8,149)
   #5457E9 rgba(84,87,233)
   #8BB4FF rgba(139,180,255)
@@ -132,9 +132,6 @@ header {
   color: #fbff00e8;
   align-self: flex-start;
   margin-left: 1px;
-  display: block;
-  font-weight: 600;
-  display: none;
 }
 
 .header-leftside button {

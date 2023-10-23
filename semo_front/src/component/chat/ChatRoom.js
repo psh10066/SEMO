@@ -22,8 +22,7 @@ const ChatRoom = (props) => {
     useState(false); // 지난대화 불러왔는지 체크
 
   //메세지 받기
-
-  const serverIP = "192.168.10.39"; // IP 주소 >> 추후 도메인으로 바꾸기
+  const serverIP =  "172.16.11.204"; // IP 주소 >> 추후 도메인으로 바꾸기 "192.168.10.39";
   const webSocketEndpoint = `http://${serverIP}:9999/ws`;
 
   useEffect(() => {
@@ -47,17 +46,39 @@ const ChatRoom = (props) => {
       console.error("STOMP error", frame);
     };
 
-    //roomId 가 바뀌면  current clinet active  / 이전 client 웹소켓 종료
+    //새로고침
+    // beforeunload 이벤트 핸들러
+    const handleBeforeUnload = (event) => {
+      event.preventDefault(); //수행하는 동작 취소하고 완전히 reload
+      event.returnValue = ""; // 이렇게 설정해야 메시지 표시
+      if (hasPreviousChatBeenClicked) {
+        sendLastAccessTime(); // 새로고침이나 페이지 나갈 때 마지막 접속 시간 전송
+      }
+    };
+    function enablePrevent() {
+      window.addEventListener("beforeunload", handleBeforeUnload);
+    }
+    function disablePrevent() {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    }
+    // beforeunload 이벤트를 활성화
+    enablePrevent();
+
+    //
+    //roomId 가 바뀌면  current clinet active  / 전의 client 웹소켓 종료
     client.activate();
     clientRef.current = client;
+
     return () => {
       if (hasPreviousChatBeenClicked) {
         sendLastAccessTime(); // 웹소켓 종료 전 마지막 접속 시간 전송
       }
       client.deactivate();
+      disablePrevent(); // 정리 시 beforeunload 이벤트 리스너 제거
     };
   }, [roomId, hasPreviousChatBeenClicked]);
-
+  //
+  //
   //마지막 접속 시간 전송 함수
   //먼저, CHAT_LAST_ACCESS_TIME 테이블에 데이터 있는지 없는지 조회
   const [chatTimeList, setChatTimeList] = useState([]);
@@ -70,7 +91,7 @@ const ChatRoom = (props) => {
       memberNo: memberNo,
       chatMyLastTime: formattedDate,
     };
-    //챗 타임 리스트
+    //챗 타임 리스트 (소실시간 체크)
     axios
       .post(
         "/chat/chatTimeList",
@@ -191,12 +212,13 @@ const ChatRoom = (props) => {
     }
     setShowPreviousChat(true); // showPreviousChat 상태를 true로 변경
   };
+
   //////////////////////////
   //초 빼고 출력
   const formatDate = (timeString) => {
     return timeString.substr(0, 16);
   };
-
+  /////////////////////////////
   //렌더링될때 자동으로 스크롤이 아래에 위치하기
   const endOfMessagesRef = useRef(null);
   useEffect(() => {

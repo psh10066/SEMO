@@ -36,4 +36,8 @@ public interface PageDao {
 
 	List selectLoungeList(HashMap<String, Object> mapLounge);
 
+	int searhLocalTotalCount(int localCategory);
+
+	List searhLocalTotalList(HashMap<String, Object> mapSearch);
+
 }

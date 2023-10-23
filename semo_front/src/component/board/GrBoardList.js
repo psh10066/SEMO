@@ -4,6 +4,7 @@ import axios from "axios";
 import Pagination from "../common/Pagination";
 import { Button1 } from "../util/Buttons";
 import { useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const GrBoardList = (props) => {
   const isLogin = props.isLogin;
@@ -12,6 +13,7 @@ const GrBoardList = (props) => {
   const [reqPage, setReqPage] = useState(1);
   const [pageInfo, setPageInfo] = useState({});
   const groupNo = location.state.groupNo;
+  const [groupLevel, setGroupLevel] = useState(0);
 
   useEffect(() => {
     axios
@@ -25,6 +27,25 @@ const GrBoardList = (props) => {
       });
   }, [reqPage]);
 
+  useEffect(() => {
+    if (isLogin) {
+      const token = window.localStorage.getItem("token");
+      axios
+        .post(
+          "/group/groupLevelState",
+          { groupNo },
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        )
+        .then((res) => {
+          setGroupLevel(res.data);
+        });
+    }
+  }, []);
+
   // 글쓰기 페이지 이동
   const navigate = useNavigate();
   const write = () => {
@@ -33,7 +54,7 @@ const GrBoardList = (props) => {
   return (
     <div className="my-board-wrap">
       <div className="board-write-wrap">
-        {isLogin ? (
+        {isLogin && (groupLevel === 1 || groupLevel === 2) ? (
           <div className="board-write-btn">
             <Button1 text="글쓰기" clickEvent={write} />
           </div>
@@ -53,7 +74,14 @@ const GrBoardList = (props) => {
           </thead>
           <tbody>
             {GrboardList.map((grBoard, index) => {
-              return <BoardItem key={"grBoard" + index} grBoard={grBoard} />;
+              return (
+                <BoardItem
+                  key={"grBoard" + index}
+                  grBoard={grBoard}
+                  isLogin={isLogin}
+                  groupLevel={groupLevel}
+                />
+              );
             })}
           </tbody>
         </table>
@@ -71,12 +99,19 @@ const GrBoardList = (props) => {
 };
 const BoardItem = (props) => {
   const grBoard = props.grBoard;
+  const isLogin = props.isLogin;
+  const groupLevel = props.groupLevel;
   const navigate = useNavigate();
   const boardView = () => {
-    navigate("/group/groupBoard/view", {
-      state: { grBoardNo: grBoard.grBoardNo },
-    });
+    if (isLogin && (groupLevel === 1 || groupLevel === 2)) {
+      navigate("/group/groupBoard/view", {
+        state: { grBoardNo: grBoard.grBoardNo },
+      });
+    } else {
+      Swal.fire("가입한 멤버만 확인이 가능합니다.");
+    }
   };
+
   return (
     <tr className="board-item" onClick={boardView}>
       <td>{grBoard.grBoardNo}</td>

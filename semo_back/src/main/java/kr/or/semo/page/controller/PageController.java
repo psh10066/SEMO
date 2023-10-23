@@ -51,4 +51,13 @@ public class PageController {
 		Map map = pageService.loungeList(reqPage);
 		return map;
 	}
+	
+	//지역 검색
+	@GetMapping(value="/searchLocal/{searchKeyword}/{reqPage}")
+	public Map searchLocal(@PathVariable String searchKeyword, @PathVariable int reqPage) {
+		Map map = pageService.searchLocal(searchKeyword,reqPage);
+		return map;
+	}
+	
+	
 }
