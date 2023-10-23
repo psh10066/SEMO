@@ -52,7 +52,9 @@ const ModifyMyFeed = (props) => {
     const token = window.localStorage.getItem("token");
     //값보내기
     const form = new FormData();
-    form.append("memberContent", memberContent);
+    if (memberContent) {
+      form.append("memberContent", memberContent);
+    }
     if (feedThumbnail) {
       form.append("feedThumbnail", feedThumbnail);
       form.append("memberImg", memberImg);
