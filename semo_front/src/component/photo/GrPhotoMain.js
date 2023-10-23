@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { Route, Routes, Link, useLocation } from "react-router-dom";
+import {
+  Route,
+  Routes,
+  Link,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import "./grPhoto.css";
 import GrPhotoList from "./GrPhotoList";
 import GrPhotoWrite from "./GrPhotoWrite";
@@ -47,11 +53,21 @@ const GrPhotoMain = (props) => {
       </div>
     );
   };
-
+  const navigate = useNavigate();
+  const allList = () => {
+    navigate("/group/view", { state: { groupNo: groupNo } });
+  };
   return (
     <div className="photo-all-wrap">
       <MySideMenu menus={menus} setMenus={setMenus} />
-      <div className="photo-title">나의 모임 사진첩</div>
+      <div className="photo-title">
+        나의 모임 사진첩
+        <div className="photo-page-back">
+          <span className="material-icons" onClick={allList}>
+            reply
+          </span>
+        </div>
+      </div>
       <Routes>
         <Route path="view" element={<GrPhotoView isLogin={isLogin} />} />
         <Route path="write" element={<GrPhotoWrite />} />

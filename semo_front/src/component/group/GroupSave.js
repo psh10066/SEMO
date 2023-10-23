@@ -19,10 +19,10 @@ const GroupSave = (props) => {
       })
       .then((res) => {
         if (res.data) {
-          Swal.fire("찜모임에 추가되었습니다.");
+          Swal.fire({ icon: "info", text: "찜모임에 추가되었습니다." });
           setGroupSave(true);
         } else {
-          Swal.fire("찜모임에서 삭제되었습니다.");
+          Swal.fire({ icon: "info", text: "찜모임에서 삭제되었습니다." });
           setGroupSave(false);
         }
       })

@@ -59,9 +59,8 @@ const GrPhotoView = (props) => {
         axios
           .get("/groupPhoto/delete/" + grPhoto.grPhotoNo)
           .then((res) => {
-            console.log(res.data);
             if (res.data === 1) {
-              Swal.fire("삭제가 완료되었습니다.");
+              Swal.fire({ icon: "success", text: "삭제가 완료되었습니다." });
               navigate("/group/groupPhoto", {
                 state: { groupNo: grPhoto.groupNo },
               });
@@ -116,9 +115,9 @@ const GrPhotoView = (props) => {
         ) : (
           ""
         )}
-        <>
+        <div className="photo-view-btn-zone-list">
           <Button1 text="목록" clickEvent={list} />
-        </>
+        </div>
       </div>
     </div>
   );
