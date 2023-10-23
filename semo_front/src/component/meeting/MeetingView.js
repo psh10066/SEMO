@@ -13,16 +13,15 @@ const MeetingView = (props) => {
   const member = props.member;
   const groupLevel = props.groupLevel;
   const [isAddMeet, setIsAddMeet] = useState(false); // 클릭시 자동으로 함수를 변경해줄 함수
+  const [grJoin, setGrJoin] = useState(0);
   const [meetingList, setMeetingList] = useState([]);
   const navigate = useNavigate();
-
   // 모임의 약속 생성
   const meetingCreate = () => {
     navigate("/meeting/create", {
       state: { memberNo: member.memberNo, groupNo: group.groupNo },
     });
   };
-
   // 모임의 약속 참여하기
   const join = (meetingNo) => {
     Swal.fire({
@@ -43,7 +42,7 @@ const MeetingView = (props) => {
           axios
             .post(
               `/meeting/join`,
-              { meetingNo, memberNo },
+              { meetingNo, memberNo, grJoin },
               {
                 headers: {
                   Authorization: "Bearer " + token,
@@ -60,9 +59,23 @@ const MeetingView = (props) => {
       }
     });
   };
-
   // 모임의 약속 보이기
   useEffect(() => {
+    const token = window.localStorage.getItem("token");
+    if (isLogin) {
+      axios
+        .get("/meeting/selectGrJoin/" + groupNo, {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then((res) => {
+          setGrJoin(res.data);
+        })
+        .catch((res) => {
+          console.log(res);
+        });
+    }
     axios
       .get("/meeting/view/" + groupNo)
       .then((res) => {
