@@ -5,11 +5,9 @@ import GroupMember from "./GroupMember";
 
 const GroupSetting = () => {
   const [group, setGroup] = useState(null);
-  // const [grJoinList, setGrJoinList] = useState(null);
   const [memberList, setMemberList] = useState(null);
   const location = useLocation();
   const groupNo = location.state ? location.state.groupNo : null;
-
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     // group 불러오기
@@ -39,7 +37,6 @@ const GroupSetting = () => {
         console.log(res.response.status);
       });
   }, []);
-
   return (
     <div>
       <div className="mypage-title">

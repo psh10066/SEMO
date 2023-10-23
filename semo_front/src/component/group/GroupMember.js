@@ -11,6 +11,7 @@ const GroupMember = (props) => {
   const groupNo = props.groupNo;
   const [memberStateNum, setMemberStateNum] = useState(0);
   const token = window.localStorage.getItem("token");
+  // 그룹 등급 조회
   useEffect(() => {
     if (groupNo !== null) {
       axios
@@ -27,7 +28,6 @@ const GroupMember = (props) => {
         });
     }
   });
-
   return (
     <div className="my-content-wrap">
       <div className="group-member-setting">

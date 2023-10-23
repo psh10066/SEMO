@@ -19,7 +19,6 @@ const Kakao = (props) => {
       if (status === kakao.maps.services.Status.OK) {
         const coords = new kakao.maps.LatLng(results[0].y, results[0].x);
         // 마커를 생성하고 지도에 표시
-        // const marker =
         new kakao.maps.Marker({
           position: coords,
           map: map,
