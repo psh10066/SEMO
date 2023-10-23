@@ -7,6 +7,7 @@ const ChatPrevious = (props) => {
   const navigate = useNavigate();
   const roomId = props.roomId; //채팅방 넘버 불러오기
   const memberNo = props.memberNo; //로그인한 회원번호
+  const connectedTime = props.connectedTime; //웹소켓 연결된 시간
 
   //채팅 메세지 불러오기
   const [previousMessage, setPreviousMessage] = useState([]);
@@ -28,7 +29,10 @@ const ChatPrevious = (props) => {
     axios
       .post(
         "/chat/chatMessage",
-        { roomId: roomId },
+        {
+          roomId: roomId,
+          beforeTime: connectedTime,
+        },
         {
           headers: {
             Authorization: "Bearer " + token,
@@ -52,7 +56,7 @@ const ChatPrevious = (props) => {
       .finally(() => {
         setIsLoading(false); // API 호출이 끝나면 로딩 상태를 false로 설정
       });
-  }, [roomId]);
+  }, [roomId, connectedTime]);
 
   //초 빼고 출력
   const formatDate = (timeString) => {

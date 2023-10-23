@@ -18,11 +18,14 @@ const ChatRoom = (props) => {
   const [newMessage, setNewMessage] = useState("");
 
   const clientRef = useRef(null);
+
   const [hasPreviousChatBeenClicked, setHasPreviousChatBeenClicked] =
     useState(false); // 지난대화 불러왔는지 체크
 
+  const [connectedTime, setConnectedTime] = useState(null); //웹소켓 연결된 시간 저장
+
   //메세지 받기
-  const serverIP = "192.168.10.39"; // IP 주소 >> 추후 도메인으로 바꾸기 "172.16.11.204"
+  const serverIP = "172.16.11.204"; // IP 주소 >> 추후 도메인으로 바꾸기 "172.16.11.204" 192.168.10.39
   const webSocketEndpoint = `http://${serverIP}:9999/ws`;
 
   useEffect(() => {
@@ -30,7 +33,11 @@ const ChatRoom = (props) => {
       webSocketFactory: () => new SockJS(webSocketEndpoint),
 
       onConnect: () => {
+        const now = new Date();
+        setConnectedTime(format(now, "yyyy-MM-dd HH:mm:ss"));
+
         console.log("WebSocket connected");
+
         client.subscribe(`/chat/rooms/${roomId}`, (message) => {
           const receivedMsg = JSON.parse(message.body); // JSON 형식의 문자열을 JavaScript 객체로 변환
           onMessageReceive(receivedMsg, `/chat/rooms/${roomId}`);
@@ -76,6 +83,13 @@ const ChatRoom = (props) => {
       disablePrevent(); // 정리 시 beforeunload 이벤트 리스너 제거
     };
   }, [roomId, hasPreviousChatBeenClicked]);
+
+  useEffect(() => {
+    if (connectedTime) {
+      console.log(connectedTime); // 여기에서 연결 시간을 로그로 찍으면 상태 변경 후에 올바른 시간 값을 볼 수 있습니다.
+    }
+  }, [connectedTime]);
+
   //
   //
   //마지막 접속 시간 전송 함수
@@ -236,7 +250,11 @@ const ChatRoom = (props) => {
         {/* showPreviousChat 값이 true일 때만 ChatPrevious 컴포넌트 렌더링 */}
         {showPreviousChat && (
           <div className="chatPrevious-wrap" ref={chatPreviousWrapRef}>
-            <ChatPrevious roomId={roomId} memberNo={memberNo} />
+            <ChatPrevious
+              roomId={roomId}
+              memberNo={memberNo}
+              connectedTime={connectedTime}
+            />
           </div>
         )}
         {/* 실시간 채팅 메세지 출력 */}

@@ -1,5 +1,6 @@
 package kr.or.semo.chatserver.model.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -18,7 +19,7 @@ public interface ChatServerDao {
 	
 	int updateAccessTime(LastAccessChatTime lastAccessChatTime);
 
-	List chatPreviousMessage(int roomId);
+	List chatPreviousMessage(int roomId,String beforeTime);
 	
 	String myChatTime(int roomId,int memberNo);
 

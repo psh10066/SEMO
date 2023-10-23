@@ -28,7 +28,7 @@
 <select id="chatPreviousMessage" resultType="Message">
 	select group_no AS room_id , MEMBER_NO, MESSAGE, CHAT_TIME, SENDER_NAME
 	from chat_message
-	where group_no=#{roomId}
+	where (group_no=#{roomId}) and (chat_time <![CDATA[<=]]> TO_DATE(#{beforeTime}, 'YYYY-MM-DD HH24:MI:SS'))
 	order by chat_time
 </select>
 

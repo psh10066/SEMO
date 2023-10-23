@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import kr.or.semo.chatserver.model.vo.LastAccessChatTime;
 import kr.or.semo.chatserver.model.vo.Message;
 import kr.or.semo.chatserver.service.ChatServerService;
@@ -22,6 +23,7 @@ import kr.or.semo.group.model.vo.Group;
 import kr.or.semo.member.model.vo.Member;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -69,9 +71,10 @@ public class ChatServerController {
     
     //지난 대화 불러오기
     @PostMapping("/chat/chatMessage")
-    public List chatPreviousMessage (@RequestBody Map<String, Integer> request) {
-    	int roomId = request.get("roomId"); //객체로 보낸거 키(String = groupNo) , 값(Integer) 가지고옴 
-    	return chatServerService.chatPreviousMessage(roomId);
+    public List chatPreviousMessage (@RequestBody Map<String,Object> request) {
+    	int roomId = (Integer)request.get("roomId"); //객체로 보낸거 키(String = groupNo) , 값(Integer) 가지고옴 
+    	String beforeTime = (String)request.get("beforeTime");
+    	return chatServerService.chatPreviousMessage(roomId,beforeTime);
     }
     
     //채팅룸에 new 알림기능
