@@ -14,35 +14,46 @@ const GrBoardModify = () => {
 
   //수정하기 클릭시 동작할 함수
   const modify = () => {
-    const form = new FormData();
-    form.append("grBoardNo", grBoard.grBoardNo);
-    form.append("grBoardTitle", grBoardTitle);
-    form.append("grBoardContent", grBoardContent);
-    const token = window.localStorage.getItem("token");
-    axios
-      .post("/groupBoard/modify", form, {
-        headers: {
-          contentType: "muitlpart/form-data",
-          processDate: false,
-          Authorization: "Bearer " + token,
-        },
-      })
-      .then((res) => {
-        if (res.data === 1) {
-          Swal.fire({ icon: "success", text: "수정이 완료되었습니다." });
-          navigate("/group/groupBoard", {
-            state: { groupNo: grBoard.groupNo },
-          });
-        } else {
-          Swal.fire({
-            icon: "info",
-            text: "수정 중 오류가 발생하였습니다. 잠시 후 다시 시도해주세요.",
-          });
-        }
-      })
-      .catch((res) => {
-        console.log(res.response.status);
+    if (
+      grBoardTitle !== "" &&
+      grBoardContent !== "" &&
+      grBoardContent !== "<p><br></p>"
+    ) {
+      const form = new FormData();
+      form.append("grBoardNo", grBoard.grBoardNo);
+      form.append("grBoardTitle", grBoardTitle);
+      form.append("grBoardContent", grBoardContent);
+      const token = window.localStorage.getItem("token");
+      axios
+        .post("/groupBoard/modify", form, {
+          headers: {
+            contentType: "muitlpart/form-data",
+            processDate: false,
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then((res) => {
+          if (res.data === 1) {
+            Swal.fire({ icon: "success", text: "수정이 완료되었습니다." });
+            navigate("/group/groupBoard", {
+              state: { groupNo: grBoard.groupNo },
+            });
+          } else {
+            Swal.fire({
+              icon: "info",
+              text: "수정 중 오류가 발생하였습니다. 잠시 후 다시 시도해주세요.",
+            });
+          }
+        })
+        .catch((res) => {
+          console.log(res.response.status);
+        });
+    } else {
+      Swal.fire({
+        icon: "info",
+        text: "내용을 입력하세요.",
       });
+    }
   };
   return (
     <div>
