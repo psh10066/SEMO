@@ -238,7 +238,7 @@ input[type="file"]::file-selector-button {
   padding: 30px;
 }
 .group-member-setting > table {
-  width: 100%;
+  width: 850px;
   padding: 20px;
   background-color: #fff;
   border-radius: 20px;
