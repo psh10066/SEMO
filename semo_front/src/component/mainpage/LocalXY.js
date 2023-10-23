@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Local from "./\bLocal";
+import Local from "./Local";
 
 const LocalXY = () => {
   const busan =
