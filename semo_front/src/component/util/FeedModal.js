@@ -74,7 +74,13 @@ const FeedModal = ({
         onSubmit();
       })
       .catch((res) => {
-        console.log(res.response.status);
+        if (res.response.status === 403) {
+          Swal.fire({
+            title: "로그인이 필요한 서비스 입니다.",
+            text: "로그인 페이지로 이동합니다.",
+            icon: "info",
+          });
+        }
       });
   };
   //피드 수정
@@ -109,7 +115,13 @@ const FeedModal = ({
         onSubmit();
       })
       .catch((res) => {
-        console.log(res.response.status);
+        if (res.response.status === 403) {
+          Swal.fire({
+            title: "로그인이 필요한 서비스 입니다.",
+            text: "로그인 페이지로 이동합니다.",
+            icon: "info",
+          });
+        }
       });
   };
 
