@@ -15,7 +15,6 @@ const MeetingModify = () => {
   const navigate = useNavigate();
   const meeting = location.state.meeting;
   const groupNo = meeting.groupNo;
-
   const [meetingName, setMeetingName] = useState(meeting.meetingName);
   const [meetingDate] = useState(meeting.meetingDate);
   const [meetingPlace, setMeetingPlace] = useState(meeting.meetingPlace);
@@ -24,7 +23,7 @@ const MeetingModify = () => {
   );
   const [meetingPrice, setMeetingPrice] = useState(meeting.meetingPrice);
   const [meetingMaxnum, setMeetingMaxnum] = useState(meeting.meetingMaxnum);
-
+  // 모임 삭제
   const deleteMeeting = () => {
     Swal.fire({
       icon: "warning",
@@ -53,12 +52,14 @@ const MeetingModify = () => {
       }
     });
   };
+  //수정 불가능
   const canNotFix = () => {
     Swal.fire({
       icon: "warning",
       text: "날짜는 수정이 불가능합니다!",
     });
   };
+  //모임 수정
   const modifyMeeting = () => {
     const data = {
       meetingNo: meeting.meetingNo,
