@@ -24,7 +24,6 @@ const GroupView = (props) => {
   const [groupSave, setGroupSave] = useState(false);
   const [peopleCount, setPeopleCount] = useState(0);
   const [peopleList, setPeopleList] = useState([]);
-  console.log(peopleList);
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -313,7 +312,6 @@ const GroupView = (props) => {
             <div className="group-like-person-wrap">
               <AvatarGroup max={7} total={peopleCount} className="avatarGroup">
                 {peopleList.map((people, index) => {
-                  console.log(people);
                   let memberNo = people.memberNo;
                   return people.peopelImg === null ? (
                     <Avatar
