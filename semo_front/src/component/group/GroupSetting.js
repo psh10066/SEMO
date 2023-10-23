@@ -52,13 +52,7 @@ const GroupSetting = () => {
             <Route
               path="groupMember"
               element={
-                <GroupMember
-                  memberList={memberList}
-                  // setMemberList={setMemberList}
-                  // grJoinList={grJoinList}
-                  // setGrJoinList={setGrJoinList}
-                  groupNo={groupNo}
-                />
+                <GroupMember memberList={memberList} groupNo={groupNo} />
               }
             />
           </Routes>
