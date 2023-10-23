@@ -90,7 +90,7 @@ public class PageService {
 		
 		int totalCount = pageDao.searchTotalCount(searchKeyword);
 		pi = pagination.getPageInfo(reqPage, numPerPage, pageNaviSize, totalCount);
-		System.out.println("socialing pi는 "+pi);
+		//System.out.println("socialing pi는 "+pi);
 		
 		HashMap<String, Object> mapSearch = new HashMap<String, Object>();
 		mapSearch.put("start", pi.getStart());
@@ -98,7 +98,7 @@ public class PageService {
 		mapSearch.put("searchKeyword", searchKeyword);
 		
 		searchSocialingList = pageDao.socialingSearchList(mapSearch);
-		System.out.println("searchSocialingList는 "+searchSocialingList);
+		//System.out.println("searchSocialingList는 "+searchSocialingList);
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("searchSocialingList", searchSocialingList);
@@ -116,7 +116,7 @@ public class PageService {
 		
 		int totalCount = pageDao.searchTotalCountFeed(searchKeyword);
 		pi = pagination.getPageInfo(reqPage, numPerPage, pageNaviSize, totalCount);
-		System.out.println("Feed pi는 "+pi);
+		//System.out.println("Feed pi는 "+pi);
 		
 		HashMap<String, Object> mapSearch = new HashMap<String, Object>();
 		mapSearch.put("start", pi.getStart());
@@ -124,7 +124,7 @@ public class PageService {
 		mapSearch.put("searchKeyword", searchKeyword);
 		
 		searchFeedList = pageDao.feedSearchList(mapSearch);
-		System.out.println("searchFeedList는 "+searchFeedList);
+		//System.out.println("searchFeedList는 "+searchFeedList);
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("searchFeedList", searchFeedList);
@@ -142,14 +142,14 @@ public class PageService {
 		
 		int totalCount = pageDao.totalCountLounge();
 		pi = pagination.getPageInfo(reqPage, numPerPage, pageNaviSize, totalCount);
-		System.out.println("pi는 "+pi);
+		//System.out.println("pi는 "+pi);
 		
 		HashMap<String, Object> mapLounge = new HashMap<String, Object>();
 		mapLounge.put("start", pi.getStart());
 		mapLounge.put("end", pi.getEnd());
 		
 		loungeList = pageDao.selectLoungeList(mapLounge);
-		System.out.println("loungeList는 "+loungeList);
+		//System.out.println("loungeList는 "+loungeList);
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("loungeList", loungeList);
