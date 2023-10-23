@@ -87,7 +87,7 @@ const FeedView = (props) => {
       .catch((res) => {
         console.log(res.response.status);
       });
-  }, [changeFeed, changeFeedComment, memberList]);
+  }, [changeFeed, changeFeedComment, feedLikeCount]);
   const handelClick = () => {
     //모달오픈
     setIsOpen(true);
@@ -210,7 +210,6 @@ const FeedView = (props) => {
     navigate("/feed/profile", {
       state: { memberNo: feed.feedWriter },
     });
-    console.log(feed);
   };
   return (
     <div className="feed-view-wrap">
