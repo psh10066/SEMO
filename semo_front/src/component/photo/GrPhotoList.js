@@ -93,7 +93,7 @@ const PhotoItem = (props) => {
         state: { grPhotoNo: grPhoto.grPhotoNo },
       });
     } else {
-      Swal.fire("가입한 멤버만 확인이 가능합니다.");
+      Swal.fire({ icon: "info", text: "가입한 멤버만 확인이 가능합니다." });
     }
   };
   return (

@@ -228,11 +228,15 @@ const FeedView = (props) => {
         ) : (
           <div className="feed-view-writerImg">
             <Stack direction="row" spacing={2} onClick={naviFeedProfile}>
-              <Avatar
-                alt="Remy Sharp"
-                src={"/member/" + feed.memberImg}
-                sx={{ width: 40, height: 40 }}
-              />
+              {feed.memberImg ? (
+                <Avatar
+                  alt="Remy Sharp"
+                  src={"/member/" + feed.memberImg}
+                  sx={{ width: 40, height: 40 }}
+                />
+              ) : (
+                ""
+              )}
             </Stack>
           </div>
         )}
@@ -245,7 +249,7 @@ const FeedView = (props) => {
       </div>
       <div className="feed-view-mid">
         <div className="feed-view-image">
-          <img src={"/feed/" + feed.feedImg} />
+          {feed.feedImg ? <img src={"/feed/" + feed.feedImg} /> : ""}
         </div>
         <div className="feed-view-mid-icon">
           <div className="feed-view-like">
@@ -317,29 +321,6 @@ const FeedView = (props) => {
           ) : (
             ""
           )}
-          {/* <div className="feed-like-person-wrap">
-            <AvatarGroup max={4} total={feedLikeCount}>
-              <Avatar
-                sx={{ width: 33, height: 33 }}
-                alt="Remy Sharp"
-                src="/static/images/avatar/1.jpg"
-              />
-              <Avatar
-                sx={{ width: 33, height: 33 }}
-                alt="Travis Howard"
-                src="/static/images/avatar/2.jpg"
-              />
-              <Avatar
-                sx={{ width: 33, height: 33 }}
-                alt="Agnes Walker"
-                src="/static/images/avatar/4.jpg"
-              />
-              <Avatar
-                alt="Trevor Henderson"
-                src="/static/images/avatar/5.jpg"
-              />
-            </AvatarGroup>
-          </div> */}
         </div>
         <div className="feed-view-content">{feed.feedContent}</div>
       </div>

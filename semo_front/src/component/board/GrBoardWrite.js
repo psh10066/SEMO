@@ -15,8 +15,6 @@ const GrBoardWrite = () => {
   //글쓰기 버튼 클릭 시 동작할 함수(서버에 insert요청 함수)
   const write = () => {
     if (grBoardTitle !== "" && grBoardContent !== "") {
-      //기본적인 문자열 또는 숫자데이터를 전송하는 경우 json을 전송
-      //파일이 포함되어 있는 경우 => FormData를 사용
       const form = new FormData();
       form.append("grBoardTitle", grBoardTitle);
       form.append("grBoardContent", grBoardContent);
@@ -32,7 +30,7 @@ const GrBoardWrite = () => {
         })
         .then((res) => {
           if (res.data > 0) {
-            Swal.fire("등록이 완료되었습니다.");
+            Swal.fire({ icon: "success", text: "등록이 완료되었습니다." });
             navigate("/group/groupBoard", {
               state: { groupNo: groupNo },
             });
@@ -42,7 +40,7 @@ const GrBoardWrite = () => {
           console.log(res.response.status);
         });
     } else {
-      Swal.fire("내용을 입력하세요.");
+      Swal.fire({ icon: "info", text: "내용을 입력하세요." });
     }
   };
   return (

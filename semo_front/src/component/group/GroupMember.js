@@ -11,6 +11,7 @@ const GroupMember = (props) => {
   const groupNo = props.groupNo;
   const [memberStateNum, setMemberStateNum] = useState(0);
   const token = window.localStorage.getItem("token");
+  console.log(memberList);
   useEffect(() => {
     if (groupNo !== null) {
       axios
@@ -30,7 +31,7 @@ const GroupMember = (props) => {
 
   return (
     <div className="my-content-wrap">
-      <div className="admin-member-tbl-box">
+      <div className="group-member-setting">
         {memberStateNum === 0 ? (
           <div>모임에 가입된 회원이 없습니다.</div>
         ) : (
@@ -67,6 +68,7 @@ const GroupMember = (props) => {
 };
 const MemberItem = (props) => {
   const member = props.member;
+  console.log(member);
   const [grJoinType, setGrJoinType] = useState(member.grJoinType);
   //모임원 가입 승인
   const changeJoinType = (event) => {
@@ -102,7 +104,10 @@ const MemberItem = (props) => {
             {member.memberImg === null ? (
               <Avatar src="/image/default.png" sx={{ width: 50, height: 50 }} />
             ) : (
-              <Avatar src={member.memberImg} sx={{ width: 50, height: 50 }} />
+              <Avatar
+                src={"/member/" + member.memberImg}
+                sx={{ width: 50, height: 50 }}
+              />
             )}
           </td>
           <td id="group-member-name">{member.memberName}</td>
@@ -116,7 +121,6 @@ const MemberItem = (props) => {
               ? "경기"
               : "부산"}
           </td>
-          {/* {등급은 수정해야함} */}
           <td>
             <FormControl sx={{ m: 1, minWidth: 100 }}>
               <Select value={grJoinType} onChange={changeJoinType}>

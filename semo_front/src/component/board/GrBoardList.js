@@ -51,8 +51,16 @@ const GrBoardList = (props) => {
   const write = () => {
     navigate("write", { state: { groupNo: groupNo } });
   };
+  // const allList = () => {
+  //   navigate("/group/view", { state: { groupNo: groupNo } });
+  // };
   return (
     <div className="my-board-wrap">
+      {/* <div className="board-page-back">
+        <span className="material-icons" onClick={allList}>
+          reply
+        </span>
+      </div> */}
       <div className="board-write-wrap">
         {isLogin && (groupLevel === 1 || groupLevel === 2) ? (
           <div className="board-write-btn">
@@ -94,9 +102,15 @@ const GrBoardList = (props) => {
           pageInfo={pageInfo}
         />
       </div>
+      {/* <div className="board-page-back">
+        <span className="material-icons" onClick={allList}>
+          reply
+        </span>
+      </div> */}
     </div>
   );
 };
+
 const BoardItem = (props) => {
   const grBoard = props.grBoard;
   const isLogin = props.isLogin;
@@ -108,7 +122,7 @@ const BoardItem = (props) => {
         state: { grBoardNo: grBoard.grBoardNo },
       });
     } else {
-      Swal.fire("가입한 멤버만 확인이 가능합니다.");
+      Swal.fire({ icon: "info", text: "가입한 멤버만 확인이 가능합니다." });
     }
   };
 

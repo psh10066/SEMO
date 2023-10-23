@@ -32,9 +32,8 @@ const GrPhotoWrite = () => {
           },
         })
         .then((res) => {
-          console.log(res.data);
           if (res.data > 0) {
-            Swal.fire("등록이 완료되었습니다.");
+            Swal.fire({ icon: "success", text: "등록이 완료되었습니다." });
             navigate("/group/groupPhoto", {
               state: { groupNo: groupNo },
             });
@@ -44,7 +43,7 @@ const GrPhotoWrite = () => {
           console.log(res.response.status);
         });
     } else {
-      Swal.fire("내용을 입력하세요.");
+      Swal.fire({ icon: "info", text: "내용을 입력하세요." });
     }
   };
   return (

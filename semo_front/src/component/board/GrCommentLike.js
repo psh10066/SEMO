@@ -38,7 +38,7 @@ const GrBoardCommentLike = (props) => {
   }, [grBoardCommentLike]);
 
   const loginMsg = () => {
-    Swal.fire("로그인 후 이용해 주세요.");
+    Swal.fire({ icon: "info", text: "로그인 후 이용해 주세요." });
   };
 
   const grBoardCommentLikeClick = (e) => {
@@ -52,7 +52,6 @@ const GrBoardCommentLike = (props) => {
         },
       })
       .then((res) => {
-        console.log(res.data);
         if (res.data) {
           setGrBoardCommentLike(true);
         } else {

@@ -48,7 +48,7 @@ const GrPhotoFrm = (props) => {
           {grPhotoImg === null ? (
             <img src="/image/photo.png" />
           ) : (
-            <img src={grPhotoImg} />
+            <img src={"/groupPhoto/" + grPhotoImg} />
           )}
         </div>
         <div className="photo-info">
@@ -69,7 +69,7 @@ const GrPhotoFrm = (props) => {
               </tr>
               <tr>
                 <td>
-                  <label htmlFor="thumbnail">대표이미지</label>
+                  <label htmlFor="thumbnail">썸네일</label>
                 </td>
                 <td>
                   <input
@@ -85,7 +85,7 @@ const GrPhotoFrm = (props) => {
                   <label htmlFor="photoFile">첨부파일</label>
                 </td>
                 <td>
-                  <input type="file" onChange={changeFile} multiple />
+                  <input type="file" onChange={thumbnailChange} multiple />
                 </td>
               </tr>
               <tr>
