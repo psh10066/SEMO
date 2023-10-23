@@ -223,42 +223,42 @@
 
 /*******관리*********/
 /*내 정보 수정*/
-.modifyMy-wrap{
+.modifyMy-wrap {
   width: 810px;
   display: flex;
   flex-direction: column;
 }
-.modifyMy-title{
+.modifyMy-title {
   width: 100%;
   display: flex;
   justify-content: start;
-  color:#220895;
+  color: #220895;
   font-weight: bold;
   font-size: 18px;
   margin-bottom: 40px;
 }
-.modifyMy-content{
+.modifyMy-content {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.my-info-tbl{
+.my-info-tbl {
   padding-right: 50px;
 }
-.my-info-tbl>tbody>tr>td:first-child{
+.my-info-tbl > tbody > tr > td:first-child {
   padding-right: 20px;
 }
-.my-info-tbl>tbody>tr{
-  height:45px;
+.my-info-tbl > tbody > tr {
+  height: 45px;
 }
-.my-info-tbl>tbody>tr>td:last-child>input{
-  width:240px;
+.my-info-tbl > tbody > tr > td:last-child > input {
+  width: 240px;
   height: 35px;
   border: 1px solid #ccc;
   padding-left: 10px;
   border-radius: 6px;
 }
-.modyfyPw{
+.modyfyPw {
   border: none;
   background-color: #8bb4ff;
   border-radius: 6px;
@@ -269,7 +269,7 @@
   margin-left: 3px;
   cursor: pointer;
 }
-.modifyMysave{
+.modifyMysave {
   border: none;
   background-color: #8bb4ff;
   border-radius: 6px;
@@ -277,12 +277,12 @@
   width: 90px;
   color: #fff;
   font-weight: bold;
-  
+
   margin-left: 3px;
   cursor: pointer;
   margin-right: 90px;
 }
-.modifyMyInfo-saveBtn{
+.modifyMyInfo-saveBtn {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -290,47 +290,47 @@
 }
 
 /*피드수정*/
-.modifyMyFeed-thumbnail{
+.modifyMyFeed-thumbnail {
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   background-color: #fff;
   margin-right: 130px;
   border-radius: 50px;
 
   justify-content: center;
-  width:400px;
+  width: 400px;
   height: 300px;
   align-items: center;
+  border: 3px solid #8bb4ff;
 }
-.modifyMyFeed-file{
+.modifyMyFeed-file {
   display: flex;
   align-items: center;
 }
-.modifyMyFeed-file:first-child{
+.modifyMyFeed-file:first-child {
   margin-left: 50px;
 }
-.modifyMyFeed-file input{
+.modifyMyFeed-file input {
   margin-left: 20px;
 }
-.modifyMyFeed-text{
+.modifyMyFeed-text {
   margin-top: 20px;
   margin-left: 10px;
 }
-.modifyMyFeed-thumbnail textarea{
-  width:300px ; 
+.modifyMyFeed-thumbnail textarea {
+  width: 300px;
   height: 80px;
   border: 1px solid #ccc;
   border-radius: 8px;
   padding-left: 10px;
 }
-.modifyMyFeed-saveBtn{
-  width:100%;
+.modifyMyFeed-saveBtn {
+  width: 100%;
   margin-top: 10px;
   display: flex;
   justify-content: center;
-
 }
-.modifymyfeedsave{
+.modifymyfeedsave {
   border: none;
   background-color: #8bb4ff;
   border-radius: 6px;
@@ -338,9 +338,10 @@
   width: 90px;
   color: #fff;
   font-weight: bold;
+  cursor: pointer;
 }
 /*내 관심사*/
-.modifyMyLikesave{
+.modifyMyLikesave {
   margin-top: 10px;
   border: none;
   background-color: #8bb4ff;
@@ -349,7 +350,65 @@
   width: 100px;
   color: #fff;
   font-weight: bold;
+  cursor: pointer;
 }
-.modifyMyLikewrap{
+.modifyMyLikewrap {
   margin-right: 130px;
+}
+
+/*비밀번호 변경*/
+.pw-auth {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 70px;
+}
+.pw-auth label {
+  margin-right: 10px;
+}
+.pw-auth > div {
+  margin-right: 100px;
+}
+.pw-auth input {
+  width: 240px;
+  height: 35px;
+  border: 1px solid #ccc;
+  padding-left: 10px;
+  border-radius: 6px;
+}
+.modifyMy-newPw-wrap {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.checkPwOmsg {
+  font-size: 13px;
+  color: red;
+}
+.newPw1 {
+  margin-left: 33px;
+}
+.newPwcheck {
+  margin-top: 10px;
+}
+.pwcheck-msg {
+  margin-top: 5px;
+  color: red;
+  text-align: start;
+}
+.pwchange-btn-box {
+  display: flex;
+  justify-content: center;
+}
+.pwchange-btn {
+  margin-top: 20px;
+  border: none;
+  background-color: #8bb4ff;
+  border-radius: 6px;
+  height: 43px;
+  width: 100px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
 }
