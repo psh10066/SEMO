@@ -90,7 +90,7 @@
 /*popularGroup*/
 .popularGroup {
   width: 100vw;
-  height: 82vh;
+  height: 100%;
   background-color: rgba(248, 249, 250);
   padding-top: 10%;
 }
