@@ -20,7 +20,7 @@ const FeedModal = ({
   const [feedImg, setFeedImg] = useState(null);
   const [feedContent, setFeedConTent] = useState("");
   useEffect(() => {
-    console.log(feed);
+    // console.log(feed);
     if (type === "modify") {
       setFeedImg(feed.feedImg);
       setFeedConTent(feed.feedContent);
