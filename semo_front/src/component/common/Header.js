@@ -142,10 +142,7 @@ const Header = (props) => {
                 </Link>
               ) : null}
             </div>
-            <div
-              className="chatNew"
-              style={{ marginLeft: "2px", marginRight: "-15px" }}
-            >
+            <div className="chatNew" style={{ marginLeft: "2px" }}>
               {/* 새로운 채팅 있을때, New 뜨게하기*/}
               {isLogin ? (
                 <Link to="/chat/chatInfo">
@@ -320,8 +317,6 @@ const Chatalert = () => {
       });
   }, [member]);
 
-  console.log(myLatestChatTime);
-  console.log(totalLatestChatTime);
   return (
     <>{myLatestChatTime < totalLatestChatTime ? <strong> New</strong> : ""}</>
   );
