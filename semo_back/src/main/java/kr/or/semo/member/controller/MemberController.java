@@ -107,22 +107,26 @@ public class MemberController {
 		member.setMemberId(memberId);
 		String savepath = root + "member/";
 
-		if (feedThumbnail != null) {
-			String filename = feedThumbnail.getOriginalFilename();
-			String filepath = fileUtil.getfilepath(savepath, filename,feedThumbnail);
-			
-			//이전 이미지 있으면 삭제
-			if(member.getMemberImg() != null) {
-				String oldMemberImgPath = member.getMemberImg();
-				File oldMemberImgFile = new File(savepath + oldMemberImgPath);
-				oldMemberImgFile.delete();
-			}
-			//새 이미지 파일 추가
-				member.setMemberImg(filepath);	
-			
+		if(member.getMemberImg() != null) {
+		    String oldMemberImgPath = member.getMemberImg();
+		    File oldMemberImgFile = new File(savepath + oldMemberImgPath);
+		    
+		    if(feedThumbnail != null) {
+		        // 기존 이미지 삭제
+		        oldMemberImgFile.delete();
+
+		        // 새 이미지 저장
+		        String filename = feedThumbnail.getOriginalFilename();
+		        String filepath = fileUtil.getfilepath(savepath, filename, feedThumbnail);
+		        member.setMemberImg(filepath);	
+		    } else { //feedThumbnail == null 이전 파일 경로 저장 
+		        member.setMemberImg(oldMemberImgPath); 
+		    }
 		}
+			
 		return memberService.updateMyFeed(member);
 	}
+	
 	//내 관심사 수정
 	@PostMapping(value = "/updateMyLike")
 	public int updateMyLike(@RequestBody Member member, @RequestAttribute String memberId) {
