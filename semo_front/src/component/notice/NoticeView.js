@@ -8,20 +8,31 @@ import { Button2 } from "../util/Buttons";
 const NoticeView = (props) => {
   const isLogin = props.isLogin;
   const location = useLocation();
-  const noticeNo = location.state.noticeNo;
+  //console.log(location.state);
   const [notice, setNotice] = useState({});
   const [member, setMember] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {
-    axios
-      .get("/notice/view/" + noticeNo)
-      .then((res) => {
-        //console.log(res.data);
-        setNotice(res.data);
-      })
-      .catch((res) => {
-        console.log(res.response.status);
+    if (location.state != null) {
+      const noticeNo = location.state.noticeNo;
+      axios
+        .get("/notice/view/" + noticeNo)
+        .then((res) => {
+          //console.log(res.data);
+          setNotice(res.data);
+        })
+        .catch((res) => {
+          console.log(res.response.status);
+        });
+    } else {
+      Swal.fire({
+        title: "잘못된 접근 경로입니다.",
+        text: "공지사항 목록으로 이동합니다.",
+        icon: "info",
+      }).then(() => {
+        navigate("/notice");
       });
+    }
     if (isLogin) {
       const token = window.localStorage.getItem("token");
       axios
