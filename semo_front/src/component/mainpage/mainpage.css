@@ -90,7 +90,7 @@
 /*popularGroup*/
 .popularGroup {
   width: 100vw;
-  height: 100vh;
+  height: 82vh;
   background-color: rgba(248, 249, 250);
   padding-top: 10%;
 }
@@ -206,7 +206,7 @@
 }
 .local-main-title {
   text-align: center;
-  margin-bottom: 90px;
+  margin-bottom: 70px;
 }
 .local-main-title > h2 {
   color: #272727;
