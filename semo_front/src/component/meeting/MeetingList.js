@@ -16,15 +16,29 @@ const MeetingList = (props) => {
   const setIsAddMeet = props.setIsAddMeet;
   const groupLevel = props.groupLevel;
   const groupNo = props.groupNo;
+  const [grJoin, setGrJoin] = useState(0); //gr_join
   const [joinMember, setJoinMember] = useState(0); //참여자 숫자
   const [joinStatus, setJoinStatus] = useState(-1); //참여 현황
   const [joinMemberNo, setJoinMemberNo] = useState([]); //참여한 맴버 번호
   const navigate = useNavigate();
+  // console.log(joinStatus);
   //모임의 약속에 참여하는 memberNo[] 조회
   useEffect(() => {
     if (member != null) {
       const token = window.localStorage.getItem("token");
       if (isLogin) {
+        axios
+          .get("/meeting/selectGrJoin/" + groupNo, {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          })
+          .then((res) => {
+            setGrJoin(res.data);
+          })
+          .catch((res) => {
+            console.log(res);
+          });
         axios
           .post("/meeting/meetingMember", meeting, {
             headers: {
@@ -33,6 +47,8 @@ const MeetingList = (props) => {
           })
           .then((res) => {
             setJoinMemberNo(res.data);
+            // console.log(res.data);
+            // console.log(member.memberNo);
             if (res.data.length > 0) {
               const indexOf = res.data.indexOf(member.memberNo);
               setJoinStatus(indexOf);
@@ -172,7 +188,7 @@ const MeetingList = (props) => {
             ) : isLogin &&
               isJoin &&
               (groupLevel === 1 || groupLevel === 2) &&
-              meeting.meetingMaxnum > joinMember ? (
+              joinStatus !== -1 ? (
               <Button2
                 text="취소"
                 clickEvent={() => {

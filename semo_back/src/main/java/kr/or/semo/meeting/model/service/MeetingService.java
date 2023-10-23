@@ -59,6 +59,11 @@ public class MeetingService {
 		return meetingDao.delete(meetingNo);
 	}
 
+	public int selectGrJoin(int groupNo, String memberId) {
+		// TODO Auto-generated method stub
+		return meetingDao.selectGrJoin(groupNo,memberId);
+	}
+
 
 	
 	

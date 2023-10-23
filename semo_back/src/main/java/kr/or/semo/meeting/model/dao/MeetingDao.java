@@ -26,6 +26,8 @@ public interface MeetingDao {
 
 	int delete(int meetingNo);
 
+	int selectGrJoin(int groupNo, String memberId);
+
 
 	
 

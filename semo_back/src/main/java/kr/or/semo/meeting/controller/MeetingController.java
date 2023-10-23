@@ -1,5 +1,7 @@
 package kr.or.semo.meeting.controller;
 
+
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,12 @@ public class MeetingController {
 		meeting.setMemberId(memberId);
 		return meetingService.createMeeting(meeting);
 	}
+	
+	@GetMapping(value = "/selectGrJoin/{groupNo}")
+	public int selectGrJoin(@PathVariable int groupNo, @RequestAttribute String memberId) {
+		return meetingService.selectGrJoin(groupNo,memberId);
+	}
+	
 	// 약속 조회
 	@GetMapping(value = "/view/{groupNo}")
 	public List view(@PathVariable int groupNo) {

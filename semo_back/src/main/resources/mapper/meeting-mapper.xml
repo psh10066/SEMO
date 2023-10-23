@@ -19,6 +19,7 @@
 		insert into meeting_join values(
 			mt_join_seq.nextval,
 			#{memberNo},
+			#{grJoin},
 			#{meetingNo},
 			1)
 	</insert>
@@ -48,6 +49,13 @@
 	<delete id="delete">
 		delete meeting where meeting_no=#{meetingNo}
 	</delete>
+	
+	<select id="selectGrJoin" resultType="int">
+		select gr_join from gr_join 
+		where member_no=
+		(select member_no from member where member_id=#{memberId})
+		and group_no=#{groupNo}
+	</select>
 	 
 	
 	
