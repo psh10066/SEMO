@@ -30,7 +30,7 @@ const GroupMember = (props) => {
 
   return (
     <div className="my-content-wrap">
-      <div className="admin-member-tbl-box">
+      <div className="group-member-setting">
         {memberStateNum === 0 ? (
           <div>모임에 가입된 회원이 없습니다.</div>
         ) : (
