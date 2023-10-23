@@ -53,50 +53,12 @@ const AdminMain = (props) => {
       navigate("/login");
     });
   }
-  {
-    /* 
-  const myfeed = () => {
-    navigate("/feed");
-  };
-  */
-  }
 
   return (
     <div className="admin-page-all-wrap">
-      {/* 
-      <div className="mypage-title">
-        <h2>Admin Page</h2>
-      </div>
-      <div className="mypage-intro">
-        <div className="mypage-name">
-          <div className="material-icons">face</div>
-          <div>
-            <span>{member.memberName}</span>
-          </div>
-        </div>
-        
-        <div className="mypage-buttons">
-          <div className="mypage-myfeed a" onClick={myfeed}>
-            <div className="material-icons">interests</div>
-            <div className="texta">내 피드</div>
-          </div>
-          <div className="mypage-myfeed b">
-            <div className="material-icons">chat_bubble</div>
-            <div className="textb">내 채팅</div>
-          </div>
-        </div>
-        
-      </div>
-      */}
       <div className="admin-content">
         <div className="admin-current-content">
           <AdminMenu adminMenus={adminMenus} setAdminMenus={setAdminMenus} />
-          {/* 
-          <div className="links">
-            <Link to="list">회원 목록 조회</Link>
-            <Link to="report">신고 내역 조회</Link>
-          </div>
-          */}
           <Routes>
             <Route path="report" element={<AdminReport />} />
             <Route path="list" element={<AdminMember />} />

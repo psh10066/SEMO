@@ -216,7 +216,6 @@ const PageItem = (props) => {
           <div className="page-group-bottom">
             <div className="page-icons page-icons-location">
               <span className="material-icons">location_on</span>
-              {/*{" "}*/}
               {page.groupLocal === 1
                 ? "서울"
                 : page.groupLocal === 2

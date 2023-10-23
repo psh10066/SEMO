@@ -48,7 +48,7 @@ const GrPhotoFrm = (props) => {
           {grPhotoImg === null ? (
             <img src="/image/photo.png" />
           ) : (
-            <img src={"/groupPhoto/" + grPhotoImg} />
+            <img src={grPhotoImg} />
           )}
         </div>
         <div className="photo-info">

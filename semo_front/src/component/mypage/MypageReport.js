@@ -9,16 +9,14 @@ const MypageReport = () => {
   const location = useLocation();
   const group = location.state.group;
   const member = location.state.member;
-  //console.log(group);
-  //console.log(member);
 
   const [reportDetail, setReportDetail] = useState("");
 
   const navigate = useNavigate();
   const report = () => {
-    console.log(reportDetail);
-    console.log(member.memberNo);
-    console.log(group.groupNo);
+    //console.log(reportDetail);
+    //console.log(member.memberNo);
+    //console.log(group.groupNo);
     if (reportDetail !== "") {
       const form = new FormData();
       form.append("reportDetail", reportDetail);
@@ -44,8 +42,8 @@ const MypageReport = () => {
         .catch((res) => [console.log(res.response.status)]);
     } else {
       Swal.fire({
-        icon: "error",
-        html: "에러가 발생했습니다.<br>잠시 후 다시 시도해주세요.",
+        icon: "warning",
+        html: "신고 내용을 입력해주세요.",
       });
     }
   };

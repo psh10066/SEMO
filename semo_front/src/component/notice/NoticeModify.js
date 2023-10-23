@@ -9,7 +9,7 @@ const NoticeModify = () => {
   const location = useLocation();
   //console.log(location);
   const notice = location.state.notice;
-  console.log(notice);
+  //console.log(notice);
 
   const [noticeTitle, setNoticeTitle] = useState(notice.noticeTitle);
   const [noticeContent, setNoticeContent] = useState(notice.noticeContent);
@@ -26,7 +26,7 @@ const NoticeModify = () => {
       form.append("noticeNo", notice.noticeNo);
       form.append("noticeTitle", noticeTitle);
       form.append("noticeContent", noticeContent);
-      console.log(noticeContent);
+      //console.log(noticeContent);
       const token = window.localStorage.getItem("token");
       axios
         .post("/notice/modify", form, {
