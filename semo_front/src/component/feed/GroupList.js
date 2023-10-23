@@ -44,6 +44,7 @@ const GroupItem = (props) => {
         console.log(res.response.status);
       });
   }, []);
+  console.log(peopleList);
   return (
     <div className="feed-group-item" onClick={groupView}>
       <div className="feed-group-img">
@@ -72,7 +73,7 @@ const GroupItem = (props) => {
           <div className="feed-like-person-wrap">
             <AvatarGroup max={7} total={peopleCount}>
               {peopleList.map((people, index) => {
-                return people.peopelImg === null ? (
+                return people.memberImg === null ? (
                   <Avatar
                     key={"feedAvatar" + index}
                     sx={{ width: 25, height: 25 }}

@@ -313,7 +313,7 @@ const GroupView = (props) => {
               <AvatarGroup max={7} total={peopleCount} className="avatarGroup">
                 {peopleList.map((people, index) => {
                   let memberNo = people.memberNo;
-                  return people.peopelImg === null ? (
+                  return people.memberImg === null ? (
                     <Avatar
                       key={("people", index)}
                       onClick={() => {
