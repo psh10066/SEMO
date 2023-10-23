@@ -14,15 +14,20 @@ const ModifyMyFeed = (props) => {
   const [memberContent, setMemberContent] = useState(member.memberContent);
   const [memberImg, setMemberImg] = useState(member.memberImg);
 
-  const [memberThumbnail, setMemberThumbnail] = useState(
-    memberImg === null ? (
-      <Avatar src={Image} sx={{ width: 108, height: 108 }} />
-    ) : (
-      "/member/" + memberImg
-    )
-  );
   //썸네일 수정시 파일
   const [feedThumbnail, setFeedThumbnail] = useState(null);
+
+  const defaultThumbnail = useState(
+    feedThumbnail === null ? (
+      <Avatar src={Image} sx={{ width: 108, height: 108 }} />
+    ) : (
+      feedThumbnail
+    )
+  );
+
+  const [memberThumbnail, setMemberThumbnail] = useState(
+    memberImg === null ? defaultThumbnail : "/member/" + memberImg
+  );
 
   //상태 업데이트
   const thumbnailChange = (e) => {
