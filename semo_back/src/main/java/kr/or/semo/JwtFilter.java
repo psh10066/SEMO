@@ -27,25 +27,22 @@ public class JwtFilter extends OncePerRequestFilter {
 			throws ServletException, IOException {
 
 		String auth = request.getHeader(HttpHeaders.AUTHORIZATION); // 헤더정보 중 인증키가 전달되는 값을 추출
-		System.out.println("filter/auth : " + auth);
+//		System.out.println("filter/auth : " + auth);
 		// 1. 인증토큰이 없거나 or 잘못보냈거나 한경우
 		if (auth == null || !auth.startsWith("Bearer ") || auth.indexOf("null") != -1) {
-			System.out.println("인증이 없거나, 잘못됨");
 			filterChain.doFilter(request, response);
 			return;
 		}
 		// token값만 꺼냄
 		String token = auth.split(" ")[1];
-		System.out.println("filter/token : " + token);
+//		System.out.println("filter/token : " + token);
 		// 2. 인증토큰이 정상이나 만료된경우
 		if (jwtUtil.isExpired(token, secretKey)) {
-			System.out.println("인증 시간 만료");
 			filterChain.doFilter(request, response);
 			return;
 		}
 		// 3. 아이디를 꺼내서 컨트롤러에 전달
 		String memberId = jwtUtil.getMemberId(token, secretKey);
-		System.out.println("filter/memberId : " + memberId);
 		request.setAttribute("memberId", memberId);
 		// 인증허가코드
 		ArrayList<SimpleGrantedAuthority> list = new ArrayList<SimpleGrantedAuthority>();

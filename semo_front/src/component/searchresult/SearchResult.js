@@ -288,7 +288,7 @@ const SearchFeedItem = (props) => {
       </div>
       {/*
       <div className="searchresult-feed-item-info">
-         <div className="searchresult-feed-infos">
+        <div className="searchresult-feed-infos">
           <div className="searchresult-feed-writer-name">
             {feedList.memberName}
           </div>

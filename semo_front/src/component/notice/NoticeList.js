@@ -65,12 +65,6 @@ const NoticeList = (props) => {
 
       <div className="notice-list-wrap">
         <div className="notice-tbl">
-          {/* <tr>
-              <td width={"20%"}>번호</td>
-              <td width={"40%"}>제목</td>
-              <td width={"20%"}>작성자</td>
-              <td width={"20%"}>작성일</td>
-            </tr> */}
           <div>
             {noticeList.map((notice, index) => {
               return <NoticeItem key={"notice" + index} notice={notice} />;
@@ -96,7 +90,6 @@ const NoticeItem = (props) => {
   };
   return (
     <ul className="notice-item" onClick={noticeView}>
-      {/* <td>{notice.noticeNo}</td> */}
       <li>
         <div className="notice-list-title">{notice.noticeTitle}</div>
         <div className="notice-list-info">
@@ -104,9 +97,6 @@ const NoticeItem = (props) => {
           <span>{notice.noticeDate}</span>
         </div>
       </li>
-      {/* <td>{notice.noticeTitle}</td>
-      <td>{notice.memberId}</td>
-      <td>{notice.noticeDate}</td> */}
     </ul>
   );
 };

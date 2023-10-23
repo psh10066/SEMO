@@ -134,7 +134,7 @@ public class MemberController {
 	
 	@PostMapping("/oauth/kakao")
 	public String handleKakaoLogin(@RequestBody KakaoParams kakaoParams){
-		System.out.println("넘겨받은 Kakao 인증키 :: " + kakaoParams.getAuthorizationCode());
+//		System.out.println("넘겨받은 Kakao 인증키 :: " + kakaoParams.getAuthorizationCode());
 		
 		String accessToken = memberService.getMemberByOauthLoginMember(kakaoParams);
 		//응답 헤더 생성
@@ -148,7 +148,7 @@ public class MemberController {
 	public String sendMail(@RequestBody Member member) {
 		String email=member.getMemberMail();
 		String authCode = emailSender.authMail(email);
-		System.out.println(authCode);
+//		System.out.println(authCode);
 		return authCode;
 	}
 	

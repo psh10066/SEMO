@@ -44,7 +44,6 @@ const GroupItem = (props) => {
         console.log(res.response.status);
       });
   }, []);
-  console.log(peopleList);
   return (
     <div className="feed-group-item" onClick={groupView}>
       <div className="feed-group-img">
@@ -84,7 +83,7 @@ const GroupItem = (props) => {
                   <Avatar
                     key={"feedAvatar" + index}
                     sx={{ width: 25, height: 25 }}
-                    alt="Remy Sharp"
+                    alt="멤"
                     src={"/member/" + people.memberImg}
                   />
                 );

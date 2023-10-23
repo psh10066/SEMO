@@ -102,7 +102,7 @@ public class GroupController {
 	public int totalMemberCount(@RequestBody Group g) {
 		int groupNo = g.getGroupNo();
 		int result = groupService.totalMemberCount(groupNo);
-		System.out.println("결과확인 : "+result);
+//		System.out.println("결과확인 : "+result);
 		return result;
 	}
 	//그룹 찜하기
@@ -153,7 +153,6 @@ public class GroupController {
 	@PostMapping(value = "/modify")
 	public int modifyGroup(@ModelAttribute Group g, @ModelAttribute MultipartFile thumbnail) {
 		String savepath = root+"group/";
-		System.out.println(g);
 		if(thumbnail != null) {
 			String filepath = fileUtil.getfilepath(savepath, thumbnail.getOriginalFilename(), thumbnail);
 			g.setGroupImg(filepath);
