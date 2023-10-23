@@ -1,17 +1,32 @@
 import { useRef, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 import * as React from "react";
 
 const ModifyMyInfo = (props) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const member = props.member;
   const setMember = props.setMember;
   const token = window.localStorage.getItem("token");
 
-  //비밀변호 변경하기
+  const initialMember = {
+    // 초기 member 값 설정 (예시입니다. 실제 초기 값을 사용해 주세요.)
+    memberId: member.memberId,
+    memberName: member.memberName,
+    memberPhone: member.memberPhone,
+    memberMail: member.memberMail,
+  };
 
+  useEffect(() => {
+    // 라우터에서 페이지를 떠날 때 실행될 함수
+    return () => {
+      setMember(initialMember); // member 상태를 초기값으로 재설정
+    };
+  }, [location.pathname]); // location.pathname이 변경될 때마다 useEffect 훅이 실행됩니다.
+
+  //비밀변호 변경하기
   const modifyMyPassword = () => {
     if (member.memberId.includes("@")) {
       Swal.fire({
