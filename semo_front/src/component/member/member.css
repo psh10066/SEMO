@@ -51,10 +51,13 @@
 .login-btn-box > button {
   width: 100%;
   border: none;
+  background-color: #5457e9;
+  border: 1px solid transparent;
 }
 .login-btn-box > button:hover {
-  background-color: #5457e9;
-  border: none;
+  background-color: #fff;
+  color: #5457e9;
+  border: 1px solid #5457e9;
 }
 
 /*join*/
@@ -84,8 +87,7 @@
   font-size: 16px;
   resize: none;
 }
-.join-mail-wrap {
-}
+
 .join-mail-wrap > .email-btn > button {
   background-color: #5457e9;
   border: none;
