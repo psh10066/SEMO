@@ -21,7 +21,7 @@ const MeetingList = (props) => {
   const [joinStatus, setJoinStatus] = useState(-1); //참여 현황
   const [joinMemberNo, setJoinMemberNo] = useState([]); //참여한 맴버 번호
   const navigate = useNavigate();
-  // console.log(joinStatus);
+  //console.log(joinStatus, isLogin, member);
   //모임의 약속에 참여하는 memberNo[] 조회
   useEffect(() => {
     if (member != null) {
@@ -59,7 +59,7 @@ const MeetingList = (props) => {
           });
       }
     }
-  }, [isAddMeet]);
+  }, [isAddMeet, member]);
   //참여수 보이기
   useEffect(() => {
     axios
