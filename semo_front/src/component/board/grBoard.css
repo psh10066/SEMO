@@ -109,7 +109,7 @@
 .board-view-wrap {
   width: 800px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 40px;
   box-sizing: border-box;
 }
 .board-view-table {
@@ -124,21 +124,24 @@
 }
 .board-view-info-content {
   width: 600px;
-  height: 50px;
+  padding-bottom: 10px;
+  /* height: 50px;
   text-align: center;
-  border: 1px solid lightgray;
+  border: 1px solid lightgray; */
 }
 .board-view-info-content2 {
   height: 500px;
+  border-bottom: 1px solid #ccc;
+  border-top: 1px solid #ccc;
 }
 .board-view-info-title {
   width: 50%;
-}
-.board-view-info-title2 {
-  width: 10%;
+  font-weight: bold;
+  font-size: 18px;
 }
 .board-view-info-date {
   width: 15%;
+  text-align: right;
 }
 .board-view-btn-zone {
   padding: 20px 0px;

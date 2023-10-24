@@ -78,7 +78,11 @@ const MeetingModify = () => {
       meetingMaxnum,
     ];
     const token = window.localStorage.getItem("token");
-    if (notNullData.every((data) => data !== null && data !== "")) {
+    if (
+      notNullData.every(
+        (data) => data !== null && data !== "" && meetingMaxnum > 0
+      )
+    ) {
       axios
         .post("/meeting/modify", data, {
           headers: {
