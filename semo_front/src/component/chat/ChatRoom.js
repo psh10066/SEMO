@@ -36,7 +36,7 @@ const ChatRoom = (props) => {
         const now = new Date();
         setConnectedTime(format(now, "yyyy-MM-dd HH:mm:ss"));
 
-        console.log("WebSocket connected");
+        //console.log("WebSocket connected");
 
         client.subscribe(`/chat/rooms/${roomId}`, (message) => {
           const receivedMsg = JSON.parse(message.body); // JSON 형식의 문자열을 JavaScript 객체로 변환
@@ -44,12 +44,12 @@ const ChatRoom = (props) => {
         });
       },
       onDisconnect: () => {
-        console.log("WebSocket disconnected");
+        //console.log("WebSocket disconnected");
       },
     });
 
     client.onStompError = (frame) => {
-      console.error("STOMP error", frame);
+      //console.error("STOMP error", frame);
     };
 
     //새로고침
@@ -86,7 +86,7 @@ const ChatRoom = (props) => {
 
   useEffect(() => {
     if (connectedTime) {
-      console.log(connectedTime); // 여기에서 연결 시간을 로그로 찍으면 상태 변경 후에 올바른 시간 값을 볼 수 있습니다.
+      //console.log(connectedTime); // 여기에서 연결 시간을 로그로 찍으면 상태 변경 후에 올바른 시간 값을 볼 수 있습니다.
     }
   }, [connectedTime]);
 
