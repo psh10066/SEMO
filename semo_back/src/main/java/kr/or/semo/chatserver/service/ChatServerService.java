@@ -1,5 +1,6 @@
 package kr.or.semo.chatserver.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +34,8 @@ public class ChatServerService {
 		return chatServerDao.updateAccessTime(lastAccessChatTime);
 	}
 
-	public List chatPreviousMessage(int roomId) {
-		return chatServerDao.chatPreviousMessage(roomId);
+	public List chatPreviousMessage(int roomId,String beforeTime) {
+		return chatServerDao.chatPreviousMessage(roomId,beforeTime);
 	}
 
 	public String myChatTime(int roomId, int memberNo) {
