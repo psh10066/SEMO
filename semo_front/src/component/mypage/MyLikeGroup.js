@@ -66,7 +66,11 @@ const MypageItem = (props) => {
     //내가 찜한 그룹
     <div className="mylike-group-item" onClick={groupView}>
       <div className="mylike-group-img">
-        <img src={"/group/" + group.groupImg} />
+        {group.groupImg ? (
+          <img src={"/group/" + group.groupImg} alt="Group Thumbnail" />
+        ) : (
+          <img src="/image/default.png" alt="Default Thumbnail" />
+        )}
       </div>
       <div className="feed-group-right">
         <div className="feed-group-category">

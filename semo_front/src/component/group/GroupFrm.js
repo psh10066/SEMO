@@ -76,19 +76,19 @@ const GroupFrm = (props) => {
                   <div className="check-msg">{chkGroupNameMsg}</div>
                 </td>
               </tr>
-              <tr>
-                <td>
-                  <label htmlFor="thumbnail">모임 썸네일</label>
-                </td>
-                <td>
-                  <input
-                    type="file"
-                    id="thumbnail"
-                    accept="image/*"
-                    onChange={thumbnailChange}
-                  />
-                </td>
-              </tr>
+              {/*<tr>*/}
+              {/*  <td>*/}
+              {/*    <label htmlFor="thumbnail">모임 썸네일</label>*/}
+              {/*  </td>*/}
+              {/*  <td>*/}
+              {/*    <input*/}
+              {/*      type="file"*/}
+              {/*      id="thumbnail"*/}
+              {/*      accept="image/*"*/}
+              {/*      onChange={thumbnailChange}*/}
+              {/*    />*/}
+              {/*  </td>*/}
+              {/*</tr>*/}
               <tr>
                 <td>
                   <label>최대 인원수</label>

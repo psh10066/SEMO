@@ -47,7 +47,11 @@ const GroupItem = (props) => {
   return (
     <div className="feed-group-item" onClick={groupView}>
       <div className="feed-group-img">
-        <img src={"/group/" + group.groupImg} />
+        {group.groupImg ? (
+          <img src={"/group/" + group.groupImg} alt="Group Thumbnail" />
+        ) : (
+          <img src="/image/default.png" alt="Default Thumbnail" />
+        )}
       </div>
       <div className="feed-group-right">
         <div className="feed-group-category">

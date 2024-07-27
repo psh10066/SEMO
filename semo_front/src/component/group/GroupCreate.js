@@ -41,7 +41,7 @@ const GroupCreate = (props) => {
   }, []);
   const create = () => {
     if (
-      groupImg !== null &&
+      // groupImg !== null &&
       groupName !== "" &&
       groupContent != "" &&
       groupContent != "<p><br></p>" &&
