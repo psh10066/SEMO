@@ -25,7 +25,7 @@ const ChatRoom = (props) => {
   const [connectedTime, setConnectedTime] = useState(null); //웹소켓 연결된 시간 저장
 
   //메세지 받기
-  const serverIP = "192.168.10.31"; // IP 주소 >> 추후 도메인으로 바꾸기 "172.16.11.204"
+  const serverIP = "localhost"; // IP 주소
   const webSocketEndpoint = `http://${serverIP}:9999/ws`;
 
   useEffect(() => {
