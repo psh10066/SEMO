@@ -97,7 +97,6 @@ const Join = () => {
     if (
       checkIdMsg === "" &&
       checkPwMsg === "" &&
-      mailChk === true &&
       checkPwOmsg === "" &&
       checkNameMsg === ""
     ) {
@@ -334,28 +333,28 @@ const Join = () => {
             ))}
           </div>
         )}
-        <div className="email-btn">
-          <Button1 text="이메일인증" clickEvent={emailJoin} />
-          <div id="auth">
-            <input type="text" id="authCode" placeholder="인증번호입력" />
-            <button className="btn bc1" id="authBtn" onClick={authButton}>
-              인증하기
-            </button>
-            <span id="timeZone">
-              {isCodeShow && (
-                <Timer
-                  setAuthCode={setAuthCode}
-                  authCode={authCode}
-                  mailChkMsg={mailChkMsg}
-                  setMailChkMsg={setMailChkMsg}
-                  setMailChk={setMailChk}
-                  mailChk={mailChk}
-                />
-              )}
-            </span>
-            <span id="authMsg"></span>
-          </div>
-        </div>
+        {/*<div className="email-btn">*/}
+        {/*  <Button1 text="이메일인증" clickEvent={emailJoin} />*/}
+        {/*  <div id="auth">*/}
+        {/*    <input type="text" id="authCode" placeholder="인증번호입력" />*/}
+        {/*    <button className="btn bc1" id="authBtn" onClick={authButton}>*/}
+        {/*      인증하기*/}
+        {/*    </button>*/}
+        {/*    <span id="timeZone">*/}
+        {/*      {isCodeShow && (*/}
+        {/*        <Timer*/}
+        {/*          setAuthCode={setAuthCode}*/}
+        {/*          authCode={authCode}*/}
+        {/*          mailChkMsg={mailChkMsg}*/}
+        {/*          setMailChkMsg={setMailChkMsg}*/}
+        {/*          setMailChk={setMailChk}*/}
+        {/*          mailChk={mailChk}*/}
+        {/*        />*/}
+        {/*      )}*/}
+        {/*    </span>*/}
+        {/*    <span id="authMsg"></span>*/}
+        {/*  </div>*/}
+        {/*</div>*/}
       </div>
       <div className="join-category-title">피드 설정</div>
       <div className="member-thumbnail">
